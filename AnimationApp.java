@@ -107,7 +107,42 @@ public class AnimationApp{
         this.Avatar = new Avatar(inputAvatar);
     }
     
-    //Methods
+    /** 
+    This method sets this.collectibesArray to a new array 
+    @param inputCollectiblesArray : the collectibesArray that we wish to set this.collectibesArray to
+    */
+    public void setCollectiblesArray(ArrayList<Collectible> inputCollectiblesArray){
+        ArrayList<Collectible> tempCollectiblesArrayList = new ArrayList<Collectible>();
+        if (inputCollectiblesArray != null){
+            ArrayList<Collectible> tempCollectiblesArrayList = new ArrayList<Collectible>();
+            for (Collectible c : this.collectibesArray){
+                if (c != null){
+                    tempCollectiblesArrayList.add(new Collectible(c));
+                }else {
+                    tempCollectiblesArrayList.add(new Collectible());
+                }
+            }
+            this.collectibesArray = tempCollectiblesArrayList;
+        }
+    }
+    
+    /**
+    This method set this.obstacleArray to a new array
+    @param inputObstaclesArray : the obstacleArray that we wish to set this.obstacleArray to
+    */
+    public void setObstacleArray(ArrayList<Collectible> inputObstaclesArray){
+        if (inputObstaclesArray != null){
+            ArrayList<Obstacle> tempObstaclesArrayList = new ArrayList<Obstacle>();
+            for (Obstacle o : this.obstacleArray){
+                if (o != null){
+                    tempObstaclesArrayList.add(new Obstacle(o));
+                }else {
+                    tempObstaclesArrayList.add(new Obstacle());
+                }
+            }
+            this.obstacleArray = tempObstaclesArrayList;
+        }
+    }
     
     /**
     This method will add an obstacle to the end of the obstacleArray
