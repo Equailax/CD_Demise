@@ -12,7 +12,7 @@ public class AnimationApp{
     */
     /*Ostacle Class
     Variables
-        -name: String
+        -name: String           
         -isDeadly: boolean
         -location: Rectangle
         -health: int
