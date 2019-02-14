@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Scanner;
+
 
 public class AnimationApp{
     //This is the animation app, where we will run our game.
@@ -47,12 +49,103 @@ public class AnimationApp{
     
     //Instance variables
     private Avatar minidisc;
-    private ArrayList<Collectibles>;
-    private ArrayList<Obstacle>;
+    private ArrayList<Collectible> collectibesArray;
+    private ArrayList<Obstacle> obstacleArray;
     
+    //Constructors
+    /**
+    The default constructor for the AnimationApp class has the instance variables set to their default values
+    */
+    public AnimationApp(){}
+    
+    /**
+    This constructor allows to initialize and set the intance variables to a prefered value
+    @param 
+    */
+    public AnimationApp(Avatar inputAvatar, ArrayList<Collectible> inputCollectiblesArray, ArrayList<Obstacle> inputObstaclesArray){
+        
+        //Copy the input avatar and set the newAvatar equal to the instance variable
+        if (inputAvatar != null){
+            this.Avatar = new Avatar(inputAvatar);
+        }else {
+            this.Avatar = null;
+        }
+        
+        //Copy the inputCollectiblesArray and set it equal to the instance variable
+        if (inputCollectiblesArray != null){
+            ArrayList<Collectible> tempCollectiblesArrayList = new ArrayList<Collectible>();
+            for (Collectible c : this.collectibesArray){
+                if (c != null){
+                    tempCollectiblesArrayList.add(new Collectible(c));
+                }else {
+                    tempCollectiblesArrayList.add(new Collectible());
+                }
+            }
+            this.collectibesArray = tempCollectiblesArrayList;
+        }
+        
+        //Copy the inputObstaclesArray and set it equal to the instance variable
+        if (inputObstaclesArray != null){
+            ArrayList<Obstacle> tempObstaclesArrayList = new ArrayList<Obstacle>();
+            for (Obstacle o : this.obstacleArray){
+                if (o != null){
+                    tempObstaclesArrayList.add(new Obstacle(o));
+                }else {
+                    tempObstaclesArrayList.add(new Obstacle());
+                }
+            }
+            this.obstacleArray = tempObstaclesArrayList;
+        }
+    }
+    
+    //Setter Method
+    /**
+    This method sets the avatar to some new avatar
+    @param inputAvatar : this is the avatar we wish to set this.avatar to
+    */
+    public void setAvatar(Avatar inputAvatar){
+        this.Avatar = new Avatar(inputAvatar);
+    }
     
     //Methods
     
+    /**
+    This method will add an obstacle to the end of the obstacleArray
+    @param obstacleToAdd : this is the obstacle we wish to add
+    */
+    public void addObstacle(Obstacle obstacleToAdd){
+        this.obstacleArray.add(new Obstacle(obstacleToAdd));
+    }
+    
+    /**
+    This method allows to add an obstacle at a speicfic index
+    @param index : the index (which is an integer) of the array in which we wish to add the obstacle
+    @param obstacleToAdd : this is the obstacle we wish to add
+    */
+    public void addObstacle(int index, Obstacle obstacleToAdd){
+        this.obstacleArray.add(index, new Obstacle(obstacleToAdd));
+    }
+    
+    /**
+    This method will add a collectible to the array at the end of the collectibesArray 
+    @param collectibleToAdd : the collectible we wish to add to the array
+    */
+    public void addCollectible(Collectible collectibleToAdd){
+        this.collectibesArray.add(new Collectible(collectibleToAdd));
+    }
+    
+    /**
+    This method allows to add a collectible at a speicfic index of the collectibesArray
+    @param index : the index (which is an integer) of the array in which we wish to add the collectible
+    @param collectibleToAdd : the collectible we wish to add to the array
+    */
+     public void addCollectible(int index, Collectible collectibleToAdd){
+        this.collectibesArray.add(index, new Collectible(collectibleToAdd));
+    }
+    
+    /**
+    This will print the current state of the game.  This means avatar position/health, collectibes and obstacles
+    */
     public void printCurrentState(){
         
     }
@@ -71,5 +164,6 @@ public class AnimationApp{
     
     //Main Run 
     public static void main(String[] args){
+        
     }
 }
