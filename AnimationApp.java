@@ -10,7 +10,8 @@ public class AnimationApp{
     Check if any collectibles have been reached.  If so, react appropriately.
     Move any collectibles that are movable.
     */
-    /*Ostacle Class
+    /*
+    Ostacle Class
     Variables
         -name: String           
         -isDeadly: boolean
@@ -25,6 +26,7 @@ public class AnimationApp{
         +move(direction:String) - Move in the direction
     */
     /*
+    Avatar
     Variables:
         -String Name; - Name of the Avatar.
         -Image Skin; - What the Avatar will look like.
@@ -51,5 +53,23 @@ public class AnimationApp{
     
     //Methods
     
-
+    public void printCurrentState(){
+        
+    }
+    
+    public void drawCurrentState(){
+        
+    }
+    
+    public void processAvatarMove(){
+    
+    }
+    
+    public void initialize(){
+    
+    }
+    
+    //Main Run 
+    public static void main(String[] args){
+    }
 }
