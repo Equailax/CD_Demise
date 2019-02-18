@@ -4,7 +4,6 @@ import java.lang.Math;
 
 public class Obstacle
 {
-	// Instance variables
 	private String name;
 	private boolean isDeadly;
 	private Rectangle location;
