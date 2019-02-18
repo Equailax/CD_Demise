@@ -21,13 +21,13 @@ public class Obstacle
 	{
 	}
 	
-	public Obstacle(String name, Rectangle location) // Used for the environment
+	public Obstacle(String name, Rectangle location)
 	{
 		this.name = name;
 		this.location = new Rectangle(location);
 	}
 	
-	public Obstacle(String name, boolean isDeadly, Rectangle location) // Used for enemies
+	public Obstacle(String name, boolean isDeadly, Rectangle location)
 	{
 		this.name = name;
 		this.isDeadly = isDeadly;
@@ -84,6 +84,7 @@ public class Obstacle
 		
 	}
 	*/
+	
 	/**
 	If the enemy got hit, reduce the health by 1
 	*/
@@ -97,7 +98,7 @@ public class Obstacle
 	
 	@param direction is the direction to move the object in (up, down, left, right, otherwise the object won't move)
 	*/
-	public void move(String direction) // Assuming that the top left is 0,0 | Will need to add a checker so that enemies do not move inside of walls
+	public void move(String direction)
 	{
 		direction = direction.toLowerCase();
 		System.out.println(direction);
@@ -135,7 +136,7 @@ public class Obstacle
 	*/
 	public void randomMove()
 	{
-		int dirNum = (int)(Math.random() * (5-1)); //Random number from 1-5, 5 is stay in place
+		int dirNum = (int)(Math.random() * (5-1));
 		String direction = "";
 		if (dirNum == 1)
 		{
