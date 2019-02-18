@@ -21,11 +21,12 @@ public class AnimationApp{
         -health: int
 
     Methods
-        +coordinates(): Rectangle - Return the location
-        +obstacleName(): String - Return the obstacle name
-        +getHit(projectile:String) - Determine if enemy gets hurt or not
-        +checkIfDeadly(): Boolean - Return if the obstacle/deadly or not
+        +getLocation(): Rectangle - Return the location
+        +getName(): String - Return the obstacle name
+		+getIsDeadly(): Boolean - Return if the obstacle/deadly or not
+        +enemyHit() - Reduce health by 1
         +move(direction:String) - Move in the direction
+		+randomMove() - Move in a random direction or stay still
     */
     /*
     Avatar
