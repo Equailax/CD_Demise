@@ -1,3 +1,5 @@
+import java.awt.Rectangle;
+
 public class Collectible
 {
 //Instance Variables 
