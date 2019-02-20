@@ -4,7 +4,11 @@ public class Collectible
 	private String name;
 	private int healthBoost;
 	private int collection;
-	private Rectangle location;
+	private int xcoord;
+	private int ycoord;
+	private final int height = 1;
+	private final int width = 1;
+	private Rectangle location = new Rectangle(xcoord, ycoord, width, height);
 
 
 //Getter Methods
@@ -14,7 +18,7 @@ This gets the name of the Collectible object
 */
 	public String getName()
 	{
-		return name;
+		return new String(name);
 	}
 	
 /**
@@ -23,7 +27,7 @@ This gets the amount of health the avatar/user will get boosted by the Collectib
 */
 	public int getHealthBoost()
 	{
-		return healthBoost;
+		return new Integer(healthBoost);
 	}
 /**
 This gets the location of the Collectible object
@@ -31,7 +35,7 @@ This gets the location of the Collectible object
 */
 	public Rectangle getLocation()
 	{
-		return location;
+		return new Rectangle(location);
 	}
 	
 
@@ -42,7 +46,7 @@ This alters/assigns the name of the Collectible object
 */
 	public void setName(String name)
 	{
-		this.name = name;
+		this.name = new String(name);
 	}
 
 /**
@@ -51,16 +55,16 @@ This alters/assigns the amount of health the Collectible object raises for the a
 */
 	public void setHealthBoost(int healthBoost)
 	{
-		this.healthBoost = healthBoost;
+		this.healthBoost = new Integer(healthBoost);
 	}
 
 /**
 This alters/assigns the Collectible objects location
 @param location
 */
-	public void setLocation(Rectangle location)
+	public void setLocation(int xcoord, int ycoord)
 	{
-		this.location = location;
+		this.location = new Rectangle(new Integer(xcoord), new Integer(ycoord), width, height);
 	}
 	
 	
@@ -68,34 +72,35 @@ This alters/assigns the Collectible objects location
 /**
 The constructors permit the user to intiate the values of variables when creating a new Collectible object.
 There is a copy constructor to copy the values of variables from one Collectible object to a new one.
-The initial values are: name is "null", healthBoost is 0, and location is an empty rectangle (all values are zero).
+The initial values are: name is "null", healthBoost is 0, and location is positioned at the origin (xcoord and ycoord are zero).
 
 @param name  			 the name of the collectible
 @param healthBoost		 the health boost the collectible would provide to the avatar
-@param location			 the location of the object
+@param xcoord			 the x-coordinate of the location of the object
+@param ycoord			 the y-coordinate of the location of the object
 @param copy  			 collectible object used for copying variables
 */
 	public Collectible()
 	{	}
 
-	public Collectible(String name, Rectangle location)
+	public Collectible(String name, int xcoord, int ycoord)
 	{
-		this.name = name;
-		this.location = location;
+		this.name = new String(name);
+		this.location = new Rectangle(new Integer(xcoord), new Integer(ycoord), width, height);
 	}
 
-	public Collectible(String name, int healthBoost, Rectangle location)
+	public Collectible(String name, int healthBoost, int xcoord, int ycoord)
 	{
-		this.name = name;
-		this.healthBoost = healthBoost;
-		this.location = location;
+		this.name = new String(name);
+		this.healthBoost = new Integer(healthBoost);
+		this.location = new Rectangle(new Integer(xcoord), new Integer(ycoord), width, height);
 	}
 	
 	public Collectible(Collectible copy)
 	{
-		this.name = copy.name;
-		this.healthBoost = copy.healthBoost;
-		this.location = copy.location;
+		this.name = new String(copy.name);
+		this.healthBoost = new Integer(copy.healthBoost);
+		this.location = new Rectangle(copy.location);
 	}
 
 //Methods
@@ -105,10 +110,15 @@ This is used for the purposes of collecting/interacting with objects by the avat
 
 @param avatar    the avatar being controlled by the user to interact with the program/game
 */
-	public boolean overlapsWith(Avatar avatar)
+	/*public boolean overlapsWith(Avatar avatar)
 	{
+		Rectangle avatarLocation = new Rectangle(avatar.getLocation());
+		
+		if(this.location.equals(avatarLocation));
+			return true;
+			
 		return false;
-	}
+	}*/
 
 /**
 This method is used to count and update the amount of the Collectible object the user has collected/obtained.
