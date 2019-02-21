@@ -6,49 +6,6 @@ import java.lang.Math;
 public class AnimationApp{
     //This is the animation app, where we will run our game.
     
-    /*
-    Interact with the human player to ask it for a move.
-    Move the avatar as specified
-    Check if any obstacles are hit.  If so react appropriately.
-    Check if any collectibles have been reached.  If so, react appropriately.
-    Move any collectibles that are movable.
-    */
-    /*
-    Ostacle Class
-    Variables
-        -name: String           
-        -isDeadly: boolean
-        -location: Rectangle
-        -health: int
-
-    Methods
-        +getLocation(): Rectangle - Return the location
-        +getName(): String - Return the obstacle name
-		+getIsDeadly(): Boolean - Return if the obstacle/deadly or not
-        +enemyHit() - Reduce health by 1
-        +move(direction:String) - Move in the direction
-		+randomMove() - Move in a random direction or stay still
-    */
-    /*
-    Avatar
-    Variables:
-        -String Name; - Name of the Avatar.
-        -Image Skin; - What the Avatar will look like.
-        -Int Health; - How many health points the Avatar can lose at a maximum in a life.
-        -Int Lives; - How many times the Avatar can respawn without the game ending. 
-        -Int x-position; - Within the Rectangle class, x-coordinate.
-        -Int y-position; - Within the Rectangle class, y-coordinate. 
-        -Int Damage; - How much damage the Avatar can output.
-
-    Methods:
-        -Move(String value): will take a String value as a parameter and will move in the direction given. Can either be Up, Down, Left or Right and will only work if that specific move if possible. (Can’t move past boundaries.)
-        -updateHealth(Int value): will take an Int value as a parameter and will change the health of the Avatar to the value given. 
-        -getLocation(Rectangle value): will take a Rectangle object from the Rectangle class as a parameter. This is a getter method so it will return the location of the avatar in the given Rectangle object. 
-        -shoot(String value): The string value in the parameter will be the direction for where the shot will go. 
-        -respawn(): This will allow the Avatar to respawn where they died, as long as they have one life left. 
-
-    */
-    
     //Instance variables
     private Avatar minidisc;
     private ArrayList<Collectible> collectiblesArray;
@@ -170,7 +127,7 @@ public class AnimationApp{
             //copy the elements of this.obstacleArray to the temporary array list
             for (Obstacle o : this.obstacleArray){
                 if (o != null){
-                    tempObstaclesArrayList.add(new obstacle(o));
+                    tempObstaclesArrayList.add(new Obstacle(o));
                 }else {
                     tempObstaclesArrayList.add(new Obstacle());
                 }
@@ -442,8 +399,6 @@ public class AnimationApp{
         
         //Move obstacles accordingly (make sure to not overlap with avatar)
             //Update positions of all obstacles in arraylist
-
-        //Print the current state
 
         //Draw the current state
 
