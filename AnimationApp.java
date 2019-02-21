@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.lang.Math;
+import java.awt.Rectangle;
 
 
 public class AnimationApp{
@@ -273,7 +274,31 @@ public class AnimationApp{
     This will print the current state of the game.  This means avatar position/health, collectibes and obstacles
     */
     public void printCurrentState(){
+        //Print the curent state of the avatar
+        System.out.println("///////////\\\\\\\\\\\\");
+        System.out.println("Name: " + this.minidisc.getName());
+		System.out.println("Health Level: " + this.minidisc. getHealth());
+		System.out.println("Lives Remaining: " + this.minidisc.getLives());
+		System.out.println("X Position: " + this.minidisc.getXPosition());
+		System.out.println("Y Position: " + this.minidisc.getYPosition());
         
+        //Print out the state of the obstacles
+        for (Obstacle o : this.obstacleArray){
+            System.out.println("_________________");
+            System.out.println("Obstacle Name: " + o.getName() + "|");
+            System.out.println("X Position: " + o.getLocation().getX() + "  |");
+            System.out.println("Y Position: " + o.getLocation().getX() + "  |");
+            System.out.println("_________________");
+        }
+        
+        //Print out the state of the collectibles
+        for (Collectible c : this.collectiblesArray){
+            System.out.println("_________________");
+            System.out.println("Collectible Name: " + c.getName() + "|");
+            System.out.println("X Position: " + c.getLocation().getX() + "  |");
+            System.out.println("Y Position: " + c.getLocation().getX() + "  |");
+            System.out.println("_________________");
+        }
     }
     
     public void drawCurrentState(){
@@ -346,7 +371,10 @@ public class AnimationApp{
     }
 	
 	public void processObstacleMove()
-	{
+	{   
+        //Create new avatar
+        Avatar inputAvatar = new Avatar(this.minidisc);
+        
 		// Create two obstacle array states
 		ArrayList<Obstacle> dynamicObstacleArray = new ArrayList<Obstacle>();
         copyObstacleArrayTo(dynamicObstacleArray);
@@ -357,7 +385,7 @@ public class AnimationApp{
 		for (Obstacle o1 : dynamicObstacleArray)
 		{
 			boolean occupied = false;
-			Rectangle preMove = o1.getLocation;
+			Rectangle preMove = new Rectangle(o1.getLocation());
 			o1.randomMove();
 			// Check if the moving obstacle overlaps with the avatar
             if (o1.overlapsWith(inputAvatar))
@@ -379,7 +407,7 @@ public class AnimationApp{
 			// If moving obstacle overlaps with an avatar or obstacle, move it back
 			if (occupied)
 			{
-				o1.setLocation(preMove);
+				o1.getLocation().setLocation((int)preMove.getX(), (int)preMove.getY());
 			}
         }
 		// Change this.ObstacleArray to the dynamic array
