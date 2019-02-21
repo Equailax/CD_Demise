@@ -8,8 +8,12 @@ public class Obstacle
 {
 	private String name;
 	private boolean isDeadly;
-	private Rectangle location;
 	private int health;
+	private int xcoord;
+	private int ycoord;
+	private final int height = 1;
+	private final int width = 1;
+	private Rectangle location = new Rectangle(xcoord, ycoord, width, height);
 	
 	
 	/**
