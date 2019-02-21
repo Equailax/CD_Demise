@@ -59,15 +59,9 @@ import java.awt.Rectangle;
         }
     }
 
-    public void setXPosition(int xaxis){
-        if (xaxis > 0 ){
-            this.xposition = xaxis;
-        }
-    }
-    public void setYPosition(int yaxis){
-        if (yaxis > 0){
-            this.yposition = yaxis;
-        }
+    public void setPosition(){
+        this.location.x = 0;
+        this.location.y = 0;
     }
     public void setDamage(int characterDamage){
         if (characterDamage > 0){
