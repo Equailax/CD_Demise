@@ -45,7 +45,8 @@ import java.awt.Rectangle;
     
     // setter 
     public void setName(String Name){
-        this.name = Name;
+        this.name
+        = Name;
     }
 
     public void setHealth(int characterHealth){
@@ -101,7 +102,7 @@ import java.awt.Rectangle;
         }else if (direction.toLowerCase().equals("left")){
             this.xposition -= 1;
         }else if (direction.toLowerCase().equals("right")){
-            this.xposition -= 1;
+            this.xposition += 1;
         }
     }
     
