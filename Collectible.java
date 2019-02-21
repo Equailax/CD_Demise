@@ -112,15 +112,15 @@ This is used for the purposes of collecting/interacting with objects by the avat
 
 @param avatar    the avatar being controlled by the user to interact with the program/game
 */
-	/*public boolean overlapsWith(Avatar avatar)
+	public boolean overlapsWith(Avatar avatar)
 	{
 		Rectangle avatarLocation = new Rectangle(avatar.getLocation());
 		
-		if(this.location.equals(avatarLocation));
+		if(this.location.getLocation().equals(avatarLocation.getLocation()))
 			return true;
-			
+		
 		return false;
-	}*/
+	}
 
 /**
 This method is used to count and update the amount of the Collectible object the user has collected/obtained.
