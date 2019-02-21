@@ -393,6 +393,7 @@ public class AnimationApp{
 		Scanner movementInput = new Scanner(System.in);
         
         String input = movementInput.nextLine();
+        movements += 1;
         
         //Process if the avatar can move 
         mainApp.processAvatarMove(input);
