@@ -321,7 +321,7 @@ public class AnimationApp{
     
     public void drawCurrentState(){
         
-    }
+    } 
     
     /**
     This method processess if hte avatar can move.  This means it would check if there are any obstacles and collectibles in the area to the place
@@ -444,6 +444,12 @@ public class AnimationApp{
             //Update positions of all obstacles in arraylist
 
         //Print the current state
+		System.out.println(minidisc.getName());
+		System.out.println("Health Level = " + minidissc. getHealth());
+		System.out.println("Lives Remaining = " + minidisc.getLives());
+		System.out.println("X Position = " + minidisc.getXPosition());
+		System.out.println("Y Position = " + minidisc.getYPosition()):
+		
 
         //Draw the current state
 
