@@ -374,7 +374,7 @@ public class AnimationApp{
                            //Dont move the original avatar accoringly (processAvatarMove())
                            
                            //Take damage from the obstacle if its there
-                           this.minidisc.updateHealth(); //||???||?|?|?|?|?|?|? this shoudl be updated to takeDamage
+                           this.minidisc.takeDamage(1); //||???||?|?|?|?|?|?|? this shoudl be updated to takeDamage
                            
                            //print out 'taken damage'
                            System.out.println("OUCH! I have taken damage");
