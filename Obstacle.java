@@ -2,6 +2,10 @@ import java.awt.Rectangle;
 import java.awt.Point;
 import java.lang.Math;
 
+import com.sun.org.apache.regexp.internal.recompile;
+
+import javafx.scene.shape.ObservableFaceArray;
+
 public class Obstacle
 {
 	private String name;
@@ -17,8 +21,11 @@ public class Obstacle
 	@param location is a rectangle of the object's location
 	@param isDeadly determines whether the object will be deadly to the user or not
 	*/
-	public Obstacle()
-	{
+	public Obstacle(Obstacle obstacle){
+		this.name = obstacle.name;
+		this.isDeadly = obstacle.isDeadly;
+		this.location = obstacle.location;
+		this.health = obstacle.health;
 	}
 	
 	public Obstacle(String name, Rectangle location)
@@ -64,6 +71,17 @@ public class Obstacle
 	public boolean getIsDeadly()
 	{
 		return isDeadly;
+	}
+
+	// checks if obsatcle is in the same spot as the avatar, will be boolean
+	public boolean overlapsWith(Avatar a){
+		if (a.getLocation().equals(this.location)){
+			return true;
+		}
+		else{
+			return false;
+		}
+		
 	}
 	
 	
