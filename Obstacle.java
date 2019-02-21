@@ -94,24 +94,16 @@ public class Obstacle
 		
 	}
 	
-	
-	/**
-	Check if the inputted avatar overlaps with the object
-	
-	@return boolean true or false, depending on if the avatar overlaps with the object or not
-	
-	public boolean overlapsWith(Avatar avatar)
+	public boolean overlapsWithObstacle(Obstacle o)
 	{
-		if (avatar.getLocation().equals(location.getLocation()))
+		if (o.getLocation().equals(this.location))
 		{
 			return true;
 		} else
 		{
 			return false;
 		}
-		
 	}
-	*/
 	
 	/**
 	If the enemy got hit, reduce the health by 1

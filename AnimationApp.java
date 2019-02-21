@@ -344,6 +344,47 @@ public class AnimationApp{
             }
         }        
     }
+	
+	public void processObstacleMove()
+	{
+		// Create two obstacle array states
+		ArrayList<Obstacle> dynamicObstacleArray = new ArrayList<Obstacle>();
+        copyObstacleArrayTo(dynamicObstacleArray);
+		ArrayList<Obstacle> staticObstacleArray = new ArrayList<Obstacle>();
+        copyObstacleArrayTo(staticObstacleArray);
+		
+		// Go through the dynamic array and move an obstacle then check for overlaps
+		for (Obstacle o1 : dynamicObstacleArray)
+		{
+			boolean occupied = false;
+			Rectangle preMove = o1.getLocation;
+			o1.randomMove();
+			// Check if the moving obstacle overlaps with the avatar
+            if (o1.overlapsWith(inputAvatar))
+			{
+				occupied = true;
+						// Code avatar getting hurt
+			} else
+			{
+				// Check if the moving obstacle overlaps with an obstacle in the static array (even if the moving obstacle doesn't move, no changes will be made)
+				for (Obstacle o2 : staticObstacleArray)
+				{
+					if (o1.overlapsWithObstacle(o2))
+					{
+						occupied = true;
+						break;
+					}
+				}
+            }
+			// If moving obstacle overlaps with an avatar or obstacle, move it back
+			if (occupied)
+			{
+				o1.setLocation(preMove);
+			}
+        }
+		// Change this.ObstacleArray to the dynamic array
+		setObstacleArray(dynamicObstacleArray);
+	}
     
     /**
     This method initializes the game.  What that means is it creates the obstacles and collecitbles for the stage
