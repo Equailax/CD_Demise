@@ -36,6 +36,12 @@ public class Obstacle
 		this.name = name;
 		this.location = new Rectangle(location);
 	}
+
+	public Obstacle(String name, int x, int y){
+		this.name = name;
+		this.location.x = x;
+		this.location.y = y;
+	}
 	
 	public Obstacle(String name, boolean isDeadly, Rectangle location)
 	{
