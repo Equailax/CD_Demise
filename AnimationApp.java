@@ -252,7 +252,7 @@ public class AnimationApp{
         
         //Copy the collectibles array list (this.collectiblesArray) elements to the temporary array list if it is not empty
         if (this.collectiblesArray != null){ 
-            copyCollectiblesArrayTo(tempCollectiblesArrayList)
+            copyCollectiblesArrayTo(tempCollectiblesArrayList);
         }
         
         //Add the required number of collecitbles that one wished to add
@@ -289,7 +289,7 @@ public class AnimationApp{
         //Check if the avatar overlaps with any collecitbles
         for (Collectible c : this.collectiblesArray){
             if (c.overlapsWith(inputAvatar)){
-                return true
+                return true;
             }
         }
         return false;
@@ -306,7 +306,7 @@ public class AnimationApp{
         //check if the avatar overlaps with any obstacles
         for (Obstacle o : this.obstacleArray){
             if (o.overlapsWith(inputAvatar)){
-                return true
+                return true;
             }
         }
         return false;
@@ -364,6 +364,7 @@ public class AnimationApp{
                         //Remove the collectible from the map
                         removeCollectible(i);
                         copyOfCollectibleArrayList.remove(i);
+                    }
                 }
             }else if ((!overlapsWithAnyCollectibles() && overlapsWithAnyObstacles()) || (overlapsWithAnyCollectibles() && overlapsWithAnyObstacles())){
                 //If there are collectibles or no collectibles in the area , but there is an obstacle, take damage and dont have the avatar move there yet
@@ -373,7 +374,7 @@ public class AnimationApp{
                            //Dont move the original avatar accoringly (processAvatarMove())
                            
                            //Take damage from the obstacle if its there
-                           this.minidisc.updateHealth() //||???||?|?|?|?|?|?|? this shoudl be updated to takeDamage
+                           this.minidisc.updateHealth(); //||???||?|?|?|?|?|?|? this shoudl be updated to takeDamage
                            
                            //print out 'taken damage'
                            System.out.println("OUCH! I have taken damage");
@@ -435,7 +436,7 @@ public class AnimationApp{
 		Scanner movementInput = new Scanner(System.in);
         
         //Process if the avatar can move 
-        processAvatarMove(movementInput);
+        mainApp.processAvatarMove(movementInput);
         
         //Move obstacles accordingly (make sure to not overlap with avatar)
             //Update positions of all obstacles in arraylist
