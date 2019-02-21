@@ -400,8 +400,9 @@ public class AnimationApp{
         //Move obstacles accordingly (make sure to not overlap with avatar)
             //Update positions of all obstacles in arraylist
 
-        //Draw the current state
-
+        //Print the current state
+        mainApp.printCurrentState();
+        
         //Check if end condition is met (number of turns lets say)
         }
         
