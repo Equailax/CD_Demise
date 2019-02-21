@@ -269,6 +269,48 @@ public class AnimationApp{
         this.collectiblesArray = tempCollectiblesArrayList;
     }
     
+    /**
+    This method removes a collectible from the map once it has been picked up!
+    @param indexToRemoveCollectible : this is the index of the collecitble that we wish to remove
+    */
+    public void removeCollectible(int indexToRemoveCollectible){
+        this.collectiblesArray.remove(indexToRemoveCollectible);
+        //can add some animation for removing things
+    }
+    
+    //////////////////AVATAR METHODS
+    /**
+    This method checks if the avatar overlaps with any element in the collecitbles array.  If the avatar overlaps,
+    it returns true.
+    @param inputAvatar : this is the avatar (most likely a copy) that we wish to check if it oberlaps with anything
+    @return boolean : this returns the true if the avatar overlaps with the collectible, false otherwise
+    */
+    public void overlapsWithAnyCollectibles(Avatar inputAvatar){
+        //Check if the avatar overlaps with any collecitbles
+        for (Collectible c : this.collectiblesArray){
+            if (c.overlapsWith(inputAvatar)){
+                return true
+            }
+        }
+        return false;
+        
+    }
+    
+    /**
+    This method checks if the avatar overlaps with any obstacle in the obstacles array list.  If the avatar overlaps,
+    it returns true
+    @param inputAvatar : this is the avatar that we wish to check if ir overlaps with anything
+    @return boolean : returns a true if an obstacles is in the way, false otherwise
+    */
+    public void overlapsWithAnyObstacles(Avatar inputAvatar){
+        //check if the avatar overlaps with any obstacles
+        for (Obstacle o : this.obstacleArray){
+            if (o.overlapsWith(inputAvatar)){
+                return true
+            }
+        }
+        return false;
+    }
     
     /**
     This will print the current state of the game.  This means avatar position/health, collectibes and obstacles
@@ -281,8 +323,68 @@ public class AnimationApp{
         
     }
     
-    public void processAvatarMove(){
+    /**
+    This method processess if hte avatar can move.  This means it would check if there are any obstacles and collectibles in the area to the place
+    that the avatar move to.  It would then act accordingly if there are some present
+    */
+    
+    public void processAvatarMove(String userMovementInput){
+        //Create a copy avatar ---- so we can move it later
+        Avatar copyOfAvatar = new Avatar(minidisc);
         
+        //Move the copy avatar accordingly 
+        copyOfAvatar.move(userMovementInput);
+        
+        //If its at the edge of the world, its an improper move and should be done nothing
+        if ((copyOfAvatar.getLocation().getX > 10 || copyOfAvatar.getLocation().getX < 0) || (copyOfAvatar.getLocation().getY < 0 || copyOfAvatar.getLocation().getY > 10)){
+            //do nothing, ie dont move the avatar
+            System.out.println("Ooops, seems I can't reach there!");
+        }else {
+                
+            //Check if the move is valid by checking the obstacle and collecitbles array
+            
+            ArrayList<Collectible> copyOfCollectibleArrayList = new ArrayList<Collectible>();
+            copyCollectiblesArrayTo(copyOfCollectibleArrayList);
+            
+            ArrayList<Obstacle> copyOfObstacleArray = new ArrayList<Obstacle>();
+            copyObstacleArrayTo(copyOfObstacleArray);
+            
+            //Check if there is a collectible and no obstacle
+            if (overlapsWithAnyCollectibles() && !overlapsWithAnyObstacles){
+                //If there is a collectible and no obstacles, move the real avatar and pick up the collecitble (remove it from the array)
+                for (int i = 0; i < copyOfCollectibleArrayList.size(); i++){
+                    if (copyOfCollectibleArrayList.get(i).overlapsWith(copyOfAvatar)){
+                        //Collect collectible if its there
+                        copyOfCollectibleArrayList.get(i).addToCollection();
+                        
+                        //Move the original avatar accordingly (processAvatarMove())
+                        this.minidisc.move(userMovementInput);
+                        System.out.println("I picked up a collecitble");
+                        
+                        //Remove the collectible from the map
+                        removeCollectible(i);
+                        copyOfCollectibleArrayList.remove(i);
+                }
+            }else if ((!overlapsWithAnyCollectibles() && overlapsWithAnyObstacles()) || (overlapsWithAnyCollectibles() && overlapsWithAnyObstacles())){
+                //If there are collectibles or no collectibles in the area , but there is an obstacle, take damage and dont have the avatar move there yet
+                for (Obstacle o : copyOfObstacleArray){
+                    if (o.overlapsWith(copyOfAvatar)){
+                       if (o.getIsDeadly()){
+                           //Dont move the original avatar accoringly (processAvatarMove())
+                           
+                           //Take damage from the obstacle if its there
+                           this.minidisc.updateHealth() //||???||?|?|?|?|?|?|? this shoudl be updated to takeDamage
+                           
+                           //print out 'taken damage'
+                           System.out.println("OUCH! I have taken damage");
+                       }
+                    }
+                }
+            }else if (!overlapsWithAnyCollectibles() && !overlapsWithAnyObstacles){
+                //if it doesnt overlap with any obstacles or colectibles, thne just move without doing nothing
+                this.minidisc.move(userMovementInput);
+            }
+        }        
     }
     
     /**
@@ -330,46 +432,19 @@ public class AnimationApp{
         
         //Prompt the user for a movement
         System.out.print("Move UP, DOWN, LEFT, RIGHT:");
-		Scanner userMovementInput = new Scanner(System.in);
+		Scanner movementInput = new Scanner(System.in);
         
-        //This chunk of code processes if the avatar can move\\
-        //Create a copy avatar
-        Avatar copyOfAvatar = new Avatar(minidisc);
+        //Process if the avatar can move 
+        processAvatarMove(movementInput);
         
-        //Move the avatar accordingly 
-        copyOfAvatar.move(userMovementInput);
-        //Check if the move is valid by checking the obstacle and collecitbles array
-        
-        //Checking if the avatar overlaps with any collecitbles
-        ArrayList<Collectible> copyOfCollectibleArrayList = new ArrayList<Collectible>();
-        copyCollectiblesArrayTo(copyOfCollectibleArrayList);
-        for (Collectible c : copyOfCollectibleArrayList){
-            if (c.overlapsWith(copyOfAvatar)){
-                c.addToCollection();
-            }
-        }
-        
-            //Collect collectible if its there
-                //Move the original avatar accordingly (processAvatarMove())
-                //Remove the collectible from the map
-                
-            //Take damage from the obstacle if its there
-                //Dont move the original avatar accoringly (processAvatarMove())
-            
-            //If its at the edge of the world, its an improper move and should be done nothing
-                //Dont move the avatar (processAvatarMove())
-            
-            //If nothing is there
-                //Move the original avatar accoringly (processAvatarMove())
-
-        //Move obstacle accordingly (make sure to not overlap with avatar)
+        //Move obstacles accordingly (make sure to not overlap with avatar)
             //Update positions of all obstacles in arraylist
 
         //Print the current state
 
         //Draw the current state
 
-        //Check if end condition is met (number of tuns lets say)
+        //Check if end condition is met (number of turns lets say)
         }
         
     }
