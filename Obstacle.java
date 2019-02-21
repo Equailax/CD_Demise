@@ -2,8 +2,6 @@ import java.awt.Rectangle;
 import java.awt.Point;
 import java.lang.Math;
 
-import com.sun.org.apache.regexp.internal.recompile;
-
 import javafx.scene.shape.ObservableFaceArray;
 
 public class Obstacle
@@ -39,8 +37,7 @@ public class Obstacle
 
 	public Obstacle(String name, int x, int y){
 		this.name = name;
-		this.location.x = x;
-		this.location.y = y;
+        this.location.setLocation(x,y);
 	}
 	
 	public Obstacle(String name, boolean isDeadly, Rectangle location)
