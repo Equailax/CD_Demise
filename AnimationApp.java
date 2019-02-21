@@ -141,7 +141,7 @@ public class AnimationApp{
     This method set this.obstacleArray to a new array
     @param inputObstaclesArray : the obstacleArray that we wish to set this.obstacleArray to
     */
-    public void setObstacleArray(ArrayList<Collectible> inputObstaclesArray){
+    public void setObstacleArray(ArrayList<Obstacle> inputObstaclesArray){
         if (inputObstaclesArray != null){
             ArrayList<Obstacle> tempObstaclesArrayList = new ArrayList<Obstacle>();
             
@@ -163,8 +163,8 @@ public class AnimationApp{
     This method copies the elements of the obstacles array list (this.obstacleArray)  to an input array list
     @param inputObstaclesArray : this is the array list that we wish to copy the elemnts of this.obstacleArray to.
     */
-    public void copyObstacleArrayTo(ArrayList<Collectible> inputCollectiblesArray){
-        if (inputCollectiblesArray != null){
+    public void copyObstacleArrayTo(ArrayList<Obstacle> inputObstaclesArray){
+        if (inputObstaclesArray != null){
             ArrayList<Obstacle> tempObstaclesArrayList = new ArrayList<Obstacle>();
             
             //copy the elements of this.obstacleArray to the temporary array list
@@ -285,7 +285,7 @@ public class AnimationApp{
     @param inputAvatar : this is the avatar (most likely a copy) that we wish to check if it oberlaps with anything
     @return boolean : this returns the true if the avatar overlaps with the collectible, false otherwise
     */
-    public void overlapsWithAnyCollectibles(Avatar inputAvatar){
+    public boolean overlapsWithAnyCollectibles(Avatar inputAvatar){
         //Check if the avatar overlaps with any collecitbles
         for (Collectible c : this.collectiblesArray){
             if (c.overlapsWith(inputAvatar)){
@@ -302,7 +302,7 @@ public class AnimationApp{
     @param inputAvatar : this is the avatar that we wish to check if ir overlaps with anything
     @return boolean : returns a true if an obstacles is in the way, false otherwise
     */
-    public void overlapsWithAnyObstacles(Avatar inputAvatar){
+    public boolean overlapsWithAnyObstacles(Avatar inputAvatar){
         //check if the avatar overlaps with any obstacles
         for (Obstacle o : this.obstacleArray){
             if (o.overlapsWith(inputAvatar)){
@@ -336,7 +336,7 @@ public class AnimationApp{
         copyOfAvatar.move(userMovementInput);
         
         //If its at the edge of the world, its an improper move and should be done nothing
-        if ((copyOfAvatar.getLocation().getX > 10 || copyOfAvatar.getLocation().getX < 0) || (copyOfAvatar.getLocation().getY < 0 || copyOfAvatar.getLocation().getY > 10)){
+        if ((copyOfAvatar.getLocation().getX() > 10 || copyOfAvatar.getLocation().getX() < 0) || (copyOfAvatar.getLocation().getY() < 0 || copyOfAvatar.getLocation().getY() > 10)){
             //do nothing, ie dont move the avatar
             System.out.println("Ooops, seems I can't reach there!");
         }else {
@@ -350,7 +350,7 @@ public class AnimationApp{
             copyObstacleArrayTo(copyOfObstacleArray);
             
             //Check if there is a collectible and no obstacle
-            if (overlapsWithAnyCollectibles() && !overlapsWithAnyObstacles){
+            if (overlapsWithAnyCollectibles(copyOfAvatar) && !overlapsWithAnyObstacles(copyOfAvatar)){
                 //If there is a collectible and no obstacles, move the real avatar and pick up the collecitble (remove it from the array)
                 for (int i = 0; i < copyOfCollectibleArrayList.size(); i++){
                     if (copyOfCollectibleArrayList.get(i).overlapsWith(copyOfAvatar)){
@@ -366,7 +366,7 @@ public class AnimationApp{
                         copyOfCollectibleArrayList.remove(i);
                     }
                 }
-            }else if ((!overlapsWithAnyCollectibles() && overlapsWithAnyObstacles()) || (overlapsWithAnyCollectibles() && overlapsWithAnyObstacles())){
+            }else if ((!overlapsWithAnyCollectibles(copyOfAvatar) && overlapsWithAnyObstacles(copyOfAvatar)) || (overlapsWithAnyCollectibles(copyOfAvatar) && overlapsWithAnyObstacles(copyOfAvatar))){
                 //If there are collectibles or no collectibles in the area , but there is an obstacle, take damage and dont have the avatar move there yet
                 for (Obstacle o : copyOfObstacleArray){
                     if (o.overlapsWith(copyOfAvatar)){
@@ -381,7 +381,7 @@ public class AnimationApp{
                        }
                     }
                 }
-            }else if (!overlapsWithAnyCollectibles() && !overlapsWithAnyObstacles){
+            }else if (!overlapsWithAnyCollectibles(copyOfAvatar) && !overlapsWithAnyObstacles(copyOfAvatar)){
                 //if it doesnt overlap with any obstacles or colectibles, thne just move without doing nothing
                 this.minidisc.move(userMovementInput);
             }
@@ -435,8 +435,10 @@ public class AnimationApp{
         System.out.print("Move UP, DOWN, LEFT, RIGHT:");
 		Scanner movementInput = new Scanner(System.in);
         
+        String input = movementInput.nextLine();
+        
         //Process if the avatar can move 
-        mainApp.processAvatarMove(movementInput);
+        mainApp.processAvatarMove(input);
         
         //Move obstacles accordingly (make sure to not overlap with avatar)
             //Update positions of all obstacles in arraylist
