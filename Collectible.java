@@ -116,7 +116,7 @@ This is used for the purposes of collecting/interacting with objects by the avat
 	{
 		Rectangle avatarLocation = new Rectangle(avatar.getLocation());
 		
-		if(this.location.getLocation().equals(avatarLocation.getLocation()))
+		if(this.location.equals(avatarLocation.getLocation()))
 			return true;
 		
 		return false;
