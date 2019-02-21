@@ -78,30 +78,10 @@ public class AnimationApp{
         }
         
         //Copy the inputCollectiblesArray and set it equal to the instance variable
-        if (inputCollectiblesArray != null){
-            ArrayList<Collectible> tempCollectiblesArrayList = new ArrayList<Collectible>();
-            for (Collectible c : this.collectiblesArray){
-                if (c != null){
-                    tempCollectiblesArrayList.add(new Collectible(c));
-                }else {
-                    tempCollectiblesArrayList.add(new Collectible());
-                }
-            }
-            this.collectiblesArray = tempCollectiblesArrayList;
-        }
-        
+        setCollectiblesArray(inputCollectiblesArray);
+
         //Copy the inputObstaclesArray and set it equal to the instance variable
-        if (inputObstaclesArray != null){
-            ArrayList<Obstacle> tempObstaclesArrayList = new ArrayList<Obstacle>();
-            for (Obstacle o : this.obstacleArray){
-                if (o != null){
-                    tempObstaclesArrayList.add(new Obstacle(o));
-                }else {
-                    tempObstaclesArrayList.add(new Obstacle());
-                }
-            }
-            this.obstacleArray = tempObstaclesArrayList;
-        }
+        setObstacleArray(inputObstaclesArray);
     }
     
     //Setter Method
@@ -118,9 +98,32 @@ public class AnimationApp{
     @param inputCollectiblesArray : the collectiblesArray that we wish to set this.collectiblesArray to
     */
     public void setCollectiblesArray(ArrayList<Collectible> inputCollectiblesArray){
-        ArrayList<Collectible> tempCollectiblesArrayList = new ArrayList<Collectible>();
         if (inputCollectiblesArray != null){
             ArrayList<Collectible> tempCollectiblesArrayList = new ArrayList<Collectible>();
+            
+            //copy the elements of the inputCollectiblesArray to a temporary array list
+            for (Collectible c : inputCollectiblesArray){
+                if (c != null){
+                    tempCollectiblesArrayList.add(new Collectible(c));
+                }else {
+                    tempCollectiblesArrayList.add(new Collectible());
+                }
+            }
+            
+            //set the temporary array list to this.collectiblesArray
+            this.collectiblesArray = tempCollectiblesArrayList;
+        }
+    }
+    
+    /**
+    This method copies the collecitbles array list to an input array list.
+    @param inputCollectiblesArray : this is the array list that we wish to copy the elemnts of this.collectiblearraylist to. 
+    */
+    public void copyCollectiblesArrayTo(ArrayList<Collectible> inputCollectiblesArray){
+        if (inputCollectiblesArray != null){
+            ArrayList<Collectible> tempCollectiblesArrayList = new ArrayList<Collectible>();
+            
+            //copy the elements of this.collectiblesArray to a temporary array list
             for (Collectible c : this.collectiblesArray){
                 if (c != null){
                     tempCollectiblesArrayList.add(new Collectible(c));
@@ -128,7 +131,9 @@ public class AnimationApp{
                     tempCollectiblesArrayList.add(new Collectible());
                 }
             }
-            this.collectiblesArray = tempCollectiblesArrayList;
+            
+            //set the temporary array list to the inputCollectiblesArray
+            inputCollectiblesArray = tempCollectiblesArrayList;
         }
     }
     
@@ -139,17 +144,45 @@ public class AnimationApp{
     public void setObstacleArray(ArrayList<Collectible> inputObstaclesArray){
         if (inputObstaclesArray != null){
             ArrayList<Obstacle> tempObstaclesArrayList = new ArrayList<Obstacle>();
-            for (Obstacle o : this.obstacleArray){
+            
+            //Copy the elements of the inputObstaclesArray to the temporary array list
+            for (Obstacle o : inputObstaclesArray){
                 if (o != null){
                     tempObstaclesArrayList.add(new Obstacle(o));
                 }else {
                     tempObstaclesArrayList.add(new Obstacle());
                 }
             }
+            
+            //set the temporary array list to the obstacleArray
             this.obstacleArray = tempObstaclesArrayList;
         }
     }
     
+    /**
+    This method copies the elements of the obstacles array list (this.obstacleArray)  to an input array list
+    @param inputObstaclesArray : this is the array list that we wish to copy the elemnts of this.obstacleArray to.
+    */
+    public void copyObstacleArrayTo(ArrayList<Collectible> inputCollectiblesArray){
+        if (inputCollectiblesArray != null){
+            ArrayList<Obstacle> tempObstaclesArrayList = new ArrayList<Obstacle>();
+            
+            //copy the elements of this.obstacleArray to the temporary array list
+            for (Obstacle o : this.obstacleArray){
+                if (o != null){
+                    tempObstaclesArrayList.add(new obstacle(o));
+                }else {
+                    tempObstaclesArrayList.add(new Obstacle());
+                }
+            }
+            
+            //set the temporary array list to the inputObstaclesArray
+            inputObstaclesArray = tempObstaclesArrayList;
+            
+        }
+        
+    }
+     
     /**
     This method will add an obstacle to the end of the obstacleArray
     @param obstacleToAdd : this is the obstacle we wish to add
@@ -174,15 +207,9 @@ public class AnimationApp{
     public void addObstacle(int numberOfObstaclesToAdd){
         ArrayList tempObstaclesArrayList = new ArrayList<Obstacle>();
         
-        //Copy the obsacle array list if it is not empty
+        //Copy the obsacle array list (this.obstacleArray)if it is not empty
         if (this.obstacleArray != null){
-            for (Obstacle o : this.obstacleArray){
-                if (o != null){
-                    tempObstaclesArrayList.add(new Obstacle(o));
-                }else {
-                    tempObstaclesArrayList.add(new Obstacle());
-                }
-            }
+            copyObstacleArrayTo(tempObstaclesArrayList);
         }
         
         //Add the required obstacles to the temporary array list
@@ -194,7 +221,7 @@ public class AnimationApp{
             //Generate a random number between 0 and 10 for the Y coordinate
             int randomYCoordinate = (int)(Math.random() * 10 + 0);
             
-            tempObstaclesArrayList.add(new Obstacle("Obstacle" + i, randomXCoordinate, randomYCoordinate))  ///When constructing an obstacle, it should take a random positon as an argument
+            tempObstaclesArrayList.add(new Obstacle("Obstacle" + i, randomXCoordinate, randomYCoordinate));  ///When constructing an obstacle, it should take a random positon as an argument
         }
         this.obstacleArray = tempObstaclesArrayList;
     }
@@ -223,15 +250,9 @@ public class AnimationApp{
     public void addCollectible(int numberOfCollectiblesToAdd){
         ArrayList<Collectible> tempCollectiblesArrayList = new ArrayList<Collectible>();
         
-        //Copy the collectibles array list if it is not empty
-        if (this.collectiblesArray != null){
-            for (Collectible c : this.collectiblesArray){
-                if (c != null){
-                    tempCollectiblesArrayList.add(new Collectible(c));
-                }else {
-                    tempCollectiblesArrayList.add(new Collectible());
-                }
-            }
+        //Copy the collectibles array list (this.collectiblesArray) elements to the temporary array list if it is not empty
+        if (this.collectiblesArray != null){ 
+            copyCollectiblesArrayTo(tempCollectiblesArrayList)
         }
         
         //Add the required number of collecitbles that one wished to add
@@ -243,7 +264,7 @@ public class AnimationApp{
             //Generate a random number between 0 and 10 for the Y coordinate
             int randomYCoordinate = (int)(Math.random() * 10 + 0);
             
-            tempCollectiblesArrayList.add(new Collectible("Collectible" + i, randomXCoordinate, randomYCoordinate))  ///When constructing a collectible, it should take a random positon as an argument
+            tempCollectiblesArrayList.add(new Collectible("Collectible" + i, randomXCoordinate, randomYCoordinate));  ///When constructing a collectible, it should take a random positon as an argument
         }
         this.collectiblesArray = tempCollectiblesArrayList;
     }
@@ -270,10 +291,10 @@ public class AnimationApp{
     */
     public void initialize(){
         //Initalize the avatar
-        this.avatar.setPosition() ///\/\/\/\/\/\/\/\/\/\/ IMPORTANT we want to make sure tha the origianl position of  the avatar is at the starting points
+        this.minidisc.setPosition(); ///\/\/\/\/\/\/\/\/\/\/ IMPORTANT we want to make sure tha the origianl position of  the avatar is at the starting points
         
         //Initialize Collectibles -- Add 5 collectibles -- make sure the positions of collectibles are correct
-        addCollectible(5)
+        addCollectible(5);
         
         //Initalize Obstacles -- Add 5 obstacles -- make sure the postions of the obstacles are correct
         addObstacle(5);  
@@ -309,42 +330,47 @@ public class AnimationApp{
         
         //Prompt the user for a movement
         System.out.print("Move UP, DOWN, LEFT, RIGHT:");
-		Scanner userMovmentInput = new Scanner(System.in);
+		Scanner userMovementInput = new Scanner(System.in);
         
         //This chunk of code processes if the avatar can move\\
         //Create a copy avatar
-            //Move the avatar accordingly 
-            //Check if the move is valid by checking the obstacle and collecitbles array
-                //Collect collectible if its there
-                    //Move the original avatar accordingly (processAvatarMove())
-                    //Remove the collectible from the map
-                    
-                //Take damage from the obstacle if its there
-                    //Dont move the original avatar accoringly (processAvatarMove())
-                
-                //If its at the edge of the world, its an improper move and should be done nothing
-                    //Dont move the avatar (processAvatarMove())
-                
-                //If nothing is there
-                    //Move the original avatar accoringly (processAvatarMove())
+        Avatar copyOfAvatar = new Avatar(minidisc);
         
+        //Move the avatar accordingly 
+        copyOfAvatar.move(userMovementInput);
+        //Check if the move is valid by checking the obstacle and collecitbles array
+        
+        //Checking if the avatar overlaps with any collecitbles
+        ArrayList<Collectible> copyOfCollectibleArrayList = new ArrayList<Collectible>();
+        copyCollectiblesArrayTo(copyOfCollectibleArrayList);
+        for (Collectible c : copyOfCollectibleArrayList){
+            if (c.overlapsWith(copyOfAvatar)){
+                c.addToCollection();
+            }
+        }
+        
+            //Collect collectible if its there
+                //Move the original avatar accordingly (processAvatarMove())
+                //Remove the collectible from the map
+                
+            //Take damage from the obstacle if its there
+                //Dont move the original avatar accoringly (processAvatarMove())
+            
+            //If its at the edge of the world, its an improper move and should be done nothing
+                //Dont move the avatar (processAvatarMove())
+            
+            //If nothing is there
+                //Move the original avatar accoringly (processAvatarMove())
+
         //Move obstacle accordingly (make sure to not overlap with avatar)
             //Update positions of all obstacles in arraylist
-        
+
         //Print the current state
-        
+
         //Draw the current state
-        
+
         //Check if end condition is met (number of tuns lets say)
         }
         
     }
 }
-
-
-
-
-
-
-
-
