@@ -1,4 +1,6 @@
-import java.util.Sacanner;
+import java.util.Scanner;
+import java.awt.Rectangle;
+
     // i have not consider the privacy leaks in this file 
     // variables 
     public class Avatar{
@@ -37,6 +39,10 @@ import java.util.Sacanner;
         return damage;
     }
 
+    public Rectangle getLocation(){
+        return location;
+    }
+    
     // setter 
     public void setName(String Name){
         this.name = Name;
@@ -83,16 +89,24 @@ import java.util.Sacanner;
     public void moveLeft(int movementLeft){
         this.xposition -= movementLeft;
     }
+
+    public void takeDamage(int damage){
+        this.health -= damage;
+    }
+
+    public void gainHealth(int boost){
+        this.health += boost;
+    }
     
     //Movment for a string inputs
     public void move(String direction){
-        if (direction.toLowerCase("up")){
+        if (direction.toLowerCase().equals("up")){
             this.yposition += 1;                    //***** check if its within bounds
-        }else if (direction.toLowerCase("down")){
+        }else if (direction.toLowerCase().equals("down")){
             this.yposition -= 1;
-        }else if (direction.toLowerCase("left")){
+        }else if (direction.toLowerCase().equals("left")){
             this.xposition -= 1;
-        }else if (direction.toLowerCase("right")){
+        }else if (direction.toLowerCase().equals("right")){
             this.xposition -= 1;
         }
     }
@@ -112,46 +126,28 @@ import java.util.Sacanner;
         }
     }
 
-    // there is no method fro damage in this file 
+    // there is no method for damage in this file 
 
     // constructors 
     // default 
     public Avatar(){
 
     }
-    public Avatar(String myName, int myLife, int myhealth, int myDamage, int xaxis, int yaxis){
+    public Avatar(String myName, int myLife, int myhealth, int myDamage, Rectangle location){
         this.name = myName;
         this.lives = myLife;
         this.health = myhealth;
+        this.location = location;
         this.damage = myDamage;
-        this.xposition = xaxis;
-        this.yposition = yaxis;
+        
     }
-    public Avatar(int xaxis, int yaxis){
-        this.xposition = xaxis;
-        this.yposition = yaxis;
-    }
-    public Avatar(int xaxis){
-        this.xposition = xaxis;
-    }
-    public Avatar(int yaxis){
-        this.yposition = yaxis;
-    }
-
-    public Avatar(int myDamage,int myLife, int myhealth){
-        this.damage = myDamage;
-        this.lives = myLife;
-        this.health = myhealth;
-    }
-
-    public Avatar(int myLife, int myhealth){
-        this.lives = myLife;
-        this.health = myhealth;
-
-    }
-
-    public Avatar(int myhealth){
-        this.health = myhealth;
+    public Avatar(Avatar a){
+        this.name = a.name;
+        this.lives = a.lives;
+        this.health = a.health;
+        this.damage = a.damage;
+        this.location = a.location;
+        
     }
          
 }
