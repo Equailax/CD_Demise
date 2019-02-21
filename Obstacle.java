@@ -28,6 +28,9 @@ public class Obstacle
 		this.health = obstacle.health;
 	}
 	
+	public Obstacle(){
+	}
+	
 	public Obstacle(String name, Rectangle location)
 	{
 		this.name = name;
