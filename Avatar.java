@@ -78,23 +78,53 @@ import java.awt.Rectangle;
 
     public void takeDamage(int damage){
         this.health -= damage;
+        //print out 'taken damage'
+        System.out.println("OUCH! I have taken damage");
     }
 
     public void gainHealth(int boost){
         this.health += boost;
+        //print out 'i picked up health'
+        System.out.println("I have picked up " + boost + " health!");
     }
     
     //Movment for a string inputs
     public void move(String direction){
-        if (direction.toLowerCase().equals("up")){
-            this.location.setLocation((int)this.location.getLocation().getX(), (int)this.location.getLocation().getY() + 1);                  //***** check if its within bounds
-        }else if (direction.toLowerCase().equals("down")){
-            this.location.setLocation((int)this.location.getLocation().getX(), (int)this.location.getLocation().getY() - 1);
-        }else if (direction.toLowerCase().equals("left")){
-            this.location.setLocation((int)this.location.getLocation().getX() - 1, (int)this.location.getLocation().getY());
-        }else if (direction.toLowerCase().equals("right")){
-            this.location.setLocation((int)this.location.getLocation().getX() + 1, (int)this.location.getLocation().getY());
-        }
+        
+        direction = direction.toLowerCase();
+        
+        int xCoord = (int)(this.location.getX());
+		int yCoord = (int)(this.location.getY());
+        
+        if(direction.equals("up")){
+			if (this.location.getY() > 0){
+                //if the avatar is within the edge, then move up
+				this.location.setLocation(xCoord, yCoord - 1);	
+			}else if(this.location.getY() == 0 ){
+                System.out.println("Cant go there, im at the edge");
+            }
+		} else if(direction.equals("down")){
+			if (this.location.getY() < 10){
+                //if the avatar is within the edge, then move down
+				this.location.setLocation(xCoord, yCoord + 1);
+			}else if(this.location.getY() == 10){
+                System.out.println("Cant go there, im at the edge");
+            }
+		} else if(direction.equals("left")){
+			if (this.location.getX() > 0){
+                //if the avatar is within the edge, then move left
+				this.location.setLocation(xCoord - 1, yCoord);
+			}else if(this.location.getX() == 0){
+                System.out.println("Cant go there, im at the edge");
+            }
+		}else if(direction.equals("right")){
+			if (this.location.getX() < 10){
+				//if the avatar is within the egde, then move right
+                this.location.setLocation(xCoord + 1, yCoord);
+			}else if(this.location.getX() == 10){
+                System.out.println("Cant go there, im at the edge");
+            }
+		}
     }
     
     //health

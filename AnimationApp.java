@@ -157,40 +157,6 @@ public class AnimationApp{
         //can add some animation for removing things
     }
     
-    //////////////////AVATAR METHODS
-    /**
-    This method checks if the avatar overlaps with any element in the collecitbles array.  If the avatar overlaps,
-    it returns true.
-    @param inputAvatar : this is the avatar (most likely a copy) that we wish to check if it oberlaps with anything
-    @return boolean : this returns the true if the avatar overlaps with the collectible, false otherwise
-    */
-    public boolean overlapsWithAnyCollectibles(Avatar inputAvatar){
-        //Check if the avatar overlaps with any collecitbles
-        for (Collectible c : this.collectiblesArray){
-            if (c.overlapsWith(inputAvatar)){
-                return true;
-            }
-        }
-        return false;
-        
-    }
-    
-    /**
-    This method checks if the avatar overlaps with any obstacle in the obstacles array list.  If the avatar overlaps,
-    it returns true
-    @param inputAvatar : this is the avatar that we wish to check if ir overlaps with anything
-    @return boolean : returns a true if an obstacles is in the way, false otherwise
-    */
-    public boolean overlapsWithAnyObstacles(Avatar inputAvatar){
-        //check if the avatar overlaps with any obstacles
-        for (Obstacle o : this.obstacleArray){
-            if (o.overlapsWith(inputAvatar)){
-                return true;
-            }
-        }
-        return false;
-    }
-    
     //Getter methods
     /**
     This method returns the collectible array list.
@@ -243,6 +209,8 @@ public class AnimationApp{
             System.out.print("Collectible Name: " + c.getName() + " |");
             System.out.print(" X Position: " + c.getLocation().getX() + "|");
             System.out.println(" Y Position: " + c.getLocation().getY() + "|");
+            System.out.println(" Collection: " + c.getCollection() + "|");
+            
             System.out.println("------------------------------------------------------------------");
         }
         
@@ -264,71 +232,66 @@ public class AnimationApp{
         //Move the copy avatar accordingly 
         copyOfAvatar.move(userMovementInput);
         
-        //Check if the move is within bounds
-        if((0 <= copyOfAvatar.getLocation().getX() && copyOfAvatar.getLocation().getX() <= 10) && ( 0 <= copyOfAvatar.getLocation().getY()) && copyOfAvatar.getLocation().getY() <= 10){
-            //Check if the move is valid by checking the obstacle and collecitbles array
-            
-            ArrayList<Collectible> copyOfCollectibleArrayList = new ArrayList<Collectible>();
-            copyOfCollectibleArrayList = getCollectiblesArray();
-            
-            
-            ArrayList<Obstacle> copyOfObstacleArray = new ArrayList<Obstacle>();
-            copyOfObstacleArray = getObstacleArray();
-            
-            
-            //Check if there is a collectible and no obstacle
-            if (overlapsWithAnyCollectibles(copyOfAvatar) && !overlapsWithAnyObstacles(copyOfAvatar)){
-                //If there is a collectible and no obstacles, move the real avatar and pick up the collecitble (remove it from the array)
-                for (int i = 0; i < copyOfCollectibleArrayList.size(); i++){
-                    if (copyOfCollectibleArrayList.get(i).overlapsWith(copyOfAvatar)){
-                        //Collect collectible if its there
-                        this.collectiblesArray.get(i).addToCollection();
-                        
-                        //Move the original avatar accordingly (processAvatarMove())
-                        this.minidisc.move(userMovementInput);
-                        System.out.println("I picked up a collecitble");
-                        
-                        //Remove the collectible from the map
-                        removeCollectible(i);
-                        this.collectiblesArray.remove(i);
-                        
-                        //break once removed
-                        break;
-                    }
-                }
-            }else if (overlapsWithAnyObstacles(copyOfAvatar)){
-                //If there are collectibles or no collectibles in the area , but there is an obstacle, take damage and dont have the avatar move there yet
-                for (Obstacle o : copyOfObstacleArray){
-                    if (o.overlapsWith(copyOfAvatar)){
-                       System.out.println("Oh no, there is an obstacle");
-                       //Take damage from the obstacle if its there
-                       this.minidisc.takeDamage(1); //||???||?|?|?|?|?|?|? this shoudl be updated to takeDamage
-                       
-                       //print out 'taken damage'
-                       System.out.println("OUCH! I have taken damage");
-                       
-                       //once detected one obstacle break
-                       break;
-                       
-                       /*if (o.getIsDeadly()){
-                           //Move the original avatar accoringly (processAvatarMove())
-                           
-                           //Take damage from the obstacle if its there
-                           this.minidisc.takeDamage(1); //||???||?|?|?|?|?|?|? this shoudl be updated to takeDamage
-                           
-                           //print out 'taken damage'
-                           System.out.println("OUCH! I have taken damage");
-                       }*/
-                    }
-                }
-            }else if (!overlapsWithAnyCollectibles(copyOfAvatar) && !overlapsWithAnyObstacles(copyOfAvatar)){
-                //if it doesnt overlap with any obstacles or colectibles, thne just move without doing nothing
-                this.minidisc.move(userMovementInput);
+        ArrayList<Collectible> copyOfCollectibleArrayList = new ArrayList<Collectible>();
+        copyOfCollectibleArrayList = getCollectiblesArray();
+        
+        
+        ArrayList<Obstacle> copyOfObstacleArray = new ArrayList<Obstacle>();
+        copyOfObstacleArray = getObstacleArray();
+        
+        System.out.println("Why da fuq isnt it working");
+        
+        System.out.println(copyOfCollectibleArrayList);
+        
+        System.out.println(copyOfObstacleArray);
+        
+        boolean occupiedByObstacle = false;
+        boolean occupiedByCollectible = false;
+        
+        //Check if the avatar overlaps with any obsatacles
+        for(Obstacle o: copyOfObstacleArray){
+            if(o.overlapsWith(copyOfAvatar)){
+                occupiedByObstacle = true;
+                break;
             }
-        }else {
-            //do nothing, ie dont move the avatar
-            System.out.println("Ooops, seems I can't reach there!");
-        }      
+        }
+        
+        //Check if the avatar overlaps with any collecitbles
+        for(Collectible c: copyOfCollectibleArrayList){
+            if(c.overlapsWith(copyOfAvatar)){
+                occupiedByCollectible = true;
+                break;
+            }
+        }
+        
+        if(occupiedByObstacle == true){
+            //If there is an obstacle, take damage
+            //Take damage from the obstacle if its there
+            this.minidisc.takeDamage(1); 
+            
+        }else if(occupiedByCollectible == true){
+            //If there is a collectible and no obstacles, move the real avatar and pick up the collecitble (remove it from the array)
+            for (int i = 0; i < copyOfCollectibleArrayList.size(); i++){
+                if (copyOfCollectibleArrayList.get(i).overlapsWith(copyOfAvatar)){
+                    //Collect collectible if its there
+                    this.collectiblesArray.get(i).addToCollection();
+                    
+                    //Move the original avatar accordingly (processAvatarMove())
+                    this.minidisc.move(userMovementInput);
+                    System.out.println("I picked up a collecitble");
+                    
+                    //Remove the collectible from the map
+                    removeCollectible(i);
+                    
+                    //break once removed
+                    break;
+                }
+            }
+        }else if(occupiedByObstacle == false && occupiedByCollectible == false){
+            //if it doesnt overlap with any obstacles or colectibles, thne just move without doing nothing
+            this.minidisc.move(userMovementInput);
+            System.out.println("Theres nothing here");
+        }
     }
 	
 	public void processObstacleMove()
@@ -354,6 +317,8 @@ public class AnimationApp{
 			{
 				occupied = true;
 						// Code avatar getting hurt
+                this.minidisc.takeDamage(1);        
+                
 			} else
 			{
 				// Check if the moving obstacle overlaps with an obstacle in the static array (even if the moving obstacle doesn't move, no changes will be made)
@@ -391,6 +356,7 @@ public class AnimationApp{
         
         //Initalize Obstacles -- Add 3 obstacles -- make sure the postions of the obstacles are correct
         addObstacle(3);  
+        
     }
     
     /**This method initializes the game while the game runs.  This means keeping the positons of the 'original' objects that
@@ -420,7 +386,10 @@ public class AnimationApp{
         //While the number of allowed movements is less than the required ammount (10), play a turn of the game
             //Might add condition of 'winning' where they collect all 5 collectibles
         while (movements < 20){
-        
+            
+             //Print the current state
+            mainApp.printCurrentState();
+            
             //Prompt the user for a movement
             System.out.print("Move UP, DOWN, LEFT, RIGHT:");
             Scanner movementInput = new Scanner(System.in);
@@ -435,8 +404,7 @@ public class AnimationApp{
             mainApp.processObstacleMove();
                 //Update positions of all obstacles in arraylist
 
-            //Print the current state
-            mainApp.printCurrentState();
+           
             
             //Check if end condition is met (number of turns lets say)
         }

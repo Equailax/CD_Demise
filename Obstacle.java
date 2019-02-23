@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.awt.Rectangle;
 import java.awt.Point;
 import java.lang.Math;
@@ -86,18 +87,32 @@ public class Obstacle
 	// checks if obsatcle is in the same spot as the avatar, will be boolean
 	public boolean overlapsWith(Avatar a){
 		
+        if((a.getLocation().getX() == this.location.getX()) && (a.getLocation().getY() == this.location.getY())){
+            return true;
+        }else{
+            return false;
+        }
         
+        /*
         if (a.getLocation().equals(this.location)){
 			return true;
 		}
 		else{
 			return false;
 		}
+        */
 		
 	}
 	
 	public boolean overlapsWithObstacle(Obstacle o)
 	{
+        if((o.getLocation().getX() == this.location.getX()) && (o.getLocation().getY() == this.location.getY())){
+            return true;
+        }else {
+            return false;
+        }
+        
+        /*
 		if (o.getLocation().equals(this.location))
 		{
 			return true;
@@ -105,6 +120,7 @@ public class Obstacle
 		{
 			return false;
 		}
+        */
 	}
 	
 	/**
@@ -224,8 +240,26 @@ public class Obstacle
     
     
     public static void main(String[] args){
-        Obstacle o1 = new Obstacle("Obstacle1", 0, 0);
-        Obstacle o2 = new Obstacle("Obstacle2", 0, 0);
+        Obstacle o1 = new Obstacle("Obstacle1", 1, 0);
+        Obstacle o2 = new Obstacle("Obstacle2", 1, 0);
+        Obstacle o3 = new Obstacle("Obstacle3", 1, 0);
+        Obstacle o4 = new Obstacle("Obstacle4", 0, 0);
+        Obstacle o5 = new Obstacle("Obstacle5", 1, 0);
+        Obstacle o6 = new Obstacle("Obstacle6", 1, 0);
+        Obstacle o7 = new Obstacle("Obstacle7", 1, 0);
+        Obstacle o8 = new Obstacle("Obstacle8", 1, 0);
+        ArrayList<Obstacle> oA1 = new ArrayList<Obstacle>();
+        
+        oA1.add(o1);
+        oA1.add(o2);
+        oA1.add(o3);
+        oA1.add(o4);
+        oA1.add(o5);
+        oA1.add(o6);
+        oA1.add(o7);
+        oA1.add(o8);
+        
+        Avatar a1 = new Avatar("Avatar1", 0, 0, 0, new Rectangle(0,0,1,1));
         
         System.out.println(o1.toString());
         System.out.println(o2.toString());
@@ -236,6 +270,29 @@ public class Obstacle
             o1.randomMove();
         }
         System.out.println(o1.toString());
+
+
+        boolean occupied = false;
+        for(Obstacle o : oA1){
+            if(o.overlapsWith(a1)){
+                occupied = true;
+                break;
+            }
+        }
+        
+        if(occupied == true){
+            for(int i = 0; i < oA1.size(); i++){
+                if(oA1.get(i).overlapsWith(a1)){
+                    System.out.println(oA1.get(i));
+                    break;
+                }
+            }
+        }
+        
+        
+        
+        
+        
 
     }
 }

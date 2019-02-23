@@ -22,6 +22,10 @@ This gets the name of the Collectible object
 	{
 		return new String(name);
 	}
+    
+    public int getCollection(){
+        return this.collection;
+    }
 	
 /**
 This gets the amount of health the avatar/user will get boosted by the Collectible object
@@ -113,10 +117,8 @@ This is used for the purposes of collecting/interacting with objects by the avat
 @param avatar    the avatar being controlled by the user to interact with the program/game
 */
 	public boolean overlapsWith(Avatar avatar)
-	{
-		Rectangle avatarLocation = new Rectangle(avatar.getLocation());
-		
-		if(this.location.equals(avatarLocation.getLocation()))
+    {
+		if((avatar.getLocation().getX() == this.location.getX()) && (avatar.getLocation().getY() == this.location.getY()))
 			return true;
 		
 		return false;
