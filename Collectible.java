@@ -130,6 +130,13 @@ This is used for gauging the progress through the stages of the game based on se
 	{
 		this.collection += 1;
 	}
+   
+    /**
+    This is a to string method
+    */
+    public String toString(){
+        return this.name + " " + this.location.getLocation().getX() + " " + this.location.getLocation().getY();
+    }
 
 
 }

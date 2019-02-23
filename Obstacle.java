@@ -7,7 +7,7 @@ import javafx.scene.shape.ObservableFaceArray;
 public class Obstacle
 {
 	private String name;
-	private boolean isDeadly;
+	private boolean isDeadly = true;
 	private int health;
 	private int xcoord;
 	private int ycoord;
@@ -23,11 +23,11 @@ public class Obstacle
 	@param location is a rectangle of the object's location
 	@param isDeadly determines whether the object will be deadly to the user or not
 	*/
-	public Obstacle(Obstacle obstacle){
-		this.name = obstacle.name;
-		this.isDeadly = obstacle.isDeadly;
-		this.location = obstacle.location;
-		this.health = obstacle.health;
+	public Obstacle(Obstacle inputObstacle){
+		this.name = inputObstacle.name;
+		this.isDeadly = inputObstacle.isDeadly;
+		this.location = new Rectangle(inputObstacle.location);
+		this.health = inputObstacle.health;
 	}
 	
 	public Obstacle(){
@@ -85,7 +85,9 @@ public class Obstacle
 
 	// checks if obsatcle is in the same spot as the avatar, will be boolean
 	public boolean overlapsWith(Avatar a){
-		if (a.getLocation().equals(this.location)){
+		
+        
+        if (a.getLocation().equals(this.location)){
 			return true;
 		}
 		else{
@@ -124,30 +126,38 @@ public class Obstacle
 		System.out.println(direction);
 		int xCoord = (int)(location.getX());
 		int yCoord = (int)(location.getY());
-		if (direction.equals("up"))
-		{
-			if (location.y > 0)
-			{
-				this.location.setLocation(xCoord, yCoord-1);	
-			}
-		} else if (direction.equals("down"))
-		{
-			if (location.y < 10)
-			{
-				this.location.setLocation(xCoord, yCoord+1);
-			}
-		} else if (direction.equals("left"))
-		{
-			if (location.x > 0)
-			{
-				this.location.setLocation(xCoord-1, yCoord);
-			}
-		} else if (direction.equals("right"))
-		{
-			if (location.x < 10)
-			{
-				this.location.setLocation(xCoord+1, yCoord);
-			}
+		if(direction.equals("up")){
+			if (location.getY() > 0){
+                //if the obstacle is within the edge, then move up
+				this.location.setLocation(xCoord, yCoord - 1);	
+			}else if(location.getY() == 0 ){
+                //If the obstacle is at the edge, have the obstacle bounce away from it
+                this.location.setLocation(xCoord, yCoord + 1);
+            }
+		} else if(direction.equals("down")){
+			if (location.getY() < 10){
+                //if the obstcle is within the edge, then move down
+				this.location.setLocation(xCoord, yCoord + 1);
+			}else if(location.getY() == 10){
+                //if the obstacle is at the edge, then move up
+                this.location.setLocation(xCoord, yCoord - 1);
+            }
+		} else if(direction.equals("left")){
+			if (location.getX() > 0){
+                //if the obstacle is within the edge, then move left
+				this.location.setLocation(xCoord - 1, yCoord);
+			}else if(location.getX() == 0){
+                //if the obstacle is at the edge, then move right
+                this.location.setLocation(xCoord + 1, yCoord);
+            }
+		}else if(direction.equals("right")){
+			if (location.getX() < 10){
+				//if the obsatcle is within the egde, then move right
+                this.location.setLocation(xCoord + 1, yCoord);
+			}else if(location.getX() == 10){
+                //if the obstacle is at the edge, then move left
+                this.location.setLocation(xCoord - 1, yCoord);
+            }
 		}
 	}
 	
@@ -156,51 +166,76 @@ public class Obstacle
 	*/
 	public void randomMove()
 	{
-		int dirNum = (int)(Math.random() * (5-1));
+		int dirNum = (int)(Math.random() * 4 + 1);
 		String direction = "";
-		if (dirNum == 1)
-		{
+		if (dirNum == 1){
 			direction = "up";
-		} else if (dirNum == 2)
-		{
+		} else if (dirNum == 2){
 			direction = "down";
-		} else if (dirNum == 3)
-		{
+		} else if (dirNum == 3){
 			direction = "left";
-		} else if (dirNum == 4)
-		{
+		} else if (dirNum == 4){
 			direction = "right";
 		}
 		
-		System.out.println(direction);
+		//System.out.println(direction);
 		
 		int xCoord = (int)(location.getX());
 		int yCoord = (int)(location.getY());
 		
-		if (direction.equals("up"))
-		{
-			if (location.y > 0)
-			{
-				this.location.setLocation(xCoord, yCoord-1);	
-			}
-		} else if (direction.equals("down"))
-		{
-			if (location.y < 10)
-			{
-				this.location.setLocation(xCoord, yCoord+1);
-			}
-		} else if (direction.equals("left"))
-		{
-			if (location.x > 0)
-			{
-				this.location.setLocation(xCoord-1, yCoord);
-			}
-		} else if (direction.equals("right"))
-		{
-			if (location.x < 10)
-			{
-				this.location.setLocation(xCoord+1, yCoord);
-			}
+		if(direction.equals("up")){
+			if (location.getY() > 0){
+                //if the obstacle is within the edge, then move up
+				this.location.setLocation(xCoord, yCoord - 1);	
+			}else if(location.getY() == 0 ){
+                //If the obstacle is at the edge, have the obstacle bounce away from it
+                this.location.setLocation(xCoord, yCoord + 1);
+            }
+		} else if(direction.equals("down")){
+			if (location.getY() < 10){
+                //if the obstcle is within the edge, then move down
+				this.location.setLocation(xCoord, yCoord + 1);
+			}else if(location.getY() == 10){
+                //if the obstacle is at the edge, then move up
+                this.location.setLocation(xCoord, yCoord - 1);
+            }
+		} else if(direction.equals("left")){
+			if (location.getX() > 0){
+                //if the obstacle is within the edge, then move left
+				this.location.setLocation(xCoord - 1, yCoord);
+			}else if(location.getX() == 0){
+                //if the obstacle is at the edge, then move right
+                this.location.setLocation(xCoord + 1, yCoord);
+            }
+		}else if(direction.equals("right")){
+			if (location.getX() < 10){
+				//if the obsatcle is within the egde, then move right
+                this.location.setLocation(xCoord + 1, yCoord);
+			}else if(location.getX() == 10){
+                //if the obstacle is at the edge, then move left
+                this.location.setLocation(xCoord - 1, yCoord);
+            }
 		}
 	}
+    
+    public String toString(){
+        return this.name + " " + this.location.getX() + " " + this.location.getY();
+    }
+    
+    
+    public static void main(String[] args){
+        Obstacle o1 = new Obstacle("Obstacle1", 0, 0);
+        Obstacle o2 = new Obstacle("Obstacle2", 0, 0);
+        
+        System.out.println(o1.toString());
+        System.out.println(o2.toString());
+        
+        System.out.println(o1.overlapsWithObstacle(o2));
+        
+        for (int i = 0; i < 10; i++){
+            o1.randomMove();
+        }
+        System.out.println(o1.toString());
+
+    }
 }

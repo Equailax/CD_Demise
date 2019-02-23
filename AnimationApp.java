@@ -8,9 +8,9 @@ public class AnimationApp{
     //This is the animation app, where we will run our game.
     
     //Instance variables
-    private Avatar minidisc;
-    private ArrayList<Collectible> collectiblesArray;
-    private ArrayList<Obstacle> obstacleArray;
+    private Avatar minidisc = new Avatar();
+    private ArrayList<Collectible> collectiblesArray = new ArrayList<Collectible>();
+    private ArrayList<Obstacle> obstacleArray = new ArrayList<Obstacle>();
     
     //Constructors
     /**
@@ -72,29 +72,7 @@ public class AnimationApp{
             this.collectiblesArray = tempCollectiblesArrayList;
         }
     }
-    
-    /**
-    This method copies the collecitbles array list to an input array list.
-    @param inputCollectiblesArray : this is the array list that we wish to copy the elemnts of this.collectiblearraylist to. 
-    */
-    public void copyCollectiblesArrayTo(ArrayList<Collectible> inputCollectiblesArray){
-        if (inputCollectiblesArray != null){
-            ArrayList<Collectible> tempCollectiblesArrayList = new ArrayList<Collectible>();
-            
-            //copy the elements of this.collectiblesArray to a temporary array list
-            for (Collectible c : this.collectiblesArray){
-                if (c != null){
-                    tempCollectiblesArrayList.add(new Collectible(c));
-                }else {
-                    tempCollectiblesArrayList.add(new Collectible());
-                }
-            }
-            
-            //set the temporary array list to the inputCollectiblesArray
-            inputCollectiblesArray = tempCollectiblesArrayList;
-        }
-    }
-    
+
     /**
     This method set this.obstacleArray to a new array
     @param inputObstaclesArray : the obstacleArray that we wish to set this.obstacleArray to
@@ -118,56 +96,15 @@ public class AnimationApp{
     }
     
     /**
-    This method copies the elements of the obstacles array list (this.obstacleArray)  to an input array list
-    @param inputObstaclesArray : this is the array list that we wish to copy the elemnts of this.obstacleArray to.
-    */
-    public void copyObstacleArrayTo(ArrayList<Obstacle> inputObstaclesArray){
-        if (inputObstaclesArray != null){
-            ArrayList<Obstacle> tempObstaclesArrayList = new ArrayList<Obstacle>();
-            
-            //copy the elements of this.obstacleArray to the temporary array list
-            for (Obstacle o : this.obstacleArray){
-                if (o != null){
-                    tempObstaclesArrayList.add(new Obstacle(o));
-                }else {
-                    tempObstaclesArrayList.add(new Obstacle());
-                }
-            }
-            
-            //set the temporary array list to the inputObstaclesArray
-            inputObstaclesArray = tempObstaclesArrayList;
-            
-        }
-        
-    }
-     
-    /**
-    This method will add an obstacle to the end of the obstacleArray
-    @param obstacleToAdd : this is the obstacle we wish to add
-    */
-    public void addObstacle(Obstacle obstacleToAdd){
-        this.obstacleArray.add(new Obstacle(obstacleToAdd));
-    }
-    
-    /**
-    This method allows to add an obstacle at a speicfic index
-    @param index : the index (which is an integer) of the array in which we wish to add the obstacle
-    @param obstacleToAdd : this is the obstacle we wish to add
-    */
-    public void addObstacle(int index, Obstacle obstacleToAdd){
-        this.obstacleArray.add(index, new Obstacle(obstacleToAdd));
-    }
-    
-    /**
     This method will add a specified number of obstacles to the end of the obstacleArray
     @param numberOfObstaclesToAdd : this is the number of (new) obstacles we wish to add
     */
     public void addObstacle(int numberOfObstaclesToAdd){
-        ArrayList tempObstaclesArrayList = new ArrayList<Obstacle>();
+        ArrayList<Obstacle> tempObstaclesArrayList = new ArrayList<Obstacle>();
         
         //Copy the obsacle array list (this.obstacleArray)if it is not empty
         if (this.obstacleArray != null){
-            copyObstacleArrayTo(tempObstaclesArrayList);
+            tempObstaclesArrayList = getObstacleArray();
         }
         
         //Add the required obstacles to the temporary array list
@@ -181,24 +118,8 @@ public class AnimationApp{
             
             tempObstaclesArrayList.add(new Obstacle("Obstacle" + i, randomXCoordinate, randomYCoordinate));  ///When constructing an obstacle, it should take a random positon as an argument
         }
+        
         this.obstacleArray = tempObstaclesArrayList;
-    }
-    
-    /**
-    This method will add a collectible to the array at the end of the collectiblesArray 
-    @param collectibleToAdd : the collectible we wish to add to the array
-    */
-    public void addCollectible(Collectible collectibleToAdd){
-        this.collectiblesArray.add(new Collectible(collectibleToAdd));
-    }
-    
-    /**
-    This method allows to add a collectible at a speicfic index of the collectiblesArray
-    @param index : the index (which is an integer) of the array in which we wish to add the collectible
-    @param collectibleToAdd : the collectible we wish to add to the array
-    */
-     public void addCollectible(int index, Collectible collectibleToAdd){
-        this.collectiblesArray.add(index, new Collectible(collectibleToAdd));
     }
     
     /**
@@ -210,7 +131,7 @@ public class AnimationApp{
         
         //Copy the collectibles array list (this.collectiblesArray) elements to the temporary array list if it is not empty
         if (this.collectiblesArray != null){ 
-            copyCollectiblesArrayTo(tempCollectiblesArrayList);
+            tempCollectiblesArrayList = getCollectiblesArray();
         }
         
         //Add the required number of collecitbles that one wished to add
@@ -270,35 +191,61 @@ public class AnimationApp{
         return false;
     }
     
+    //Getter methods
+    /**
+    This method returns the collectible array list.
+    @return temp : this is a copy of the this.collecitblesArray
+    */
+    public ArrayList<Collectible> getCollectiblesArray(){
+        ArrayList<Collectible> temp = new ArrayList<Collectible>();
+        for (Collectible c : this.collectiblesArray){
+            temp.add(new Collectible(c));
+        }
+        return temp;
+    }
+    
+    /**
+    This method returns the obstacle array list
+    @return temp : this is a copy of the this.obstacleArray
+    */
+    public ArrayList<Obstacle> getObstacleArray(){
+        ArrayList<Obstacle> temp = new ArrayList<Obstacle>();
+        for (Obstacle o : this.obstacleArray){
+            temp.add(new Obstacle(o));
+        }
+        return temp;
+    }
+    
     /**
     This will print the current state of the game.  This means avatar position/health, collectibes and obstacles
     */
     public void printCurrentState(){
         //Print the curent state of the avatar
-        System.out.println("///////////\\\\\\\\\\\\");
         System.out.println("Name: " + this.minidisc.getName());
 		System.out.println("Health Level: " + this.minidisc. getHealth());
 		System.out.println("Lives Remaining: " + this.minidisc.getLives());
-		System.out.println("X Position: " + this.minidisc.getXPosition());
-		System.out.println("Y Position: " + this.minidisc.getYPosition());
+		System.out.println("X Position: " + this.minidisc.getLocation().getX());
+		System.out.println("Y Position: " + this.minidisc.getLocation().getY());
         
         //Print out the state of the obstacles
+        
         for (Obstacle o : this.obstacleArray){
-            System.out.println("_________________");
-            System.out.println("Obstacle Name: " + o.getName() + "|");
-            System.out.println("X Position: " + o.getLocation().getX() + "  |");
-            System.out.println("Y Position: " + o.getLocation().getX() + "  |");
-            System.out.println("_________________");
+            System.out.println("------------------------------------------------------------");
+            System.out.print("Obstacle Name: " + o.getName() + "|");
+            System.out.print(" X Position: " + o.getLocation().getX() + "|");
+            System.out.println(" Y Position: " + o.getLocation().getY() + " |");
+            System.out.println("------------------------------------------------------------");
         }
         
         //Print out the state of the collectibles
         for (Collectible c : this.collectiblesArray){
-            System.out.println("_________________");
-            System.out.println("Collectible Name: " + c.getName() + "|");
-            System.out.println("X Position: " + c.getLocation().getX() + "  |");
-            System.out.println("Y Position: " + c.getLocation().getX() + "  |");
-            System.out.println("_________________");
+            System.out.println("------------------------------------------------------------------");
+            System.out.print("Collectible Name: " + c.getName() + " |");
+            System.out.print(" X Position: " + c.getLocation().getX() + "|");
+            System.out.println(" Y Position: " + c.getLocation().getY() + "|");
+            System.out.println("------------------------------------------------------------------");
         }
+        
     }
     
     public void drawCurrentState(){
@@ -306,30 +253,28 @@ public class AnimationApp{
     }
     
     /**
-    This method processess if hte avatar can move.  This means it would check if there are any obstacles and collectibles in the area to the place
+    This method processess if the avatar can move.  This means it would check if there are any obstacles and collectibles in the area to the place
     that the avatar move to.  It would then act accordingly if there are some present
     */
     
     public void processAvatarMove(String userMovementInput){
         //Create a copy avatar ---- so we can move it later
-        Avatar copyOfAvatar = new Avatar(minidisc);
+        Avatar copyOfAvatar = new Avatar(this.minidisc);
         
         //Move the copy avatar accordingly 
         copyOfAvatar.move(userMovementInput);
         
-        //If its at the edge of the world, its an improper move and should be done nothing
-        if ((copyOfAvatar.getLocation().getX() > 10 || copyOfAvatar.getLocation().getX() < 0) || (copyOfAvatar.getLocation().getY() < 0 || copyOfAvatar.getLocation().getY() > 10)){
-            //do nothing, ie dont move the avatar
-            System.out.println("Ooops, seems I can't reach there!");
-        }else {
-                
+        //Check if the move is within bounds
+        if((0 <= copyOfAvatar.getLocation().getX() && copyOfAvatar.getLocation().getX() <= 10) && ( 0 <= copyOfAvatar.getLocation().getY()) && copyOfAvatar.getLocation().getY() <= 10){
             //Check if the move is valid by checking the obstacle and collecitbles array
             
             ArrayList<Collectible> copyOfCollectibleArrayList = new ArrayList<Collectible>();
-            copyCollectiblesArrayTo(copyOfCollectibleArrayList);
+            copyOfCollectibleArrayList = getCollectiblesArray();
+            
             
             ArrayList<Obstacle> copyOfObstacleArray = new ArrayList<Obstacle>();
-            copyObstacleArrayTo(copyOfObstacleArray);
+            copyOfObstacleArray = getObstacleArray();
+            
             
             //Check if there is a collectible and no obstacle
             if (overlapsWithAnyCollectibles(copyOfAvatar) && !overlapsWithAnyObstacles(copyOfAvatar)){
@@ -337,7 +282,7 @@ public class AnimationApp{
                 for (int i = 0; i < copyOfCollectibleArrayList.size(); i++){
                     if (copyOfCollectibleArrayList.get(i).overlapsWith(copyOfAvatar)){
                         //Collect collectible if its there
-                        copyOfCollectibleArrayList.get(i).addToCollection();
+                        this.collectiblesArray.get(i).addToCollection();
                         
                         //Move the original avatar accordingly (processAvatarMove())
                         this.minidisc.move(userMovementInput);
@@ -345,29 +290,45 @@ public class AnimationApp{
                         
                         //Remove the collectible from the map
                         removeCollectible(i);
-                        copyOfCollectibleArrayList.remove(i);
+                        this.collectiblesArray.remove(i);
+                        
+                        //break once removed
+                        break;
                     }
                 }
-            }else if ((!overlapsWithAnyCollectibles(copyOfAvatar) && overlapsWithAnyObstacles(copyOfAvatar)) || (overlapsWithAnyCollectibles(copyOfAvatar) && overlapsWithAnyObstacles(copyOfAvatar))){
+            }else if (overlapsWithAnyObstacles(copyOfAvatar)){
                 //If there are collectibles or no collectibles in the area , but there is an obstacle, take damage and dont have the avatar move there yet
                 for (Obstacle o : copyOfObstacleArray){
                     if (o.overlapsWith(copyOfAvatar)){
-                       if (o.getIsDeadly()){
-                           //Dont move the original avatar accoringly (processAvatarMove())
+                       System.out.println("Oh no, there is an obstacle");
+                       //Take damage from the obstacle if its there
+                       this.minidisc.takeDamage(1); //||???||?|?|?|?|?|?|? this shoudl be updated to takeDamage
+                       
+                       //print out 'taken damage'
+                       System.out.println("OUCH! I have taken damage");
+                       
+                       //once detected one obstacle break
+                       break;
+                       
+                       /*if (o.getIsDeadly()){
+                           //Move the original avatar accoringly (processAvatarMove())
                            
                            //Take damage from the obstacle if its there
                            this.minidisc.takeDamage(1); //||???||?|?|?|?|?|?|? this shoudl be updated to takeDamage
                            
                            //print out 'taken damage'
                            System.out.println("OUCH! I have taken damage");
-                       }
+                       }*/
                     }
                 }
             }else if (!overlapsWithAnyCollectibles(copyOfAvatar) && !overlapsWithAnyObstacles(copyOfAvatar)){
                 //if it doesnt overlap with any obstacles or colectibles, thne just move without doing nothing
                 this.minidisc.move(userMovementInput);
             }
-        }        
+        }else {
+            //do nothing, ie dont move the avatar
+            System.out.println("Ooops, seems I can't reach there!");
+        }      
     }
 	
 	public void processObstacleMove()
@@ -377,9 +338,10 @@ public class AnimationApp{
         
 		// Create two obstacle array states
 		ArrayList<Obstacle> dynamicObstacleArray = new ArrayList<Obstacle>();
-        copyObstacleArrayTo(dynamicObstacleArray);
+        dynamicObstacleArray = getObstacleArray();
+        
 		ArrayList<Obstacle> staticObstacleArray = new ArrayList<Obstacle>();
-        copyObstacleArrayTo(staticObstacleArray);
+        staticObstacleArray = getObstacleArray();
 		
 		// Go through the dynamic array and move an obstacle then check for overlaps
 		for (Obstacle o1 : dynamicObstacleArray)
@@ -412,6 +374,7 @@ public class AnimationApp{
         }
 		// Change this.ObstacleArray to the dynamic array
 		setObstacleArray(dynamicObstacleArray);
+
 	}
     
     /**
@@ -420,13 +383,14 @@ public class AnimationApp{
     */
     public void initialize(){
         //Initalize the avatar
+        this.minidisc.setName("Minidisc");
         this.minidisc.setPosition(); ///\/\/\/\/\/\/\/\/\/\/ IMPORTANT we want to make sure tha the origianl position of  the avatar is at the starting points
         
-        //Initialize Collectibles -- Add 5 collectibles -- make sure the positions of collectibles are correct
-        addCollectible(5);
+        //Initialize Collectibles -- Add 3 collectibles -- make sure the positions of collectibles are correct
+        addCollectible(3);
         
-        //Initalize Obstacles -- Add 5 obstacles -- make sure the postions of the obstacles are correct
-        addObstacle(5);  
+        //Initalize Obstacles -- Add 3 obstacles -- make sure the postions of the obstacles are correct
+        addObstacle(3);  
     }
     
     /**This method initializes the game while the game runs.  This means keeping the positons of the 'original' objects that
@@ -455,25 +419,26 @@ public class AnimationApp{
         
         //While the number of allowed movements is less than the required ammount (10), play a turn of the game
             //Might add condition of 'winning' where they collect all 5 collectibles
-        while (movements < 10){
+        while (movements < 20){
         
-        //Prompt the user for a movement
-        System.out.print("Move UP, DOWN, LEFT, RIGHT:");
-		Scanner movementInput = new Scanner(System.in);
-        
-        String input = movementInput.nextLine();
-        movements += 1;
-        
-        //Process if the avatar can move 
-        mainApp.processAvatarMove(input);
-        
-        //Move obstacles accordingly (make sure to not overlap with avatar)
-            //Update positions of all obstacles in arraylist
+            //Prompt the user for a movement
+            System.out.print("Move UP, DOWN, LEFT, RIGHT:");
+            Scanner movementInput = new Scanner(System.in);
+            
+            String input = movementInput.nextLine();
+            movements += 1;
+            
+            //Process if the avatar can move 
+            mainApp.processAvatarMove(input);
+            
+            //Move obstacles accordingly (make sure to not overlap with avatar)
+            mainApp.processObstacleMove();
+                //Update positions of all obstacles in arraylist
 
-        //Print the current state
-        mainApp.printCurrentState();
-        
-        //Check if end condition is met (number of turns lets say)
+            //Print the current state
+            mainApp.printCurrentState();
+            
+            //Check if end condition is met (number of turns lets say)
         }
         
     }

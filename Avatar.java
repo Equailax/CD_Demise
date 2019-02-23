@@ -27,26 +27,17 @@ import java.awt.Rectangle;
         return lives;
     }
 
-    public int getXPosition(){
-        return xposition;
-    }
-
-    public int getYPosition(){
-        return yposition;
-    }
-
     public int getDamage(){
         return damage;
     }
 
     public Rectangle getLocation(){
-        return location;
+        return new Rectangle(this.location);
     }
     
     // setter 
     public void setName(String Name){
-        this.name
-        = Name;
+        this.name = Name;
     }
 
     public void setHealth(int characterHealth){
@@ -96,13 +87,13 @@ import java.awt.Rectangle;
     //Movment for a string inputs
     public void move(String direction){
         if (direction.toLowerCase().equals("up")){
-            this.yposition += 1;                    //***** check if its within bounds
+            this.location.setLocation((int)this.location.getLocation().getX(), (int)this.location.getLocation().getY() + 1);                  //***** check if its within bounds
         }else if (direction.toLowerCase().equals("down")){
-            this.yposition -= 1;
+            this.location.setLocation((int)this.location.getLocation().getX(), (int)this.location.getLocation().getY() - 1);
         }else if (direction.toLowerCase().equals("left")){
-            this.xposition -= 1;
+            this.location.setLocation((int)this.location.getLocation().getX() - 1, (int)this.location.getLocation().getY());
         }else if (direction.toLowerCase().equals("right")){
-            this.xposition += 1;
+            this.location.setLocation((int)this.location.getLocation().getX() + 1, (int)this.location.getLocation().getY());
         }
     }
     
@@ -132,16 +123,16 @@ import java.awt.Rectangle;
         this.name = myName;
         this.lives = myLife;
         this.health = myhealth;
-        this.location = location;
+        this.location = new Rectangle(location);
         this.damage = myDamage;
         
     }
-    public Avatar(Avatar a){
-        this.name = a.name;
-        this.lives = a.lives;
-        this.health = a.health;
-        this.damage = a.damage;
-        this.location = a.location;
+    public Avatar(Avatar inputAvatar){
+        this.name = inputAvatar.name;
+        this.lives = inputAvatar.lives;
+        this.health = inputAvatar.health;
+        this.damage = inputAvatar.damage;
+        this.location = new Rectangle(inputAvatar.location);
         
     }
          
