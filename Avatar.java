@@ -41,14 +41,12 @@ import java.awt.Rectangle;
     }
 
     public void setHealth(int characterHealth){
-        if (characterHealth  > 0){
-            this.health = characterHealth;
-        }
+        this.health = characterHealth;
+
     }
     public void setLives(int characterLives){
-        if ( characterLives <= 0){
-            this.lives = characterLives;
-        }
+        this.lives = characterLives;
+        
     }
 
     public void setPosition(){
