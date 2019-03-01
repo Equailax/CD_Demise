@@ -437,6 +437,15 @@ public class AnimationApp{
                 System.out.println("O-Oh, I have ran out of health!");
                 System.out.println("Lost 1 Life");
                 
+                
+                /*
+                Make sure after the avatar lost a life, reset the health back to original input
+                */
+                
+                Avatar updatedHealthAvatar = new Avatar(mainApp.getAvatar());
+                updatedHealthAvatar.setHealth(healthCount);
+                mainApp.setAvatar(updatedHealthAvatar);   
+                
                 Avatar checkLivesAvatar = new Avatar(mainApp.getAvatar());
                 int newLife = mainApp.getAvatar().getLives() - 1;
                 checkLivesAvatar.setLives(newLife);
@@ -446,6 +455,7 @@ public class AnimationApp{
                     System.out.println("Womp-womp, game over :(");
                     break;
                 }
+                
                 
             }
             

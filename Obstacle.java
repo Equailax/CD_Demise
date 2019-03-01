@@ -131,6 +131,30 @@ public class Obstacle
 		this.health -= 1;
 	}
 	
+    //Setter methods
+    /**
+    This method sets the location of the object
+    @param location : this is the location that we wish to set the location of the object to
+    */
+    public void setLocation(Rectangle location){
+        this.location = new Rectangle(location);
+    }
+    
+    /**
+    @param xcoordinate
+    @param ycoordinate
+    */
+    public void setLocation(int xcoordinate, int ycoordinate){
+        this.location = new Rectangle(xcoordinate, ycoordinate, width, height);
+    }
+    
+    /**
+    This sets the name
+    */
+    public void setName(String aName){
+        this.name = aName;
+    }
+    
 	/**
 	Move the object in a defined direction
 	
@@ -288,11 +312,7 @@ public class Obstacle
                 }
             }
         }
-        
-        
-        
-        
-        
+          
 
     }
 }
