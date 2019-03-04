@@ -192,6 +192,10 @@ public class Projectile extends Obstacle{
         p.move("down");
         System.out.println(p);
         
+        ArrayList<Obstacle> obstacleArray = new ArrayList<Obstacle>();
+        obstacleArray.add(p);
+        System.out.println(p);
+        
     }
     
 }

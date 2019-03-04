@@ -160,8 +160,10 @@ public class Obstacle
 	
 	@param direction is the direction to move the object in (up, down, left, right, otherwise the object won't move)
 	*/
-	public void move(String direction)
-	{
+    
+	public void move(String direction){}
+	
+    /*{
 		direction = direction.toLowerCase();
 		System.out.println(direction);
 		int xCoord = (int)(location.getX());
@@ -200,7 +202,7 @@ public class Obstacle
             }
 		}
 	}
-	
+	*/
 	/**
 	Randomly decide if the object should stay in place or move in a random cardinal direction
 	*/

@@ -237,6 +237,32 @@ public class Enemy extends Obstacle
         
         System.out.println(copyOfEnemy);
         System.out.println(copyOfEnemy.overlapsWith(a));
+        
+        ArrayList<Obstacle> obstacleArray = new ArrayList<Obstacle>();
+        obstacleArray.add(e);
+        System.out.println(e);
+        
+        obstacleArray.add(new Obstacle("Obstacle 1", 0, 0));
+        obstacleArray.add(new Obstacle("Obstacle 2", 0, 0));
+        obstacleArray.add(new Obstacle("Obstacle 3", 0, 0));
+        obstacleArray.add(new Enemy("Enemy 2", 3, 0, 0));
+        obstacleArray.add(new Projectile("Projectile 1", true, false));
+        
+        ArrayList<Obstacle> temp = new ArrayList<Obstacle>();
+        for (Obstacle o : obstacleArray){
+            if (o instanceof Enemy){
+                temp.add(new Enemy((Enemy)o));
+            }else if (o instanceof Projectile){
+                temp.add(new Projectile((Projectile)o));
+            }else if (o instanceof Obstacle){
+                temp.add(new Obstacle(o));
+            }
+        }
+        System.out.println(obstacleArray);
+        System.out.println(temp);
+        
+        Enemy newEnemy = new Enemy((Enemy)temp.get(0));
+        System.out.println(newEnemy);
     }
     
 }

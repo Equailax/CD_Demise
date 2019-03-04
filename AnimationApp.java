@@ -119,6 +119,18 @@ public class AnimationApp{
             tempObstaclesArrayList.add(new Obstacle("Obstacle" + i, randomXCoordinate, randomYCoordinate));  ///When constructing an obstacle, it should take a random positon as an argument
         }
         
+        //Add the required enemies to the temporary array list
+        for (int i = 0; i < numberOfObstaclesToAdd; i++){
+            
+            //Generate a random number between 0 and 10 for the x coordinate
+            int randomXCoordinate = (int)(Math.random() * 10 + 0);
+            
+            //Generate a random number between 0 and 10 for the Y coordinate
+            int randomYCoordinate = (int)(Math.random() * 10 + 0);
+            
+            tempObstaclesArrayList.add(new Enemy("Enemy" + i, 3, randomXCoordinate, randomYCoordinate));  //Sets the enemy health to 3
+        }
+        
         this.obstacleArray = tempObstaclesArrayList;
     }
     
@@ -406,7 +418,7 @@ public class AnimationApp{
             mainApp.printCurrentState();
             
             //Prompt the user for a movement
-            System.out.print("Move UP, DOWN, LEFT, RIGHT: ");
+            System.out.print("Move UP, DOWN, LEFT, RIGHT, or SHOOT: ");
             Scanner movementInput = new Scanner(System.in);
             
             //Check if the input is valid
@@ -416,11 +428,11 @@ public class AnimationApp{
             while (!check){
                 input = movementInput.nextLine();
                 
-                if(input.toLowerCase().equals("up") || input.toLowerCase().equals("down") || input.toLowerCase().equals("left") || input.toLowerCase().equals("right")){
+                if(input.toLowerCase().equals("up") || input.toLowerCase().equals("down") || input.toLowerCase().equals("left") || input.toLowerCase().equals("right") || input.toLowerCase().equals("shoot")){
                     check = true;
                     break;
                 }else{
-                    System.out.print("Invalid input, please type either UP, DOWN, LEFT, or RIGHT: ");
+                    System.out.print("Invalid input, please type either UP, DOWN, LEFT, RIGHT, or SHOOT: ");
                 }
             }
             
