@@ -33,9 +33,10 @@ public class Health extends Collectible
 	
 	public Health(Health healthToCopy)
 	{
-		super.setName(healthToCopy.getName());
+		super(healthToCopy);
+        //super.setName(healthToCopy.getName());
 		this.healthBoost = healthToCopy.getHealthBoost();
-		super.setLocation(healthToCopy.getLocation());
+		//super.setLocation(healthToCopy.getLocation());
 	}
 
 
@@ -78,6 +79,15 @@ public class Health extends Collectible
         }
 
 	}
+    
+    /**
+    This is the toString method for the Health class
+    @return String
+    */
+    public String toString(){
+        return super.toString() + " Health Boost: " + this.getHealthBoost();
+    }
+    
 	
     public static void main(String[] args){
         Health h = new Health();
@@ -97,6 +107,13 @@ public class Health extends Collectible
         
         System.out.println(h.overlapsWith(a));
     
+        h.setName("Original Health");
+        h.setLocation(0,0);
+        Health copyOhH = new Health(h);
+        
+        System.out.println(copyOhH);
+        System.out.println(copyOhH.overlapsWith(a));
     }
+    
 
 }

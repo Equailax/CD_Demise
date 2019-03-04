@@ -9,6 +9,7 @@ public class Enemy extends Obstacle
 {
 	private boolean isDeadly = true;
 	private int health;
+    private Projectile note = new Projectile("Enemy's Note", true, false);
 	
 	
 	/**
@@ -19,9 +20,11 @@ public class Enemy extends Obstacle
 	@param isDeadly determines whether the object will be deadly to the user or not
 	*/
 	public Enemy(Enemy inputEnemy){
-		super.setName(inputEnemy.getName());
+		super(inputEnemy);
+        
+        //super.setName(inputEnemy.getName());
 		this.isDeadly = inputEnemy.isDeadly;
-		super.setLocation(inputEnemy.getLocation());
+		//super.setLocation(inputEnemy.getLocation());
 		this.health = inputEnemy.health;
 	}
 	
@@ -58,6 +61,13 @@ public class Enemy extends Obstacle
         return this.health;
     }
     
+    /**
+    Gets the projectile for the enemy
+    */
+    public Projectile getProjectile(){
+        return new Projectile(this.note);
+    }
+    
     //Setter methdos
     /**
     This sets wether or not the enemy is deadly
@@ -76,17 +86,18 @@ public class Enemy extends Obstacle
     
 	
 	/**
-	If the enemy got hit, reduce the health by 1
+	If the enemy got hit, reduce the health by the damge taken
+    @param damageTaken : this is the damage taken by the enemy
 	*/
-	public void enemyHit()
+	public void takeDamage(int damageTaken)
 	{
-		this.health -= 1;
+		this.health -= damageTaken;
 	}
 	
 	/**
-	Move the object in a defined direction
+	Move the enemy in a defined direction
 	
-	@param direction is the direction to move the object in (up, down, left, right, otherwise the object won't move)
+	@param direction is the direction to move the enemy in (up, down, left, right, otherwise the object won't move)
 	*/
 	public void move(String direction)
 	{
@@ -187,13 +198,14 @@ public class Enemy extends Obstacle
 	}
     
     public String toString(){
-        return this.getName() + " " + this.getLocation().getX() + " " + this.getLocation().getY();
+        return this.getName() + " Location: " + this.getLocation().getX() + " " + this.getLocation().getY() + " Health: " + this.health;
     }
     
     /**
     This mehod shoots a projectile in the direction that the enemy is facing
     */
-    public void shootPorjectile(){
+    public void shootProjectile(){
+        
     }
     
     public static void main(String[] args){
@@ -218,6 +230,13 @@ public class Enemy extends Obstacle
         }
         System.out.println(aE);
         
+        e.setName("Original Enemy");
+        e.setLocation(0,0);
+        
+        Enemy copyOfEnemy = new Enemy(e);
+        
+        System.out.println(copyOfEnemy);
+        System.out.println(copyOfEnemy.overlapsWith(a));
     }
     
 }

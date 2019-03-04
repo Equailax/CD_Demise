@@ -3,7 +3,7 @@ import java.awt.Rectangle;
 
     // i have not consider the privacy leaks in this file 
     // variables 
-    public class Avatar{
+public class Avatar{
     private String name;
     private int health;
     private int lives;
@@ -13,41 +13,85 @@ import java.awt.Rectangle;
     private final int height = 1;
     private int damage;
     private Rectangle location = new Rectangle(xposition, yposition, width, height);
+    private Projectile note = new Projectile("Avatar's Note", false, true);
 
     // getter methods 
+    /**
+    This method gets the name for the avatar
+    @return name
+    */
     public String getName(){
         return name;
     }
-
+    
+    /**
+    This method gets the health for the avatar
+    @return health
+    */
     public int getHealth(){
         return health;
     }
-
+    
+    /**
+    This method gets the lives for the avatar
+    @return lives
+    */
     public int getLives(){
         return lives;
     }
 
+    /**
+    This method gets the damage for the avatar
+    @return damage
+    */
     public int getDamage(){
         return damage;
     }
 
+    /**
+    This method gets the location for the avatar
+    @return location
+    */
     public Rectangle getLocation(){
         return new Rectangle(this.location);
     }
     
+    /**
+    This method gets the projectile for the avatar
+    @return projectile
+    */
+    public Projectile getProjectile(){
+        return new Projectile(this.note);
+    } 
+    
     // setter 
+    /**
+    This sets the name for the avatar
+    @param name : this is the name that we wish to change to
+    */
     public void setName(String Name){
         this.name = Name;
     }
-
+    
+    /**
+    This sets the health for the avatar
+    @param characterHealth : this is the health that we wish to change to
+    */
     public void setHealth(int characterHealth){
         this.health = characterHealth;
 
     }
+    
+    /**
+    This sets the lives for the avatar
+    @param characterLives : this is the lives that we wish to change to
+    */
     public void setLives(int characterLives){
         this.lives = characterLives;
         
     }
+    
+    //public void setProjectile(){}
 
     public void setPosition(){
         this.location.x = 0;
@@ -123,6 +167,20 @@ import java.awt.Rectangle;
                 System.out.println("Cant go there, im at the edge");
             }
 		}
+    }
+    
+    /**
+    This method is the toString method for the avatar
+    @return String
+    */
+    public String toString(){
+        return this.name + " Position: " + this.location.getLocation().getX() + " " + this.location.getLocation().getY() + " Health: " + this.health + " Lives: " + this.lives;
+    }
+    
+    /**
+    This method shoots the projectile note
+    */
+    public void shootProjectile(){
     }
     
     //health
