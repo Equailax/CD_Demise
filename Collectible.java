@@ -11,6 +11,9 @@ public class Collectible
 	private final int height = 1;
 	private final int width = 1;
 	private Rectangle location = new Rectangle(xcoord, ycoord, width, height);
+    
+    private final int mapHeight = 1000;
+    private final int mapWidth = 1000;
 
 
     //Getter Methods

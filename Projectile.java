@@ -10,6 +10,9 @@ public class Projectile extends Obstacle{
     private boolean isDeadlyToEnemy = false;
     private boolean isShot = false;
     
+    private final int mapHeight = 1000;
+    private final int mapWidth = 1000;
+    
     //Constructors
     public Projectile(){}
     
@@ -100,10 +103,10 @@ public class Projectile extends Obstacle{
                 super.setLocation(xCoord, yCoord + 1);
             }
 		} else if(direction.equals("down")){
-			if (this.getLocation().getY() < 10){
+			if (this.getLocation().getY() < mapHeight){
                 //if the obstcle is within the edge, then move down
 				super.setLocation(xCoord, yCoord + 1);
-			}else if(this.getLocation().getY() == 10){
+			}else if(this.getLocation().getY() == mapHeight){
                 //if the obstacle is at the edge, then move up
                 super.setLocation(xCoord, yCoord - 1);
             }
@@ -116,10 +119,10 @@ public class Projectile extends Obstacle{
                 super.setLocation(xCoord + 1, yCoord);
             }
 		}else if(direction.equals("right")){
-			if (this.getLocation().getX() < 10){
+			if (this.getLocation().getX() < mapWidth){
 				//if the obsatcle is within the egde, then move right
                 super.setLocation(xCoord + 1, yCoord);
-			}else if(this.getLocation().getX() == 10){
+			}else if(this.getLocation().getX() == mapWidth){
                 //if the obstacle is at the edge, then move left
                 super.setLocation(xCoord - 1, yCoord);
             }

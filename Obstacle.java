@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.awt.Rectangle;
 import java.awt.Point;
+import java.awt.Point;
 import java.lang.Math;
 
 import javafx.scene.shape.ObservableFaceArray;
@@ -8,8 +9,8 @@ import javafx.scene.shape.ObservableFaceArray;
 public class Obstacle
 {
 	private String name;
-	private boolean isDeadly = true;
-	private int health;
+	//private boolean isDeadly = true;
+	//private int health;
 	private int xcoord;
 	private int ycoord;
 	private final int height = 1;
@@ -26,9 +27,9 @@ public class Obstacle
 	*/
 	public Obstacle(Obstacle inputObstacle){
 		this.name = inputObstacle.name;
-		this.isDeadly = inputObstacle.isDeadly;
+		//this.isDeadly = inputObstacle.isDeadly;
 		this.location = new Rectangle(inputObstacle.location);
-		this.health = inputObstacle.health;
+		//this.health = inputObstacle.health;
 	}
 	
 	public Obstacle(){
@@ -45,14 +46,15 @@ public class Obstacle
         this.location.setLocation(x,y);
 	}
 	
+    /*
 	public Obstacle(String name, boolean isDeadly, Rectangle location)
 	{
 		this.name = name;
-		this.isDeadly = isDeadly;
+		//this.isDeadly = isDeadly;
 		this.location = new Rectangle(location);
 		this.health = 3;
 	}
-	
+	*/
 	
 	/**
 	Get the the object's current location
@@ -79,57 +81,68 @@ public class Obstacle
 	
 	@return isDeadly
 	*/
+    /*
 	public boolean getIsDeadly()
 	{
 		return isDeadly;
 	}
+    */
 
-	// checks if obsatcle is in the same spot as the avatar, will be boolean
+	/**
+    This method checks wether or not the obsatcle overalps with an avatar
+    @param a : this is the avatar that we want to check if the obstacle overlaps with it
+    */
 	public boolean overlapsWith(Avatar a){
 		
-        if((a.getLocation().getX() == this.location.getX()) && (a.getLocation().getY() == this.location.getY())){
-            return true;
-        }else{
-            return false;
-        }
-        
-        /*
-        if (a.getLocation().equals(this.location)){
-			return true;
-		}
-		else{
-			return false;
-		}
-        */
-		
-	}
-	
-	public boolean overlapsWithObstacle(Obstacle o)
-	{
-        if((o.getLocation().getX() == this.location.getX()) && (o.getLocation().getY() == this.location.getY())){
+        if ((a.getLocation().contains(this.location.getX(), this.location.getY())) || (a.getLocation().contains(this.location.getX() + this.width, this.location.getY())) ||
+            (a.getLocation().contains(this.location.getX(), this.location.getY() + this.height)) || (a.getLocation().contains(this.location.getX() + this.width, this.location.getY() + this.height))){
+            //If the obstacle contains the upper left corner, or upper right corner, or bottom right corner, or bottom left conrer, return true
             return true;
         }else {
             return false;
         }
         
         /*
-		if (o.getLocation().equals(this.location))
-		{
-			return true;
-		} else
-		{
-			return false;
-		}
+        if((a.getLocation().getX() == this.location.getX()) && (a.getLocation().getY() == this.location.getY())){
+            return true;
+        }else{
+            return false;
+        }
+        */
+	}
+	
+    /**
+    This method checks wether or not the obstacle overlaps with another obstacle
+    @param o : this is the obstacle that we want to check if our obsatcle overalps with it
+    */
+	public boolean overlapsWithObstacle(Obstacle o)
+	{
+        
+        if ((o.getLocation().contains(this.location.getX(), this.location.getY())) || (o.getLocation().contains(this.location.getX() + this.width, this.location.getY())) ||
+            (o.getLocation().contains(this.location.getX(), this.location.getY() + this.height)) || (o.getLocation().contains(this.location.getX() + this.width, this.location.getY() + this.height))){
+            //If the obstacle contains the upper left corner, or upper right corner, or bottom right corner, or bottom left conrer, return true
+            return true;
+        }else {
+            return false;
+        }
+        /*
+        if((o.getLocation().getX() == this.location.getX()) && (o.getLocation().getY() == this.location.getY())){
+            return true;
+        }else {
+            return false;
+        }
         */
 	}
 	
 	/**
 	If the enemy got hit, reduce the health by 1
 	*/
+    /*
 	public void enemyHit()
 	{
 		this.health -= 1;
 	}
+    */
 	
     //Setter methods
     /**
@@ -161,7 +174,7 @@ public class Obstacle
 	@param direction is the direction to move the object in (up, down, left, right, otherwise the object won't move)
 	*/
     
-	public void move(String direction){}
+	//public void move(String direction){}
 	
     /*{
 		direction = direction.toLowerCase();
@@ -203,9 +216,11 @@ public class Obstacle
 		}
 	}
 	*/
+    
 	/**
 	Randomly decide if the object should stay in place or move in a random cardinal direction
 	*/
+    /*
 	public void randomMove()
 	{
 		int dirNum = (int)(Math.random() * 4 + 1);
@@ -260,6 +275,7 @@ public class Obstacle
 		}
 	}
     
+    */
     /**
     This is the to string method
     */
@@ -305,9 +321,9 @@ public class Obstacle
         
         System.out.println(o1.overlapsWithObstacle(o2));
         
-        for (int i = 0; i < 10; i++){
-            o1.randomMove();
-        }
+        //for (int i = 0; i < 10; i++){
+          //  o1.randomMove();
+        //}
         System.out.println(o1.toString());
 
 

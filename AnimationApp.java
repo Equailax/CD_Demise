@@ -135,7 +135,7 @@ public class AnimationApp{
             //Generate a random number between 0 and 10 for the Y coordinate
             int randomYCoordinate = (int)(Math.random() * 10 + 0);
             
-            tempObstaclesArrayList.add(new Enemy("Enemy" + i, 3, randomXCoordinate, randomYCoordinate));  //Sets the enemy health to 3
+            tempObstaclesArrayList.add(new Enemy("Enemy" + i, 1, randomXCoordinate, randomYCoordinate));  //Sets the enemy health to 3
         }
         
         this.obstacleArray = tempObstaclesArrayList;
@@ -226,39 +226,26 @@ public class AnimationApp{
     */
     public void printCurrentState(){
         //Print the curent state of the avatar
-        System.out.println("Name: " + this.minidisc.getName());
-		System.out.println("Health Level: " + this.minidisc. getHealth());
-		System.out.println("Lives Remaining: " + this.minidisc.getLives());
-		System.out.println("X Position: " + this.minidisc.getLocation().getX());
-		System.out.println("Y Position: " + this.minidisc.getLocation().getY());
+        System.out.println(this.minidisc.toString());
         
         //Print out the state of the obstacles
-        
         for (Obstacle o : this.obstacleArray) {
             if (o instanceof Enemy) {
                 System.out.println(((Enemy)o).toString());
             } else if (o instanceof Projectile) {
                 System.out.println(((Projectile)o).toString());
-            } else if 
-            
-            /*
-            System.out.println("------------------------------------------------------------");
-            System.out.print("Obstacle Name: " + o.getName() + "|");
-            System.out.print(" X Position: " + o.getLocation().getX() + "|");
-            System.out.println(" Y Position: " + o.getLocation().getY() + " |");
-            System.out.println("------------------------------------------------------------");
-            */
+            } else {
+                System.out.println(o.toString());
+            }
         }
         
         //Print out the state of the collectibles
         for (Collectible c : this.collectiblesArray){
-            System.out.println("------------------------------------------------------------------");
-            System.out.print("Collectible Name: " + c.getName() + " |");
-            System.out.print(" X Position: " + c.getLocation().getX() + "|");
-            System.out.println(" Y Position: " + c.getLocation().getY() + "|");
-            System.out.println(" Collection: " + c.getCollection() + "|");
-            
-            System.out.println("------------------------------------------------------------------");
+            if (c instanceof Health){
+                System.out.println(((Health)c).toString());
+            }else {
+                System.out.println(c.toString());
+            }
         }
         
     }
@@ -449,7 +436,32 @@ public class AnimationApp{
     This method removes any obstacle that need to be removed
     */
     public void removeObstacles(){
-        //Check the number of times an obstacle has to be removed
+        /*
+        First remove any enemies that have run out of health
+        */
+        int enemiesToRemove = 0;
+        for (Obstacle enemy : this.obstacleArray){
+            if (enemy instanceof Enemy){
+                if (((Enemy)enemy).getHealth() == 0){
+                    enemiesToRemove += 1;
+                }
+            }
+        }
+        
+        for (int i = 0; i < enemiesToRemove; i++){
+            for (Obstacle enemy : this.obstacleArray){
+                if (enemy instanceof Enemy){
+                    if (((Enemy)enemy).getHealth() == 0){
+                        this.obstacleArray.remove(enemy);
+                        break;
+                    }
+                }
+            }
+        }
+        
+        /**
+        Now remove any pojectiles that have hit the walls or other enemies
+        */
         int obstaclesToRemove = 0;
         
         for (Obstacle o1 : this.obstacleArray){
@@ -472,7 +484,8 @@ public class AnimationApp{
                         if (o1.overlapsWithObstacle(o2)){
                             /*
                             Now, if the obstacle is an instance of a projectile remove it if;
-                            if the projectile overlaps with an enemy, remove both the projectile and enemy, 
+                            if the projectile overlaps with an enemy, remove both the projectile and enemy if the enemy's health is at 0, if not
+                            just remove the projecile, 
                             if the projectile overlaps with an obstacle, remove only the projectile
                             */
                             if (o1 instanceof Projectile) {
@@ -496,6 +509,7 @@ public class AnimationApp{
                         }
                     }
                 }
+                break;
             }
         }
     }
