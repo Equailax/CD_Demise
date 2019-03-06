@@ -260,10 +260,23 @@ public class Obstacle
 		}
 	}
     
+    /**
+    This is the to string method
+    */
     public String toString(){
         return this.name + " " + this.location.getX() + " " + this.location.getY();
     }
     
+    /**
+    This method checks if two obstacles are equal
+    */
+    public boolean equals(Obstacle o1){
+        if (this.location.equals(o1.getLocation())){
+            return true;
+        }else {
+            return false;
+        }
+    }
     
     public static void main(String[] args){
         Obstacle o1 = new Obstacle("Obstacle1", 1, 0);

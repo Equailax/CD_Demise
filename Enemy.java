@@ -8,7 +8,7 @@ import javafx.scene.shape.ObservableFaceArray;
 public class Enemy extends Obstacle
 {
 	private boolean isDeadly = true;
-	private int health;
+	private int health = 0;
     private Projectile note = new Projectile("Enemy's Note", true, false);
 	
 	

@@ -104,7 +104,9 @@ public class Avatar{
     }
     // Methods 
     // movements for integer inputs
-    
+    /*
+    Update these methods
+    */
     public void moveUp(int movementUp){
         this.yposition -= movementUp;
     }
@@ -181,6 +183,29 @@ public class Avatar{
     This method shoots the projectile note
     */
     public void shootProjectile(){
+    }
+    
+    /**
+    This method checks if the health of the avatar.  It would do nothing if the health is above 0.  Once it is below 0
+    the avatar would reset to it original health, and it would lose a life.  If the avatar ran out of lives, it would return true (end of game)
+    */
+    public boolean checkIfEndGame(int originalHealth){
+        if (this.health > 0){
+            //If the health is above 0, the end game hasnt reached yet
+            return false;
+        }else {
+            //if the live is greater than 0, then the end game hasnt reached, only has lost a life and has reset the health
+            if (this.lives > 0){
+                System.out.println("O-Oh, I have ran out of health!");
+                System.out.println("Lost 1 Life");
+                this.lives -= 1;
+                this.health = originalHealth;
+                return false;
+            }else {
+                //If the lives is 0 or below, then we have reached the end game, so the health is not reset and the lives is not taken
+                return true;
+            }
+        }
     }
     
     //health

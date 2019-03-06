@@ -84,7 +84,14 @@ public class AnimationApp{
             //Copy the elements of the inputObstaclesArray to the temporary array list
             for (Obstacle o : inputObstaclesArray){
                 if (o != null){
-                    tempObstaclesArrayList.add(new Obstacle(o));
+                    if (o instanceof Enemy){
+                        tempObstaclesArrayList.add(new Enemy((Enemy)o));
+                    }else if (o instanceof Projectile){
+                        tempObstaclesArrayList.add(new Projectile((Projectile)o));
+                    }else if (o instanceof Obstacle){
+                        tempObstaclesArrayList.add(new Obstacle(o));
+                    }
+                    //tempObstaclesArrayList.add(new Obstacle(o));
                 }else {
                     tempObstaclesArrayList.add(new Obstacle());
                 }
@@ -195,9 +202,21 @@ public class AnimationApp{
     @return temp : this is a copy of the this.obstacleArray
     */
     public ArrayList<Obstacle> getObstacleArray(){
-        ArrayList<Obstacle> temp = new ArrayList<Obstacle>();
+        /*ArrayList<Obstacle> temp = new ArrayList<Obstacle>();
         for (Obstacle o : this.obstacleArray){
             temp.add(new Obstacle(o));
+        }
+        return temp;
+        */
+        ArrayList<Obstacle> temp = new ArrayList<Obstacle>();
+        for (Obstacle o : this.obstacleArray){
+            if (o instanceof Enemy){
+                temp.add(new Enemy((Enemy)o));
+            }else if (o instanceof Projectile){
+                temp.add(new Projectile((Projectile)o));
+            }else if (o instanceof Obstacle){
+                temp.add(new Obstacle(o));
+            }
         }
         return temp;
     }
@@ -215,12 +234,20 @@ public class AnimationApp{
         
         //Print out the state of the obstacles
         
-        for (Obstacle o : this.obstacleArray){
+        for (Obstacle o : this.obstacleArray) {
+            if (o instanceof Enemy) {
+                System.out.println(((Enemy)o).toString());
+            } else if (o instanceof Projectile) {
+                System.out.println(((Projectile)o).toString());
+            } else if 
+            
+            /*
             System.out.println("------------------------------------------------------------");
             System.out.print("Obstacle Name: " + o.getName() + "|");
             System.out.print(" X Position: " + o.getLocation().getX() + "|");
             System.out.println(" Y Position: " + o.getLocation().getY() + " |");
             System.out.println("------------------------------------------------------------");
+            */
         }
         
         //Print out the state of the collectibles
@@ -235,16 +262,16 @@ public class AnimationApp{
         }
         
     }
-    
+    /*
     public void drawCurrentState(){
         
     }
+    */
     
     /**
     This method processess if the avatar can move.  This means it would check if there are any obstacles and collectibles in the area to the place
     that the avatar move to.  It would then act accordingly if there are some present
     */
-    
     public void processAvatarMove(String userMovementInput){
         //Create a copy avatar ---- so we can move it later
         Avatar copyOfAvatar = new Avatar(this.minidisc);
@@ -260,13 +287,30 @@ public class AnimationApp{
         copyOfObstacleArray = getObstacleArray();
         
         boolean occupiedByObstacle = false;
+        boolean occupiedByEnemy = false;
+        boolean occupiedByProjectile = false;
         boolean occupiedByCollectible = false;
         
         //Check if the avatar overlaps with any obsatacles
+        /*
+        This block of code check if the isntance of the obstacle in the obstacle array is a projectile, enemy, or obstacle
+        If the instance is a projectile then, the avatar would take damage, move in the desired direction, and the projectile would be removed from the obstacle array
+        If the instance is an enemy, then the avatar would take damage and would not move in the desired direction.
+        If the instance is an obstacle, then the avatar would just not move to the desired space, taking no damage.
+        */
         for(Obstacle o: copyOfObstacleArray){
             if(o.overlapsWith(copyOfAvatar)){
-                occupiedByObstacle = true;
-                break;
+                if (!(o instanceof Enemy || o instanceof Projectile)){      
+                    //If the object is NOT an instance of either an enemy nor a porjetile,then it is an obstacle and we cant move through it
+                    occupiedByObstacle = true;
+                    break;
+                }else if (o instanceof Enemy){
+                    //If the obstalce is an instance of an enemy, then we cant move to the desired position so the spot is occupied by an enemy
+                    occupiedByEnemy = true;
+                }else if (o instanceof Projectile){
+                    //If the obstacle is an instance of a projectile, then we can move through it and so the spot is occupied by a projectile
+                    occupiedByProjectile = true;
+                }
             }
         }
         
@@ -279,9 +323,18 @@ public class AnimationApp{
         }
         
         if(occupiedByObstacle == true){
-            //If there is an obstacle, take damage
-            //Take damage from the obstacle if its there
-            this.minidisc.takeDamage(1); 
+            //just have the obstacle not move
+            System.out.println("I cant move there!");
+            
+        }else if (occupiedByEnemy == true){
+            //if the spot is occupied by an enemy (regadless if there is a projectile there too), then dont move to the desired location and take damage
+            this.minidisc.takeDamage(1);
+            System.out.println("I cant move there!");
+            
+        }else if (occupiedByProjectile == true && occupiedByEnemy == false && occupiedByObstacle == false){
+            // if the spot is occupied by a projecile (and is not occupied by an enemy nor an obstacle), take damage and move to the desired location
+            this.minidisc.takeDamage(1);
+            this.minidisc.move(userMovementInput);
             
         }else if(occupiedByCollectible == true){
             //If there is a collectible and no obstacles, move the real avatar and pick up the collecitble (remove it from the array)
@@ -301,13 +354,17 @@ public class AnimationApp{
                     break;
                 }
             }
-        }else if(occupiedByObstacle == false && occupiedByCollectible == false){
+        }else if(occupiedByObstacle == false && occupiedByCollectible == false && occupiedByEnemy == false && occupiedByProjectile == false){
             //if it doesnt overlap with any obstacles or colectibles, thne just move without doing nothing
             this.minidisc.move(userMovementInput);
             System.out.println("Theres nothing here");
         }
     }
 	
+    /**
+    This method processes the obstacle movement.  It checks if the obstacle overlaps with any other obstacle and doesnt move if it does.
+    It also checks if it overlaps with an avatar and damages the avatar accordingly.
+    */
 	public void processObstacleMove()
 	{   
         //Create new avatar
@@ -319,42 +376,129 @@ public class AnimationApp{
         
 		ArrayList<Obstacle> staticObstacleArray = new ArrayList<Obstacle>();
         staticObstacleArray = getObstacleArray();
-		
+        
 		// Go through the dynamic array and move an obstacle then check for overlaps
-		for (Obstacle o1 : dynamicObstacleArray)
-		{
-			boolean occupied = false;
+		for (Obstacle o1 : dynamicObstacleArray) {
+			
+            boolean occupied = false;
 			Rectangle preMove = new Rectangle(o1.getLocation());
-			o1.randomMove();
-			// Check if the moving obstacle overlaps with the avatar
-            if (o1.overlapsWith(inputAvatar))
-			{
-				occupied = true;
-						// Code avatar getting hurt
-                this.minidisc.takeDamage(1);        
+			
+            //If the obstacle is an instance of an enemy, move the enemy in a random direction for now
+            if (o1 instanceof Enemy){
+                ((Enemy)o1).randomMove();
                 
-			} else
-			{
-				// Check if the moving obstacle overlaps with an obstacle in the static array (even if the moving obstacle doesn't move, no changes will be made)
-				for (Obstacle o2 : staticObstacleArray)
-				{
-					if (o1.overlapsWithObstacle(o2))
-					{
-						occupied = true;
-						break;
-					}
-				}
+                //Check if the enemy overlaps with any other enemy, obstacle, projectile
+                boolean occupiedByProjectile = false;
+                
+                for(Obstacle o2: staticObstacleArray){
+                    if(o1.overlapsWithObstacle(o2)){
+                        if (o2 instanceof Enemy || o2 instanceof Obstacle){
+                            //If the instance of the obstacle is an enemy or an obstacle, then it cant move through
+                            occupied = true;
+                        }else if (o2 instanceof Projectile){
+                            //If the isntance is a projectile, then it can move through but it takes damage
+                            occupiedByProjectile = true;
+                        }
+                    }
+                }
+                
+                // Check if the moving enemy overlaps with the avatar
+                if (o1.overlapsWith(inputAvatar)){
+                    //If the enemy  overlaps with an avatar, have the avatar take damage
+                    occupied = true;
+                    this.minidisc.takeDamage(1);        
+                    
+                } else if (occupied){
+                    // If moving obstacle overlaps with an avatar or obstacle, move it back
+                    o1.getLocation().setLocation((int)preMove.getX(), (int)preMove.getY());
+                } else if (!occupied && occupiedByProjectile){
+                    //If the spot is not occupied by an obstacle or an enemy, but it is occupied by a projectile, the enemy takes damage.
+                    ((Enemy)o1).takeDamage(1);
+                }
+                
+                /*{
+                    // Check if the moving enemy overlaps with an obstacle in the static array (even if the moving obstacle doesn't move, no changes will be made)
+                    
+                    for (Obstacle o2 : staticObstacleArray) {
+                        
+                        //Check if o2 is an enemy or an obstacle
+                        if (o2 instanceof Enemy || o2 instanceof Obstacle){
+                            //If the original enemy overlaps with either an obstacle or an enemy, dont move there
+                            if (o1.overlapsWithObstacle(o2)){
+                                occupied = true;
+                                break;
+                            }
+                        }
+                        
+                        
+                        
+                    }
+                }
+                */
+            } else if (o1 instanceof Projectile) {
+                //If the instance of the obstacle is a projectile have it move until it reaches an obstacle
+                
             }
-			// If moving obstacle overlaps with an avatar or obstacle, move it back
-			if (occupied)
-			{
-				o1.getLocation().setLocation((int)preMove.getX(), (int)preMove.getY());
-			}
         }
 		// Change this.ObstacleArray to the dynamic array
 		setObstacleArray(dynamicObstacleArray);
 
 	}
+    
+    /**
+    This method removes any obstacle that need to be removed
+    */
+    public void removeObstacles(){
+        //Check the number of times an obstacle has to be removed
+        int obstaclesToRemove = 0;
+        
+        for (Obstacle o1 : this.obstacleArray){
+            for (Obstacle o2 : this.obstacleArray){
+                if (!o1.equals(o2)){
+                    //If the obstacle does not equal itself, check if it overlaps with obstacle 2
+                    if (o1.overlapsWithObstacle(o2)){
+                        obstaclesToRemove += 1;
+                    }
+                }
+            }
+        }
+        
+        //Once wwe have the number of obstacles to remove, remove that number from this.obstacleArray
+        for (int i = 0; i < obstaclesToRemove; i++){
+            for (Obstacle o1 : this.obstacleArray){
+                for (Obstacle o2 : this.obstacleArray){
+                    if (!o1.equals(o2)){
+                        //If the obstacle does not equal itself, check if it overlaps with obstacle 2
+                        if (o1.overlapsWithObstacle(o2)){
+                            /*
+                            Now, if the obstacle is an instance of a projectile remove it if;
+                            if the projectile overlaps with an enemy, remove both the projectile and enemy, 
+                            if the projectile overlaps with an obstacle, remove only the projectile
+                            */
+                            if (o1 instanceof Projectile) {
+                                if (o2 instanceof Enemy){
+                                    this.obstacleArray.remove(o1);
+                                    if (((Enemy)o2).getHealth() == 0){
+                                        this.obstacleArray.remove(o2);
+                                    }
+                                    break;
+                                } else if (!(o2 instanceof Enemy || o2 instanceof Projectile)) {
+                                    this.obstacleArray.remove(o1);
+                                    break;
+                                }
+                            } else if (o1 instanceof Enemy){
+                                if (((Enemy)o1).getHealth() == 0){
+                                    this.obstacleArray.remove(o1);
+                                    break;
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+            }
+        }
+    }
     
     /**
     This method initializes the game.  What that means is it creates the obstacles and collecitbles for the stage
@@ -444,31 +588,18 @@ public class AnimationApp{
             //Move obstacles accordingly (make sure to not overlap with avatar)
             mainApp.processObstacleMove();
             
+            //Remove any projectiles that overlap with an obstacle, have hit their intended targets.  Remove enemies that have ran out of health
+            mainApp.removeObstacles();
+            
             //Check if the player has run out of health
-            if(mainApp.getAvatar().getHealth() <= 0){
-                System.out.println("O-Oh, I have ran out of health!");
-                System.out.println("Lost 1 Life");
-                
-                
-                /*
-                Make sure after the avatar lost a life, reset the health back to original input
-                */
-                
-                Avatar updatedHealthAvatar = new Avatar(mainApp.getAvatar());
-                updatedHealthAvatar.setHealth(healthCount);
-                mainApp.setAvatar(updatedHealthAvatar);   
-                
-                Avatar checkLivesAvatar = new Avatar(mainApp.getAvatar());
-                int newLife = mainApp.getAvatar().getLives() - 1;
-                checkLivesAvatar.setLives(newLife);
-                mainApp.setAvatar(checkLivesAvatar);
-                
-                if (mainApp.getAvatar().getLives() <= 0){
-                    System.out.println("Womp-womp, game over :(");
-                    break;
-                }
-                
-                
+            Avatar checkIfEndGameAvatar = new Avatar(mainApp.getAvatar());
+            if (!checkIfEndGameAvatar.checkIfEndGame(healthCount)){
+                //If the avatar still has lives (game hasnt ended), then update the main avatar accordingly
+                mainApp.setAvatar(checkIfEndGameAvatar);
+            }else if (checkIfEndGameAvatar.checkIfEndGame(healthCount)){
+                //If the end game has been reached (avatar has lost all of their health and lives) then break from the loop and end the game
+                System.out.println("Womp-womp, game over :(");
+                break;
             }
             
             //Check if end condition is met (number of turns lets say)
