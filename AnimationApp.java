@@ -596,6 +596,8 @@ public class AnimationApp{
             
             movements += 1;
             
+            //Check if avatar shot
+            
             //Process if the avatar can move 
             mainApp.processAvatarMove(input);
             
