@@ -9,6 +9,7 @@ public class Projectile extends Obstacle{
     private boolean isDeadlyToAvatar = false;
     private boolean isDeadlyToEnemy = false;
     private boolean isShot = false;
+    private boolean direction = "NONE"
     
     private final int mapHeight = 1000;
     private final int mapWidth = 1000;
@@ -16,11 +17,12 @@ public class Projectile extends Obstacle{
     //Constructors
     public Projectile(){}
     
-    public Projectile(String name, boolean deadlyToAvatar, boolean deadlyToEnemy){
+    public Projectile(String name, boolean deadlyToAvatar, boolean deadlyToEnemy, String aDirection){
         super.setName(name);
         this.isDeadlyToAvatar = deadlyToAvatar;
         this.isDeadlyToEnemy = deadlyToEnemy;
         this.isShot = false;
+        this.direction = aDirection.toUpperCase();
     }
     
     public Projectile(Projectile projectileToCopy){
@@ -28,6 +30,7 @@ public class Projectile extends Obstacle{
         this.isDeadlyToAvatar = projectileToCopy.getDeadlyToAvatar();
         this.isDeadlyToEnemy = projectileToCopy.getDeadlyToEnenmy();
         this.isShot = projectileToCopy.getIsShot();
+        this.direction = projectileToCopy.getDirection();
     }
     
     //Getter methods
@@ -52,6 +55,14 @@ public class Projectile extends Obstacle{
     */
     public boolean getIsShot(){
         return this.isShot;
+    }
+    
+    /**
+    This method returns the direction that the projectile will be going
+    @return String
+    */
+    public String getDirection(){
+        return this.direction;
     }
     
     //Setter methods
@@ -83,10 +94,12 @@ public class Projectile extends Obstacle{
     This method is the move method for the projectile.  It takes in a string input for the direction that the avatar/enemy is facing
     @param direction : this is the direction that we wish to shoot the projectile
     */
+    
+    
+    
     /**
 	Move the object in a defined direction
-	
-	@param direction is the direction to move the object in (up, down, left, right, otherwise the object won't move)
+	@param direction is the direction to move the projectile in (up, down, left, right, otherwise the object won't move)
 	*/
 	public void move(String direction)
 	{

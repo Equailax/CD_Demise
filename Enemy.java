@@ -9,7 +9,7 @@ public class Enemy extends Obstacle
 {
 	private boolean isDeadly = true;
 	private int health = 0;
-    private Projectile note = new Projectile("Enemy's Note", true, false);
+    private Projectile note = new Projectile("Enemy's Note", true, false, "NONE");
     
     private final int mapHeight = 1000;
     private final int mapWidth = 1000;
@@ -96,10 +96,29 @@ public class Enemy extends Obstacle
 	{
 		this.health -= damageTaken;
 	}
+    
+    /**
+    This is one of the movement methods that moves the location of the enemy a set amount, in the x-axis.  The parameter is a positive or negative integer value.
+    The sign of the movement determines which direction the enemy will move.  It also checks if the movement is valid (ie withing bounds)
+    @param movement : this is a negative or positive integer value.  If the value is negative, the enemy will move left, if its positive, the enemy
+                      will move right.
+    */
+    public void moveX(int movement){
+        this.location.setLocation(this.location.getX() + movement, this.location.getY());
+    }
+    
+    /**
+    This is one of the movement methods that moves the location of the enemy a set amount, in the y-axis.  The parameter is a positive or negative integer value.
+    The sign of the movement determines which direction the enemy will move.  It also checks if the movement is valid (ie withing bounds)
+    @param movement : this is a negative or positive integer value.  If the value is negative, the enemy will move up, if its positive, the enemy
+                      will move down.
+    */
+    public void moveY(int movement){
+        this.location.setLocation(this.location.getX(), this.location.getY() + movement);
+    }
 	
 	/**
 	Move the enemy in a defined direction
-	
 	@param direction is the direction to move the enemy in (up, down, left, right, otherwise the object won't move)
 	*/
 	public void move(String direction)

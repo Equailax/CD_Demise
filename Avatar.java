@@ -13,7 +13,7 @@ public class Avatar{
     private final int height = 1;
     private int damage;
     private Rectangle location = new Rectangle(xposition, yposition, width, height);
-    private Projectile note = new Projectile("Avatar's Note", false, true);
+    private Projectile note = new Projectile("Avatar's Note", false, true, "NONE");
     
     private final int mapHeight = 1000;
     private final int mapWidth = 1000;
@@ -105,30 +105,41 @@ public class Avatar{
             this.damage =  characterDamage;
         }
     }
-    // Methods 
-    // movements for integer inputs
-    /*
-    Update these methods
+    
+    /**
+    This is one of the movement methods that moves the location of the avatar a set amount, in the x-axis.  The parameter is a positive or negative integer value.
+    The sign of the movement determines which direction the avatar will move.  It also checks if the movement is valid (ie withing bounds)
+    @param movement : this is a negative or positive integer value.  If the value is negative, the avatar will move left, if its positive, the avatar
+                      will move right.
     */
-    public void moveUp(int movementUp){
-        this.yposition -= movementUp;
+    public void moveX(int movement){
+        this.location.setLocation(this.location.getX() + movement, this.location.getY());
     }
-    public void moveDown(int movementDown){
-        this.yposition += movementDown;
+    
+    /**
+    This is one of the movement methods that moves the location of the avatar a set amount, in the y-axis.  The parameter is a positive or negative integer value.
+    The sign of the movement determines which direction the avatar will move.  It also checks if the movement is valid (ie withing bounds)
+    @param movement : this is a negative or positive integer value.  If the value is negative, the avatar will move up, if its positive, the avatar
+                      will move down.
+    */
+    public void moveY(int movement){
+        this.location.setLocation(this.location.getX(), this.location.getY() + movement);
     }
-    public void moveRight(int movementRight){
-        this.xposition += movementRight;
-    }
-    public void moveLeft(int movementLeft){
-        this.xposition -= movementLeft;
-    }
-
+    
+    /**
+    This is the take damage method where the avatar will take a specified amount of damage to their health
+    @param damage : this is the damage that we want the avatar to take
+    */
     public void takeDamage(int damage){
         this.health -= damage;
         //print out 'taken damage'
         System.out.println("OUCH! I have taken damage");
     }
-
+    
+    /**
+    The gain health method adds a specified amount of health to the avatar
+    @param boost : this is the amount of health that we want the avatar to gain
+    */
     public void gainHealth(int boost){
         this.health += boost;
         //print out 'i picked up health'
