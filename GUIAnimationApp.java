@@ -63,7 +63,7 @@ public class GUIAnimationApp extends Application {
 	}
 		
 	// Display of life hearts on GUI
-	for(int i = 0; i <= myhealth; i++)
+	for(int i = 0; i < myhealth; i++)
 	{
 	    root.getChildren().add(lifeHearts.get(i).getLocation());
 	}
