@@ -121,10 +121,10 @@ public class GUIAnimationApp extends Application {
                     moveY += 3;
 
                 if ((mini.getXLocation(moveX) <= 758) && (mini.getXLocation(moveX) >= 0))
-				{
-					if((mini.getYLocation(moveY) >= 0) && ( mini.getYLocation(moveY) <= 742))
-					{
-                        // Change the location of the avatar on the map
+		{
+		   if((mini.getYLocation(moveY) >= 0) && ( mini.getYLocation(moveY) <= 742))
+		   {
+                       	// Change the location of the avatar on the map
                         mini.moveAvatar(moveX, moveY);
 
                         // Take the location of the actual avatar and make it match the one on the map
