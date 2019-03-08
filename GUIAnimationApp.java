@@ -57,8 +57,8 @@ public class GUIAnimationApp extends Application {
         AnimationTimer moveTime = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                int moveX;
-                int moveY;
+                int moveX = 0;
+                int moveY = 0;
                 if (Right.equals("move")) 
 		{
                     mini.setForward();
@@ -89,6 +89,7 @@ public class GUIAnimationApp extends Application {
                         int newY = doubleNewY.intValue();
                         avatarLocation.setLocation(newX, newY);
               	    }
+		}
             }
         };
         // Movement Key Events
@@ -108,7 +109,6 @@ public class GUIAnimationApp extends Application {
                 // Starts moving down when key is pressed
                 if (keyEvent.getCode().toString() == "DOWN")
                     Down = "move";
-            }
         });
 
         scene.setOnKeyReleased(keyEvent -> {
@@ -127,7 +127,6 @@ public class GUIAnimationApp extends Application {
                 // Stops moving down when key is released
                 if (keyEvent.getCode().toString() == "DOWN")
                     Down = "don't move";
-            }
         });
         moveTime.start();
     }
