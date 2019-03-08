@@ -6,7 +6,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 import javafx.animation.AnimationTimer;
 import java.util.ArrayList;
@@ -14,15 +13,16 @@ import java.util.ArrayList;
 /**
  * GUI Display for the bank account of the user with deposit and withdraw
  * options, currently has no functions beyond the basic display
+ * Some parts referenced from: https://gist.github.com/jewelsea/8321740
  */
 // FINAL DRAFT
 
 public class GUIAnimationApp extends Application {
-    // Instance variables for avatar image
-    boolean moveRight = false;
-    boolean moveLeft = false;
-    boolean moveUp = false;
-    boolean moveDown = false;
+    // Instance variables for avatar image and movements
+    String Right = "don't move";
+    String Left = "don't move";
+    String Up = "don't move";
+    String Down = "don't move";
     AvatarImage mini = new AvatarImage();
 
     //Instance variables for avatar
@@ -31,7 +31,7 @@ public class GUIAnimationApp extends Application {
     int myhealth = 5;
     int myDamage = 1;
 
-    // Create the avatar, obstacls, and collectibles\
+    // Creation of the avatar, obstacles, and collectibles
    
     java.awt.Rectangle avatarLocation = new java.awt.Rectangle(72, 72, 100, 100);
     Avatar minidisc = new Avatar(myName, myLife, myhealth, myDamage, avatarLocation);
@@ -44,80 +44,34 @@ public class GUIAnimationApp extends Application {
     }
 
     public void start(Stage primaryStage) throws Exception {
-        Image map = new Image("Map 1000pixels.jpg");
-    
+       // Display Setup for the GUI
+	Image map = new Image("Map 1000pixels.jpg");
         Pane root = new Pane();
         final Scene scene = new Scene(root, 1000, 1000, new ImagePattern(map));
-        
         root.getChildren().add(mini.getAvatarImage());
-
-        // Display Setup for the GUI
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
-
-        // Movement EvenHandlers
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                // Move right
-                if (keyEvent.getCode().toString() == "RIGHT")
-                    moveRight = true;
-
-                // Move left
-                if (keyEvent.getCode().toString() == "LEFT")
-                    moveLeft = true;
-                    
-                // Move up
-                if (keyEvent.getCode().toString() == "UP")
-                    moveUp = true;
-
-                // Move down
-                if (keyEvent.getCode().toString() == "DOWN")
-                    moveDown = true;
-            }
-        });
-
-        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                // Move right
-                if (keyEvent.getCode().toString() == "RIGHT")
-                    moveRight = false;
-
-                // Move left
-                if (keyEvent.getCode().toString() == "LEFT")
-                    moveLeft = false;
-
-                // Move up
-                if (keyEvent.getCode().toString() == "UP")
-                    moveUp = false;
-                    
-                // Move down
-                if (keyEvent.getCode().toString() == "DOWN")
-                    moveDown = false;
-
-            }
-        });
-
-        // Creates animation movement
+	    
+        //Animation of movements
         AnimationTimer moveTime = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                int moveX = 0;
-                int moveY = 0;
-
-                if (moveRight == true) {
+                int moveX;
+                int moveY;
+                if (Right.equals("move")) 
+		{
                     mini.setForward();
                     moveX += 3;
                 }
-                if (moveLeft == true) {
+                if (Left.equals("move")) 
+		{
                     mini.setBackward();
                     moveX -= 3;
                 }
-                if (moveUp == true)
+                if (Up.equals("move"))
                     moveY -= 3;
-                if (moveDown == true)
+                if (Down.equals("move"))
                     moveY += 3;
 
                 if ((mini.getXLocation(moveX) <= 758) && (mini.getXLocation(moveX) >= 0))
@@ -138,8 +92,44 @@ public class GUIAnimationApp extends Application {
                 }
             }
         };
+        // Movement Key Events
+        scene.setOnKeyPressed(keyEvent -> {
+                // Starts moving right when key is pressed
+                if (keyEvent.getCode().toString() == "RIGHT")
+                    Right = "move";
+		
+                // Starts moving left when key is pressed
+                if (keyEvent.getCode().toString() == "LEFT")
+                    Left = "move";
+		
+                // Starts moving up when key is pressed
+                if (keyEvent.getCode().toString() == "UP")
+                    Up = "move";
+		
+                // Starts moving down when key is pressed
+                if (keyEvent.getCode().toString() == "DOWN")
+                    Down = "move";
+            }
+        });
+
+        scene.setOnKeyReleased(keyEvent -> {
+                // Stops moving right when key is released
+                if (keyEvent.getCode().toString() == "RIGHT")
+                    Right = "don't move";
+		
+                // Stops moving left when key is released
+                if (keyEvent.getCode().toString() == "LEFT")
+                    Left = "don't move";
+		
+                // Stops moving up when key is released
+                if (keyEvent.getCode().toString() == "UP")
+                    Up = "don't move";
+		
+                // Stops moving down when key is released
+                if (keyEvent.getCode().toString() == "DOWN")
+                    Down = "don't move";
+            }
+        });
         moveTime.start();
-
     }
-
 }
