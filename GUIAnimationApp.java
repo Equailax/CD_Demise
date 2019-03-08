@@ -11,9 +11,12 @@ import javafx.animation.AnimationTimer;
 import java.util.ArrayList;
 
 /**
- * GUI Display for the bank account of the user with deposit and withdraw
- * options, currently has no functions beyond the basic display
- * Some parts referenced from: https://gist.github.com/jewelsea/8321740
+ * GUI to display the main map, with spawns and animations of the avatar, enemies, obstacles, and collectibles, and projectiles.
+ *The avatar moves using keys on the keyboard for up,down,right, and left movements, and a combination of these.
+ *The enemies will currently be stationary until later demos.
+ *The avatar will also throw projectiles at the enemies to deal damage to them, and collect collectible items to make progress and eventually win the game.
+ *The health of the avatar will be hearts displayed in the top corner of the screen that will decrease/increase in numbers based on interactions in the map.
+ * Some parts referenced from:https://gist.github.com/jewelsea/8321740
  */
 // FINAL DRAFT
 
