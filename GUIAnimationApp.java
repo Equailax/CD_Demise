@@ -21,12 +21,15 @@ import java.util.ArrayList;
 // FINAL DRAFT
 
 public class GUIAnimationApp extends Application {
-    // Instance variables for avatar image and movements
+    // Instance variables for avatar movements
     String Right = "don't move";
     String Left = "don't move";
     String Up = "don't move";
     String Down = "don't move";
+	
+    //Creation of the life hearts and the image of the avatar for the GUI
     AvatarImage mini = new AvatarImage();
+    ArrayList<LifeHeart> lifeHearts = new ArrayList<LifeHeart>();
 
     //Instance variables for avatar
     String myName = "Minidisc";
@@ -51,7 +54,21 @@ public class GUIAnimationApp extends Application {
 	Image map = new Image("Map 1000pixels.jpg");
         Pane root = new Pane();
         final Scene scene = new Scene(root, 1000, 1000, new ImagePattern(map));
-        root.getChildren().add(mini.getAvatarImage());
+	    
+	// Display positions of life hearts for health
+	for(int i = 0; i <= myhealth; i++)
+	{
+	    LifeHeart temp = new LifeHeart(25, 20+(30*i));
+	    lifeHearts.add(temp);
+	}
+		
+	// Display of life hearts on GUI
+	for(int i = 0; i <= myhealth; i++)
+	{
+	    root.getChildren().add(lifeHearts.get(i).getLocation());
+	}
+	
+	root.getChildren().add(mini.getAvatarImage());
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
