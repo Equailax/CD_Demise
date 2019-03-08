@@ -4,15 +4,11 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
-import javafx.animation.TranslateTransition;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 import javafx.animation.AnimationTimer;
-import javafx.scene.Node;
 import java.util.ArrayList;
 
 /**
@@ -22,11 +18,12 @@ import java.util.ArrayList;
 // FINAL DRAFT
 
 public class GUIAnimationApp extends Application {
-    // Instance variables
+    // Instance variables for avatar image
     boolean moveRight = false;
     boolean moveLeft = false;
     boolean moveUp = false;
-    boolean moveDown = false;;
+    boolean moveDown = false;
+    AvatarImage mini = new AvatarImage();
 
     //Instance variables for avatar
     String myName = "Minidisc";
@@ -41,9 +38,6 @@ public class GUIAnimationApp extends Application {
     private ArrayList<Collectible> collectiblesArray = new ArrayList<Collectible>();
     private ArrayList<Obstacle> obstacleArray = new ArrayList<Obstacle>();
     AnimationApp demo2 = new AnimationApp(minidisc, collectiblesArray, obstacleArray);
-    
-
-    // private Node character;
 
     public static void main(String[] args) {
         launch(args); // launches GUI application
@@ -54,17 +48,8 @@ public class GUIAnimationApp extends Application {
     
         Pane root = new Pane();
         final Scene scene = new Scene(root, 1000, 1000, new ImagePattern(map));
-
-        Image avatarImage = new Image("Mini Test2.png");
-
-        // Image avatarImageBackward = new Image("Mini Test2 Backward.png");
-        Rectangle avatar = new Rectangle(72, 72, 100, 100);
-        avatar.setFill(new ImagePattern(avatarImage));
-
-        ImageView avatarForwards = new ImageView(avatarImage);
-        // ImageView avatarBackwards = new ImageView(avatarImageBackward);
-
-        root.getChildren().add(avatar);
+        
+        root.getChildren().add(mini.getAvatarImage());
 
         // Display Setup for the GUI
         primaryStage.setScene(scene);
@@ -76,30 +61,20 @@ public class GUIAnimationApp extends Application {
             @Override
             public void handle(KeyEvent keyEvent) {
                 // Move right
-                if (keyEvent.getCode().toString() == "RIGHT") {
+                if (keyEvent.getCode().toString() == "RIGHT")
                     moveRight = true;
-                    return;
-                }
 
                 // Move left
-                if (keyEvent.getCode().toString() == "LEFT") {
+                if (keyEvent.getCode().toString() == "LEFT")
                     moveLeft = true;
-                    return;
-                }
-
+                    
                 // Move up
-                if (keyEvent.getCode().toString() == "UP") {
-
+                if (keyEvent.getCode().toString() == "UP")
                     moveUp = true;
-                    return;
-                }
 
                 // Move down
-                if (keyEvent.getCode().toString() == "DOWN") {
+                if (keyEvent.getCode().toString() == "DOWN")
                     moveDown = true;
-                    return;
-                }
-
             }
         });
 
@@ -107,28 +82,20 @@ public class GUIAnimationApp extends Application {
             @Override
             public void handle(KeyEvent keyEvent) {
                 // Move right
-                if (keyEvent.getCode().toString() == "RIGHT") {
+                if (keyEvent.getCode().toString() == "RIGHT")
                     moveRight = false;
-                    return;
-                }
 
                 // Move left
-                if (keyEvent.getCode().toString() == "LEFT") {
+                if (keyEvent.getCode().toString() == "LEFT")
                     moveLeft = false;
-                    return;
-                }
 
                 // Move up
-                if (keyEvent.getCode().toString() == "UP") {
+                if (keyEvent.getCode().toString() == "UP")
                     moveUp = false;
-                    return;
-                }
-
+                    
                 // Move down
-                if (keyEvent.getCode().toString() == "DOWN") {
+                if (keyEvent.getCode().toString() == "DOWN")
                     moveDown = false;
-                    return;
-                }
 
             }
         });
@@ -141,11 +108,11 @@ public class GUIAnimationApp extends Application {
                 int moveY = 0;
 
                 if (moveRight == true) {
-                    avatar.setFill(new ImagePattern(avatarImage));
+                    mini.setForward();
                     moveX += 3;
                 }
                 if (moveLeft == true) {
-                    // avatar.setFill(new ImagePattern(avatarImageBackward));
+                    mini.setBackward();
                     moveX -= 3;
                 }
                 if (moveUp == true)
@@ -153,13 +120,12 @@ public class GUIAnimationApp extends Application {
                 if (moveDown == true)
                     moveY += 3;
 
-                double avatarX = avatar.getLayoutX() + moveX;
-                double avatarY = avatar.getLayoutY() + moveY;
+                double avatarX = mini.getXLocation(moveX);
+                double avatarY = mini.getYLocation(moveY);
 
                 if ((avatarX <= 755) && (avatarX >= 0) && (avatarY >= 0) && (avatarY <= 640)) {
                     // Change the location of the avatar on the map
-                    avatar.setLayoutX(avatar.getLayoutX() + moveX);
-                    avatar.setLayoutY(avatar.getLayoutY() + moveY);
+                    mini.moveAvatar(moveX, moveY);
 
                     // Take the location of the actual avatar and make it match the one on the map
                     // Had to take the double value returned by the getX and getY methods into int
