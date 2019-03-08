@@ -120,20 +120,21 @@ public class GUIAnimationApp extends Application {
                 if (moveDown == true)
                     moveY += 3;
 
-                double avatarX = mini.getXLocation(moveX);
-                double avatarY = mini.getYLocation(moveY);
+                if ((mini.getXLocation(moveX) <= 758) && (mini.getXLocation(moveX) >= 0))
+				{
+					if((mini.getYLocation(moveY) >= 0) && ( mini.getYLocation(moveY) <= 742))
+					{
+                        // Change the location of the avatar on the map
+                        mini.moveAvatar(moveX, moveY);
 
-                if ((avatarX <= 755) && (avatarX >= 0) && (avatarY >= 0) && (avatarY <= 640)) {
-                    // Change the location of the avatar on the map
-                    mini.moveAvatar(moveX, moveY);
-
-                    // Take the location of the actual avatar and make it match the one on the map
-                    // Had to take the double value returned by the getX and getY methods into int
-                    Double doubleNewX = avatarLocation.getX() + moveX;
-                    Double doubleNewY = avatarLocation.getY() + moveY;
-                    int newX = doubleNewX.intValue();
-                    int newY = doubleNewY.intValue();
-                    avatarLocation.setLocation(newX, newY);
+                        // Take the location of the actual avatar and make it match the one on the map
+                        // Had to take the double value returned by the getX and getY methods into int
+                        Double doubleNewX = avatarLocation.getX() + moveX;
+                        Double doubleNewY = avatarLocation.getY() + moveY;
+                        int newX = doubleNewX.intValue();
+                        int newY = doubleNewY.intValue();
+                        avatarLocation.setLocation(newX, newY);
+                    }
                 }
             }
         };
