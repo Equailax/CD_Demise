@@ -88,8 +88,7 @@ public class GUIAnimationApp extends Application {
                         int newX = doubleNewX.intValue();
                         int newY = doubleNewY.intValue();
                         avatarLocation.setLocation(newX, newY);
-                    }
-                }
+              	    }
             }
         };
         // Movement Key Events
