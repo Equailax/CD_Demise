@@ -13,8 +13,8 @@ public class AnimationApp{
     private ArrayList<Obstacle> obstacleArray = new ArrayList<Obstacle>();
     
     //Map dimensions
-    private final int mapHeight = 1000;
-    private final int mapWidth = 1000;
+    private final int mapHeight = 700;
+    private final int mapWidth = 800;
     
     //Constructors
     /**

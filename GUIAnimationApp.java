@@ -165,7 +165,7 @@ public class GUIAnimationApp extends Application {
                     
                     //if the avatar's movement changed, set the moveX to + 3, if not, nothing has changed
                     if (avatarBeforeMovement.equals(demo2.getAvatar())){
-                        moveX -= 0;
+                        moveY -= 0;
                     } else {
                         moveY += 3;
                     }
