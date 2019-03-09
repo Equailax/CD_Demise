@@ -5,11 +5,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.RectangleBuilder;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.animation.AnimationTimer;
 import java.util.ArrayList;
+import java.lang.Math;
 
 /**
  * GUI to display the main map, with spawns and animations of the avatar, enemies, obstacles, and collectibles, and projectiles.
@@ -100,14 +103,18 @@ public class GUIAnimationApp extends Application {
             }
         }
 
-       
+       // Rectangle / hitbox
+		Rectangle mouseHitbox = new Rectangle(0, 0, 1250, 1250);           // IMPORTANT: Make the rectangle fill the whole window
+		mouseHitbox.setFill(Color.rgb(255,0,0,0.5));
         
         root.getChildren().add(mini.getAvatarImage());
+		root.getChildren().add(mouseHitbox);                               // IMPORTANT: mouseHitbox must be added to root last
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
-
+		
         
+		
         
         //Animation of movements
         AnimationTimer moveTime = new AnimationTimer() {
@@ -229,6 +236,53 @@ public class GUIAnimationApp extends Application {
                 if (keyEvent.getCode().toString() == "DOWN")
                     Down = "don't move";
         });
+		
+		mouseHitbox.setOnMouseClicked(mouseEvent ->
+		{
+			//+(demo2.getAvatar().getLocation().getWidth()/2)
+			//+(demo2.getAvatar().getLocation().getHeight()/2)
+			
+			double avatarXCenter = demo2.getAvatar().getLocation().getX();
+			double avatarYCenter = demo2.getAvatar().getLocation().getY();
+			System.out.println(demo2.getAvatar().getLocation());
+			
+			double angle = Math.toDegrees(Math.atan2(mouseEvent.getX()-(demo2.getAvatar().getLocation().getX()+27-100), mouseEvent.getY()-(demo2.getAvatar().getLocation().getY()+33.5-100)))+180;
+			System.out.println("Click (" + mouseEvent.getX() + ", " + mouseEvent.getY() + ")"); // CAN BE DELETED
+			System.out.println(angle);// CAN BE DELETED
+			
+			// Print to console the direction that the mouse click is relative to the avatar's rectangle.
+			// The angle is a circle with 0 starting at the top and increases as the mouse moves counter clockwise
+			if (angle > 337.5)
+			{
+				System.out.println("North");
+			} else if (angle > 292.5)
+			{
+				System.out.println("North East");
+			} else if (angle > 247.5)
+			{
+				System.out.println("East");
+			} else if (angle > 202.5)
+			{
+				System.out.println("South East");
+			} else if (angle > 157.5)
+			{
+				System.out.println("South");
+			} else if (angle > 112.5)
+			{
+				System.out.println("South West");
+			} else if (angle > 67.5)
+			{
+				System.out.println("West");
+			} else if (angle > 22.5)
+			{
+				System.out.println("North West");
+			} else if (angle >= 0)
+			{
+				System.out.println("North");
+			}
+		}
+		);
+		
         moveTime.start();
     }
 }
