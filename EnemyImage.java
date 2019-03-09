@@ -10,7 +10,7 @@ public class EnemyImage
 	private String type;
 	private int xcoord; //*****remove
 	private int ycoord; //***** remove
-
+	
 	public Rectangle getLocation()
 	{
 		return location;
@@ -47,12 +47,50 @@ public class EnemyImage
 		}
 		if(this.type.equals("PEARMUSIC"))
 		{
-			enemy = new Image("Pear Music.png");
+			enemy = new Image("PearMusic.png");
 			this.location = new Rectangle(xcoord, ycoord, 40, 67);
 			this.location.setFill(new ImagePattern(enemy));
 		}
 	}
 
+	public void setImageForward()
+	{
+		if(this.type.equals("DOTIFY"))
+		{
+			enemy = new Image("Dotify.png");
+			this.location.setFill(new ImagePattern(enemy));
+		}
+		if(this.type.equals("BEATSBYDRO"))
+		{
+			enemy = new Image("BeatsbyDro.png");
+			this.location.setFill(new ImagePattern(enemy));
+		}
+		if(this.type.equals("PEARMUSIC"))
+		{
+			enemy = new Image("PearMusic.png");
+			this.location.setFill(new ImagePattern(enemy));
+		}
+	}
+	
+	public void setImageBackward()
+	{
+		if(this.type.equals("DOTIFY"))
+		{
+			enemy = new Image("Dotify Backward.png");
+			this.location.setFill(new ImagePattern(enemy));
+		}
+		if(this.type.equals("BEATSBYDRO"))
+		{
+			enemy = new Image("BeatsbyDro Backward.png");
+			this.location.setFill(new ImagePattern(enemy));
+		}
+		if(this.type.equals("PEARMUSIC"))
+		{
+			enemy = new Image("PearMusic Backward.png");
+			this.location.setFill(new ImagePattern(enemy));
+		}
+	}
+	
 	public EnemyImage()
 	{	}
 	
@@ -76,7 +114,7 @@ public class EnemyImage
 		}
 		if(this.type.equals("PEARMUSIC"))
 		{
-			enemy = new Image("Pear Music.png");
+			enemy = new Image("PearMusic.png");
 			this.location = new Rectangle(xcoord, ycoord, 40, 67);
 			this.location.setFill(new ImagePattern(enemy));
 		}
