@@ -90,7 +90,7 @@ public class GUIAnimationApp extends Application {
                     EnemyImage temp = new EnemyImage("MYPHONE", (int) o.getLocation().getX(),(int) o.getLocation().getY());
                     root.getChildren().add(temp.getLocation());}
             }   
-            if (o instanceof Obstacle){
+            else{
                 Image puddle = new Image("Puddle.png");
                 Rectangle puddleSpace = new Rectangle(o.getLocation().getX(), o.getLocation().getY(), 60 , 0);
                 puddleSpace.setFill(new ImagePattern(puddle));
