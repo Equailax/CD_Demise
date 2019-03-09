@@ -52,9 +52,9 @@ public class AvatarImage
 		
 		public AvatarImage()
 		{
-			this.avatarImageForward = new Image("Mini Test2.png");
-			this.avatarImageBackward = new Image("Mini Test2 Backward.png");
-			this.avatar = new Rectangle(78, 85, 100, 100);
+			this.avatarImageForward = new Image("MiniDisc.png");
+			this.avatarImageBackward = new Image("MiniDisc Backward.png");
+			this.avatar = new Rectangle(100, 100, 54, 67);
 			this.avatar.setFill(new ImagePattern(avatarImageForward));
 			
 		}
