@@ -39,7 +39,7 @@ public class GUIAnimationApp extends Application {
 
     // Creation of the avatar, obstacles, and collectibles
    
-    java.awt.Rectangle avatarLocation = new java.awt.Rectangle(72, 72, 100, 100);
+    java.awt.Rectangle avatarLocation = new java.awt.Rectangle(100, 100, 54, 67);
     Avatar minidisc = new Avatar(myName, myLife, myhealth, myDamage, avatarLocation);
     private ArrayList<Collectible> collectiblesArray = new ArrayList<Collectible>();
     private ArrayList<Obstacle> obstacleArray = new ArrayList<Obstacle>();
