@@ -9,7 +9,7 @@ public class Projectile extends Obstacle{
     private boolean isDeadlyToAvatar = false;
     private boolean isDeadlyToEnemy = false;
     private boolean isShot = false;
-    private boolean direction = "NONE"
+    private String direction = "NONE";
     
     private final int mapHeight = 1000;
     private final int mapWidth = 1000;

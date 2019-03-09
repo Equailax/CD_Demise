@@ -13,8 +13,8 @@ public class Obstacle
 	//private int health;
 	private int xcoord;
 	private int ycoord;
-	private final int height = 1;
-	private final int width = 1;
+	private final int height = 100;
+	private final int width = 100;
 	private Rectangle location = new Rectangle(xcoord, ycoord, width, height);
 	
 	

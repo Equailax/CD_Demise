@@ -104,7 +104,7 @@ public class Enemy extends Obstacle
                       will move right.
     */
     public void moveX(int movement){
-        this.location.setLocation(this.location.getX() + movement, this.location.getY());
+        this.setLocation((int)(this.getLocation().getX() + movement), (int)this.getLocation().getY());
     }
     
     /**
@@ -114,7 +114,7 @@ public class Enemy extends Obstacle
                       will move down.
     */
     public void moveY(int movement){
-        this.location.setLocation(this.location.getX(), this.location.getY() + movement);
+        this.setLocation((int)this.getLocation().getX(), (int)(this.getLocation().getY() + movement));
     }
 	
 	/**
@@ -268,7 +268,7 @@ public class Enemy extends Obstacle
         obstacleArray.add(new Obstacle("Obstacle 2", 0, 0));
         obstacleArray.add(new Obstacle("Obstacle 3", 0, 0));
         obstacleArray.add(new Enemy("Enemy 2", 3, 0, 0));
-        obstacleArray.add(new Projectile("Projectile 1", true, false));
+        obstacleArray.add(new Projectile("Projectile 1", true, false, "NONE"));
         
         ArrayList<Obstacle> temp = new ArrayList<Obstacle>();
         for (Obstacle o : obstacleArray){
