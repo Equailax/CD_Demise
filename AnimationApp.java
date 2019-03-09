@@ -614,7 +614,25 @@ public class AnimationApp{
             //Check if avatar shot
             
             //Process if the avatar can move 
-            mainApp.processAvatarMove(input);
+            if (input.toLowerCase().equals("up") || input.toLowerCase().equals("down") || input.toLowerCase().equals("left") || input.toLowerCase().equals("right")){
+                mainApp.processAvatarMove(input);
+            } else if (input.toLowerCase().equals("shoot")) {
+                
+                //have the avatar shoot the proejctile "in a direction"
+                Avatar avatarHasShot = new Avatar(mainApp.getAvatar());
+                avatarHasShot.shootProjectile(input);
+                mainApp.setAvatar(avatarHasShot);
+                
+                // add the projectile to the obstacle array
+                
+                Projectile projectileToAdd = new Projectile(mainApp.getAvatar().getProjectile());
+                
+                ArrayList<Obstacle> arrayListToAdd = new ArrayList<Obstacle>();
+                arrayListToAdd = mainApp.getObstacleArray();
+                mainApp.setObstacleArray(arrayListToAdd.add(projectileToAdd));
+                
+            }
+            
             
             //Move obstacles accordingly (make sure to not overlap with avatar)
             mainApp.processObstacleMove();
