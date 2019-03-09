@@ -89,16 +89,20 @@ public class GUIAnimationApp extends Application {
                 if (randomEnemy == 3) {
                     EnemyImage temp = new EnemyImage("MYPHONE", (int) o.getLocation().getX(),(int) o.getLocation().getY());
                     root.getChildren().add(temp.getLocation());}
-            }   
-            if (o instanceof Obstacle){
-                Image puddle = new Image("Puddle.png");
-                Rectangle puddleSpace = new Rectangle(o.getLocation().getX(), o.getLocation().getY(), 60 , 0);
+            }  }
+        
+        for (int i = 0; i < demo2.getObstacleArray().size(); i++){
+            Obstacle o = demo2.getObstacleArray().get(i);
+            Image puddle = new Image("Puddle.png");
+            if (!(o instanceof Enemy || o instanceof Projectile)){
+                Rectangle puddleSpace = new Rectangle(o.getLocation().getX(), o.getLocation().getY(), 60 , 60);
                 puddleSpace.setFill(new ImagePattern(puddle));
-                root.getChildren().add(puddleSpace);
-            }
-        }
-
-       
+                root.getChildren().add(puddleSpace);}}
+            
+          
+            
+        
+    
         
         root.getChildren().add(mini.getAvatarImage());
         primaryStage.setScene(scene);
