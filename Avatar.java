@@ -94,8 +94,15 @@ public class Avatar{
         
     }
     
-    //public void setProjectile(){}
-
+    /**
+    This method sets the proejectile note for the avtar
+    @param projecitleNote : this is the projectile that we wish to set the note to
+    */
+    public void setProjectile(Projectile projecitleNote){
+        this.note = new Projectile(projecitleNote);
+    }
+    
+    
     public void setPosition(){
         this.location.x = 0;
         this.location.y = 0;
@@ -158,7 +165,7 @@ public class Avatar{
 			if (this.location.getY() > 0){
                 //if the avatar is within the edge, then move up
 				//this.location.setLocation(xCoord, yCoord - 1);	
-                this.moveY(-1);
+                this.moveY(-3);
 			}else if(this.location.getY() == 0 ){
                 System.out.println("Cant go there, im at the edge");
             }
@@ -166,7 +173,7 @@ public class Avatar{
 			if (this.location.getY() < mapHeight){
                 //if the avatar is within the edge, then move down
 				//this.location.setLocation(xCoord, yCoord + 1);
-                this.moveY(1);
+                this.moveY(3);
 			}else if(this.location.getY() == mapHeight){
                 System.out.println("Cant go there, im at the edge");
             }
@@ -174,7 +181,7 @@ public class Avatar{
 			if (this.location.getX() > 0){
                 //if the avatar is within the edge, then move left
 				//this.location.setLocation(xCoord - 1, yCoord);
-                this.moveX(-1);
+                this.moveX(-3);
 			}else if(this.location.getX() == 0){
                 System.out.println("Cant go there, im at the edge");
             }
@@ -182,7 +189,7 @@ public class Avatar{
 			if (this.location.getX() < mapWidth){
 				//if the avatar is within the egde, then move right
                 //this.location.setLocation(xCoord + 1, yCoord);
-                this.moveX(1);
+                this.moveX(3);
 			}else if(this.location.getX() == mapWidth){
                 System.out.println("Cant go there, im at the edge");
             }
@@ -198,9 +205,12 @@ public class Avatar{
     }
     
     /**
-    This method shoots the projectile note
+    This method shoots the projectile note in a specified direction (can be updated so that it shoots to wherever
+    the mouse is pointing)
+    @param directionToShoot : this is the direction that we want to shoot the projecitle
     */
-    public void shootProjectile(){
+    public void shootProjectile(String directionToShoot){
+        this.setProjectile(new Projectile(this.getProjectile().getName(), this.getProjectile().getDeadlyToAvatar(), this.getProjectile().getDeadlyToEnemy(), directionToShoot));
     }
     
     /**
@@ -223,6 +233,18 @@ public class Avatar{
                 //If the lives is 0 or below, then we have reached the end game, so the health is not reset and the lives is not taken
                 return true;
             }
+        }
+    }
+    
+    /**
+    This method checks if two avatars have equal position
+    @return boolean
+    */
+    public boolean equals(Avatar a1){
+        if (this.location.equals(a1.getLocation())){
+            return true;
+        }else {
+            return false;
         }
     }
     

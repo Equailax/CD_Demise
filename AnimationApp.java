@@ -110,7 +110,7 @@ public class AnimationApp{
     This method will add a specified number of obstacles to the end of the obstacleArray
     @param numberOfObstaclesToAdd : this is the number of (new) obstacles we wish to add
     */
-    public void addObstacle(int numberOfObstaclesToAdd){
+    public void addObstacle(int numberOfObstaclesToAdd, int numberOfEnemiesToAdd){
         ArrayList<Obstacle> tempObstaclesArrayList = new ArrayList<Obstacle>();
         
         //Copy the obsacle array list (this.obstacleArray)if it is not empty
@@ -131,7 +131,7 @@ public class AnimationApp{
         }
         
         //Add the required enemies to the temporary array list
-        for (int i = 0; i < numberOfObstaclesToAdd; i++){
+        for (int i = 0; i < numberOfEnemiesToAdd; i++){
             
             //Generate a random number between 0 and 10 for the x coordinate
             int randomXCoordinate = (int)(Math.random() * mapWidth + 0);
@@ -206,13 +206,8 @@ public class AnimationApp{
     @return temp : this is a copy of the this.obstacleArray
     */
     public ArrayList<Obstacle> getObstacleArray(){
-        /*ArrayList<Obstacle> temp = new ArrayList<Obstacle>();
-        for (Obstacle o : this.obstacleArray){
-            temp.add(new Obstacle(o));
-        }
-        return temp;
-        */
         ArrayList<Obstacle> temp = new ArrayList<Obstacle>();
+        
         for (Obstacle o : this.obstacleArray){
             if (o instanceof Enemy){
                 temp.add(new Enemy((Enemy)o));
@@ -253,11 +248,6 @@ public class AnimationApp{
         }
         
     }
-    /*
-    public void drawCurrentState(){
-        
-    }
-    */
     
     /**
     This method processess if the avatar can move.  This means it would check if there are any obstacles and collectibles in the area to the place
@@ -348,7 +338,7 @@ public class AnimationApp{
         }else if(occupiedByObstacle == false && occupiedByCollectible == false && occupiedByEnemy == false && occupiedByProjectile == false){
             //if it doesnt overlap with any obstacles or colectibles, thne just move without doing nothing
             this.minidisc.move(userMovementInput);
-            System.out.println("Theres nothing here");
+            //System.out.println("Theres nothing here");
         }
     }
 	
@@ -376,6 +366,8 @@ public class AnimationApp{
 			
             //If the obstacle is an instance of an enemy, move the enemy in a random direction for now
             if (o1 instanceof Enemy){
+                
+                //Currently has the enemy move in a random direction
                 ((Enemy)o1).randomMove();
                 
                 //Check if the enemy overlaps with any other enemy, obstacle, projectile
@@ -387,8 +379,10 @@ public class AnimationApp{
                             //If the instance of the obstacle is an enemy or an obstacle, then it cant move through
                             occupied = true;
                         }else if (o2 instanceof Projectile){
-                            //If the isntance is a projectile, then it can move through but it takes damage
-                            occupiedByProjectile = true;
+                            //If the isntance is a projectile that damages enemies, then it can move through but it takes damage
+                            if (((Projectile)o2).getDeadlyToEnemy()){
+                                occupiedByProjectile = true;
+                            }
                         }
                     }
                 }
@@ -399,35 +393,26 @@ public class AnimationApp{
                     occupied = true;
                     this.minidisc.takeDamage(1);        
                     
-                } else if (occupied){
+                } 
+                
+                if (occupied){
                     // If moving obstacle overlaps with an avatar or obstacle, move it back
                     o1.getLocation().setLocation((int)preMove.getX(), (int)preMove.getY());
                 } else if (!occupied && occupiedByProjectile){
-                    //If the spot is not occupied by an obstacle or an enemy, but it is occupied by a projectile, the enemy takes damage.
+                    //If the spot is not occupied by an obstacle or an enemy, but it is occupied by a projectile that damages enemies, the enemy takes damage.
                     ((Enemy)o1).takeDamage(1);
                 }
                 
-                /*{
-                    // Check if the moving enemy overlaps with an obstacle in the static array (even if the moving obstacle doesn't move, no changes will be made)
-                    
-                    for (Obstacle o2 : staticObstacleArray) {
-                        
-                        //Check if o2 is an enemy or an obstacle
-                        if (o2 instanceof Enemy || o2 instanceof Obstacle){
-                            //If the original enemy overlaps with either an obstacle or an enemy, dont move there
-                            if (o1.overlapsWithObstacle(o2)){
-                                occupied = true;
-                                break;
-                            }
-                        }
-                        
-                        
-                        
-                    }
-                }
-                */
             } else if (o1 instanceof Projectile) {
-                //If the instance of the obstacle is a projectile have it move until it reaches an obstacle
+                //If the instance of the obstacle is a projectile have it move in its specified direction, as long as its within bounds
+                Projectile projecitleBeforeMovement = new Projectile((Projectile)o1);
+                projecitleBeforeMovement.move();
+                if ((projecitleBeforeMovement.getLocation().getX() < this.mapWidth && projecitleBeforeMovement.getLocation().getX() > 0) && (
+                    projecitleBeforeMovement.getLocation().getY() < this.mapHeight && projecitleBeforeMovement.getLocation().getY() > 0))
+                    {
+                        //If the projetile before movement is within bounds, have the original projectile move 
+                        ((Projectile)o1).move();
+                    }
                 
             }
         }
@@ -440,8 +425,87 @@ public class AnimationApp{
     This method removes any obstacle that need to be removed
     */
     public void removeObstacles(){
+        
         /*
-        First remove any enemies that have run out of health
+        Remove the projecitles that have reached bound limits
+        */
+        int obstaclesThatHaveReachedBounds = 0;
+        for (Obstacle o1 : this.obstacleArray){
+            if (o1 instanceof Projectile) {
+                //has the projectile reached the bounds of the map
+                if ((o1.getLocation().getX() == this.mapWidth || o1.getLocation().getX() == 0) || (
+                    o1.getLocation().getY() == this.mapHeight || o1.getLocation().getY() == 0)) {
+                    
+                    obstaclesThatHaveReachedBounds += 1;
+                }
+            }
+        }
+        
+        for (int i = 0; i < obstaclesThatHaveReachedBounds; i++){
+            for (Obstacle o1 : this.obstacleArray){
+                if (o1 instanceof Projectile) {
+                    //remove the obstacle once it has reached the edges of the map
+                    if ((o1.getLocation().getX() == this.mapWidth || o1.getLocation().getX() == 0) || (
+                    o1.getLocation().getY() == this.mapHeight || o1.getLocation().getY() == 0)) {
+                        
+                        this.obstacleArray.remove(o1);
+                        break;
+                    }
+                }
+            }
+        }
+        
+        /*
+        Remove the projectiles that have run out of health, hit an enenmy or avatar
+        */
+        int obstaclesToRemove = 0;
+        
+        for (Obstacle o1 : this.obstacleArray){
+            for (Obstacle o2 : this.obstacleArray){
+                if (!o1.equals(o2)){
+                    //If the obstacle does not equal itself, check if it overlaps with obstacle 2
+                    if (o1.overlapsWithObstacle(o2)){
+                        obstaclesToRemove += 1;
+                    }
+                }
+            }
+        }
+        
+        //Once we have the number of obstacles to remove, remove that number from this.obstacleArray
+        for (int i = 0; i < obstaclesToRemove; i++){
+            for (Obstacle o1 : this.obstacleArray){
+                for (Obstacle o2 : this.obstacleArray){
+                    if (!o1.equals(o2)){
+                        //If the obstacle does not equal itself, check if it overlaps with obstacle 2
+                        if (o1.overlapsWithObstacle(o2)){
+                            /*
+                            Now, if the obstacle is an instance of a projectile remove it if;
+                            if the projectile overlaps with an enemy (if it damages it)
+                            if the projecitle overlaps with the avatar (if it damages it)
+                            if the projectile overlaps with an obstacle, remove only the projectile
+                            */
+                            if (o1 instanceof Projectile) {
+                                if (o2 instanceof Enemy){
+                                    //if object 1 is a projectile, check if it damages enemies, if it does remove it, other wise don't do anything. 
+                                    if (((Projectile)o1).getDeadlyToEnemy()){
+                                        this.obstacleArray.remove(o1);
+                                    }
+                                    break;
+                                } else if (!(o2 instanceof Enemy || o2 instanceof Projectile)) {
+                                    //If the second obstacle is not an instance of enemy nor projectile, its a wall, so the projectile should be removed.
+                                    this.obstacleArray.remove(o1);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                break;
+            }
+        }
+        
+        /*
+        Remove any enemies that have run out of health
         */
         int enemiesToRemove = 0;
         for (Obstacle enemy : this.obstacleArray){
@@ -462,60 +526,7 @@ public class AnimationApp{
                 }
             }
         }
-        
-        /**
-        Now remove any pojectiles that have hit the walls or other enemies
-        */
-        int obstaclesToRemove = 0;
-        
-        for (Obstacle o1 : this.obstacleArray){
-            for (Obstacle o2 : this.obstacleArray){
-                if (!o1.equals(o2)){
-                    //If the obstacle does not equal itself, check if it overlaps with obstacle 2
-                    if (o1.overlapsWithObstacle(o2)){
-                        obstaclesToRemove += 1;
-                    }
-                }
-            }
-        }
-        
-        //Once wwe have the number of obstacles to remove, remove that number from this.obstacleArray
-        for (int i = 0; i < obstaclesToRemove; i++){
-            for (Obstacle o1 : this.obstacleArray){
-                for (Obstacle o2 : this.obstacleArray){
-                    if (!o1.equals(o2)){
-                        //If the obstacle does not equal itself, check if it overlaps with obstacle 2
-                        if (o1.overlapsWithObstacle(o2)){
-                            /*
-                            Now, if the obstacle is an instance of a projectile remove it if;
-                            if the projectile overlaps with an enemy, remove both the projectile and enemy if the enemy's health is at 0, if not
-                            just remove the projecile, 
-                            if the projectile overlaps with an obstacle, remove only the projectile
-                            */
-                            if (o1 instanceof Projectile) {
-                                if (o2 instanceof Enemy){
-                                    this.obstacleArray.remove(o1);
-                                    if (((Enemy)o2).getHealth() == 0){
-                                        this.obstacleArray.remove(o2);
-                                    }
-                                    break;
-                                } else if (!(o2 instanceof Enemy || o2 instanceof Projectile)) {
-                                    this.obstacleArray.remove(o1);
-                                    break;
-                                }
-                            } else if (o1 instanceof Enemy){
-                                if (((Enemy)o1).getHealth() == 0){
-                                    this.obstacleArray.remove(o1);
-                                    break;
-                                }
-                            }
-                            
-                        }
-                    }
-                }
-                break;
-            }
-        }
+ 
     }
     
     /**
@@ -530,8 +541,8 @@ public class AnimationApp{
         //Initialize Collectibles -- Add 3 collectibles -- make sure the positions of collectibles are correct
         addCollectible(3);
         
-        //Initalize Obstacles -- Add 3 obstacles -- make sure the postions of the obstacles are correct
-        addObstacle(3);  
+        //Initalize Obstacles
+        addObstacle(3, 3);  
         
     }
     
@@ -546,7 +557,7 @@ public class AnimationApp{
         addCollectible(collecitblesToAdd);
         
         //Add any obstacles if necessary
-        addObstacle(obstacleToAdd);
+        //addObstacle(obstacleToAdd);
     }
     
     

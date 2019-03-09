@@ -28,7 +28,7 @@ public class Projectile extends Obstacle{
     public Projectile(Projectile projectileToCopy){
         super(projectileToCopy);
         this.isDeadlyToAvatar = projectileToCopy.getDeadlyToAvatar();
-        this.isDeadlyToEnemy = projectileToCopy.getDeadlyToEnenmy();
+        this.isDeadlyToEnemy = projectileToCopy.getDeadlyToEnemy();
         this.isShot = projectileToCopy.getIsShot();
         this.direction = projectileToCopy.getDirection();
     }
@@ -46,7 +46,7 @@ public class Projectile extends Obstacle{
     This method gets the isDeadlyToEnemy instance variable
     @return boolean
     */
-    public boolean getDeadlyToEnenmy(){
+    public boolean getDeadlyToEnemy(){
         return this.isDeadlyToEnemy;
     }
     
@@ -95,49 +95,32 @@ public class Projectile extends Obstacle{
     @param direction : this is the direction that we wish to shoot the projectile
     */
     
-    
-    
-    /**
-	Move the object in a defined direction
-	@param direction is the direction to move the projectile in (up, down, left, right, otherwise the object won't move)
-	*/
-	public void move(String direction)
+	public void move()
 	{
-		direction = direction.toLowerCase();
-		System.out.println(direction);
+		this.direction = this.direction.toUpperCase();
+
 		int xCoord = (int)(this.getLocation().getX());
 		int yCoord = (int)(this.getLocation().getY());
-		if(direction.equals("up")){
+		
+        if(this.direction.equals("UP")){
 			if (this.getLocation().getY() > 0){
                 //if the obstacle is within the edge, then move up
-				super.setLocation(xCoord, yCoord - 1);	
-			}else if(this.getLocation().getY() == 0 ){
-                //If the obstacle is at the edge, have the obstacle bounce away from it
-                super.setLocation(xCoord, yCoord + 1);
-            }
-		} else if(direction.equals("down")){
+				super.setLocation(xCoord, yCoord - 1);	 
+			}
+		} else if(this.direction.equals("DOWN")){
 			if (this.getLocation().getY() < mapHeight){
                 //if the obstcle is within the edge, then move down
 				super.setLocation(xCoord, yCoord + 1);
-			}else if(this.getLocation().getY() == mapHeight){
-                //if the obstacle is at the edge, then move up
-                super.setLocation(xCoord, yCoord - 1);
             }
-		} else if(direction.equals("left")){
+		} else if(this.direction.equals("LEFT")){
 			if (this.getLocation().getX() > 0){
                 //if the obstacle is within the edge, then move left
 				super.setLocation(xCoord - 1, yCoord);
-			}else if(this.getLocation().getX() == 0){
-                //if the obstacle is at the edge, then move right
-                super.setLocation(xCoord + 1, yCoord);
             }
-		}else if(direction.equals("right")){
+		}else if(this.direction.equals("RIGHT")){
 			if (this.getLocation().getX() < mapWidth){
 				//if the obsatcle is within the egde, then move right
                 super.setLocation(xCoord + 1, yCoord);
-			}else if(this.getLocation().getX() == mapWidth){
-                //if the obstacle is at the edge, then move left
-                super.setLocation(xCoord - 1, yCoord);
             }
 		}
 	}
@@ -199,13 +182,13 @@ public class Projectile extends Obstacle{
         
         e.setHealth(3);
         System.out.println(e);
-        if (p.overlapsWithObstacle(e) && p.getDeadlyToEnenmy()){
+        if (p.overlapsWithObstacle(e) && p.getDeadlyToEnemy()){
             //Enemy take damage
             e.takeDamage(1);
         }
         System.out.println(e);
         
-        p.move("down");
+        p.move();
         System.out.println(p);
         
         ArrayList<Obstacle> obstacleArray = new ArrayList<Obstacle>();

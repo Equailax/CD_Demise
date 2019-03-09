@@ -46,16 +46,6 @@ public class Obstacle
         this.location.setLocation(x,y);
 	}
 	
-    /*
-	public Obstacle(String name, boolean isDeadly, Rectangle location)
-	{
-		this.name = name;
-		//this.isDeadly = isDeadly;
-		this.location = new Rectangle(location);
-		this.health = 3;
-	}
-	*/
-	
 	/**
 	Get the the object's current location
 	
@@ -75,18 +65,6 @@ public class Obstacle
 	{
 		return name;
 	}
-	
-	/**
-	Get whether the object is deadly to the user or not
-	
-	@return isDeadly
-	*/
-    /*
-	public boolean getIsDeadly()
-	{
-		return isDeadly;
-	}
-    */
 
 	/**
     This method checks wether or not the obsatcle overalps with an avatar
@@ -134,16 +112,6 @@ public class Obstacle
         */
 	}
 	
-	/**
-	If the enemy got hit, reduce the health by 1
-	*/
-    /*
-	public void enemyHit()
-	{
-		this.health -= 1;
-	}
-    */
-	
     //Setter methods
     /**
     This method sets the location of the object
@@ -167,115 +135,7 @@ public class Obstacle
     public void setName(String aName){
         this.name = aName;
     }
-    
-	/**
-	Move the object in a defined direction
-	
-	@param direction is the direction to move the object in (up, down, left, right, otherwise the object won't move)
-	*/
-    
-	//public void move(String direction){}
-	
-    /*{
-		direction = direction.toLowerCase();
-		System.out.println(direction);
-		int xCoord = (int)(location.getX());
-		int yCoord = (int)(location.getY());
-		if(direction.equals("up")){
-			if (location.getY() > 0){
-                //if the obstacle is within the edge, then move up
-				this.location.setLocation(xCoord, yCoord - 1);	
-			}else if(location.getY() == 0 ){
-                //If the obstacle is at the edge, have the obstacle bounce away from it
-                this.location.setLocation(xCoord, yCoord + 1);
-            }
-		} else if(direction.equals("down")){
-			if (location.getY() < 10){
-                //if the obstcle is within the edge, then move down
-				this.location.setLocation(xCoord, yCoord + 1);
-			}else if(location.getY() == 10){
-                //if the obstacle is at the edge, then move up
-                this.location.setLocation(xCoord, yCoord - 1);
-            }
-		} else if(direction.equals("left")){
-			if (location.getX() > 0){
-                //if the obstacle is within the edge, then move left
-				this.location.setLocation(xCoord - 1, yCoord);
-			}else if(location.getX() == 0){
-                //if the obstacle is at the edge, then move right
-                this.location.setLocation(xCoord + 1, yCoord);
-            }
-		}else if(direction.equals("right")){
-			if (location.getX() < 10){
-				//if the obsatcle is within the egde, then move right
-                this.location.setLocation(xCoord + 1, yCoord);
-			}else if(location.getX() == 10){
-                //if the obstacle is at the edge, then move left
-                this.location.setLocation(xCoord - 1, yCoord);
-            }
-		}
-	}
-	*/
-    
-	/**
-	Randomly decide if the object should stay in place or move in a random cardinal direction
-	*/
-    /*
-	public void randomMove()
-	{
-		int dirNum = (int)(Math.random() * 4 + 1);
-		String direction = "";
-		if (dirNum == 1){
-			direction = "up";
-		} else if (dirNum == 2){
-			direction = "down";
-		} else if (dirNum == 3){
-			direction = "left";
-		} else if (dirNum == 4){
-			direction = "right";
-		}
-		
-		//System.out.println(direction);
-		
-		int xCoord = (int)(location.getX());
-		int yCoord = (int)(location.getY());
-		
-		if(direction.equals("up")){
-			if (location.getY() > 0){
-                //if the obstacle is within the edge, then move up
-				this.location.setLocation(xCoord, yCoord - 1);	
-			}else if(location.getY() == 0 ){
-                //If the obstacle is at the edge, have the obstacle bounce away from it
-                this.location.setLocation(xCoord, yCoord + 1);
-            }
-		} else if(direction.equals("down")){
-			if (location.getY() < 10){
-                //if the obstcle is within the edge, then move down
-				this.location.setLocation(xCoord, yCoord + 1);
-			}else if(location.getY() == 10){
-                //if the obstacle is at the edge, then move up
-                this.location.setLocation(xCoord, yCoord - 1);
-            }
-		} else if(direction.equals("left")){
-			if (location.getX() > 0){
-                //if the obstacle is within the edge, then move left
-				this.location.setLocation(xCoord - 1, yCoord);
-			}else if(location.getX() == 0){
-                //if the obstacle is at the edge, then move right
-                this.location.setLocation(xCoord + 1, yCoord);
-            }
-		}else if(direction.equals("right")){
-			if (location.getX() < 10){
-				//if the obsatcle is within the egde, then move right
-                this.location.setLocation(xCoord + 1, yCoord);
-			}else if(location.getX() == 10){
-                //if the obstacle is at the edge, then move left
-                this.location.setLocation(xCoord - 1, yCoord);
-            }
-		}
-	}
-    
-    */
+
     /**
     This is the to string method
     */

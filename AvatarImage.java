@@ -44,10 +44,10 @@ public class AvatarImage
 		
 		public void moveAvatar(int moveX, int moveY)
 		{
-					this.moveX = moveX;
-					this.moveY = moveY;
-			        avatar.setLayoutX(avatar.getLayoutX() + moveX);
-                    avatar.setLayoutY(avatar.getLayoutY() + moveY);
+            this.moveX = moveX;
+            this.moveY = moveY;
+            avatar.setLayoutX(avatar.getLayoutX() + moveX);
+            avatar.setLayoutY(avatar.getLayoutY() + moveY);
 		}
 		
 		public AvatarImage()
