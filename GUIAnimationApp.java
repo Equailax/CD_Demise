@@ -6,10 +6,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.RectangleBuilder;
+//import javafx.scene.shape.RectangleBuilder;
 import javafx.scene.input.KeyEvent;
 import javafx.animation.AnimationTimer;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * GUI to display the main map, with spawns and animations of the avatar, enemies, obstacles, and collectibles, and projectiles.
@@ -71,30 +72,27 @@ public class GUIAnimationApp extends Application {
         
         for (int i = 0; i < demo2.getObstacleArray().size(); i++){
             Obstacle o = demo2.getObstacleArray().get(i);
-            int enemies = 0;
+            int randomEnemy = new Random().nextInt(4);
             if (o instanceof Enemy){
-                if (enemies == 0){
+                if (randomEnemy == 0){
                     EnemyImage temp = new EnemyImage("DOTIFY", (int) o.getLocation().getX(), (int) o.getLocation().getY());
                     root.getChildren().add(temp.getLocation());
-                    enemies++;
                 }
-                if (enemies == 1) {
+                if (randomEnemy == 1) {
                     EnemyImage temp = new EnemyImage("BEATSBYDRO", (int) o.getLocation().getX(),(int) o.getLocation().getY());
                     root.getChildren().add(temp.getLocation());
-                    enemies++;
                 }
-                if (enemies == 2) {
+                if (randomEnemy == 2) {
                     EnemyImage temp = new EnemyImage("PEARMUSIC", (int) o.getLocation().getX(),(int) o.getLocation().getY());
                     root.getChildren().add(temp.getLocation());
-                    enemies++;
                 }
-                if (enemies == 3) {
+                if (randomEnemy == 3) {
                     EnemyImage temp = new EnemyImage("MYPHONE", (int) o.getLocation().getX(),(int) o.getLocation().getY());
                     root.getChildren().add(temp.getLocation());}
             }   
             if (o instanceof Obstacle){
                 Image puddle = new Image("Puddle.png");
-                Rectangle puddleSpace = new Rectangle(o.getLocation().getX(), o.getLocation().getY(), 60 , 60);
+                Rectangle puddleSpace = new Rectangle(o.getLocation().getX(), o.getLocation().getY(), 60 , 0);
                 puddleSpace.setFill(new ImagePattern(puddle));
                 root.getChildren().add(puddleSpace);
             }
