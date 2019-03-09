@@ -7,10 +7,10 @@ public class Avatar{
     private String name;
     private int health;
     private int lives;
-    private int xposition = 72;
-    private int yposition = 72;
-    private final int width = 100;
-    private final int height = 100;
+    private int xposition = 100;
+    private int yposition = 100;
+    private final int width = 54;
+    private final int height = 67;
     private int damage;
     private Rectangle location = new Rectangle(xposition, yposition, width, height);
     private Projectile note = new Projectile("Avatar's Note", false, true, "NONE");
