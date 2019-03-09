@@ -51,6 +51,12 @@ public class EnemyImage
 			this.location = new Rectangle(xcoord, ycoord, 40, 67);
 			this.location.setFill(new ImagePattern(enemy));
 		}
+		if(this.type.equals("MYPHONE"))
+		{
+			enemy = new Image("MyPhone.png");
+			this.location = new Rectangle(xcoord, ycoord, 40, 67);
+			this.location.setFill(new ImagePattern(enemy));
+		}
 	}
 
 	public void setImageForward()
@@ -70,6 +76,11 @@ public class EnemyImage
 			enemy = new Image("PearMusic.png");
 			this.location.setFill(new ImagePattern(enemy));
 		}
+		if(this.type.equals("MYPHONE"))
+		{
+			enemy = new Image("MyPhone.png");
+			this.location.setFill(new ImagePattern(enemy));
+		}
 	}
 	
 	public void setImageBackward()
@@ -87,6 +98,11 @@ public class EnemyImage
 		if(this.type.equals("PEARMUSIC"))
 		{
 			enemy = new Image("PearMusic Backward.png");
+			this.location.setFill(new ImagePattern(enemy));
+		}
+		if(this.type.equals("MYPHONE"))
+		{
+			enemy = new Image("MyPhone Backward.png");
 			this.location.setFill(new ImagePattern(enemy));
 		}
 	}
@@ -115,6 +131,12 @@ public class EnemyImage
 		if(this.type.equals("PEARMUSIC"))
 		{
 			enemy = new Image("PearMusic.png");
+			this.location = new Rectangle(xcoord, ycoord, 40, 67);
+			this.location.setFill(new ImagePattern(enemy));
+		}
+		if(this.type.equals("MYPHONE"))
+		{
+			enemy = new Image("MyPhone.png");
 			this.location = new Rectangle(xcoord, ycoord, 40, 67);
 			this.location.setFill(new ImagePattern(enemy));
 		}
