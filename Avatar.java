@@ -15,8 +15,8 @@ public class Avatar{
     private Rectangle location = new Rectangle(xposition, yposition, width, height);
     private Projectile note = new Projectile("Avatar's Note", false, true, "NONE");
     
-    private final int mapHeight = 1000;
-    private final int mapWidth = 1000;
+    private final int mapHeight = 700;
+    private final int mapWidth = 800;
 
     // getter methods 
     /**
@@ -210,7 +210,7 @@ public class Avatar{
     @param directionToShoot : this is the direction that we want to shoot the projecitle
     */
     public void shootProjectile(String directionToShoot){
-        this.setProjectile(new Projectile(this.getProjectile().getName(), this.getProjectile().getDeadlyToAvatar(), this.getProjectile().getDeadlyToEnemy(), directionToShoot));
+        this.setProjectile(new Projectile(this.getProjectile().getName(), this.getProjectile().getDeadlyToAvatar(), this.getProjectile().getDeadlyToEnemy(), directionToShoot.toUpperCase()));
     }
     
     /**

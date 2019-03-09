@@ -13,8 +13,8 @@ public class AnimationApp{
     private ArrayList<Obstacle> obstacleArray = new ArrayList<Obstacle>();
     
     //Map dimensions
-    private final int mapHeight = 650;
-    private final int mapWidth = 780;
+    private final int mapHeight = 700;
+    private final int mapWidth = 800;
     
     //Constructors
     /**
@@ -122,10 +122,10 @@ public class AnimationApp{
         for (int i = 0; i < numberOfObstaclesToAdd; i++){
             
             //Generate a random number between 0 and 10 for the x coordinate
-            int randomXCoordinate = (int)(Math.random() * mapWidth + 110);
+            int randomXCoordinate = (int)(Math.random() * mapWidth + 0);
             
             //Generate a random number between 0 and 10 for the Y coordinate
-            int randomYCoordinate = (int)(Math.random() * mapHeight + 110);
+            int randomYCoordinate = (int)(Math.random() * mapHeight + 0);
             
             tempObstaclesArrayList.add(new Obstacle("Obstacle" + i, randomXCoordinate, randomYCoordinate));  ///When constructing an obstacle, it should take a random positon as an argument
         }
@@ -134,10 +134,10 @@ public class AnimationApp{
         for (int i = 0; i < numberOfEnemiesToAdd; i++){
             
             //Generate a random number between 0 and 10 for the x coordinate
-            int randomXCoordinate = (int)(Math.random() * mapWidth + 110);
+            int randomXCoordinate = (int)(Math.random() * mapWidth + 0);
             
             //Generate a random number between 0 and 10 for the Y coordinate
-            int randomYCoordinate = (int)(Math.random() * mapHeight + 110);
+            int randomYCoordinate = (int)(Math.random() * mapHeight + 0);
             
             tempObstaclesArrayList.add(new Enemy("Enemy" + i, 1, randomXCoordinate, randomYCoordinate));  //Sets the enemy health to 3
         }

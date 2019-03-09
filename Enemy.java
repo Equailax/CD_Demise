@@ -11,8 +11,8 @@ public class Enemy extends Obstacle
 	private int health = 0;
     private Projectile note = new Projectile("Enemy's Note", true, false, "NONE");
     
-    private final int mapHeight = 1000;
-    private final int mapWidth = 1000;
+    private final int mapHeight = 700;
+    private final int mapWidth = 800;
 	
 	
 	/**

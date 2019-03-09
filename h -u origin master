@@ -1,0 +1,112 @@
+[1mdiff --git a/Avatar.java b/Avatar.java[m
+[1mindex feabc29..e8bef98 100644[m
+[1m--- a/Avatar.java[m
+[1m+++ b/Avatar.java[m
+[36m@@ -1,4 +1,6 @@[m
+[31m-import java.util.Sacanner;[m
+[32m+[m[32mimport java.util.Scanner;[m
+[32m+[m[32mimport java.awt.Rectangle;[m
+[32m+[m
+     // i have not consider the privacy leaks in this file [m
+     // variables [m
+     public class Avatar{[m
+[36m@@ -37,6 +39,10 @@[m [mimport java.util.Sacanner;[m
+         return damage;[m
+     }[m
+ [m
+[32m+[m[32m    public Rectangle getLocation(){[m
+[32m+[m[32m        return location;[m
+[32m+[m[32m    }[m
+[32m+[m[41m    [m
+     // setter [m
+     public void setName(String Name){[m
+         this.name = Name;[m
+[36m@@ -83,16 +89,24 @@[m [mimport java.util.Sacanner;[m
+     public void moveLeft(int movementLeft){[m
+         this.xposition -= movementLeft;[m
+     }[m
+[32m+[m
+[32m+[m[32m    public void takeDamage(int damage){[m
+[32m+[m[32m        this.health -= damage;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public void gainHealth(int boost){[m
+[32m+[m[32m        this.health += boost;[m
+[32m+[m[32m    }[m
+     [m
+     //Movment for a string inputs[m
+     public void move(String direction){[m
+[31m-        if (direction.toLowerCase("up")){[m
+[32m+[m[32m        if (direction.toLowerCase().equals("up")){[m
+             this.yposition += 1;                    //***** check if its within bounds[m
+[31m-        }else if (direction.toLowerCase("down")){[m
+[32m+[m[32m        }else if (direction.toLowerCase().equals("down")){[m
+             this.yposition -= 1;[m
+[31m-        }else if (direction.toLowerCase("left")){[m
+[32m+[m[32m        }else if (direction.toLowerCase().equals("left")){[m
+             this.xposition -= 1;[m
+[31m-        }else if (direction.toLowerCase("right")){[m
+[32m+[m[32m        }else if (direction.toLowerCase().equals("right")){[m
+             this.xposition -= 1;[m
+         }[m
+     }[m
+[36m@@ -112,46 +126,28 @@[m [mimport java.util.Sacanner;[m
+         }[m
+     }[m
+ [m
+[31m-    // there is no method fro damage in this file [m
+[32m+[m[32m    // there is no method for damage in this file[m[41m [m
+ [m
+     // constructors [m
+     // default [m
+     public Avatar(){[m
+ [m
+     }[m
+[31m-    public Avatar(String myName, int myLife, int myhealth, int myDamage, int xaxis, int yaxis){[m
+[32m+[m[32m    public Avatar(String myName, int myLife, int myhealth, int myDamage, Rectangle location){[m
+         this.name = myName;[m
+         this.lives = myLife;[m
+         this.health = myhealth;[m
+[32m+[m[32m        this.location = location;[m
+         this.damage = myDamage;[m
+[31m-        this.xposition = xaxis;[m
+[31m-        this.yposition = yaxis;[m
+[31m-    }[m
+[31m-    public Avatar(int xaxis, int yaxis){[m
+[31m-        this.xposition = xaxis;[m
+[31m-        this.yposition = yaxis;[m
+[31m-    }[m
+[31m-    public Avatar(int xaxis){[m
+[31m-        this.xposition = xaxis;[m
+[31m-    }[m
+[31m-    public Avatar(int yaxis){[m
+[31m-        this.yposition = yaxis;[m
+[31m-    }[m
+[31m-[m
+[31m-    public Avatar(int myDamage,int myLife, int myhealth){[m
+[31m-        this.damage = myDamage;[m
+[31m-        this.lives = myLife;[m
+[31m-        this.health = myhealth;[m
+[31m-    }[m
+[31m-[m
+[31m-    public Avatar(int myLife, int myhealth){[m
+[31m-        this.lives = myLife;[m
+[31m-        this.health = myhealth;[m
+[31m-[m
+[31m-    }[m
+[31m-[m
+[31m-    public Avatar(int myhealth){[m
+[31m-        this.health = myhealth;[m
+[32m+[m[41m        [m
+[32m+[m[32m    }[m
+[32m+[m[32m    public Avatar(Avatar a){[m
+[32m+[m[32m        this.name = a.name;[m
+[32m+[m[32m        this.lives = a.lives;[m
+[32m+[m[32m        this.health = a.health;[m
+[32m+[m[32m        this.damage = a.damage;[m
+[32m+[m[32m        this.location = a.location;[m
+[32m+[m[41m        [m
+     }[m
+          [m
+ }[m
+\ No newline at end of file[m
