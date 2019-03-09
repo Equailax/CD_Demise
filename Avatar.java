@@ -15,8 +15,8 @@ public class Avatar{
     private Rectangle location = new Rectangle(xposition, yposition, width, height);
     private Projectile note = new Projectile("Avatar's Note", false, true, "NONE");
     
-    private final int mapHeight = 1000;
-    private final int mapWidth = 1000;
+    private final int mapHeight = 650;
+    private final int mapWidth = 780;
 
     // getter methods 
     /**
