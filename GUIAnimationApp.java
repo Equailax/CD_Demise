@@ -6,6 +6,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.RectangleBuilder;
 import javafx.scene.input.KeyEvent;
 import javafx.animation.AnimationTimer;
 import java.util.ArrayList;
@@ -31,45 +32,82 @@ public class GUIAnimationApp extends Application {
     AvatarImage mini = new AvatarImage();
     ArrayList<LifeHeart> lifeHearts = new ArrayList<LifeHeart>();
 
-    //Instance variables for avatar
-    String myName = "Minidisc";
-    int myLife = 5;
-    int myhealth = 5;
-    int myDamage = 1;
+    // Creation of ArrayList for enemies
+    ArrayList<EnemyImage> enemyImages = new ArrayList<EnemyImage>();
+    ArrayList<Obstacle> obstacleList = new ArrayList<Obstacle>();
+    
 
-    // Creation of the avatar, obstacles, and collectibles
-   
-    java.awt.Rectangle avatarLocation = new java.awt.Rectangle(100, 100, 54, 67);
-    Avatar minidisc = new Avatar(myName, myLife, myhealth, myDamage, avatarLocation);
-    private ArrayList<Collectible> collectiblesArray = new ArrayList<Collectible>();
-    private ArrayList<Obstacle> obstacleArray = new ArrayList<Obstacle>();
-    AnimationApp demo2 = new AnimationApp(minidisc, collectiblesArray, obstacleArray);
+
+
 
     public static void main(String[] args) {
+        
         launch(args); // launches GUI application
+
     }
 
     public void start(Stage primaryStage) throws Exception {
+        // Initialize the Animation App with 3 collectibles, 3 obstacles, and 3 enemies
+        AnimationApp demo2 = new AnimationApp();
+        demo2.initialize();
+
        // Display Setup for the GUI
         Image map = new Image("Map 1000pixels.jpg");
         Pane root = new Pane();
         final Scene scene = new Scene(root, 1000, 1000, new ImagePattern(map));
 	    
         // Display positions of life hearts for health
-        for(int i = 0; i <= myhealth; i++){
+        for(int i = 0; i <= demo2.getAvatar().getHealth(); i++){
             LifeHeart temp = new LifeHeart(25, 20+(30*i));
             lifeHearts.add(temp);
         }
             
         // Display of life hearts on GUI
-        for(int i = 0; i < myhealth; i++){
+        for(int i = 0; i < demo2.getAvatar().getHealth(); i++){
             root.getChildren().add(lifeHearts.get(i).getLocation());
         }
+
+        // Display Obstacles
+        
+        for (int i = 0; i < demo2.getObstacleArray().size(); i++){
+            Obstacle o = demo2.getObstacleArray().get(i);
+            int enemies = 0;
+            if (o instanceof Enemy){
+                if (enemies == 0){
+                    EnemyImage temp = new EnemyImage("DOTIFY", (int) o.getLocation().getX(), (int) o.getLocation().getY());
+                    root.getChildren().add(temp.getLocation());
+                    enemies++;
+                }
+                if (enemies == 1) {
+                    EnemyImage temp = new EnemyImage("BEATSBYDRO", (int) o.getLocation().getX(),(int) o.getLocation().getY());
+                    root.getChildren().add(temp.getLocation());
+                    enemies++;
+                }
+                if (enemies == 2) {
+                    EnemyImage temp = new EnemyImage("PEARMUSIC", (int) o.getLocation().getX(),(int) o.getLocation().getY());
+                    root.getChildren().add(temp.getLocation());
+                    enemies++;
+                }
+                if (enemies == 3) {
+                    EnemyImage temp = new EnemyImage("MYPHONE", (int) o.getLocation().getX(),(int) o.getLocation().getY());
+                    root.getChildren().add(temp.getLocation());}
+            }   
+            if (o instanceof Obstacle){
+                Image puddle = new Image("Puddle.png");
+                Rectangle puddleSpace = new Rectangle(o.getLocation().getX(), o.getLocation().getY(), 60 , 60);
+                puddleSpace.setFill(new ImagePattern(puddle));
+                root.getChildren().add(puddleSpace);
+            }
+        }
+
+       
         
         root.getChildren().add(mini.getAvatarImage());
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
+
+        
         
         //Animation of movements
         AnimationTimer moveTime = new AnimationTimer() {
