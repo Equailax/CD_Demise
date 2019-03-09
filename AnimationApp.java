@@ -629,7 +629,8 @@ public class AnimationApp{
                 
                 ArrayList<Obstacle> arrayListToAdd = new ArrayList<Obstacle>();
                 arrayListToAdd = mainApp.getObstacleArray();
-                mainApp.setObstacleArray(arrayListToAdd.add(projectileToAdd));
+                arrayListToAdd.add(projectileToAdd);
+                mainApp.setObstacleArray(arrayListToAdd);
                 
             }
             
