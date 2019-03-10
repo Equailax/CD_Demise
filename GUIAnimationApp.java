@@ -64,8 +64,8 @@ public class GUIAnimationApp extends Application {
 	    
         // Display positions of life hearts for health
         for(int i = 0; i <= demo2.getAvatar().getHealth(); i++){
-            LifeHeart temp = new LifeHeart(25, 20+(30*i));
-            lifeHearts.add(temp);
+            LifeHeart tempHealth = new LifeHeart(25, 20+(30*i));
+            lifeHearts.add(tempHealth);
         }
             
         // Display of life hearts on GUI
@@ -100,6 +100,16 @@ public class GUIAnimationApp extends Application {
                     puddleSpace.setFill(new ImagePattern(puddle));
                     root.getChildren().add(puddleSpace);
                 }
+            }
+        }
+
+        // Display Collectibles
+        Image record = new Image("Record.png");
+        for(Collectible o : demo2.getCollectiblesArray()){
+            if (o instanceof Collectible){
+                Rectangle recordSpace = new Rectangle(o.getLocation().getX(), o.getLocation().getY(), 60 , 60);
+                recordSpace.setFill(new ImagePattern(record));
+                root.getChildren().add(recordSpace);
             }
         }
         
@@ -154,7 +164,7 @@ public class GUIAnimationApp extends Application {
         
 
         //Animation of movements
-        AnimationTimer moveTime = new AnimationTimer() {
+        AnimationTimer moveTime = new AnimationTimer(){
             @Override
             public void handle(long now) {
                 int moveX = 0;
@@ -237,10 +247,15 @@ public class GUIAnimationApp extends Application {
                         int newY = doubleNewY.intValue();
                         avatarLocation.setLocation(newX, newY);
                         */
+
+                        
                     }
                 }
-            }
-        };
+            }};
+    
+
+        
+
         // Movement Key Events
         scene.setOnKeyPressed(keyEvent -> {
                 // Starts moving right when key is pressed
@@ -333,4 +348,5 @@ public class GUIAnimationApp extends Application {
         
         demo2.printCurrentState();
     }
-}
+};
+
