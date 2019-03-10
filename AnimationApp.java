@@ -13,8 +13,8 @@ public class AnimationApp{
     private ArrayList<Obstacle> obstacleArray = new ArrayList<Obstacle>();
     
     //Map dimensions
-    private final int mapHeight = 1000;
-    private final int mapWidth = 1000;
+    private final int mapHeight = 650;
+    private final int mapWidth = 780;
     
     //Constructors
     /**
@@ -122,10 +122,10 @@ public class AnimationApp{
         for (int i = 0; i < numberOfObstaclesToAdd; i++){
             
             //Generate a random number between 0 and 10 for the x coordinate
-            int randomXCoordinate = (int)(Math.random() * mapWidth + 0);
+            int randomXCoordinate = (int)(Math.random() * mapWidth + 110);
             
             //Generate a random number between 0 and 10 for the Y coordinate
-            int randomYCoordinate = (int)(Math.random() * mapHeight + 0);
+            int randomYCoordinate = (int)(Math.random() * mapHeight + 110);
             
             tempObstaclesArrayList.add(new Obstacle("Obstacle" + i, randomXCoordinate, randomYCoordinate));  ///When constructing an obstacle, it should take a random positon as an argument
         }
@@ -134,10 +134,10 @@ public class AnimationApp{
         for (int i = 0; i < numberOfEnemiesToAdd; i++){
             
             //Generate a random number between 0 and 10 for the x coordinate
-            int randomXCoordinate = (int)(Math.random() * mapWidth + 0);
+            int randomXCoordinate = (int)(Math.random() * mapWidth + 110);
             
             //Generate a random number between 0 and 10 for the Y coordinate
-            int randomYCoordinate = (int)(Math.random() * mapHeight + 0);
+            int randomYCoordinate = (int)(Math.random() * mapHeight + 110);
             
             tempObstaclesArrayList.add(new Enemy("Enemy" + i, 1, randomXCoordinate, randomYCoordinate));  //Sets the enemy health to 3
         }
@@ -614,7 +614,26 @@ public class AnimationApp{
             //Check if avatar shot
             
             //Process if the avatar can move 
-            mainApp.processAvatarMove(input);
+            if (input.toLowerCase().equals("up") || input.toLowerCase().equals("down") || input.toLowerCase().equals("left") || input.toLowerCase().equals("right")){
+                mainApp.processAvatarMove(input);
+            } else if (input.toLowerCase().equals("shoot")) {
+                
+                //have the avatar shoot the proejctile "in a direction"
+                Avatar avatarHasShot = new Avatar(mainApp.getAvatar());
+                avatarHasShot.shootProjectile(input);
+                mainApp.setAvatar(avatarHasShot);
+                
+                // add the projectile to the obstacle array
+                
+                Projectile projectileToAdd = new Projectile(mainApp.getAvatar().getProjectile());
+                
+                ArrayList<Obstacle> arrayListToAdd = new ArrayList<Obstacle>();
+                arrayListToAdd = mainApp.getObstacleArray();
+                arrayListToAdd.add(projectileToAdd);
+                mainApp.setObstacleArray(arrayListToAdd);
+                
+            }
+            
             
             //Move obstacles accordingly (make sure to not overlap with avatar)
             mainApp.processObstacleMove();
