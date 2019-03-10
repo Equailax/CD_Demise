@@ -7,13 +7,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.RectangleBuilder;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.animation.AnimationTimer;
 import java.util.ArrayList;
 import java.lang.Math;
-
+import java.util.Random;
 /**
  * GUI to display the main map, with spawns and animations of the avatar, enemies, obstacles, and collectibles, and projectiles.
  *The avatar moves using keys on the keyboard for up,down,right, and left movements, and a combination of these.
@@ -31,7 +30,7 @@ public class GUIAnimationApp extends Application {
     String Up = "don't move";
     String Down = "don't move";
 	
-    //Creation of the life hearts and the image of the avatar for the GUI
+    // Creation of the life hearts and the image of the avatar for the GUI
     AvatarImage mini = new AvatarImage();
     ArrayList<LifeHeart> lifeHearts = new ArrayList<LifeHeart>();
 
@@ -39,7 +38,7 @@ public class GUIAnimationApp extends Application {
     ArrayList<EnemyImage> enemyImages = new ArrayList<EnemyImage>();
     ArrayList<Obstacle> obstacleList = new ArrayList<Obstacle>();
     
-
+    // Creation of collectibles
 
 
 
@@ -72,40 +71,40 @@ public class GUIAnimationApp extends Application {
 
         // Display Obstacles
         
-        for (int i = 0; i < demo2.getObstacleArray().size(); i++){
+         for (int i = 0; i < demo2.getObstacleArray().size(); i++){
             Obstacle o = demo2.getObstacleArray().get(i);
-            int enemies = 0;
+            int randomEnemy = new Random().nextInt(4);
             if (o instanceof Enemy){
-                if (enemies == 0){
+                if (randomEnemy == 0){
                     EnemyImage temp = new EnemyImage("DOTIFY", (int) o.getLocation().getX(), (int) o.getLocation().getY());
                     root.getChildren().add(temp.getLocation());
-                    enemies++;
                 }
-                if (enemies == 1) {
+                if (randomEnemy == 1) {
                     EnemyImage temp = new EnemyImage("BEATSBYDRO", (int) o.getLocation().getX(),(int) o.getLocation().getY());
                     root.getChildren().add(temp.getLocation());
-                    enemies++;
                 }
-                if (enemies == 2) {
+                if (randomEnemy == 2) {
                     EnemyImage temp = new EnemyImage("PEARMUSIC", (int) o.getLocation().getX(),(int) o.getLocation().getY());
                     root.getChildren().add(temp.getLocation());
-                    enemies++;
                 }
-                if (enemies == 3) {
+                if (randomEnemy == 3) {
                     EnemyImage temp = new EnemyImage("MYPHONE", (int) o.getLocation().getX(),(int) o.getLocation().getY());
                     root.getChildren().add(temp.getLocation());}
-            }   
-            if (o instanceof Obstacle){
-                Image puddle = new Image("Puddle.png");
+            }  }
+        
+        for (int i = 0; i < demo2.getObstacleArray().size(); i++){
+            Obstacle o = demo2.getObstacleArray().get(i);
+            Image puddle = new Image("Puddle.png");
+            if (!(o instanceof Enemy || o instanceof Projectile)){
                 Rectangle puddleSpace = new Rectangle(o.getLocation().getX(), o.getLocation().getY(), 60 , 60);
                 puddleSpace.setFill(new ImagePattern(puddle));
-                root.getChildren().add(puddleSpace);
-            }
-        }
+                root.getChildren().add(puddleSpace);}}
+
+
 
        // Rectangle / hitbox
 		Rectangle mouseHitbox = new Rectangle(0, 0, 1250, 1250);           // IMPORTANT: Make the rectangle fill the whole window
-		mouseHitbox.setFill(Color.rgb(255,0,0,0.5));
+		mouseHitbox.setFill(Color.rgb(0,0,0,0));
         
         root.getChildren().add(mini.getAvatarImage());
 		root.getChildren().add(mouseHitbox);                               // IMPORTANT: mouseHitbox must be added to root last
@@ -239,14 +238,13 @@ public class GUIAnimationApp extends Application {
 		
 		mouseHitbox.setOnMouseClicked(mouseEvent ->
 		{
-			//+(demo2.getAvatar().getLocation().getWidth()/2)
-			//+(demo2.getAvatar().getLocation().getHeight()/2)
+
 			
-			double avatarXCenter = demo2.getAvatar().getLocation().getX();
-			double avatarYCenter = demo2.getAvatar().getLocation().getY();
+			double avatarXCenter = (demo2.getAvatar().getLocation().getX()+27)+100;
+			double avatarYCenter = (demo2.getAvatar().getLocation().getY()+33.5)+100;
 			System.out.println(demo2.getAvatar().getLocation());
 			
-			double angle = Math.toDegrees(Math.atan2(mouseEvent.getX()-(demo2.getAvatar().getLocation().getX()+27-100), mouseEvent.getY()-(demo2.getAvatar().getLocation().getY()+33.5-100)))+180;
+			double angle = Math.toDegrees(Math.atan2(mouseEvent.getX()-(avatarXCenter), mouseEvent.getY()-(avatarYCenter)))+180;
 			System.out.println("Click (" + mouseEvent.getX() + ", " + mouseEvent.getY() + ")"); // CAN BE DELETED
 			System.out.println(angle);// CAN BE DELETED
 			
