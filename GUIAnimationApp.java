@@ -105,7 +105,7 @@ public class GUIAnimationApp extends Application {
 
        // Rectangle / hitbox
 		Rectangle mouseHitbox = new Rectangle(0, 0, 1250, 1250);           // IMPORTANT: Make the rectangle fill the whole window
-		mouseHitbox.setFill(Color.rgb(255,0,0,0.5));
+		mouseHitbox.setFill(Color.rgb(0,0,0,0));
         
         root.getChildren().add(mini.getAvatarImage());
 		root.getChildren().add(mouseHitbox);                               // IMPORTANT: mouseHitbox must be added to root last
