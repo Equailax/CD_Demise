@@ -194,11 +194,11 @@ public class Avatar{
                 System.out.println("Cant go there, im at the edge");
             }
 		}else if(direction.equals("right")){
-			if (this.location.getX() < (mapWidth - 240)){
+			if (this.location.getX() < (mapWidth - 138)){
 				//if the avatar is within the egde, then move right
                 //this.location.setLocation(xCoord + 1, yCoord);
                 this.moveX(3);
-			}else if(this.location.getX() == (mapWidth - 240)){
+			}else if(this.location.getX() == (mapWidth - 138)){
                 System.out.println("Cant go there, im at the edge");
             }
 		}

@@ -112,43 +112,6 @@ public class GUIAnimationApp extends Application {
                 root.getChildren().add(recordSpace);
             }
         }
-        
-        //for (Obstacle o : demo2.getObstacleArray());
-        
-        /*
-         for (int i = 0; i < demo2.getObstacleArray().size(); i++){
-            Obstacle o = demo2.getObstacleArray().get(i);
-            int randomEnemy = new Random().nextInt(4);
-            if (o instanceof Enemy){
-                if (randomEnemy == 0){
-                    EnemyImage temp = new EnemyImage("DOTIFY", (int) o.getLocation().getX(), (int) o.getLocation().getY());
-                    root.getChildren().add(temp.getLocation());
-                }
-                if (randomEnemy == 1) {
-                    EnemyImage temp = new EnemyImage("BEATSBYDRO", (int) o.getLocation().getX(),(int) o.getLocation().getY());
-                    root.getChildren().add(temp.getLocation());
-                }
-                if (randomEnemy == 2) {
-                    EnemyImage temp = new EnemyImage("PEARMUSIC", (int) o.getLocation().getX(),(int) o.getLocation().getY());
-                    root.getChildren().add(temp.getLocation());
-                }
-                if (randomEnemy == 3) {
-                    EnemyImage temp = new EnemyImage("MYPHONE", (int) o.getLocation().getX(),(int) o.getLocation().getY());
-                    root.getChildren().add(temp.getLocation());}
-            }  
-        }
-        */
-        /*
-        for (int i = 0; i < demo2.getObstacleArray().size(); i++){
-            Obstacle o = demo2.getObstacleArray().get(i);
-            Image puddle = new Image("Puddle.png");
-            if (!(o instanceof Enemy || o instanceof Projectile)){
-                Rectangle puddleSpace = new Rectangle(o.getLocation().getX(), o.getLocation().getY(), 60 , 60);
-                puddleSpace.setFill(new ImagePattern(puddle));
-                root.getChildren().add(puddleSpace);
-            }
-        }
-        */
 
 		
 		
@@ -229,25 +192,12 @@ public class GUIAnimationApp extends Application {
                 }
 
                 if (((mini.getXLocation() + moveX) <= 758) && ((mini.getXLocation() + moveX) >= 0)) {
-                    if(((mini.getYLocation() + moveY) >= 0) && ((mini.getYLocation() + moveY) <= 638)) {
-                        
-                        
+                    if(((mini.getYLocation() + moveY) >= 0) && ((mini.getYLocation() + moveY) <= 805)) {
                         // Change the location of the avatar on the map
                         mini.moveAvatar(moveX, moveY);//Make sure to update the avatar
                         Avatar updatedAvatar = new Avatar(demo2.getAvatar());
                         updatedAvatar.setLocation((int)mini.getXLocation() + 100, (int)mini.getYLocation() + 100);
-                        demo2.setAvatar(updatedAvatar);
-                        
-                        /*
-                        // Take the location of the actual avatar and make it match the one on the map
-                        // Had to take the double value returned by the getX and getY methods into int
-                        Double doubleNewX = avatarLocation.getX() + moveX;
-                        Double doubleNewY = avatarLocation.getY() + moveY;
-                        int newX = doubleNewX.intValue();
-                        int newY = doubleNewY.intValue();
-                        avatarLocation.setLocation(newX, newY);
-                        */
-
+                        demo2.setAvatar(updatedAvatar); 
                         
                     }
                 }

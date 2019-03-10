@@ -129,10 +129,11 @@ public class Collectible
     */
 	public boolean overlapsWith(Avatar avatar)
     {
-		if((avatar.getLocation().getX() == this.location.getX()) && (avatar.getLocation().getY() == this.location.getY()))
-			return true;
-		
-		return false;
+		if (avatar.getLocation().intersects(this.location)){
+            return true;
+        } else {
+            return false;
+        }
 	}
 
     /**
