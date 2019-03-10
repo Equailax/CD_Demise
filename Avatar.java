@@ -15,7 +15,7 @@ public class Avatar{
     private Rectangle location = new Rectangle(xposition, yposition, width, height);
     private Projectile note = new Projectile("Avatar's Note", false, true, "NONE");
     
-    private final int mapHeight = 650;
+    private final int mapHeight = 630;
     private final int mapWidth = 780;
 
     // getter methods 
@@ -170,11 +170,11 @@ public class Avatar{
                 System.out.println("Cant go there, im at the edge");
             }
 		} else if(direction.equals("down")){
-			if (this.location.getY() < mapHeight){
+			if (this.location.getY() < (mapHeight - 160)){
                 //if the avatar is within the edge, then move down
 				//this.location.setLocation(xCoord, yCoord + 1);
                 this.moveY(3);
-			}else if(this.location.getY() == mapHeight){
+			}else if(this.location.getY() == (mapHeight - 160)){
                 System.out.println("Cant go there, im at the edge");
             }
 		} else if(direction.equals("left")){
@@ -186,11 +186,11 @@ public class Avatar{
                 System.out.println("Cant go there, im at the edge");
             }
 		}else if(direction.equals("right")){
-			if (this.location.getX() < mapWidth){
+			if (this.location.getX() < (mapWidth)){
 				//if the avatar is within the egde, then move right
                 //this.location.setLocation(xCoord + 1, yCoord);
                 this.moveX(3);
-			}else if(this.location.getX() == mapWidth){
+			}else if(this.location.getX() == (mapWidth)){
                 System.out.println("Cant go there, im at the edge");
             }
 		}
