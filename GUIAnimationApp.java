@@ -237,6 +237,8 @@ public class GUIAnimationApp extends Application {
                         Avatar updatedAvatar = new Avatar(demo2.getAvatar());
                         updatedAvatar.setLocation((int)mini.getXLocation() + 100, (int)mini.getYLocation() + 100);
                         demo2.setAvatar(updatedAvatar);
+
+                        
                         
                         /*
                         // Take the location of the actual avatar and make it match the one on the map
@@ -249,9 +251,16 @@ public class GUIAnimationApp extends Application {
                         */
 
                         
+                        
                     }
+                    
                 }
+                
+
+               
             }};
+
+
     
 
         
