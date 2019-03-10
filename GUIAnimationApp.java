@@ -40,7 +40,12 @@ public class GUIAnimationApp extends Application {
     
     // Creation of collectibles
 
+    /**
+    This is the initialize method for the gui animation application
+    */
+    public void initialize(){
 
+    }
 
     public static void main(String[] args) {
         
@@ -70,7 +75,38 @@ public class GUIAnimationApp extends Application {
         }
 
         // Display Obstacles
+        for (Obstacle o : demo2.getObstacleArray()){
+            int randomEnemy = new Random().nextInt(4);
+            if (o instanceof Enemy){
+                if (randomEnemy == 0){
+                    EnemyImage temp = new EnemyImage("DOTIFY", (int)(o.getLocation().getX()), (int)(o.getLocation().getY()));
+                    root.getChildren().add(temp.getLocation());
+                }
+                if (randomEnemy == 1) {
+                    EnemyImage temp = new EnemyImage("BEATSBYDRO", (int)(o.getLocation().getX()),(int)(o.getLocation().getY()));
+                    root.getChildren().add(temp.getLocation());
+                }
+                if (randomEnemy == 2) {
+                    EnemyImage temp = new EnemyImage("PEARMUSIC", (int)(o.getLocation().getX()),(int)(o.getLocation().getY()));
+                    root.getChildren().add(temp.getLocation());
+                }
+                if (randomEnemy == 3) {
+                    EnemyImage temp = new EnemyImage("MYPHONE", (int)(o.getLocation().getX()),(int)(o.getLocation().getY()));
+                    root.getChildren().add(temp.getLocation());
+                }
+            } else {
+                Image puddle = new Image("Puddle.png");
+                if (!(o instanceof Enemy || o instanceof Projectile)){
+                    Rectangle puddleSpace = new Rectangle(o.getLocation().getX(), o.getLocation().getY(), 60 , 60);
+                    puddleSpace.setFill(new ImagePattern(puddle));
+                    root.getChildren().add(puddleSpace);
+                }
+            }
+        }
         
+        for (Obstacle o : demo2.getObstacleArray());
+        
+        /*
          for (int i = 0; i < demo2.getObstacleArray().size(); i++){
             Obstacle o = demo2.getObstacleArray().get(i);
             int randomEnemy = new Random().nextInt(4);
@@ -90,15 +126,20 @@ public class GUIAnimationApp extends Application {
                 if (randomEnemy == 3) {
                     EnemyImage temp = new EnemyImage("MYPHONE", (int) o.getLocation().getX(),(int) o.getLocation().getY());
                     root.getChildren().add(temp.getLocation());}
-            }  }
-        
+            }  
+        }
+        */
+        /*
         for (int i = 0; i < demo2.getObstacleArray().size(); i++){
             Obstacle o = demo2.getObstacleArray().get(i);
             Image puddle = new Image("Puddle.png");
             if (!(o instanceof Enemy || o instanceof Projectile)){
                 Rectangle puddleSpace = new Rectangle(o.getLocation().getX(), o.getLocation().getY(), 60 , 60);
                 puddleSpace.setFill(new ImagePattern(puddle));
-                root.getChildren().add(puddleSpace);}}
+                root.getChildren().add(puddleSpace);
+            }
+        }
+        */
 
 
 
@@ -181,7 +222,7 @@ public class GUIAnimationApp extends Application {
                 }
 
                 if ((mini.getXLocation(moveX) <= 758) && (mini.getXLocation(moveX) >= 0)) {
-                    if((mini.getYLocation(moveY) >= 0) && ( mini.getYLocation(moveY) <= 742)) {
+                    if((mini.getYLocation(moveY) >= 0) && ( mini.getYLocation(moveY) <= 475)) {
                         
                         
                         // Change the location of the avatar on the map
@@ -244,6 +285,8 @@ public class GUIAnimationApp extends Application {
 			double avatarYCenter = (demo2.getAvatar().getLocation().getY()+33.5)+100;
 			System.out.println(demo2.getAvatar().getLocation());
 			
+            demo2.printCurrentState();
+            
 			double angle = Math.toDegrees(Math.atan2(mouseEvent.getX()-(avatarXCenter), mouseEvent.getY()-(avatarYCenter)))+180;
 			System.out.println("Click (" + mouseEvent.getX() + ", " + mouseEvent.getY() + ")"); // CAN BE DELETED
 			System.out.println(angle);// CAN BE DELETED
@@ -282,5 +325,7 @@ public class GUIAnimationApp extends Application {
 		);
 		
         moveTime.start();
+        
+        demo2.printCurrentState();
     }
 }

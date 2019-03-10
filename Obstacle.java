@@ -13,7 +13,7 @@ public class Obstacle
 	//private int health;
 	private int xcoord;
 	private int ycoord;
-	private final int height = 37;
+	private final int height = 54;
 	private final int width = 67;
 	private Rectangle location = new Rectangle(xcoord, ycoord, width, height);
 	
@@ -72,6 +72,13 @@ public class Obstacle
     */
 	public boolean overlapsWith(Avatar a){
 		
+        if (a.getLocation().intersects(this.location)){
+            return true;
+        } else {
+            return false;
+        }
+        
+        /*
         if ((a.getLocation().contains(this.location.getX(), this.location.getY())) || (a.getLocation().contains(this.location.getX() + this.width, this.location.getY())) ||
             (a.getLocation().contains(this.location.getX(), this.location.getY() + this.height)) || (a.getLocation().contains(this.location.getX() + this.width, this.location.getY() + this.height))){
             //If the obstacle contains the upper left corner, or upper right corner, or bottom right corner, or bottom left conrer, return true
@@ -79,6 +86,7 @@ public class Obstacle
         }else {
             return false;
         }
+        */
         
         /*
         if((a.getLocation().getX() == this.location.getX()) && (a.getLocation().getY() == this.location.getY())){
@@ -93,9 +101,15 @@ public class Obstacle
     This method checks wether or not the obstacle overlaps with another obstacle
     @param o : this is the obstacle that we want to check if our obsatcle overalps with it
     */
-	public boolean overlapsWithObstacle(Obstacle o)
-	{
+	public boolean overlapsWithObstacle(Obstacle o){
         
+        if (o.getLocation().intersects(this.location)){
+            return true;
+        } else {
+            return false;
+        }
+        
+        /*
         if ((o.getLocation().contains(this.location.getX(), this.location.getY())) || (o.getLocation().contains(this.location.getX() + this.width, this.location.getY())) ||
             (o.getLocation().contains(this.location.getX(), this.location.getY() + this.height)) || (o.getLocation().contains(this.location.getX() + this.width, this.location.getY() + this.height))){
             //If the obstacle contains the upper left corner, or upper right corner, or bottom right corner, or bottom left conrer, return true
@@ -103,6 +117,7 @@ public class Obstacle
         }else {
             return false;
         }
+        */
         /*
         if((o.getLocation().getX() == this.location.getX()) && (o.getLocation().getY() == this.location.getY())){
             return true;

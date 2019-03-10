@@ -7,16 +7,16 @@ public class Avatar{
     private String name;
     private int health;
     private int lives;
-    private int xposition = 72;
-    private int yposition = 72;
+    private int xposition = 100;
+    private int yposition = 100;
     private final int width = 54;
     private final int height = 67;
     private int damage;
     private Rectangle location = new Rectangle(xposition, yposition, width, height);
     private Projectile note = new Projectile("Avatar's Note", false, true, "NONE");
     
-    private final int mapHeight = 630;
-    private final int mapWidth = 780;
+    private final int mapHeight = 1000;
+    private final int mapWidth = 1000;
 
     // getter methods 
     /**
@@ -162,35 +162,35 @@ public class Avatar{
 		int yCoord = (int)(this.location.getY());
         
         if(direction.equals("up")){
-			if (this.location.getY() > 0){
+			if (this.location.getY() > 70){
                 //if the avatar is within the edge, then move up
 				//this.location.setLocation(xCoord, yCoord - 1);	
                 this.moveY(-3);
-			}else if(this.location.getY() == 0 ){
+			}else if(this.location.getY() == 70){
                 System.out.println("Cant go there, im at the edge");
             }
 		} else if(direction.equals("down")){
-			if (this.location.getY() < (mapHeight - 160)){
+			if (this.location.getY() < (mapHeight - 525)){
                 //if the avatar is within the edge, then move down
 				//this.location.setLocation(xCoord, yCoord + 1);
                 this.moveY(3);
-			}else if(this.location.getY() == (mapHeight - 160)){
+			}else if(this.location.getY() == (mapHeight - 525)){
                 System.out.println("Cant go there, im at the edge");
             }
 		} else if(direction.equals("left")){
-			if (this.location.getX() > 0){
+			if (this.location.getX() > 100){
                 //if the avatar is within the edge, then move left
 				//this.location.setLocation(xCoord - 1, yCoord);
                 this.moveX(-3);
-			}else if(this.location.getX() == 0){
+			}else if(this.location.getX() == 100){
                 System.out.println("Cant go there, im at the edge");
             }
 		}else if(direction.equals("right")){
-			if (this.location.getX() < (mapWidth)){
+			if (this.location.getX() < (mapWidth - 240)){
 				//if the avatar is within the egde, then move right
                 //this.location.setLocation(xCoord + 1, yCoord);
                 this.moveX(3);
-			}else if(this.location.getX() == (mapWidth)){
+			}else if(this.location.getX() == (mapWidth - 240)){
                 System.out.println("Cant go there, im at the edge");
             }
 		}

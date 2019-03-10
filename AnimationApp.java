@@ -161,10 +161,10 @@ public class AnimationApp{
         for (int i = 0; i < numberOfCollectiblesToAdd; i++){
             
             //Generate a random number between 0 and 10 for the x coordinate
-            int randomXCoordinate = (int)(Math.random() * mapWidth + 0);
+            int randomXCoordinate = (int)(Math.random() * (mapWidth - 240) + 110);
             
             //Generate a random number between 0 and 10 for the Y coordinate
-            int randomYCoordinate = (int)(Math.random() * mapHeight + 0);
+            int randomYCoordinate = (int)(Math.random() * (mapHeight - 485) + 75);
             
             tempCollectiblesArrayList.add(new Collectible("Collectible" + i, randomXCoordinate, randomYCoordinate));  ///When constructing a collectible, it should take a random positon as an argument
         }
@@ -536,7 +536,7 @@ public class AnimationApp{
     public void initialize(){
         //Initalize the avatar
         this.minidisc = new Avatar("Minidisc",3, 3, 1, new Rectangle(100, 100, 54, 67));
-        this.minidisc.setPosition(); ///\/\/\/\/\/\/\/\/\/\/ IMPORTANT we want to make sure tha the origianl position of  the avatar is at the starting points
+        
         
         //Initialize Collectibles -- Add 3 collectibles -- make sure the positions of collectibles are correct
         addCollectible(3);

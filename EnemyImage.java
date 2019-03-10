@@ -113,8 +113,6 @@ public class EnemyImage
 	public EnemyImage(String type, int xcoord, int ycoord)
 	{
 		this.type = type.toUpperCase();
-		this.xcoord = xcoord;
-		this.ycoord = ycoord;
 	
 		if(this.type.equals("DOTIFY"))
 		{
