@@ -29,7 +29,7 @@ public class GUIAnimationApp extends Application {
     String Up = "don't move";
     String Down = "don't move";
 	
-    //Creation of the life hearts and the image of the avatar for the GUI
+    // Creation of the life hearts and the image of the avatar for the GUI
     AvatarImage mini = new AvatarImage();
     ArrayList<LifeHeart> lifeHearts = new ArrayList<LifeHeart>();
 
@@ -37,7 +37,7 @@ public class GUIAnimationApp extends Application {
     ArrayList<EnemyImage> enemyImages = new ArrayList<EnemyImage>();
     ArrayList<Obstacle> obstacleList = new ArrayList<Obstacle>();
     
-
+    // Creation of collectibles
 
 
 

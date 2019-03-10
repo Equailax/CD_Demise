@@ -535,7 +535,7 @@ public class AnimationApp{
     */
     public void initialize(){
         //Initalize the avatar
-        this.minidisc = new Avatar("Minidisc",3, 3, 1, new Rectangle(72,72,100,100));
+        this.minidisc = new Avatar("Minidisc",3, 3, 1, new Rectangle(100, 100, 54, 67));
         this.minidisc.setPosition(); ///\/\/\/\/\/\/\/\/\/\/ IMPORTANT we want to make sure tha the origianl position of  the avatar is at the starting points
         
         //Initialize Collectibles -- Add 3 collectibles -- make sure the positions of collectibles are correct
