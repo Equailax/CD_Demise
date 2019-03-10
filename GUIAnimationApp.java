@@ -239,14 +239,13 @@ public class GUIAnimationApp extends Application {
 		
 		mouseHitbox.setOnMouseClicked(mouseEvent ->
 		{
-			//+(demo2.getAvatar().getLocation().getWidth()/2)
-			//+(demo2.getAvatar().getLocation().getHeight()/2)
+
 			
-			double avatarXCenter = demo2.getAvatar().getLocation().getX();
-			double avatarYCenter = demo2.getAvatar().getLocation().getY();
+			double avatarXCenter = (demo2.getAvatar().getLocation().getX()+27)+100;
+			double avatarYCenter = (demo2.getAvatar().getLocation().getY()+33.5)+100;
 			System.out.println(demo2.getAvatar().getLocation());
 			
-			double angle = Math.toDegrees(Math.atan2(mouseEvent.getX()-(demo2.getAvatar().getLocation().getX()+27-100), mouseEvent.getY()-(demo2.getAvatar().getLocation().getY()+33.5-100)))+180;
+			double angle = Math.toDegrees(Math.atan2(mouseEvent.getX()-(avatarXCenter), mouseEvent.getY()-(avatarYCenter)))+180;
 			System.out.println("Click (" + mouseEvent.getX() + ", " + mouseEvent.getY() + ")"); // CAN BE DELETED
 			System.out.println(angle);// CAN BE DELETED
 			
