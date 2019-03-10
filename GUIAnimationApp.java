@@ -13,15 +13,16 @@ import javafx.animation.AnimationTimer;
 import java.util.ArrayList;
 import java.lang.Math;
 import java.util.Random;
+
 /**
  * GUI to display the main map, with spawns and animations of the avatar, enemies, obstacles, and collectibles, and projectiles.
- *The avatar moves using keys on the keyboard for up,down,right, and left movements, and a combination of these.
- *The enemies will currently be stationary until later demos.
- *The avatar will also throw projectiles at the enemies to deal damage to them, and collect collectible items to make progress and eventually win the game.
- *The health of the avatar will be hearts displayed in the top corner of the screen that will decrease/increase in numbers based on interactions in the map.
+ * The avatar moves using keys on the keyboard for up, down, right and left movements, and a combination of these.
+ * The mouse calculates the angle between where the mouse clicked and the avatar to know what direction to shoot the projectile.
+ * The enemies will currently be stationary until later demos.
+ * The avatar will also throw projectiles at the enemies to deal damage to them, and collect collectible items to make progress and eventually win the game.
+ * The health of the avatar will be hearts displayed in the top corner of the screen that will decrease/increase in numbers based on interactions in the map.
  * Some parts referenced from:https://gist.github.com/jewelsea/8321740
  */
-// FINAL DRAFT
 
 public class GUIAnimationApp extends Application {
     // Instance variables for avatar movements
@@ -37,8 +38,6 @@ public class GUIAnimationApp extends Application {
     // Creation of ArrayList for enemies
     ArrayList<EnemyImage> enemyImages = new ArrayList<EnemyImage>();
     ArrayList<Obstacle> obstacleList = new ArrayList<Obstacle>();
-    
-    // Creation of collectibles
 
 
 
@@ -100,12 +99,11 @@ public class GUIAnimationApp extends Application {
                 puddleSpace.setFill(new ImagePattern(puddle));
                 root.getChildren().add(puddleSpace);}}
 
-
-
+		
+		
        // Rectangle / hitbox
 		Rectangle mouseHitbox = new Rectangle(0, 0, 1250, 1250);           // IMPORTANT: Make the rectangle fill the whole window
 		mouseHitbox.setFill(Color.rgb(0,0,0,0));
-        
         root.getChildren().add(mini.getAvatarImage());
 		root.getChildren().add(mouseHitbox);                               // IMPORTANT: mouseHitbox must be added to root last
         primaryStage.setScene(scene);
@@ -113,8 +111,7 @@ public class GUIAnimationApp extends Application {
         primaryStage.show();
 		
         
-		
-        
+
         //Animation of movements
         AnimationTimer moveTime = new AnimationTimer() {
             @Override
@@ -238,12 +235,12 @@ public class GUIAnimationApp extends Application {
 		
 		mouseHitbox.setOnMouseClicked(mouseEvent ->
 		{
-
-			
+			// Calculate the center of the avatar relative to the window
 			double avatarXCenter = (demo2.getAvatar().getLocation().getX()+27)+100;
 			double avatarYCenter = (demo2.getAvatar().getLocation().getY()+33.5)+100;
-			System.out.println(demo2.getAvatar().getLocation());
+			System.out.println(demo2.getAvatar().getLocation()); // CAN BE DELETED
 			
+			// Calculate the anglet between the avatar and the mouse
 			double angle = Math.toDegrees(Math.atan2(mouseEvent.getX()-(avatarXCenter), mouseEvent.getY()-(avatarYCenter)))+180;
 			System.out.println("Click (" + mouseEvent.getX() + ", " + mouseEvent.getY() + ")"); // CAN BE DELETED
 			System.out.println(angle);// CAN BE DELETED
@@ -278,8 +275,7 @@ public class GUIAnimationApp extends Application {
 			{
 				System.out.println("North");
 			}
-		}
-		);
+		});
 		
         moveTime.start();
     }
