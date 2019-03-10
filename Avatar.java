@@ -102,6 +102,14 @@ public class Avatar{
         this.note = new Projectile(projecitleNote);
     }
     
+    /**
+    This method sets the location of the avatar to a specific place
+    @param xcoord : this is the xcoordinate of the location that we want the avatar to move
+    @param ycoord : this is the ycoordinate of the location that we want the avatar to move to
+    */
+    public void setLocation(int xcoord, int ycoord){
+        this.location.setLocation(xcoord, ycoord);
+    }
     
     public void setPosition(){
         this.location.x = 0;
@@ -170,11 +178,11 @@ public class Avatar{
                 System.out.println("Cant go there, im at the edge");
             }
 		} else if(direction.equals("down")){
-			if (this.location.getY() < (mapHeight - 525)){
+			if (this.location.getY() < (574)){
                 //if the avatar is within the edge, then move down
 				//this.location.setLocation(xCoord, yCoord + 1);
                 this.moveY(3);
-			}else if(this.location.getY() == (mapHeight - 525)){
+			}else if(this.location.getY() == (574)){
                 System.out.println("Cant go there, im at the edge");
             }
 		} else if(direction.equals("left")){

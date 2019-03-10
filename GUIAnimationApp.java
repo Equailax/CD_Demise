@@ -103,7 +103,7 @@ public class GUIAnimationApp extends Application {
             }
         }
         
-        for (Obstacle o : demo2.getObstacleArray());
+        //for (Obstacle o : demo2.getObstacleArray());
         
         /*
          for (int i = 0; i < demo2.getObstacleArray().size(); i++){
@@ -218,12 +218,16 @@ public class GUIAnimationApp extends Application {
                     //moveY += 3;
                 }
 
-                if ((mini.getXLocation(moveX) <= 758) && (mini.getXLocation(moveX) >= 0)) {
-                    if((mini.getYLocation(moveY) >= 0) && ( mini.getYLocation(moveY) <= 475)) {
+                if (((mini.getXLocation() + moveX) <= 758) && ((mini.getXLocation() + moveX) >= 0)) {
+                    if(((mini.getYLocation() + moveY) >= 0) && ((mini.getYLocation() + moveY) <= 638)) {
                         
                         
                         // Change the location of the avatar on the map
-                        mini.moveAvatar(moveX, moveY);
+                        mini.moveAvatar(moveX, moveY);//Make sure to update the avatar
+                        Avatar updatedAvatar = new Avatar(demo2.getAvatar());
+                        updatedAvatar.setLocation((int)mini.getXLocation() + 100, (int)mini.getYLocation() + 100);
+                        demo2.setAvatar(updatedAvatar);
+                        
                         /*
                         // Take the location of the actual avatar and make it match the one on the map
                         // Had to take the double value returned by the getX and getY methods into int
@@ -280,13 +284,15 @@ public class GUIAnimationApp extends Application {
 			double avatarXCenter = (demo2.getAvatar().getLocation().getX()+27)+100;
 			double avatarYCenter = (demo2.getAvatar().getLocation().getY()+33.5)+100;
 			System.out.println(demo2.getAvatar().getLocation()); // CAN BE DELETED
-			
-<<<<<<< HEAD
+            
+            System.out.println(mini.getXLocation() + " " + mini.getYLocation());
+            
+            System.out.println(mini.getAvatarImage().getX() + " " + mini.getAvatarImage().getY());
+            
             demo2.printCurrentState();
             
-=======
 			// Calculate the anglet between the avatar and the mouse
->>>>>>> 447b35344d5647fdb1a50c532cb7a398dfc8f182
+
 			double angle = Math.toDegrees(Math.atan2(mouseEvent.getX()-(avatarXCenter), mouseEvent.getY()-(avatarYCenter)))+180;
 			System.out.println("Click (" + mouseEvent.getX() + ", " + mouseEvent.getY() + ")"); // CAN BE DELETED
 			System.out.println(angle);// CAN BE DELETED

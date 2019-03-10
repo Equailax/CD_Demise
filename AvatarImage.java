@@ -56,6 +56,9 @@ public class AvatarImage
             //this.moveY = moveY;
             avatar.setLayoutX(avatar.getLayoutX() + moveX);
             avatar.setLayoutY(avatar.getLayoutY() + moveY);
+            
+            //this.avatar.setX(moveX + this.avatar.getX());
+            //this.avatar.setY(moveY + this.avatar.getY());
 		}
 		
 		public AvatarImage()
