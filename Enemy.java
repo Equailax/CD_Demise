@@ -234,6 +234,33 @@ public class Enemy extends Obstacle
         Enemy e = new Enemy();
         Avatar a = new Avatar();
         
+        e.setHealth(1);
+        
+        System.out.println(" ");
+        
+        Projectile p = a.getProjectile();
+        
+        ArrayList<Obstacle> obstacleArray = new ArrayList<Obstacle>();
+        obstacleArray.add(e);
+        obstacleArray.add(p);
+        
+        System.out.println(obstacleArray);
+        
+        if (e.overlapsWithObstacle(p)) {
+            if (p.getDeadlyToEnemy() == true) {
+                obstacleArray.remove(p);
+                ((Enemy)e).takeDamage(1);
+            }
+        }
+        
+        if (e.getHealth() == 0) {
+            obstacleArray.remove(e);
+        }
+        
+        System.out.println(obstacleArray);
+    }
+        
+        /*
         System.out.println(e);
         
         ArrayList<Enemy> aE = new ArrayList<Enemy>();
@@ -285,6 +312,7 @@ public class Enemy extends Obstacle
         
         Enemy newEnemy = new Enemy((Enemy)temp.get(0));
         System.out.println(newEnemy);
-    }
+        */
+        
     
 }
