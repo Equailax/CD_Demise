@@ -12,6 +12,7 @@ public class Collectible
 	private final int width = 100;
 	private Rectangle location = new Rectangle(xcoord, ycoord, width, height);
     
+    
     private final int mapHeight = 1000;
     private final int mapWidth = 1000;
 

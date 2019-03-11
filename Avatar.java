@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.awt.Rectangle;
 
+
     // i have not consider the privacy leaks in this file 
     // variables 
 public class Avatar{
