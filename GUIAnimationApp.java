@@ -246,8 +246,8 @@ public class GUIAnimationApp extends Application {
 		mouseHitbox.setOnMouseClicked(mouseEvent ->
 		{
 			// Calculate the center of the avatar relative to the window
-			double avatarXCenter = (demo2.getAvatar().getLocation().getX()+27)+100;
-			double avatarYCenter = (demo2.getAvatar().getLocation().getY()+33.5)+100;
+			double avatarXCenter = (demo2.getAvatar().getLocation().getX()+27);
+			double avatarYCenter = (demo2.getAvatar().getLocation().getY()+33.5);
 			System.out.println(demo2.getAvatar().getLocation()); // CAN BE DELETED
             
             System.out.println(mini.getXLocation() + " " + mini.getYLocation());
