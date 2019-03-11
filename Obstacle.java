@@ -77,24 +77,6 @@ public class Obstacle
         } else {
             return false;
         }
-        
-        /*
-        if ((a.getLocation().contains(this.location.getX(), this.location.getY())) || (a.getLocation().contains(this.location.getX() + this.width, this.location.getY())) ||
-            (a.getLocation().contains(this.location.getX(), this.location.getY() + this.height)) || (a.getLocation().contains(this.location.getX() + this.width, this.location.getY() + this.height))){
-            //If the obstacle contains the upper left corner, or upper right corner, or bottom right corner, or bottom left conrer, return true
-            return true;
-        }else {
-            return false;
-        }
-        */
-        
-        /*
-        if((a.getLocation().getX() == this.location.getX()) && (a.getLocation().getY() == this.location.getY())){
-            return true;
-        }else{
-            return false;
-        }
-        */
 	}
 	
     /**
@@ -108,23 +90,6 @@ public class Obstacle
         } else {
             return false;
         }
-        
-        /*
-        if ((o.getLocation().contains(this.location.getX(), this.location.getY())) || (o.getLocation().contains(this.location.getX() + this.width, this.location.getY())) ||
-            (o.getLocation().contains(this.location.getX(), this.location.getY() + this.height)) || (o.getLocation().contains(this.location.getX() + this.width, this.location.getY() + this.height))){
-            //If the obstacle contains the upper left corner, or upper right corner, or bottom right corner, or bottom left conrer, return true
-            return true;
-        }else {
-            return false;
-        }
-        */
-        /*
-        if((o.getLocation().getX() == this.location.getX()) && (o.getLocation().getY() == this.location.getY())){
-            return true;
-        }else {
-            return false;
-        }
-        */
 	}
 	
     //Setter methods
