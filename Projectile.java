@@ -104,50 +104,57 @@ public class Projectile extends Obstacle{
     @param direction : this is the direction that we wish to shoot the projectile
     */
     
-	public void move()
+	public void move()                                                         // Projectile still bounces
 	{
 		this.direction = this.direction.toUpperCase();
 
 		int xCoord = (int)(this.getLocation().getX());
 		int yCoord = (int)(this.getLocation().getY());
 		
-        if(this.direction.equals("UP")){
+		int xChange = 0;
+		int yChange = 0;
+		
+        if (this.direction.contains("UP")){
 			if (this.getLocation().getY() > 100){
                 //if the obstacle is within the edge, then move up
-				super.setLocation(xCoord, yCoord - 1);	 
+				yChange = -1; 
 			} else if (this.getLocation().getY() == 100) {
                 //Move the projectile the opsoite direction once it has hit a boundary
-                super.setLocation(xCoord, yCoord + 1);
-                this.setDirection("DOWN"); //sets he projectile to the oposite direction
+				yChange = 1;
+				this.direction = this.direction.replace("UP", "DOWN"); // Bounce
             }
-		} else if(this.direction.equals("DOWN")){
+		} else if(this.direction.contains("DOWN")){
 			if (this.getLocation().getY() < mapHeight){
                 //if the obstcle is within the edge, then move down
-				super.setLocation(xCoord, yCoord + 1);
+				yChange = 1;
             } else if (this.getLocation().getY() == mapHeight) {
                 //Move the projectile the opsoite direction once it has hit a boundary
-                super.setLocation(xCoord, yCoord - 1);
-                this.setDirection("UP"); // sets he projectile to the oposite direction
-            }
-		} else if(this.direction.equals("LEFT")){
-			if (this.getLocation().getX() > 100){
-                //if the obstacle is within the edge, then move left
-				super.setLocation(xCoord - 1, yCoord);
-            } else if (this.getLocation().getX() == 100) {
-                //Move the projectile the opsoite direction once it has hit a boundary
-                super.setLocation(xCoord + 1, yCoord);
-                this.setDirection("RIGHT"); // sets he projectile to the oposite direction
-            }
-		}else if(this.direction.equals("RIGHT")){
-			if (this.getLocation().getX() < mapWidth){
-				//if the obsatcle is within the egde, then move right
-                super.setLocation(xCoord + 1, yCoord);
-            } else if (this.getLocation().getX() == mapWidth) {
-                //Move the projectile the opsoite direction once it has hit a boundary
-                super.setLocation(xCoord - 1, yCoord);
-                this.setDirection("LEFT");  //sets the projectile to the oposite direction
+				yChange = -1;
+                this.direction = this.direction.replace("DOWN", "UP"); // Bounce
             }
 		}
+		
+		if (this.direction.contains("LEFT")){
+			if (this.getLocation().getX() > 100){
+                //if the obstacle is within the edge, then move left
+				xChange = -1;
+            } else if (this.getLocation().getX() == 100) {
+                //Move the projectile the opsoite direction once it has hit a boundary
+				xChange = 1;
+				this.direction = this.direction.replace("LEFT", "RIGHT"); // Bounce
+            }
+		}else if(this.direction.contains("RIGHT")){
+			if (this.getLocation().getX() < mapWidth){
+				//if the obsatcle is within the egde, then move right
+				xChange = 1;
+            } else if (this.getLocation().getX() == mapWidth) {
+                //Move the projectile the opsoite direction once it has hit a boundary
+				xChange = -1;
+				this.direction = this.direction.replace("RIGHT", "LEFT"); // Bounce
+            }
+		}
+		
+		super.setLocation(xCoord + xChange, yCoord + yChange);	 
 	}
     
     /**
@@ -177,6 +184,7 @@ public class Projectile extends Obstacle{
     }
     
     public static void main(String[] args){
+		/*
         Projectile p = new Projectile();
         Enemy e = new Enemy();
         Avatar a = new Avatar();
@@ -219,7 +227,29 @@ public class Projectile extends Obstacle{
         ArrayList<Obstacle> obstacleArray = new ArrayList<Obstacle>();
         obstacleArray.add(p);
         System.out.println(p);
-        
+        */
+		
+		// Diagonal Movement Test
+		Projectile p = new Projectile("Projectile", false, true, "UP LEFT");
+		p.setLocation(100, 100);
+		System.out.println(p);
+		/*
+		for (int i=0; i<10; i++)
+		{
+			p.move();
+			System.out.println(p);
+		}
+		p.setDirection("UP RIGHT");
+		p.move();
+		System.out.println(p);
+		
+		p.setDirection("UP LEFT");
+		p.move();
+		System.out.println(p);
+		*/
+		p.move();
+		System.out.println(p);
+		
     }
     
 }
