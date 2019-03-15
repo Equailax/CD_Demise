@@ -91,6 +91,15 @@ public class Projectile extends Obstacle{
     }
     
     /**
+    This method sets the directione of the projectile
+    @param directionToShoot : this is the direction that we want to shoot the projectile to
+    */
+    public void setDirection(String directionToShoot) {
+        directionToShoot.toUpperCase();
+        this.direction = directionToShoot;
+    }
+    
+    /**
     This method is the move method for the projectile.  It takes in a string input for the direction that the avatar/enemy is facing
     @param direction : this is the direction that we wish to shoot the projectile
     */
@@ -103,24 +112,40 @@ public class Projectile extends Obstacle{
 		int yCoord = (int)(this.getLocation().getY());
 		
         if(this.direction.equals("UP")){
-			if (this.getLocation().getY() > 0){
+			if (this.getLocation().getY() > 100){
                 //if the obstacle is within the edge, then move up
 				super.setLocation(xCoord, yCoord - 1);	 
-			}
+			} else if (this.getLocation().getY() == 100) {
+                //Move the projectile the opsoite direction once it has hit a boundary
+                super.setLocation(xCoord, yCoord + 1);
+                this.setDirection("DOWN"); //sets he projectile to the oposite direction
+            }
 		} else if(this.direction.equals("DOWN")){
 			if (this.getLocation().getY() < mapHeight){
                 //if the obstcle is within the edge, then move down
 				super.setLocation(xCoord, yCoord + 1);
+            } else if (this.getLocation().getY() == mapHeight) {
+                //Move the projectile the opsoite direction once it has hit a boundary
+                super.setLocation(xCoord, yCoord - 1);
+                this.setDirection("UP"); // sets he projectile to the oposite direction
             }
 		} else if(this.direction.equals("LEFT")){
-			if (this.getLocation().getX() > 0){
+			if (this.getLocation().getX() > 100){
                 //if the obstacle is within the edge, then move left
 				super.setLocation(xCoord - 1, yCoord);
+            } else if (this.getLocation().getX() == 100) {
+                //Move the projectile the opsoite direction once it has hit a boundary
+                super.setLocation(xCoord + 1, yCoord);
+                this.setDirection("RIGHT"); // sets he projectile to the oposite direction
             }
 		}else if(this.direction.equals("RIGHT")){
 			if (this.getLocation().getX() < mapWidth){
 				//if the obsatcle is within the egde, then move right
                 super.setLocation(xCoord + 1, yCoord);
+            } else if (this.getLocation().getX() == mapWidth) {
+                //Move the projectile the opsoite direction once it has hit a boundary
+                super.setLocation(xCoord - 1, yCoord);
+                this.setDirection("LEFT");  //sets the projectile to the oposite direction
             }
 		}
 	}
@@ -132,17 +157,17 @@ public class Projectile extends Obstacle{
     public String toString(){
         if (this.isShot == true){
             if(this.isDeadlyToAvatar == true){
-                return super.toString() + " Is deadly to Avatar" + " and is Shot"; 
+                return super.toString() + " Is deadly to Avatar" + " and is Shot" + this.direction; 
             }else if (this.isDeadlyToEnemy == true){
-                return super.toString() + " Is deadly to Enemy" + " and is Shot";
+                return super.toString() + " Is deadly to Enemy" + " and is Shot" + this.direction;
             }else {
                 return super.toString() + " is Shot";
             }
         }else if (this.isShot == false){
             if(this.isDeadlyToAvatar == true){
-                return super.toString() + " Is deadly to Avatar"; 
+                return super.toString() + " Is deadly to Avatar" + this.direction; 
             }else if (this.isDeadlyToEnemy == true){
-                return super.toString() + " Is deadly to Enemy";
+                return super.toString() + " Is deadly to Enemy" + this.direction;
             }else {
                 return super.toString();
             }

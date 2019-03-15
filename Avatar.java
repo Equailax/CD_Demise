@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.awt.Rectangle;
 
+
     // i have not consider the privacy leaks in this file 
     // variables 
 public class Avatar{
@@ -100,6 +101,7 @@ public class Avatar{
     */
     public void setProjectile(Projectile projecitleNote){
         this.note = new Projectile(projecitleNote);
+        this.note.setLocation(new Rectangle(this.location));
     }
     
     /**
@@ -285,6 +287,8 @@ public class Avatar{
         this.location = new Rectangle(location);
         this.damage = myDamage;
         
+        this.note.setLocation(new Rectangle(this.location));
+        
     }
     public Avatar(Avatar inputAvatar){
         this.name = inputAvatar.name;
@@ -292,6 +296,7 @@ public class Avatar{
         this.health = inputAvatar.health;
         this.damage = inputAvatar.damage;
         this.location = new Rectangle(inputAvatar.location);
+        this.note = new Projectile(inputAvatar.note);
         
     }
     

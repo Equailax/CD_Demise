@@ -406,15 +406,17 @@ public class AnimationApp{
                 
             } else if (o1 instanceof Projectile) {
                 //If the instance of the obstacle is a projectile have it move in its specified direction, as long as its within bounds
-                Projectile projecitleBeforeMovement = new Projectile((Projectile)o1);
-                projecitleBeforeMovement.move();
-                if ((projecitleBeforeMovement.getLocation().getX() < this.mapWidth && projecitleBeforeMovement.getLocation().getX() > 0) && (
+                //Projectile projecitleBeforeMovement = new Projectile((Projectile)o1);
+                //projecitleBeforeMovement.move();
+                ((Projectile)o1).move();
+                
+                /*if ((projecitleBeforeMovement.getLocation().getX() < this.mapWidth && projecitleBeforeMovement.getLocation().getX() > 0) && (
                     projecitleBeforeMovement.getLocation().getY() < this.mapHeight && projecitleBeforeMovement.getLocation().getY() > 0))
                     {
                         //If the projetile before movement is within bounds, have the original projectile move 
                         ((Projectile)o1).move();
                     }
-                
+                */
             }
         }
 		// Change this.ObstacleArray to the dynamic array
@@ -457,7 +459,7 @@ public class AnimationApp{
         }
         
         /*
-        Remove the projectiles that have run out of health, hit an enenmy or avatar
+        Remove the projectiles that overlap with any obstacle
         */
         int obstaclesToRemove = 0;
         
@@ -592,7 +594,7 @@ public class AnimationApp{
             mainApp.printCurrentState();
             
             //Prompt the user for a movement
-            System.out.print("Move UP, DOWN, LEFT, RIGHT, or SHOOT: ");
+            System.out.print("Move UP, DOWN, LEFT, RIGHT, or SHOOT + DIRECTION (LEFT, RIGHT, DOWN, UP): ");
             Scanner movementInput = new Scanner(System.in);
             
             //Check if the input is valid
@@ -602,11 +604,12 @@ public class AnimationApp{
             while (!check){
                 input = movementInput.nextLine();
                 
-                if(input.toLowerCase().equals("up") || input.toLowerCase().equals("down") || input.toLowerCase().equals("left") || input.toLowerCase().equals("right") || input.toLowerCase().equals("shoot")){
+                if(input.toLowerCase().equals("up") || input.toLowerCase().equals("down") || input.toLowerCase().equals("left") || input.toLowerCase().equals("right") || input.toLowerCase().equals("shoot")
+                    || input.toLowerCase().equals("shootleft") || input.toLowerCase().equals("shootright") || input.toLowerCase().equals("shootdown") || input.toLowerCase().equals("shootup")){
                     check = true;
                     break;
                 }else{
-                    System.out.print("Invalid input, please type either UP, DOWN, LEFT, RIGHT, or SHOOT: ");
+                    System.out.print("Invalid input, please type either UP, DOWN, LEFT, RIGHT, or SHOOTDIRECTION (LEFT, RIGHT, DOWN, UP): ");
                 }
             }
             
@@ -617,11 +620,24 @@ public class AnimationApp{
             //Process if the avatar can move 
             if (input.toLowerCase().equals("up") || input.toLowerCase().equals("down") || input.toLowerCase().equals("left") || input.toLowerCase().equals("right")){
                 mainApp.processAvatarMove(input);
-            } else if (input.toLowerCase().equals("shoot")) {
+            } else if (input.toLowerCase().equals("shoot") || input.toLowerCase().equals("shootleft") || input.toLowerCase().equals("shootright") || 
+                input.toLowerCase().equals("shootdown") || input.toLowerCase().equals("shootup")) {
+                
+                System.out.println("Projectile has shot");
                 
                 //have the avatar shoot the proejctile "in a direction"
                 Avatar avatarHasShot = new Avatar(mainApp.getAvatar());
-                avatarHasShot.shootProjectile(input);
+                
+                if (input.toLowerCase().contains("left")) {
+                    avatarHasShot.shootProjectile("left");
+                } else if (input.toLowerCase().contains("right")) {
+                    avatarHasShot.shootProjectile("right");
+                } else if (input.toLowerCase().contains("up")) {
+                    avatarHasShot.shootProjectile("up");
+                } else if (input.toLowerCase().contains("down")) {
+                    avatarHasShot.shootProjectile("down");
+                }
+                
                 mainApp.setAvatar(avatarHasShot);
                 
                 // add the projectile to the obstacle array
