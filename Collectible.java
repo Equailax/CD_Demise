@@ -4,7 +4,6 @@ public class Collectible
 {
     //Instance Variables 
 	private String name;
-	private int healthBoost;
 	private int collection;
 	private int xcoord;
 	private int ycoord;
@@ -32,14 +31,6 @@ public class Collectible
     }
 	
     /**
-    This gets the amount of health the avatar/user will get boosted by the Collectible object
-    @return healthBoost
-    */
-	public int getHealthBoost()
-	{
-		return new Integer(healthBoost);
-	}
-    /**
     This gets the location of the Collectible object
     @return location
     */
@@ -57,15 +48,6 @@ public class Collectible
 	public void setName(String name)
 	{
 		this.name = new String(name);
-	}
-
-    /**
-    This alters/assigns the amount of health the Collectible object raises for the avatar
-    @param healthBoost
-    */
-	public void setHealthBoost(int healthBoost)
-	{
-		this.healthBoost = new Integer(healthBoost);
 	}
 
     /**
@@ -105,20 +87,14 @@ public class Collectible
 	{
 		this.name = new String(name);
 		this.location = new Rectangle(new Integer(xcoord), new Integer(ycoord), width, height);
-	}
-
-	public Collectible(String name, int healthBoost, int xcoord, int ycoord)
-	{
-		this.name = new String(name);
-		this.healthBoost = new Integer(healthBoost);
-		this.location = new Rectangle(new Integer(xcoord), new Integer(ycoord), width, height);
+        this.collection = 0;
 	}
 	
 	public Collectible(Collectible copy)
 	{
 		this.name = new String(copy.name);
-		this.healthBoost = new Integer(copy.healthBoost);
 		this.location = new Rectangle(copy.location);
+        this.collection = copy.collection;
 	}
 
     //Methods

@@ -218,7 +218,9 @@ public class GUIAnimationApp extends Application {
 		Rectangle mouseHitbox = new Rectangle(0, 0, 1250, 1250);           // IMPORTANT: Make the rectangle fill the whole window
 		mouseHitbox.setFill(Color.rgb(0,0,0,0));
         root.getChildren().add(mini.getAvatarImage());
-		root.getChildren().add(mouseHitbox);                               // IMPORTANT: mouseHitbox must be added to root last
+		root.getChildren().add(mouseHitbox);
+		
+		mouseHitbox.toFront();
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
@@ -412,6 +414,11 @@ public class GUIAnimationApp extends Application {
 			{
 				System.out.println("North");
 			}
+			
+			// Projectile Image
+			ProjectileImage projectile = new ProjectileImage((int)(avatarXCenter-11), (int)(avatarYCenter-18.5));
+			root.getChildren().add(projectile.getImageLocation());
+			mouseHitbox.toFront();
 		});
 		
         moveTime.start();
