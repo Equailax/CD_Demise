@@ -6,6 +6,9 @@ import java.lang.Math;
 
 import javafx.scene.shape.ObservableFaceArray;
 
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
+
 public class Obstacle
 {
 	private String name;
@@ -16,6 +19,13 @@ public class Obstacle
 	private final int height = 54;
 	private final int width = 67;
 	private Rectangle location = new Rectangle(xcoord, ycoord, width, height);
+    
+        
+    ////IMAGE INSTANCE VARIABLES\\\\
+    
+    private Image obstacle;
+	private javafx.scene.shape.Rectangle imageLocation = new javafx.scene.shape.Rectangle(xcoord, ycoord, height, width);
+    private String type = "NOTSET";
 	
 	
 	/**
@@ -27,10 +37,13 @@ public class Obstacle
 	*/
 	public Obstacle(Obstacle inputObstacle){
 		this.name = inputObstacle.name;
-		//this.isDeadly = inputObstacle.isDeadly;
 		this.location = new Rectangle(inputObstacle.location);
-		//this.health = inputObstacle.health;
-	}
+	
+        /*
+        COPY THE TYPE OF OBSTACLE 
+        COPY THE IMAGE OF THE OBSTACLE AND LAYOUT LOCATION_FORWARD
+        */
+    }
 	
 	public Obstacle(){
 	}
@@ -44,6 +57,10 @@ public class Obstacle
 	public Obstacle(String name, int x, int y){
 		this.name = name;
         this.location.setLocation(x,y);
+        
+        /*
+        HAVE A SET TYPE AS PARAMETER, WHICH INTURN DECIDES WHICH IMAGE TO USE
+        */
 	}
 	
 	/**
@@ -133,6 +150,8 @@ public class Obstacle
             return false;
         }
     }
+    
+    //////IMAGE METHODS\\\\\\\
     
     public static void main(String[] args){
         Obstacle o1 = new Obstacle("Obstacle1", 1, 0);

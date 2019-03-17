@@ -5,6 +5,7 @@ import java.lang.Math;
 
 import javafx.scene.shape.ObservableFaceArray;
 
+
 public class Enemy extends Obstacle
 {
 	private boolean isDeadly = true;
@@ -29,6 +30,11 @@ public class Enemy extends Obstacle
 		this.isDeadly = inputEnemy.isDeadly;
 		//super.setLocation(inputEnemy.getLocation());
 		this.health = inputEnemy.health;
+        
+        
+        /*
+        MAKE SURE TO COPY THE IMAGE
+        */
 	}
 	
 	public Enemy(){
@@ -44,6 +50,10 @@ public class Enemy extends Obstacle
 		super.setName(name);
         super.setLocation(x, y);
         this.health = aHealth;
+        
+        /*
+        TYPE DETERMINES THE IMAGE
+        */
 	}
     
     //Getter methods
