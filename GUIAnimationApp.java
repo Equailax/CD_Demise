@@ -278,23 +278,6 @@ public class GUIAnimationApp extends Application {
                     }
                 }
                 
-                /*
-                if (((mini.getXLocation() + moveX) <= 758) && ((mini.getXLocation() + moveX) >= 0)) {
-                    if(((mini.getYLocation() + moveY) >= 0) && ((mini.getYLocation() + moveY) <= 805)) {
-                        
-                        root.getChildren().remove(mini.getAvatarImage());
-                        
-                        // Change the location of the avatar on the map
-                        mini.moveAvatar(moveX, moveY);//Make sure to update the avatar
-                        Avatar updatedAvatar = new Avatar(demo2.getAvatar());
-                        updatedAvatar.setLocation((int)mini.getXLocation() + 100, (int)mini.getYLocation() + 100);
-                        demo2.setAvatar(updatedAvatar); 
-                        
-                        
-                        root.getChildren().add(mini.getAvatarImage());
-                    }
-                }
-                */
             }};
     
 
