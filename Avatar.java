@@ -1,5 +1,9 @@
 import java.util.Scanner;
 import java.awt.Rectangle;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.paint.ImagePattern;
+
 
     // i have not consider the privacy leaks in this file 
     // variables 
@@ -7,16 +11,23 @@ public class Avatar{
     private String name;
     private int health;
     private int lives;
-    private int xposition = 72;
-    private int yposition = 72;
+    private int xposition = 100;
+    private int yposition = 100;
     private final int width = 54;
     private final int height = 67;
     private int damage;
     private Rectangle location = new Rectangle(xposition, yposition, width, height);
-    private Projectile note = new Projectile("Avatar's Note", false, true, "NONE");
+    private Projectile note = new Projectile("Avatar's Note", "note",false, true, "NONE");
     
-    private final int mapHeight = 650;
-    private final int mapWidth = 780;
+    private final int mapHeight = 1000;
+    private final int mapWidth = 1000;
+    
+    
+    /////IMAGE INSTANCE VARIABLES\\\\\
+    
+    private Image avatarImageForward = new Image("MiniDisc.png");
+    private Image avatarImageBackward = new Image("MiniDisc Backward.png");
+    private javafx.scene.shape.Rectangle imageRectangle = new javafx.scene.shape.Rectangle(100, 100, 54, 67);
 
     // getter methods 
     /**
@@ -100,8 +111,17 @@ public class Avatar{
     */
     public void setProjectile(Projectile projecitleNote){
         this.note = new Projectile(projecitleNote);
+        this.note.setLocation(new Rectangle(this.location));
     }
     
+    /**
+    This method sets the location of the avatar to a specific place
+    @param xcoord : this is the xcoordinate of the location that we want the avatar to move
+    @param ycoord : this is the ycoordinate of the location that we want the avatar to move to
+    */
+    public void setLocation(int xcoord, int ycoord){
+        this.location.setLocation(xcoord, ycoord);
+    }
     
     public void setPosition(){
         this.location.x = 0;
@@ -162,35 +182,38 @@ public class Avatar{
 		int yCoord = (int)(this.location.getY());
         
         if(direction.equals("up")){
-			if (this.location.getY() > 0){
-                //if the avatar is within the edge, then move up
-				//this.location.setLocation(xCoord, yCoord - 1);	
+			if (this.location.getY() > 70){
+                //if the avatar is within the edge, then move up	
                 this.moveY(-3);
-			}else if(this.location.getY() == 0 ){
+			}else if(this.location.getY() == 70){
                 System.out.println("Cant go there, im at the edge");
             }
 		} else if(direction.equals("down")){
-			if (this.location.getY() < mapHeight){
+			if (this.location.getY() < (574)){
                 //if the avatar is within the edge, then move down
-				//this.location.setLocation(xCoord, yCoord + 1);
                 this.moveY(3);
-			}else if(this.location.getY() == mapHeight){
+			}else if(this.location.getY() == (574)){
                 System.out.println("Cant go there, im at the edge");
             }
 		} else if(direction.equals("left")){
-			if (this.location.getX() > 0){
+			if (this.location.getX() > 100){
                 //if the avatar is within the edge, then move left
-				//this.location.setLocation(xCoord - 1, yCoord);
                 this.moveX(-3);
-			}else if(this.location.getX() == 0){
+                
+                //this.setBackward();
+                
+			}else if(this.location.getX() == 100){
                 System.out.println("Cant go there, im at the edge");
             }
 		}else if(direction.equals("right")){
-			if (this.location.getX() < mapWidth){
+			if (this.location.getX() < (mapWidth - 138)){
 				//if the avatar is within the egde, then move right
                 //this.location.setLocation(xCoord + 1, yCoord);
                 this.moveX(3);
-			}else if(this.location.getX() == mapWidth){
+                
+                //this.setForward();
+                
+			}else if(this.location.getX() == (mapWidth - 138)){
                 System.out.println("Cant go there, im at the edge");
             }
 		}
@@ -210,7 +233,7 @@ public class Avatar{
     @param directionToShoot : this is the direction that we want to shoot the projecitle
     */
     public void shootProjectile(String directionToShoot){
-        this.setProjectile(new Projectile(this.getProjectile().getName(), this.getProjectile().getDeadlyToAvatar(), this.getProjectile().getDeadlyToEnemy(), directionToShoot));
+        this.setProjectile(new Projectile(this.getProjectile().getName(), "note",this.getProjectile().getDeadlyToAvatar(), this.getProjectile().getDeadlyToEnemy(), directionToShoot));
     }
     
     /**
@@ -263,8 +286,49 @@ public class Avatar{
         }
     }
 
-    // there is no method for damage in this file 
-
+    //////////////IMAGE METHODS\\\\\\\\\\\\\\\\
+    
+    public void setForward()
+    {
+        this.imageRectangle.setFill(new ImagePattern(avatarImageForward));
+    }
+    
+    public void setBackward()
+    {
+        this.imageRectangle.setFill(new ImagePattern(avatarImageBackward));
+    }
+    
+    public javafx.scene.shape.Rectangle getAvatarImage()
+    {
+        return this.imageRectangle;
+    }
+    
+    public double getXImageLayout(int moveX)
+    {
+        //this.moveX = moveX;
+        return this.imageRectangle.getLayoutX() + moveX;
+    }
+    
+    public double getXImageLayout(){
+        return this.imageRectangle.getLayoutX();
+    }
+    
+    public double getYImageLayout(int moveY)
+    {
+        //this.moveY = moveY;
+        return this.imageRectangle.getLayoutY() + moveY;
+    }
+    
+    public double getYImageLayout(){
+        return this.imageRectangle.getLayoutY();
+    }
+    
+    public void moveAvatarImage(int moveX, int moveY) {
+        this.imageRectangle.setLayoutX(this.imageRectangle.getLayoutX() + moveX);
+        this.imageRectangle.setLayoutY(this.imageRectangle.getLayoutY() + moveY);
+    }
+    
+    
     // constructors 
     // default 
     public Avatar(){
@@ -277,6 +341,16 @@ public class Avatar{
         this.location = new Rectangle(location);
         this.damage = myDamage;
         
+        this.note.setLocation(new Rectangle(this.location));
+        
+        
+        //Image Variables
+        this.avatarImageForward = new Image("MiniDisc.png");
+        this.avatarImageBackward = new Image("MiniDisc Backward.png");
+        
+        this.imageRectangle = new javafx.scene.shape.Rectangle(100, 100, 54, 67);
+        this.imageRectangle.setFill(new ImagePattern(avatarImageForward));
+        
     }
     public Avatar(Avatar inputAvatar){
         this.name = inputAvatar.name;
@@ -284,7 +358,7 @@ public class Avatar{
         this.health = inputAvatar.health;
         this.damage = inputAvatar.damage;
         this.location = new Rectangle(inputAvatar.location);
-        
+        this.note = new Projectile(inputAvatar.note);
     }
     
 }

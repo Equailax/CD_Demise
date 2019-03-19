@@ -35,19 +35,30 @@ public class AvatarImage
 			this.moveX = moveX;
 			return avatar.getLayoutX() + moveX;
 		}
+        
+        public double getXLocation(){
+            return avatar.getLayoutX();
+        }
 		
 		public double getYLocation(int moveY)
 		{
 			this.moveY = moveY;
 			return avatar.getLayoutY() + moveY;
 		}
+        
+        public double getYLocation(){
+            return avatar.getLayoutY();
+        }
 		
 		public void moveAvatar(int moveX, int moveY)
 		{
-            this.moveX = moveX;
-            this.moveY = moveY;
+            //this.moveX = moveX;
+            //this.moveY = moveY;
             avatar.setLayoutX(avatar.getLayoutX() + moveX);
             avatar.setLayoutY(avatar.getLayoutY() + moveY);
+            
+            //this.avatar.setX(moveX + this.avatar.getX());
+            //this.avatar.setY(moveY + this.avatar.getY());
 		}
 		
 		public AvatarImage()

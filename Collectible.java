@@ -4,13 +4,13 @@ public class Collectible
 {
     //Instance Variables 
 	private String name;
-	private int healthBoost;
 	private int collection;
 	private int xcoord;
 	private int ycoord;
 	private final int height = 100;
 	private final int width = 100;
 	private Rectangle location = new Rectangle(xcoord, ycoord, width, height);
+    
     
     private final int mapHeight = 1000;
     private final int mapWidth = 1000;
@@ -31,14 +31,6 @@ public class Collectible
     }
 	
     /**
-    This gets the amount of health the avatar/user will get boosted by the Collectible object
-    @return healthBoost
-    */
-	public int getHealthBoost()
-	{
-		return new Integer(healthBoost);
-	}
-    /**
     This gets the location of the Collectible object
     @return location
     */
@@ -56,15 +48,6 @@ public class Collectible
 	public void setName(String name)
 	{
 		this.name = new String(name);
-	}
-
-    /**
-    This alters/assigns the amount of health the Collectible object raises for the avatar
-    @param healthBoost
-    */
-	public void setHealthBoost(int healthBoost)
-	{
-		this.healthBoost = new Integer(healthBoost);
 	}
 
     /**
@@ -104,20 +87,14 @@ public class Collectible
 	{
 		this.name = new String(name);
 		this.location = new Rectangle(new Integer(xcoord), new Integer(ycoord), width, height);
-	}
-
-	public Collectible(String name, int healthBoost, int xcoord, int ycoord)
-	{
-		this.name = new String(name);
-		this.healthBoost = new Integer(healthBoost);
-		this.location = new Rectangle(new Integer(xcoord), new Integer(ycoord), width, height);
+        this.collection = 0;
 	}
 	
 	public Collectible(Collectible copy)
 	{
 		this.name = new String(copy.name);
-		this.healthBoost = new Integer(copy.healthBoost);
 		this.location = new Rectangle(copy.location);
+        this.collection = copy.collection;
 	}
 
     //Methods
@@ -129,10 +106,11 @@ public class Collectible
     */
 	public boolean overlapsWith(Avatar avatar)
     {
-		if((avatar.getLocation().getX() == this.location.getX()) && (avatar.getLocation().getY() == this.location.getY()))
-			return true;
-		
-		return false;
+		if (avatar.getLocation().intersects(this.location)){
+            return true;
+        } else {
+            return false;
+        }
 	}
 
     /**

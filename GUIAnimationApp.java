@@ -13,34 +13,153 @@ import javafx.animation.AnimationTimer;
 import java.util.ArrayList;
 import java.lang.Math;
 import java.util.Random;
+
 /**
  * GUI to display the main map, with spawns and animations of the avatar, enemies, obstacles, and collectibles, and projectiles.
- *The avatar moves using keys on the keyboard for up,down,right, and left movements, and a combination of these.
- *The enemies will currently be stationary until later demos.
- *The avatar will also throw projectiles at the enemies to deal damage to them, and collect collectible items to make progress and eventually win the game.
- *The health of the avatar will be hearts displayed in the top corner of the screen that will decrease/increase in numbers based on interactions in the map.
+ * The avatar moves using keys on the keyboard for up, down, right and left movements, and a combination of these.
+ * The mouse calculates the angle between where the mouse clicked and the avatar to know what direction to shoot the projectile.
+ * The enemies will currently be stationary until later demos.
+ * The avatar will also throw projectiles at the enemies to deal damage to them, and collect collectible items to make progress and eventually win the game.
+ * The health of the avatar will be hearts displayed in the top corner of the screen that will decrease/increase in numbers based on interactions in the map.
  * Some parts referenced from:https://gist.github.com/jewelsea/8321740
  */
-// FINAL DRAFT
 
 public class GUIAnimationApp extends Application {
     // Instance variables for avatar movements
-    String Right = "don't move";
-    String Left = "don't move";
-    String Up = "don't move";
-    String Down = "don't move";
-	
-    // Creation of the life hearts and the image of the avatar for the GUI
-    AvatarImage mini = new AvatarImage();
-    ArrayList<LifeHeart> lifeHearts = new ArrayList<LifeHeart>();
-
-    // Creation of ArrayList for enemies
-    ArrayList<EnemyImage> enemyImages = new ArrayList<EnemyImage>();
-    ArrayList<Obstacle> obstacleList = new ArrayList<Obstacle>();
+	private boolean right = false;
+    private boolean left = false;
+    private boolean up = false;
+    private boolean down = false;
     
-    // Creation of collectibles
-
-
+    // Creation of the life hearts and the image of the avatar for the GUI
+    private AvatarImage mini = new AvatarImage();
+    private ArrayList<LifeHeart> lifeHearts = new ArrayList<LifeHeart>();
+    
+    //This creades an animation app instance
+    private AnimationApp demo2 = new AnimationApp();
+    
+    //These are the image arrays for enemies and collectibles
+    private ArrayList<Rectangle> imageRectangles = new ArrayList<Rectangle>();
+    
+    // Display Setup for the GUI
+    private Image map = new Image("Map 1000pixels.jpg");
+    private Pane root = new Pane();
+    private final Scene scene = new Scene(root, 1000, 1000, new ImagePattern(map));
+    
+    /**
+    This is the initialize method for the gui animation application
+    */
+    public void initialize(){
+        this.demo2.initialize();
+        
+        // Display positions of life hearts for health
+        for(int i = 0; i <= demo2.getAvatar().getHealth(); i++){
+            LifeHeart tempHealth = new LifeHeart(25, 20+(30*i));
+            
+            imageRectangles.add(tempHealth.getLocation());
+            
+            lifeHearts.add(tempHealth);
+        }
+        
+        // Display of life hearts on GUI
+        for(int i = 0; i < demo2.getAvatar().getHealth(); i++){
+            root.getChildren().add(lifeHearts.get(i).getLocation());
+        }
+        
+        //Distplay the obstacles
+        for (Obstacle o : demo2.getObstacleArray()) {
+            root.getChildren().add(o.getEnemyImageRectangle());
+        }
+        
+        
+        // Display Collectibles
+        Image record = new Image("Record.png");
+        for(Collectible o : demo2.getCollectiblesArray()){
+            if (o instanceof Collectible){
+                Rectangle recordSpace = new Rectangle(o.getLocation().getX(), o.getLocation().getY(), 60 , 60);
+                recordSpace.setFill(new ImagePattern(record));
+                
+                imageRectangles.add(recordSpace);
+                
+                root.getChildren().add(recordSpace);
+            }
+        }
+        
+    }
+    
+    /* //WORK IN PROGRESS
+    public void updateScreen() {
+        
+        //Remove all rectangles
+        
+        for (Rectangle r : imageRectangles) {
+            root.getChildren().remove(r);
+        }
+        
+        imageRectangles = new ArrayList<Rectangle>();
+        
+        // Display positions of life hearts for health
+        for(int i = 0; i <= demo2.getAvatar().getHealth(); i++){
+            LifeHeart tempHealth = new LifeHeart(25, 20+(30*i));
+            
+            imageRectangles.add(tempHealth.getLocation());
+            
+            lifeHearts.add(tempHealth);
+        }
+        
+        // Display of life hearts on GUI
+        for(int i = 0; i < demo2.getAvatar().getHealth(); i++){
+            root.getChildren().add(lifeHearts.get(i).getLocation());
+        }
+        
+        /*
+        // Display Obstacles
+        for (Obstacle o : demo2.getObstacleArray()){
+            int randomEnemy = new Random().nextInt(4);
+            if (o instanceof Enemy){
+                if (randomEnemy == 0){
+                    EnemyImage temp = new EnemyImage("DOTIFY", (int)(o.getLocation().getX()), (int)(o.getLocation().getY()));
+                    root.getChildren().add(temp.getLocation());
+                }
+                if (randomEnemy == 1) {
+                    EnemyImage temp = new EnemyImage("BEATSBYDRO", (int)(o.getLocation().getX()),(int)(o.getLocation().getY()));
+                    root.getChildren().add(temp.getLocation());
+                }
+                if (randomEnemy == 2) {
+                    EnemyImage temp = new EnemyImage("PEARMUSIC", (int)(o.getLocation().getX()),(int)(o.getLocation().getY()));
+                    root.getChildren().add(temp.getLocation());
+                }
+                if (randomEnemy == 3) {
+                    EnemyImage temp = new EnemyImage("MYPHONE", (int)(o.getLocation().getX()),(int)(o.getLocation().getY()));
+                    root.getChildren().add(temp.getLocation());
+                }
+            } else {
+                Image puddle = new Image("Puddle.png");
+                if (!(o instanceof Enemy || o instanceof Projectile)){
+                    Rectangle puddleSpace = new Rectangle(o.getLocation().getX(), o.getLocation().getY(), 60 , 60);
+                    puddleSpace.setFill(new ImagePattern(puddle));
+                    root.getChildren().add(puddleSpace);
+                }
+            }
+        }
+        
+        
+        // Display Collectibles
+        // Display Collectibles
+        Image record = new Image("Record.png");
+        for(Collectible o : demo2.getCollectiblesArray()){
+            if (o instanceof Collectible){
+                Rectangle recordSpace = new Rectangle(o.getLocation().getX(), o.getLocation().getY(), 60 , 60);
+                recordSpace.setFill(new ImagePattern(record));
+                
+                imageRectangles.add(recordSpace);
+                
+                root.getChildren().add(recordSpace);
+            }
+        }
+        
+    }
+    */
 
     public static void main(String[] args) {
         
@@ -50,73 +169,26 @@ public class GUIAnimationApp extends Application {
 
     public void start(Stage primaryStage) throws Exception {
         // Initialize the Animation App with 3 collectibles, 3 obstacles, and 3 enemies
-        AnimationApp demo2 = new AnimationApp();
-        demo2.initialize();
-
-       // Display Setup for the GUI
-        Image map = new Image("Map 1000pixels.jpg");
-        Pane root = new Pane();
-        final Scene scene = new Scene(root, 1000, 1000, new ImagePattern(map));
+        initialize();
+        
+        
+        
 	    
-        // Display positions of life hearts for health
-        for(int i = 0; i <= demo2.getAvatar().getHealth(); i++){
-            LifeHeart temp = new LifeHeart(25, 20+(30*i));
-            lifeHearts.add(temp);
-        }
-            
-        // Display of life hearts on GUI
-        for(int i = 0; i < demo2.getAvatar().getHealth(); i++){
-            root.getChildren().add(lifeHearts.get(i).getLocation());
-        }
-
-        // Display Obstacles
-        
-         for (int i = 0; i < demo2.getObstacleArray().size(); i++){
-            Obstacle o = demo2.getObstacleArray().get(i);
-            int randomEnemy = new Random().nextInt(4);
-            if (o instanceof Enemy){
-                if (randomEnemy == 0){
-                    EnemyImage temp = new EnemyImage("DOTIFY", (int) o.getLocation().getX(), (int) o.getLocation().getY());
-                    root.getChildren().add(temp.getLocation());
-                }
-                if (randomEnemy == 1) {
-                    EnemyImage temp = new EnemyImage("BEATSBYDRO", (int) o.getLocation().getX(),(int) o.getLocation().getY());
-                    root.getChildren().add(temp.getLocation());
-                }
-                if (randomEnemy == 2) {
-                    EnemyImage temp = new EnemyImage("PEARMUSIC", (int) o.getLocation().getX(),(int) o.getLocation().getY());
-                    root.getChildren().add(temp.getLocation());
-                }
-                if (randomEnemy == 3) {
-                    EnemyImage temp = new EnemyImage("MYPHONE", (int) o.getLocation().getX(),(int) o.getLocation().getY());
-                    root.getChildren().add(temp.getLocation());}
-            }  }
-        
-        for (int i = 0; i < demo2.getObstacleArray().size(); i++){
-            Obstacle o = demo2.getObstacleArray().get(i);
-            Image puddle = new Image("Puddle.png");
-            if (!(o instanceof Enemy || o instanceof Projectile)){
-                Rectangle puddleSpace = new Rectangle(o.getLocation().getX(), o.getLocation().getY(), 60 , 60);
-                puddleSpace.setFill(new ImagePattern(puddle));
-                root.getChildren().add(puddleSpace);}}
-
-
-
-       // Rectangle / hitbox
+        // Rectangle / hitbox
 		Rectangle mouseHitbox = new Rectangle(0, 0, 1250, 1250);           // IMPORTANT: Make the rectangle fill the whole window
 		mouseHitbox.setFill(Color.rgb(0,0,0,0));
-        
         root.getChildren().add(mini.getAvatarImage());
-		root.getChildren().add(mouseHitbox);                               // IMPORTANT: mouseHitbox must be added to root last
+		root.getChildren().add(mouseHitbox);
+		
+		mouseHitbox.toFront();
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
 		
         
-		
-        
+
         //Animation of movements
-        AnimationTimer moveTime = new AnimationTimer() {
+        AnimationTimer moveTime = new AnimationTimer(){
             @Override
             public void handle(long now) {
                 int moveX = 0;
@@ -124,7 +196,7 @@ public class GUIAnimationApp extends Application {
                 
                 Avatar avatarBeforeMovement = new Avatar(demo2.getAvatar());
                 
-                if (Right.equals("move")) {
+                if (right) {
                     mini.setForward();
                     
                     //Check if moving right is valid by the ANIMATIONAPP LOGIC
@@ -139,7 +211,7 @@ public class GUIAnimationApp extends Application {
                     
                     //moveX += 3;
                 }
-                if (Left.equals("move")) {
+                if (left) {
                     mini.setBackward();
                     
                     //Check if moving right is valid by the ANIMATIONAPP LOGIC
@@ -154,7 +226,7 @@ public class GUIAnimationApp extends Application {
                     
                    // moveX -= 3;
                 }
-                if (Up.equals("move")) {
+                if (up) {
                     //Check if moving right is valid by the ANIMATIONAPP LOGIC
                     demo2.processAvatarMove("up");
                     
@@ -167,7 +239,7 @@ public class GUIAnimationApp extends Application {
                     
                     //moveY -= 3;
                 }
-                if (Down.equals("move")) {
+                if (down) {
                     //Check if moving right is valid by the ANIMATIONAPP LOGIC
                     demo2.processAvatarMove("down");
                     
@@ -180,70 +252,74 @@ public class GUIAnimationApp extends Application {
                     //moveY += 3;
                 }
 
-                if ((mini.getXLocation(moveX) <= 758) && (mini.getXLocation(moveX) >= 0)) {
-                    if((mini.getYLocation(moveY) >= 0) && ( mini.getYLocation(moveY) <= 742)) {
-                        
-                        
+                if (((mini.getXLocation() + moveX) <= 758) && ((mini.getXLocation() + moveX) >= 0)) {
+                    if(((mini.getYLocation() + moveY) >= 0) && ((mini.getYLocation() + moveY) <= 805)) {
                         // Change the location of the avatar on the map
-                        mini.moveAvatar(moveX, moveY);
-                        /*
-                        // Take the location of the actual avatar and make it match the one on the map
-                        // Had to take the double value returned by the getX and getY methods into int
-                        Double doubleNewX = avatarLocation.getX() + moveX;
-                        Double doubleNewY = avatarLocation.getY() + moveY;
-                        int newX = doubleNewX.intValue();
-                        int newY = doubleNewY.intValue();
-                        avatarLocation.setLocation(newX, newY);
-                        */
+                        mini.moveAvatar(moveX, moveY);//Make sure to update the avatar
+                        Avatar updatedAvatar = new Avatar(demo2.getAvatar());
+                        updatedAvatar.setLocation((int)mini.getXLocation() + 100, (int)mini.getYLocation() + 100);
+                        demo2.setAvatar(updatedAvatar); 
+                        
+                        
                     }
                 }
-            }
-        };
+            }};
+    
+
+        
+
         // Movement Key Events
         scene.setOnKeyPressed(keyEvent -> {
                 // Starts moving right when key is pressed
                 if (keyEvent.getCode().toString() == "RIGHT")
-                    Right = "move";
+                    right = true;
         
                 // Starts moving left when key is pressed
                 if (keyEvent.getCode().toString() == "LEFT")
-                    Left = "move";
+                    left = true;
         
                 // Starts moving up when key is pressed
                 if (keyEvent.getCode().toString() == "UP")
-                    Up = "move";
+                    up = true;
         
                 // Starts moving down when key is pressed
                 if (keyEvent.getCode().toString() == "DOWN")
-                    Down = "move";
+                    down = true;
         });
 
         scene.setOnKeyReleased(keyEvent -> {
                 // Stops moving right when key is released
                 if (keyEvent.getCode().toString() == "RIGHT")
-                    Right = "don't move";
+                    right = false;
         
                 // Stops moving left when key is released
                 if (keyEvent.getCode().toString() == "LEFT")
-                    Left = "don't move";
+                    left = false;
         
                 // Stops moving up when key is released
                 if (keyEvent.getCode().toString() == "UP")
-                    Up = "don't move";
+                    up = false;
         
                 // Stops moving down when key is released
                 if (keyEvent.getCode().toString() == "DOWN")
-                    Down = "don't move";
+                    down = false;
         });
 		
 		mouseHitbox.setOnMouseClicked(mouseEvent ->
 		{
+			// Calculate the center of the avatar relative to the window
+			double avatarXCenter = (demo2.getAvatar().getLocation().getX()+27);
+			double avatarYCenter = (demo2.getAvatar().getLocation().getY()+33.5);
+			System.out.println(demo2.getAvatar().getLocation()); // CAN BE DELETED
+            
+            System.out.println(mini.getXLocation() + " " + mini.getYLocation());
+            
+            System.out.println(mini.getAvatarImage().getX() + " " + mini.getAvatarImage().getY());
+            
+            demo2.printCurrentState();
+            
+			// Calculate the anglet between the avatar and the mouse
 
-			
-			double avatarXCenter = (demo2.getAvatar().getLocation().getX()+27)+100;
-			double avatarYCenter = (demo2.getAvatar().getLocation().getY()+33.5)+100;
-			System.out.println(demo2.getAvatar().getLocation());
-			
 			double angle = Math.toDegrees(Math.atan2(mouseEvent.getX()-(avatarXCenter), mouseEvent.getY()-(avatarYCenter)))+180;
 			System.out.println("Click (" + mouseEvent.getX() + ", " + mouseEvent.getY() + ")"); // CAN BE DELETED
 			System.out.println(angle);// CAN BE DELETED
@@ -278,9 +354,16 @@ public class GUIAnimationApp extends Application {
 			{
 				System.out.println("North");
 			}
-		}
-		);
+			
+			// Projectile Image
+			ProjectileImage projectile = new ProjectileImage((int)(avatarXCenter-11), (int)(avatarYCenter-18.5));
+			root.getChildren().add(projectile.getImageLocation());
+			mouseHitbox.toFront();
+		});
 		
         moveTime.start();
+        
+        demo2.printCurrentState();
     }
-}
+};
+

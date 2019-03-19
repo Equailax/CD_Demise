@@ -5,14 +5,15 @@ import java.lang.Math;
 
 import javafx.scene.shape.ObservableFaceArray;
 
+
 public class Enemy extends Obstacle
 {
 	private boolean isDeadly = true;
 	private int health = 0;
-    private Projectile note = new Projectile("Enemy's Note", true, false, "NONE");
+    private Projectile note = new Projectile("Enemy's Note", "enemynote",true, false, "NONE");
     
-    private final int mapHeight = 650;
-    private final int mapWidth = 780;
+    private final int mapHeight = 1000;
+    private final int mapWidth = 1000;
 	
 	
 	/**
@@ -29,6 +30,7 @@ public class Enemy extends Obstacle
 		this.isDeadly = inputEnemy.isDeadly;
 		//super.setLocation(inputEnemy.getLocation());
 		this.health = inputEnemy.health;
+        
 	}
 	
 	public Enemy(){
@@ -40,9 +42,10 @@ public class Enemy extends Obstacle
 		super.setLocation(location);
 	}
 
-	public Enemy(String name, int aHealth ,int x, int y){
+	public Enemy(String name, String type,int aHealth ,int x, int y){
 		super.setName(name);
         super.setLocation(x, y);
+        super.setType(type);
         this.health = aHealth;
 	}
     
@@ -230,10 +233,45 @@ public class Enemy extends Obstacle
         
     }
     
+    
+    /////IMAGE MOVEMENT METHODS\\\\\\
+    
+    public void moveEnemyImage(int moveX, int moveY) {
+        this.imageRectangle.setLayoutX(this.imageRectangle.getLayoutX() + moveX);
+        this.imageRectangle.setLayoutY(this.imageRectangle.getLayoutY() + moveY);
+    }
+    
     public static void main(String[] args){
         Enemy e = new Enemy();
         Avatar a = new Avatar();
         
+        e.setHealth(1);
+        
+        System.out.println(" ");
+        
+        Projectile p = a.getProjectile();
+        
+        ArrayList<Obstacle> obstacleArray = new ArrayList<Obstacle>();
+        obstacleArray.add(e);
+        obstacleArray.add(p);
+        
+        System.out.println(obstacleArray);
+        
+        if (e.overlapsWithObstacle(p)) {
+            if (p.getDeadlyToEnemy() == true) {
+                obstacleArray.remove(p);
+                ((Enemy)e).takeDamage(1);
+            }
+        }
+        
+        if (e.getHealth() == 0) {
+            obstacleArray.remove(e);
+        }
+        
+        System.out.println(obstacleArray);
+    }
+        
+        /*
         System.out.println(e);
         
         ArrayList<Enemy> aE = new ArrayList<Enemy>();
@@ -285,6 +323,7 @@ public class Enemy extends Obstacle
         
         Enemy newEnemy = new Enemy((Enemy)temp.get(0));
         System.out.println(newEnemy);
-    }
+        */
+        
     
 }

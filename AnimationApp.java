@@ -13,8 +13,8 @@ public class AnimationApp{
     private ArrayList<Obstacle> obstacleArray = new ArrayList<Obstacle>();
     
     //Map dimensions
-    private final int mapHeight = 650;
-    private final int mapWidth = 780;
+    private final int mapHeight = 1000;
+    private final int mapWidth = 1000;
     
     //Constructors
     /**
@@ -122,24 +122,24 @@ public class AnimationApp{
         for (int i = 0; i < numberOfObstaclesToAdd; i++){
             
             //Generate a random number between 0 and 10 for the x coordinate
-            int randomXCoordinate = (int)(Math.random() * mapWidth + 110);
+            int randomXCoordinate = (int)(Math.random() * (mapWidth - 240) + 110);
             
             //Generate a random number between 0 and 10 for the Y coordinate
-            int randomYCoordinate = (int)(Math.random() * mapHeight + 110);
+            int randomYCoordinate = (int)(Math.random() * (mapHeight - 485) + 75);
             
-            tempObstaclesArrayList.add(new Obstacle("Obstacle" + i, randomXCoordinate, randomYCoordinate));  ///When constructing an obstacle, it should take a random positon as an argument
+            tempObstaclesArrayList.add(new Obstacle("Obstacle" + i, "puddle",randomXCoordinate, randomYCoordinate));  ///When constructing an obstacle, it should take a random positon as an argument
         }
         
         //Add the required enemies to the temporary array list
         for (int i = 0; i < numberOfEnemiesToAdd; i++){
             
             //Generate a random number between 0 and 10 for the x coordinate
-            int randomXCoordinate = (int)(Math.random() * mapWidth + 110);
+            int randomXCoordinate = (int)(Math.random() * (mapWidth - 240) + 110);
             
             //Generate a random number between 0 and 10 for the Y coordinate
-            int randomYCoordinate = (int)(Math.random() * mapHeight + 110);
+            int randomYCoordinate = (int)(Math.random() * (mapHeight - 485) + 75);
             
-            tempObstaclesArrayList.add(new Enemy("Enemy" + i, 1, randomXCoordinate, randomYCoordinate));  //Sets the enemy health to 3
+            tempObstaclesArrayList.add(new Enemy("Enemy" + i, "dotify", 1, randomXCoordinate, randomYCoordinate));  //Sets the enemy health to 3
         }
         
         this.obstacleArray = tempObstaclesArrayList;
@@ -161,10 +161,10 @@ public class AnimationApp{
         for (int i = 0; i < numberOfCollectiblesToAdd; i++){
             
             //Generate a random number between 0 and 10 for the x coordinate
-            int randomXCoordinate = (int)(Math.random() * mapWidth + 0);
+            int randomXCoordinate = (int)(Math.random() * (mapWidth - 240) + 110);
             
             //Generate a random number between 0 and 10 for the Y coordinate
-            int randomYCoordinate = (int)(Math.random() * mapHeight + 0);
+            int randomYCoordinate = (int)(Math.random() * (mapHeight - 485) + 75);
             
             tempCollectiblesArrayList.add(new Collectible("Collectible" + i, randomXCoordinate, randomYCoordinate));  ///When constructing a collectible, it should take a random positon as an argument
         }
@@ -405,15 +405,17 @@ public class AnimationApp{
                 
             } else if (o1 instanceof Projectile) {
                 //If the instance of the obstacle is a projectile have it move in its specified direction, as long as its within bounds
-                Projectile projecitleBeforeMovement = new Projectile((Projectile)o1);
-                projecitleBeforeMovement.move();
-                if ((projecitleBeforeMovement.getLocation().getX() < this.mapWidth && projecitleBeforeMovement.getLocation().getX() > 0) && (
+                //Projectile projecitleBeforeMovement = new Projectile((Projectile)o1);
+                //projecitleBeforeMovement.move();
+                ((Projectile)o1).move();
+                
+                /*if ((projecitleBeforeMovement.getLocation().getX() < this.mapWidth && projecitleBeforeMovement.getLocation().getX() > 0) && (
                     projecitleBeforeMovement.getLocation().getY() < this.mapHeight && projecitleBeforeMovement.getLocation().getY() > 0))
                     {
                         //If the projetile before movement is within bounds, have the original projectile move 
                         ((Projectile)o1).move();
                     }
-                
+                */
             }
         }
 		// Change this.ObstacleArray to the dynamic array
@@ -456,7 +458,7 @@ public class AnimationApp{
         }
         
         /*
-        Remove the projectiles that have run out of health, hit an enenmy or avatar
+        Remove the projectiles that overlap with any obstacle
         */
         int obstaclesToRemove = 0;
         
@@ -536,7 +538,7 @@ public class AnimationApp{
     public void initialize(){
         //Initalize the avatar
         this.minidisc = new Avatar("Minidisc",3, 3, 1, new Rectangle(100, 100, 54, 67));
-        this.minidisc.setPosition(); ///\/\/\/\/\/\/\/\/\/\/ IMPORTANT we want to make sure tha the origianl position of  the avatar is at the starting points
+        
         
         //Initialize Collectibles -- Add 3 collectibles -- make sure the positions of collectibles are correct
         addCollectible(3);
@@ -591,7 +593,7 @@ public class AnimationApp{
             mainApp.printCurrentState();
             
             //Prompt the user for a movement
-            System.out.print("Move UP, DOWN, LEFT, RIGHT, or SHOOT: ");
+            System.out.print("Move UP, DOWN, LEFT, RIGHT, or SHOOT + DIRECTION (LEFT, RIGHT, DOWN, UP): ");
             Scanner movementInput = new Scanner(System.in);
             
             //Check if the input is valid
@@ -601,11 +603,12 @@ public class AnimationApp{
             while (!check){
                 input = movementInput.nextLine();
                 
-                if(input.toLowerCase().equals("up") || input.toLowerCase().equals("down") || input.toLowerCase().equals("left") || input.toLowerCase().equals("right") || input.toLowerCase().equals("shoot")){
+                if(input.toLowerCase().equals("up") || input.toLowerCase().equals("down") || input.toLowerCase().equals("left") || input.toLowerCase().equals("right") || input.toLowerCase().equals("shoot")
+                    || input.toLowerCase().equals("shootleft") || input.toLowerCase().equals("shootright") || input.toLowerCase().equals("shootdown") || input.toLowerCase().equals("shootup")){
                     check = true;
                     break;
                 }else{
-                    System.out.print("Invalid input, please type either UP, DOWN, LEFT, RIGHT, or SHOOT: ");
+                    System.out.print("Invalid input, please type either UP, DOWN, LEFT, RIGHT, or SHOOTDIRECTION (LEFT, RIGHT, DOWN, UP): ");
                 }
             }
             
@@ -616,11 +619,24 @@ public class AnimationApp{
             //Process if the avatar can move 
             if (input.toLowerCase().equals("up") || input.toLowerCase().equals("down") || input.toLowerCase().equals("left") || input.toLowerCase().equals("right")){
                 mainApp.processAvatarMove(input);
-            } else if (input.toLowerCase().equals("shoot")) {
+            } else if (input.toLowerCase().equals("shoot") || input.toLowerCase().equals("shootleft") || input.toLowerCase().equals("shootright") || 
+                input.toLowerCase().equals("shootdown") || input.toLowerCase().equals("shootup")) {
+                
+                System.out.println("Projectile has shot");
                 
                 //have the avatar shoot the proejctile "in a direction"
                 Avatar avatarHasShot = new Avatar(mainApp.getAvatar());
-                avatarHasShot.shootProjectile(input);
+                
+                if (input.toLowerCase().contains("left")) {
+                    avatarHasShot.shootProjectile("left");
+                } else if (input.toLowerCase().contains("right")) {
+                    avatarHasShot.shootProjectile("right");
+                } else if (input.toLowerCase().contains("up")) {
+                    avatarHasShot.shootProjectile("up");
+                } else if (input.toLowerCase().contains("down")) {
+                    avatarHasShot.shootProjectile("down");
+                }
+                
                 mainApp.setAvatar(avatarHasShot);
                 
                 // add the projectile to the obstacle array
