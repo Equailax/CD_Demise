@@ -80,16 +80,10 @@ public class GUIAnimationApp extends Application {
         
         
         // Display Collectibles
-        Image record = new Image("Record.png");
+        
         for(Collectible o : demo2.getCollectiblesArray()){
-            if (o instanceof Collectible){
-                Rectangle recordSpace = new Rectangle(o.getLocation().getX(), o.getLocation().getY(), 60 , 60);
-                recordSpace.setFill(new ImagePattern(record));
-                
-                imageRectangles.add(recordSpace);
-                
-                root.getChildren().add(recordSpace);
-            }
+            o.setImage();
+            root.getChildren().add(o.getCollectibleImageRectangle());
         }
         
     }
@@ -261,6 +255,29 @@ public class GUIAnimationApp extends Application {
                     }
                     //moveY += 3;
                 }
+<<<<<<< HEAD
+
+                if (((mini.getXLocation() + moveX) <= 758) && ((mini.getXLocation() + moveX) >= 0)) {
+                    if(((mini.getYLocation() + moveY) >= 0) && ((mini.getYLocation() + moveY) <= 805)) {
+                        // Change the location of the avatar on the map
+                        mini.moveAvatar(moveX, moveY);//Make sure to update the avatar
+                        Avatar updatedAvatar = new Avatar(demo2.getAvatar());
+                        updatedAvatar.setLocation((int)mini.getXLocation() + 100, (int)mini.getYLocation() + 100);
+                        demo2.setAvatar(updatedAvatar);
+
+                        
+                        
+                        /*
+                        // Take the location of the actual avatar and make it match the one on the map
+                        // Had to take the double value returned by the getX and getY methods into int
+                        Double doubleNewX = avatarLocation.getX() + moveX;
+                        Double doubleNewY = avatarLocation.getY() + moveY;
+                        int newX = doubleNewX.intValue();
+                        int newY = doubleNewY.intValue();
+                        avatarLocation.setLocation(newX, newY);
+                        */
+
+=======
                 
                 if (((mini.getXImageLayout() + moveX) <= 758) && ((mini.getXImageLayout() + moveX) >= 0)) {
                     if(((mini.getYImageLayout() + moveY) >= 0) && ((mini.getYImageLayout() + moveY) <= 805)) {
@@ -270,6 +287,7 @@ public class GUIAnimationApp extends Application {
                         mini.moveAvatarImage(moveX, moveY);
                         
                         //Avatar updatedAvatar = new Avatar(demo2.getAvatar());
+>>>>>>> ed881553be50e34ed569d9688f37a81b6b4a93bf
                         
                         
                         
@@ -281,9 +299,17 @@ public class GUIAnimationApp extends Application {
                         root.getChildren().add(mini.getAvatarImage());
                     
                     }
+                    
                 }
                 
+<<<<<<< HEAD
+
+               
+=======
+>>>>>>> ed881553be50e34ed569d9688f37a81b6b4a93bf
             }};
+
+
     
 
         

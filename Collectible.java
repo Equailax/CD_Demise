@@ -1,4 +1,6 @@
 import java.awt.Rectangle;
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
 
 public class Collectible
 {
@@ -10,11 +12,12 @@ public class Collectible
 	private final int height = 100;
 	private final int width = 100;
 	private Rectangle location = new Rectangle(xcoord, ycoord, width, height);
-    
-    
     private final int mapHeight = 1000;
     private final int mapWidth = 1000;
 
+    //Image instance variables\\
+    private Image collectibleImage;
+    protected javafx.scene.shape.Rectangle imageRectangle = new javafx.scene.shape.Rectangle(xcoord, ycoord, height, width);
 
     //Getter Methods
     /** 
@@ -129,5 +132,39 @@ public class Collectible
         return this.name + " " + this.location.getLocation().getX() + " " + this.location.getLocation().getY();
     }
 
+    //Image Methods\\
+    /**
+     * This method returns the x position of the image layout
+     * 
+     * @return double
+     */
+    public double getXImageLayout() {
+        return this.imageRectangle.getLayoutX();
+    }
+
+    /**
+     * This method returns the y position of the image layout
+     */
+    public double getYImageLayout() {
+        return this.imageRectangle.getLayoutY();
+    }
+
+    /**
+     * This method sets the image of the obstacle
+     */
+
+     public void setImage(){
+         this.collectibleImage = new Image("Record.png");
+         this.imageRectangle = new javafx.scene.shape.Rectangle(this.location.getX(), this.location.getY(), 60, 60);
+         this.imageRectangle.setFill(new ImagePattern(this.collectibleImage));
+         this.location.setSize(60, 60);
+     }
+
+     /**
+      * this method returns the rectangle of the image
+      */
+    public javafx.scene.shape.Rectangle getCollectibleImageRectangle() {
+        return this.imageRectangle;
+    }
 
 }

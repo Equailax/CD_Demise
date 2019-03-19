@@ -327,6 +327,7 @@ public class AnimationApp{
             //just have the obstacle not move
             System.out.println("I cant move there!");
             
+            
         }else if (occupiedByEnemy == true){
             //if the spot is occupied by an enemy (regadless if there is a projectile there too), then dont move to the desired location and take damage
             this.minidisc.takeDamage(1);
