@@ -119,7 +119,12 @@ public class AnimationApp{
         }
         
         //Add the required obstacles to the temporary array list
-        for (int i = 0; i < numberOfObstaclesToAdd; i++){
+        
+        tempObstaclesArrayList.add(new Obstacle("Obstacle1", "puddle", 300, 110));
+        tempObstaclesArrayList.add(new Obstacle("Obstacle2", "puddle", 700, 400));
+        tempObstaclesArrayList.add(new Obstacle("Obstacle3", "puddle", 260, 565));
+        
+        /*for (int i = 0; i < numberOfObstaclesToAdd; i++){
             
             //Generate a random number between 0 and 10 for the x coordinate
             int randomXCoordinate = (int)(Math.random() * (mapWidth - 240) + 110);
@@ -129,7 +134,15 @@ public class AnimationApp{
             
             tempObstaclesArrayList.add(new Obstacle("Obstacle" + i, "puddle",randomXCoordinate, randomYCoordinate));  ///When constructing an obstacle, it should take a random positon as an argument
         }
+        */
         
+        //Add specific enemies
+        
+        tempObstaclesArrayList.add(new Enemy("Enemy1", "dotify", 1, 500, 400));  //Sets the enemy health to 3
+        tempObstaclesArrayList.add(new Enemy("Enemy2", "beatsbydro", 1, 700, 200));  //Sets the enemy health to 3
+        tempObstaclesArrayList.add(new Enemy("Enemy3", "mearmusic", 1, 200, 500));  //Sets the enemy health to 3
+        
+        /*
         //Add the required enemies to the temporary array list
         for (int i = 0; i < numberOfEnemiesToAdd; i++){
             
@@ -141,6 +154,7 @@ public class AnimationApp{
             
             tempObstaclesArrayList.add(new Enemy("Enemy" + i, "dotify", 1, randomXCoordinate, randomYCoordinate));  //Sets the enemy health to 3
         }
+        */
         
         this.obstacleArray = tempObstaclesArrayList;
     }
@@ -157,7 +171,12 @@ public class AnimationApp{
             tempCollectiblesArrayList = getCollectiblesArray();
         }
         
+        tempCollectiblesArrayList.add(new Collectible("Collectible1", 300, 300));
+        tempCollectiblesArrayList.add(new Collectible("Collectible2", 800, 565));
+        tempCollectiblesArrayList.add(new Collectible("Collectible3", 400, 200));
+        
         //Add the required number of collecitbles that one wished to add
+        /*
         for (int i = 0; i < numberOfCollectiblesToAdd; i++){
             
             //Generate a random number between 0 and 10 for the x coordinate
@@ -168,6 +187,7 @@ public class AnimationApp{
             
             tempCollectiblesArrayList.add(new Collectible("Collectible" + i, randomXCoordinate, randomYCoordinate));  ///When constructing a collectible, it should take a random positon as an argument
         }
+        */
         this.collectiblesArray = tempCollectiblesArrayList;
     }
     
