@@ -32,7 +32,7 @@ public class GUIAnimationApp extends Application {
     private boolean down = false;
     
     // Creation of the life hearts and the image of the avatar for the GUI
-    private AvatarImage mini = new AvatarImage();
+    //private AvatarImage mini = new AvatarImage();
     private ArrayList<LifeHeart> lifeHearts = new ArrayList<LifeHeart>();
     
     //This creades an animation app instance
@@ -170,15 +170,18 @@ public class GUIAnimationApp extends Application {
     public void start(Stage primaryStage) throws Exception {
         // Initialize the Animation App with 3 collectibles, 3 obstacles, and 3 enemies
         initialize();
-        
-        
-        
-	    
+          
         // Rectangle / hitbox
 		Rectangle mouseHitbox = new Rectangle(0, 0, 1250, 1250);           // IMPORTANT: Make the rectangle fill the whole window
 		mouseHitbox.setFill(Color.rgb(0,0,0,0));
+        
+        //root.getChildren().add(mini.getAvatarImage());
+		
+        Avatar mini = demo2.getAvatar();
+        
         root.getChildren().add(mini.getAvatarImage());
-		root.getChildren().add(mouseHitbox);
+        
+        root.getChildren().add(mouseHitbox);
 		
 		mouseHitbox.toFront();
         primaryStage.setScene(scene);
@@ -196,6 +199,8 @@ public class GUIAnimationApp extends Application {
                 
                 Avatar avatarBeforeMovement = new Avatar(demo2.getAvatar());
                 
+                //Avatar updatedAvatar = new Avatar(demo2.getAvatar());
+                
                 if (right) {
                     mini.setForward();
                     
@@ -206,7 +211,7 @@ public class GUIAnimationApp extends Application {
                     if (avatarBeforeMovement.equals(demo2.getAvatar())){
                         moveX -= 0;
                     } else {
-                        moveX += 3;
+                        moveX += 5;
                     }
                     
                     //moveX += 3;
@@ -221,7 +226,7 @@ public class GUIAnimationApp extends Application {
                     if (avatarBeforeMovement.equals(demo2.getAvatar())){
                         moveX -= 0;
                     } else {
-                        moveX -= 3;
+                        moveX -= 5;
                     }
                     
                    // moveX -= 3;
@@ -234,7 +239,7 @@ public class GUIAnimationApp extends Application {
                     if (avatarBeforeMovement.equals(demo2.getAvatar())){
                         moveY-= 0;
                     } else {
-                        moveY -= 3;
+                        moveY -= 5;
                     }
                     
                     //moveY -= 3;
@@ -247,13 +252,38 @@ public class GUIAnimationApp extends Application {
                     if (avatarBeforeMovement.equals(demo2.getAvatar())){
                         moveX -= 0;
                     } else {
-                        moveY += 3;
+                        moveY += 5;
                     }
                     //moveY += 3;
                 }
-
+                
+                if (((mini.getXImageLayout() + moveX) <= 758) && ((mini.getXImageLayout() + moveX) >= 0)) {
+                    if(((mini.getYImageLayout() + moveY) >= 0) && ((mini.getYImageLayout() + moveY) <= 805)) {
+                        
+                        root.getChildren().remove(mini.getAvatarImage());
+                        
+                        mini.moveAvatarImage(moveX, moveY);
+                        
+                        //Avatar updatedAvatar = new Avatar(demo2.getAvatar());
+                        
+                        
+                        
+                        mini.setLocation((int)mini.getXImageLayout() + 100, (int)mini.getYImageLayout() + 100);
+                        //demo2.setAvatar(updatedAvatar); 
+                        
+                        demo2.setAvatar(mini);
+                        
+                        root.getChildren().add(mini.getAvatarImage());
+                    
+                    }
+                }
+                
+                /*
                 if (((mini.getXLocation() + moveX) <= 758) && ((mini.getXLocation() + moveX) >= 0)) {
                     if(((mini.getYLocation() + moveY) >= 0) && ((mini.getYLocation() + moveY) <= 805)) {
+                        
+                        root.getChildren().remove(mini.getAvatarImage());
+                        
                         // Change the location of the avatar on the map
                         mini.moveAvatar(moveX, moveY);//Make sure to update the avatar
                         Avatar updatedAvatar = new Avatar(demo2.getAvatar());
@@ -261,8 +291,10 @@ public class GUIAnimationApp extends Application {
                         demo2.setAvatar(updatedAvatar); 
                         
                         
+                        root.getChildren().add(mini.getAvatarImage());
                     }
                 }
+                */
             }};
     
 
@@ -312,7 +344,7 @@ public class GUIAnimationApp extends Application {
 			double avatarYCenter = (demo2.getAvatar().getLocation().getY()+33.5);
 			System.out.println(demo2.getAvatar().getLocation()); // CAN BE DELETED
             
-            System.out.println(mini.getXLocation() + " " + mini.getYLocation());
+            System.out.println(mini.getXImageLayout() + " " + mini.getYImageLayout());
             
             System.out.println(mini.getAvatarImage().getX() + " " + mini.getAvatarImage().getY());
             
