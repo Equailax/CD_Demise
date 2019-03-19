@@ -26,11 +26,11 @@ import java.util.Random;
 
 public class GUIAnimationApp extends Application {
     // Instance variables for avatar movements
-    private String Right = "don't move";
-    private String Left = "don't move";
-    private String Up = "don't move";
-    private String Down = "don't move";
-	
+	private boolean right = false;
+    private boolean left = false;
+    private boolean up = false;
+    private boolean down = false;
+    
     // Creation of the life hearts and the image of the avatar for the GUI
     private AvatarImage mini = new AvatarImage();
     private ArrayList<LifeHeart> lifeHearts = new ArrayList<LifeHeart>();
@@ -66,50 +66,9 @@ public class GUIAnimationApp extends Application {
             root.getChildren().add(lifeHearts.get(i).getLocation());
         }
         
-        
-        // Display Obstacles
-        for (Obstacle o : demo2.getObstacleArray()){
-            int randomEnemy = new Random().nextInt(4);
-            if (o instanceof Enemy){
-                if (randomEnemy == 0){
-                    EnemyImage temp = new EnemyImage("DOTIFY", (int)(o.getLocation().getX()), (int)(o.getLocation().getY()));
-                    
-                    //imageRectangles.add(temp.getLocation());
-                    
-                    root.getChildren().add(temp.getLocation());
-                }
-                if (randomEnemy == 1) {
-                    EnemyImage temp = new EnemyImage("BEATSBYDRO", (int)(o.getLocation().getX()),(int)(o.getLocation().getY()));
-                    
-                    //imageRectangles.add(temp.getLocation());
-                    
-                    root.getChildren().add(temp.getLocation());
-                }
-                if (randomEnemy == 2) {
-                    EnemyImage temp = new EnemyImage("PEARMUSIC", (int)(o.getLocation().getX()),(int)(o.getLocation().getY()));
-                    
-                    //imageRectangles.add(temp.getLocation());
-                    
-                    root.getChildren().add(temp.getLocation());
-                }
-                if (randomEnemy == 3) {
-                    EnemyImage temp = new EnemyImage("MYPHONE", (int)(o.getLocation().getX()),(int)(o.getLocation().getY()));
-                    
-                    //imageRectangles.add(temp.getLocation());
-                    
-                    root.getChildren().add(temp.getLocation());
-                }
-            } else {
-                Image puddle = new Image("Puddle.png");
-                if (!(o instanceof Enemy || o instanceof Projectile)){
-                    Rectangle puddleSpace = new Rectangle(o.getLocation().getX(), o.getLocation().getY(), 60 , 60);
-                    puddleSpace.setFill(new ImagePattern(puddle));
-                    
-                    //imageRectangles.add(puddleSpace);
-                    
-                    root.getChildren().add(puddleSpace);
-                }
-            }
+        //Distplay the obstacles
+        for (Obstacle o : demo2.getObstacleArray()) {
+            root.getChildren().add(o.getEnemyImageRectangle());
         }
         
         
@@ -213,6 +172,7 @@ public class GUIAnimationApp extends Application {
         initialize();
         
         
+        
 	    
         // Rectangle / hitbox
 		Rectangle mouseHitbox = new Rectangle(0, 0, 1250, 1250);           // IMPORTANT: Make the rectangle fill the whole window
@@ -236,7 +196,7 @@ public class GUIAnimationApp extends Application {
                 
                 Avatar avatarBeforeMovement = new Avatar(demo2.getAvatar());
                 
-                if (Right.equals("move")) {
+                if (right) {
                     mini.setForward();
                     
                     //Check if moving right is valid by the ANIMATIONAPP LOGIC
@@ -251,7 +211,7 @@ public class GUIAnimationApp extends Application {
                     
                     //moveX += 3;
                 }
-                if (Left.equals("move")) {
+                if (left) {
                     mini.setBackward();
                     
                     //Check if moving right is valid by the ANIMATIONAPP LOGIC
@@ -266,7 +226,7 @@ public class GUIAnimationApp extends Application {
                     
                    // moveX -= 3;
                 }
-                if (Up.equals("move")) {
+                if (up) {
                     //Check if moving right is valid by the ANIMATIONAPP LOGIC
                     demo2.processAvatarMove("up");
                     
@@ -279,7 +239,7 @@ public class GUIAnimationApp extends Application {
                     
                     //moveY -= 3;
                 }
-                if (Down.equals("move")) {
+                if (down) {
                     //Check if moving right is valid by the ANIMATIONAPP LOGIC
                     demo2.processAvatarMove("down");
                     
@@ -332,37 +292,37 @@ public class GUIAnimationApp extends Application {
         scene.setOnKeyPressed(keyEvent -> {
                 // Starts moving right when key is pressed
                 if (keyEvent.getCode().toString() == "RIGHT")
-                    Right = "move";
+                    right = true;
         
                 // Starts moving left when key is pressed
                 if (keyEvent.getCode().toString() == "LEFT")
-                    Left = "move";
+                    left = true;
         
                 // Starts moving up when key is pressed
                 if (keyEvent.getCode().toString() == "UP")
-                    Up = "move";
+                    up = true;
         
                 // Starts moving down when key is pressed
                 if (keyEvent.getCode().toString() == "DOWN")
-                    Down = "move";
+                    down = true;
         });
 
         scene.setOnKeyReleased(keyEvent -> {
                 // Stops moving right when key is released
                 if (keyEvent.getCode().toString() == "RIGHT")
-                    Right = "don't move";
+                    right = false;
         
                 // Stops moving left when key is released
                 if (keyEvent.getCode().toString() == "LEFT")
-                    Left = "don't move";
+                    left = false;
         
                 // Stops moving up when key is released
                 if (keyEvent.getCode().toString() == "UP")
-                    Up = "don't move";
+                    up = false;
         
                 // Stops moving down when key is released
                 if (keyEvent.getCode().toString() == "DOWN")
-                    Down = "don't move";
+                    down = false;
         });
 		
 		mouseHitbox.setOnMouseClicked(mouseEvent ->

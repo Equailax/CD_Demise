@@ -6,6 +6,9 @@ import java.lang.Math;
 
 import javafx.scene.shape.ObservableFaceArray;
 
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
+
 public class Obstacle
 {
 	private String name;
@@ -13,9 +16,16 @@ public class Obstacle
 	//private int health;
 	private int xcoord;
 	private int ycoord;
-	private final int height = 54;
-	private final int width = 67;
+	private int height = 54;
+	private int width = 67;
 	private Rectangle location = new Rectangle(xcoord, ycoord, width, height);
+    
+        
+    ////IMAGE INSTANCE VARIABLES\\\\
+    
+    private Image obstacleImage;
+	protected javafx.scene.shape.Rectangle imageRectangle = new javafx.scene.shape.Rectangle(xcoord, ycoord, height, width);
+    private String type = "NOTSET";
 	
 	
 	/**
@@ -27,10 +37,18 @@ public class Obstacle
 	*/
 	public Obstacle(Obstacle inputObstacle){
 		this.name = inputObstacle.name;
-		//this.isDeadly = inputObstacle.isDeadly;
 		this.location = new Rectangle(inputObstacle.location);
-		//this.health = inputObstacle.health;
-	}
+	
+        /*
+        COPY THE TYPE OF OBSTACLE 
+        COPY THE IMAGE OF THE OBSTACLE AND LAYOUT LOCATION_FORWARD
+        */
+        
+        this.type = inputObstacle.type;
+        this.setImage();
+        
+        
+    }
 	
 	public Obstacle(){
 	}
@@ -39,11 +57,20 @@ public class Obstacle
 	{
 		this.name = name;
 		this.location = new Rectangle(location);
+        
 	}
 
-	public Obstacle(String name, int x, int y){
+	public Obstacle(String name, String aType, int x, int y){
 		this.name = name;
         this.location.setLocation(x,y);
+        
+        /*
+        HAVE A SET TYPE AS PARAMETER, WHICH INTURN DECIDES WHICH IMAGE TO USE
+        */
+        this.type = aType.toUpperCase();
+        
+        this.setImage();
+        
 	}
 	
 	/**
@@ -134,7 +161,170 @@ public class Obstacle
         }
     }
     
+    //////IMAGE METHODS\\\\\\\
+    
+    /**
+    This method returns the x position of the image layout
+    @return double
+    */
+    public double getXImageLayout(){
+        return this.imageRectangle.getLayoutX();
+    }
+    
+    /**
+    This method returns the y position of the image layout
+    */
+    public double getYImageLayout(){
+        return this.imageRectangle.getLayoutY();
+    }
+    
+    /**
+    This method sets the forward image of the obstacle
+    */
+    public void setImageForward() {
+		if(this.type.equals("DOTIFY")) {
+            
+			this.obstacleImage = new Image("Dotify.png");
+			this.imageRectangle.setFill(new ImagePattern(this.obstacleImage));
+            
+		} else if(this.type.equals("BEATSBYDRO")) {
+            
+			this.obstacleImage = new Image("BeatsbyDro.png");
+			this.imageRectangle.setFill(new ImagePattern(this.obstacleImage));
+            
+		} else if(this.type.equals("PEARMUSIC")) {
+            
+			this.obstacleImage = new Image("PearMusic.png");
+			this.imageRectangle.setFill(new ImagePattern(this.obstacleImage));
+            
+		} else if(this.type.equals("MYPHONE")) {
+            
+			this.obstacleImage = new Image("MyPhone.png");
+			this.imageRectangle.setFill(new ImagePattern(this.obstacleImage));
+            
+		} else if (this.type.equals("NOTE")) {
+            
+            this.obstacleImage = new Image("MusicNote.png");
+            this.imageRectangle.setFill(new ImagePattern(this.obstacleImage));
+            
+        } else if (this.type.equals("PUDDLE")) {
+            
+            this.obstacleImage = new Image("Puddle.png");
+            this.imageRectangle.setFill(new ImagePattern(this.obstacleImage));
+            
+        }
+	}
+    
+    /**
+    This method sets the backward image of the obstacle
+    */
+    public void setImageBackward() {
+        
+		if(this.type.equals("DOTIFY")) {
+            
+			this.obstacleImage = new Image("Dotify Backward.png");
+			this.imageRectangle.setFill(new ImagePattern(this.obstacleImage));
+            
+		} else if(this.type.equals("BEATSBYDRO")) {
+            
+			this.obstacleImage = new Image("BeatsbyDro Backward.png");
+			this.imageRectangle.setFill(new ImagePattern(this.obstacleImage));
+            
+		} else if(this.type.equals("PEARMUSIC")) {
+            
+			this.obstacleImage = new Image("PearMusic Backward.png");
+			this.imageRectangle.setFill(new ImagePattern(this.obstacleImage));
+            
+		} else if(this.type.equals("MYPHONE")) {
+            
+			this.obstacleImage = new Image("MyPhone Backward.png");
+			this.imageRectangle.setFill(new ImagePattern(this.obstacleImage));
+            
+		}
+	}
+    
+    public void setImage() {
+        if(this.type.equals("DOTIFY")) {
+            
+            this.obstacleImage = new Image("Dotify.png");
+            this.imageRectangle = new javafx.scene.shape.Rectangle(this.location.getX(), this.location.getY(), 54, 67);
+            this.imageRectangle.setFill(new ImagePattern(this.obstacleImage));
+            
+            this.location.setSize(54, 67);
+        
+        } else if(this.type.equals("BEATSBYDRO")) {
+            
+            this.obstacleImage = new Image("BeatsbyDro.png");
+            this.imageRectangle = new javafx.scene.shape.Rectangle(this.location.getX(), this.location.getY(), 37, 67);
+            this.imageRectangle.setFill(new ImagePattern(this.obstacleImage));
+            
+            this.location.setSize(37, 67);
+        
+        } else if(this.type.equals("PEARMUSIC")) {
+            
+            this.obstacleImage = new Image("PearMusic.png");
+            this.imageRectangle = new javafx.scene.shape.Rectangle(this.location.getX(), this.location.getY(), 40, 67);
+            this.imageRectangle.setFill(new ImagePattern(this.obstacleImage));
+            
+            this.location.setSize(40, 67);
+        
+        } else if(this.type.equals("MYPHONE")) {
+            
+            this.obstacleImage = new Image("MyPhone.png");
+            this.imageRectangle = new javafx.scene.shape.Rectangle(this.location.getX(), this.location.getY(), 40, 67);
+            this.imageRectangle.setFill(new ImagePattern(this.obstacleImage));
+            
+            this.location.setSize(40, 67);
+            
+        } else if (this.type.equals("NOTE")) {
+            
+            this.obstacleImage = new Image("MusicNote.png");
+            this.imageRectangle = new javafx.scene.shape.Rectangle(this.location.getX(), this.location.getY(), 22, 37);
+            this.imageRectangle.setFill(new ImagePattern(this.obstacleImage));
+            
+            this.location.setSize(22, 37);
+            
+        } else if (this.type.equals("PUDDLE")) {
+            
+            this.obstacleImage = new Image("Puddle.png");
+            this.imageRectangle = new javafx.scene.shape.Rectangle(this.location.getX(), this.location.getY(), 60 , 60);
+            this.imageRectangle.setFill(new ImagePattern(this.obstacleImage));
+            
+            this.location.setSize(60, 60);
+            
+        }
+    }
+    
+    /**
+    This returns the image location of the obstacle
+    @return javafx.scene.shape.Rectangle
+    */
+    public javafx.scene.shape.Rectangle getEnemyImageRectangle() {
+        return this.imageRectangle;
+    }
+    
+    /**
+    This sets the type of the obstacle, which then subsequently changes the image as well
+    @param aType : this is the type we wish to set the obstacle to
+    */
+    public void setType(String aType) {
+        if (aType != null) {
+            this.type = aType.toUpperCase();
+        }
+        this.setImage();
+    }
+    
+    /**
+    This method gets the type of the obstacle
+    @return String
+    */
+    public String getType() {
+        return this.type;
+    }
+    
+    
     public static void main(String[] args){
+        /*
         Obstacle o1 = new Obstacle("Obstacle1", 1, 0);
         Obstacle o2 = new Obstacle("Obstacle2", 1, 0);
         Obstacle o3 = new Obstacle("Obstacle3", 1, 0);
@@ -183,7 +373,10 @@ public class Obstacle
                 }
             }
         }
-          
+         */
+         
+        Obstacle o = new Obstacle("Obstacle1", "dotify", 0, 0);
+        System.out.println(o);
 
     }
 }

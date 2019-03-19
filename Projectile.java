@@ -17,8 +17,9 @@ public class Projectile extends Obstacle{
     //Constructors
     public Projectile(){}
     
-    public Projectile(String name, boolean deadlyToAvatar, boolean deadlyToEnemy, String aDirection){
+    public Projectile(String name, String type, boolean deadlyToAvatar, boolean deadlyToEnemy, String aDirection){
         super.setName(name);
+        super.setType(type);
         this.isDeadlyToAvatar = deadlyToAvatar;
         this.isDeadlyToEnemy = deadlyToEnemy;
         this.isShot = false;
@@ -230,7 +231,7 @@ public class Projectile extends Obstacle{
         */
 		
 		// Diagonal Movement Test
-		Projectile p = new Projectile("Projectile", false, true, "UP LEFT");
+		Projectile p = new Projectile("Projectile", "note",false, true, "UP LEFT");
 		p.setLocation(100, 100);
 		System.out.println(p);
 		/*

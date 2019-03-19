@@ -5,11 +5,12 @@ import java.lang.Math;
 
 import javafx.scene.shape.ObservableFaceArray;
 
+
 public class Enemy extends Obstacle
 {
 	private boolean isDeadly = true;
 	private int health = 0;
-    private Projectile note = new Projectile("Enemy's Note", true, false, "NONE");
+    private Projectile note = new Projectile("Enemy's Note", "enemynote",true, false, "NONE");
     
     private final int mapHeight = 1000;
     private final int mapWidth = 1000;
@@ -29,6 +30,7 @@ public class Enemy extends Obstacle
 		this.isDeadly = inputEnemy.isDeadly;
 		//super.setLocation(inputEnemy.getLocation());
 		this.health = inputEnemy.health;
+        
 	}
 	
 	public Enemy(){
@@ -40,9 +42,10 @@ public class Enemy extends Obstacle
 		super.setLocation(location);
 	}
 
-	public Enemy(String name, int aHealth ,int x, int y){
+	public Enemy(String name, String type,int aHealth ,int x, int y){
 		super.setName(name);
         super.setLocation(x, y);
+        super.setType(type);
         this.health = aHealth;
 	}
     
@@ -228,6 +231,14 @@ public class Enemy extends Obstacle
     */
     public void shootProjectile(){
         
+    }
+    
+    
+    /////IMAGE MOVEMENT METHODS\\\\\\
+    
+    public void moveEnemyImage(int moveX, int moveY) {
+        this.imageRectangle.setLayoutX(this.imageRectangle.getLayoutX() + moveX);
+        this.imageRectangle.setLayoutY(this.imageRectangle.getLayoutY() + moveY);
     }
     
     public static void main(String[] args){

@@ -17,7 +17,7 @@ public class Avatar{
     private final int height = 67;
     private int damage;
     private Rectangle location = new Rectangle(xposition, yposition, width, height);
-    private Projectile note = new Projectile("Avatar's Note", false, true, "NONE");
+    private Projectile note = new Projectile("Avatar's Note", "note",false, true, "NONE");
     
     private final int mapHeight = 1000;
     private final int mapWidth = 1000;
@@ -183,8 +183,7 @@ public class Avatar{
         
         if(direction.equals("up")){
 			if (this.location.getY() > 70){
-                //if the avatar is within the edge, then move up
-				//this.location.setLocation(xCoord, yCoord - 1);	
+                //if the avatar is within the edge, then move up	
                 this.moveY(-3);
 			}else if(this.location.getY() == 70){
                 System.out.println("Cant go there, im at the edge");
@@ -192,7 +191,6 @@ public class Avatar{
 		} else if(direction.equals("down")){
 			if (this.location.getY() < (574)){
                 //if the avatar is within the edge, then move down
-				//this.location.setLocation(xCoord, yCoord + 1);
                 this.moveY(3);
 			}else if(this.location.getY() == (574)){
                 System.out.println("Cant go there, im at the edge");
@@ -200,8 +198,10 @@ public class Avatar{
 		} else if(direction.equals("left")){
 			if (this.location.getX() > 100){
                 //if the avatar is within the edge, then move left
-				//this.location.setLocation(xCoord - 1, yCoord);
                 this.moveX(-3);
+                
+                //this.setBackward();
+                
 			}else if(this.location.getX() == 100){
                 System.out.println("Cant go there, im at the edge");
             }
@@ -210,6 +210,9 @@ public class Avatar{
 				//if the avatar is within the egde, then move right
                 //this.location.setLocation(xCoord + 1, yCoord);
                 this.moveX(3);
+                
+                //this.setForward();
+                
 			}else if(this.location.getX() == (mapWidth - 138)){
                 System.out.println("Cant go there, im at the edge");
             }
@@ -230,7 +233,7 @@ public class Avatar{
     @param directionToShoot : this is the direction that we want to shoot the projecitle
     */
     public void shootProjectile(String directionToShoot){
-        this.setProjectile(new Projectile(this.getProjectile().getName(), this.getProjectile().getDeadlyToAvatar(), this.getProjectile().getDeadlyToEnemy(), directionToShoot));
+        this.setProjectile(new Projectile(this.getProjectile().getName(), "note",this.getProjectile().getDeadlyToAvatar(), this.getProjectile().getDeadlyToEnemy(), directionToShoot));
     }
     
     /**
@@ -320,26 +323,10 @@ public class Avatar{
         return this.imageRectangle.getLayoutY();
     }
     
-    public void moveAvatarImage(int moveX, int moveY)
-    {
-        //this.moveX = moveX;
-        //this.moveY = moveY;
+    public void moveAvatarImage(int moveX, int moveY) {
         this.imageRectangle.setLayoutX(this.imageRectangle.getLayoutX() + moveX);
         this.imageRectangle.setLayoutY(this.imageRectangle.getLayoutY() + moveY);
-        
-        //this.avatar.setX(moveX + this.avatar.getX());
-        //this.avatar.setY(moveY + this.avatar.getY());
     }
-    
-    /*public AvatarImage()
-    {
-        this.avatarImageForward = new Image("MiniDisc.png");
-        this.avatarImageBackward = new Image("MiniDisc Backward.png");
-        //this.avatar = new Rectangle(100, 100, 54, 67);
-        //this.avatar.setFill(new ImagePattern(avatarImageForward));
-        
-    }
-    */
     
     
     // constructors 

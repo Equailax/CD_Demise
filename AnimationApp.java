@@ -127,7 +127,7 @@ public class AnimationApp{
             //Generate a random number between 0 and 10 for the Y coordinate
             int randomYCoordinate = (int)(Math.random() * (mapHeight - 485) + 75);
             
-            tempObstaclesArrayList.add(new Obstacle("Obstacle" + i, randomXCoordinate, randomYCoordinate));  ///When constructing an obstacle, it should take a random positon as an argument
+            tempObstaclesArrayList.add(new Obstacle("Obstacle" + i, "puddle",randomXCoordinate, randomYCoordinate));  ///When constructing an obstacle, it should take a random positon as an argument
         }
         
         //Add the required enemies to the temporary array list
@@ -139,7 +139,7 @@ public class AnimationApp{
             //Generate a random number between 0 and 10 for the Y coordinate
             int randomYCoordinate = (int)(Math.random() * (mapHeight - 485) + 75);
             
-            tempObstaclesArrayList.add(new Enemy("Enemy" + i, 1, randomXCoordinate, randomYCoordinate));  //Sets the enemy health to 3
+            tempObstaclesArrayList.add(new Enemy("Enemy" + i, "dotify", 1, randomXCoordinate, randomYCoordinate));  //Sets the enemy health to 3
         }
         
         this.obstacleArray = tempObstaclesArrayList;
