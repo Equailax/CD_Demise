@@ -140,7 +140,7 @@ public class AnimationApp{
         
         tempObstaclesArrayList.add(new Enemy("Enemy1", "dotify", 1, 500, 400));  //Sets the enemy health to 3
         tempObstaclesArrayList.add(new Enemy("Enemy2", "beatsbydro", 1, 700, 200));  //Sets the enemy health to 3
-        tempObstaclesArrayList.add(new Enemy("Enemy3", "mearmusic", 1, 200, 500));  //Sets the enemy health to 3
+        tempObstaclesArrayList.add(new Enemy("Enemy3", "pearmusic", 1, 200, 500));  //Sets the enemy health to 3
         
         /*
         //Add the required enemies to the temporary array list
@@ -326,7 +326,6 @@ public class AnimationApp{
         if(occupiedByObstacle == true){
             //just have the obstacle not move
             System.out.println("I cant move there!");
-            
             
         }else if (occupiedByEnemy == true){
             //if the spot is occupied by an enemy (regadless if there is a projectile there too), then dont move to the desired location and take damage

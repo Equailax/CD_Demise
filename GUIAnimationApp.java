@@ -26,10 +26,10 @@ import java.util.Random;
 
 public class GUIAnimationApp extends Application {
     // Instance variables for avatar movements
-	private boolean right = true;
-    private boolean left = true;
-    private boolean up = true;
-    private boolean down = true;
+	private boolean right = false;
+    private boolean left = false;
+    private boolean up = false;
+    private boolean down = false;
     
     // Creation of the life hearts and the image of the avatar for the GUI
     //private AvatarImage mini = new AvatarImage();
