@@ -118,19 +118,19 @@ public class Projectile extends Obstacle{
         if (this.direction.contains("UP")){
 			if (this.getLocation().getY() > 100){
                 //if the obstacle is within the edge, then move up
-				yChange = -1; 
+				yChange = -3; 
 			} else if (this.getLocation().getY() == 100) {
                 //Move the projectile the opsoite direction once it has hit a boundary
-				yChange = 1;
+				yChange = 3;
 				this.direction = this.direction.replace("UP", "DOWN"); // Bounce
             }
 		} else if(this.direction.contains("DOWN")){
 			if (this.getLocation().getY() < mapHeight){
                 //if the obstcle is within the edge, then move down
-				yChange = 1;
+				yChange = 3;
             } else if (this.getLocation().getY() == mapHeight) {
                 //Move the projectile the opsoite direction once it has hit a boundary
-				yChange = -1;
+				yChange = -3;
                 this.direction = this.direction.replace("DOWN", "UP"); // Bounce
             }
 		}
@@ -138,19 +138,19 @@ public class Projectile extends Obstacle{
 		if (this.direction.contains("LEFT")){
 			if (this.getLocation().getX() > 100){
                 //if the obstacle is within the edge, then move left
-				xChange = -1;
+				xChange = -3;
             } else if (this.getLocation().getX() == 100) {
                 //Move the projectile the opsoite direction once it has hit a boundary
-				xChange = 1;
+				xChange = 3;
 				this.direction = this.direction.replace("LEFT", "RIGHT"); // Bounce
             }
 		}else if(this.direction.contains("RIGHT")){
 			if (this.getLocation().getX() < mapWidth){
 				//if the obsatcle is within the egde, then move right
-				xChange = 1;
+				xChange = 3;
             } else if (this.getLocation().getX() == mapWidth) {
                 //Move the projectile the opsoite direction once it has hit a boundary
-				xChange = -1;
+				xChange = -3;
 				this.direction = this.direction.replace("RIGHT", "LEFT"); // Bounce
             }
 		}

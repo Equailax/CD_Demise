@@ -310,7 +310,9 @@ public class AnimationApp{
                     occupiedByEnemy = true;
                 }else if (o instanceof Projectile){
                     //If the obstacle is an instance of a projectile, then we can move through it and so the spot is occupied by a projectile
-                    occupiedByProjectile = true;
+                    if (((Projectile)o).getDeadlyToAvatar()) {
+                        occupiedByProjectile = true;
+                    }
                 }
             }
         }

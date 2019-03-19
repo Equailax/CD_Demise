@@ -59,6 +59,11 @@ public class GUIAnimationApp extends Application {
     public void initialize(){
         this.demo2.initialize();
         
+        obstacleGUIArray = demo2.getObstacleArray();
+        collectibleGUIArray = demo2.getCollectiblesArray();
+        mini = demo2.getAvatar();
+        
+        
         // Display positions of life hearts for health
         for(int i = 0; i <= demo2.getAvatar().getHealth(); i++){
             LifeHeart tempHealth = new LifeHeart(25, 20+(30*i));
@@ -74,7 +79,7 @@ public class GUIAnimationApp extends Application {
         }
         
         //Distplay the obstacles
-        for (Obstacle o : demo2.getObstacleArray()) {
+        for (Obstacle o : this.obstacleGUIArray) {
             root.getChildren().add(o.getEnemyImageRectangle());
         }
         
@@ -259,14 +264,25 @@ public class GUIAnimationApp extends Application {
                 if (((mini.getXImageLayout() + moveX) <= 758) && ((mini.getXImageLayout() + moveX) >= 0)) {
                     if(((mini.getYImageLayout() + moveY) >= 0) && ((mini.getYImageLayout() + moveY) <= 805)) {
                         
+                        //Process the obstacle movement remove anything if necessary
+                        demo2.processObstacleMove();
+                        demo2.removeObstacles();
+                        
+                        for (Obstacle o : obstacleGUIArray) {
+                            root.getChildren().remove(o.getEnemyImageRectangle());
+                        }
+                        
+                        obstacleGUIArray = demo2.getObstacleArray();
+                        
+                        for (Obstacle o : obstacleGUIArray) {
+                            root.getChildren().add(o.getEnemyImageRectangle());
+                        }
+                        
+                        
                         root.getChildren().remove(mini.getAvatarImage());
                         
                         mini.moveAvatarImage(moveX, moveY);
-                        
-                        //Avatar updatedAvatar = new Avatar(demo2.getAvatar());
-                        
-                        
-                        
+
                         mini.setLocation((int)mini.getXImageLayout() + 100, (int)mini.getYImageLayout() + 100);
                         //demo2.setAvatar(updatedAvatar); 
                         
@@ -346,30 +362,103 @@ public class GUIAnimationApp extends Application {
 			if (angle > 337.5)
 			{
 				System.out.println("North");
+                
+                mini.shootProjectile("up");
+                
+                Projectile avatarProjectile = new Projectile(mini.getProjectile());
+                
+                this.obstacleGUIArray.add(avatarProjectile);
+                demo2.setObstacleArray(this.obstacleGUIArray);
+                
+                
 			} else if (angle > 292.5)
 			{
 				System.out.println("North East");
+                
+                mini.shootProjectile("upright");
+                
+                Projectile avatarProjectile = new Projectile(mini.getProjectile());
+                
+                this.obstacleGUIArray.add(avatarProjectile);
+                demo2.setObstacleArray(this.obstacleGUIArray);
+                
 			} else if (angle > 247.5)
 			{
 				System.out.println("East");
+                
+                mini.shootProjectile("right");
+                
+                Projectile avatarProjectile = new Projectile(mini.getProjectile());
+                
+                this.obstacleGUIArray.add(avatarProjectile);
+                demo2.setObstacleArray(this.obstacleGUIArray);
+                
 			} else if (angle > 202.5)
 			{
 				System.out.println("South East");
+                
+                mini.shootProjectile("downright");
+                
+                Projectile avatarProjectile = new Projectile(mini.getProjectile());
+                
+                this.obstacleGUIArray.add(avatarProjectile);
+                demo2.setObstacleArray(this.obstacleGUIArray);
+                
 			} else if (angle > 157.5)
 			{
 				System.out.println("South");
+                
+                mini.shootProjectile("down");
+                
+                Projectile avatarProjectile = new Projectile(mini.getProjectile());
+                
+                this.obstacleGUIArray.add(avatarProjectile);
+                demo2.setObstacleArray(this.obstacleGUIArray);
+                
 			} else if (angle > 112.5)
 			{
 				System.out.println("South West");
+                
+                mini.shootProjectile("downleft");
+                
+                Projectile avatarProjectile = new Projectile(mini.getProjectile());
+                
+                this.obstacleGUIArray.add(avatarProjectile);
+                demo2.setObstacleArray(this.obstacleGUIArray);
+                
 			} else if (angle > 67.5)
 			{
 				System.out.println("West");
+                
+                mini.shootProjectile("left");
+                
+                Projectile avatarProjectile = new Projectile(mini.getProjectile());
+                
+                this.obstacleGUIArray.add(avatarProjectile);
+                demo2.setObstacleArray(this.obstacleGUIArray);
+                
 			} else if (angle > 22.5)
 			{
 				System.out.println("North West");
+                
+                mini.shootProjectile("upleft");
+                
+                Projectile avatarProjectile = new Projectile(mini.getProjectile());
+                
+                this.obstacleGUIArray.add(avatarProjectile);
+                demo2.setObstacleArray(this.obstacleGUIArray);
+                
 			} else if (angle >= 0)
 			{
 				System.out.println("North");
+                
+                mini.shootProjectile("up");
+                
+                Projectile avatarProjectile = new Projectile(mini.getProjectile());
+                
+                this.obstacleGUIArray.add(avatarProjectile);
+                demo2.setObstacleArray(this.obstacleGUIArray);
+                
 			}
 			
 			// Projectile Image
