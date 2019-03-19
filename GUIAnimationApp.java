@@ -26,25 +26,32 @@ import java.util.Random;
 
 public class GUIAnimationApp extends Application {
     // Instance variables for avatar movements
-	private boolean right = false;
-    private boolean left = false;
-    private boolean up = false;
-    private boolean down = false;
+	private boolean right = true;
+    private boolean left = true;
+    private boolean up = true;
+    private boolean down = true;
     
     // Creation of the life hearts and the image of the avatar for the GUI
     //private AvatarImage mini = new AvatarImage();
     private ArrayList<LifeHeart> lifeHearts = new ArrayList<LifeHeart>();
     
-    //This creades an animation app instance
-    private AnimationApp demo2 = new AnimationApp();
-    
-    //These are the image arrays for enemies and collectibles
-    private ArrayList<Rectangle> imageRectangles = new ArrayList<Rectangle>();
     
     // Display Setup for the GUI
     private Image map = new Image("Map 1000pixels.jpg");
     private Pane root = new Pane();
     private final Scene scene = new Scene(root, 1000, 1000, new ImagePattern(map));
+    
+    //Instance variables
+    //This creades an animation app instance
+    private AnimationApp demo2 = new AnimationApp();
+    
+    //These are the image arrays for enemies and collectibles
+    private ArrayList<Obstacle> obstacleGUIArray = demo2.getObstacleArray();
+    private ArrayList<Collectible> collectibleGUIArray = demo2.getCollectiblesArray();
+    
+    private Avatar mini = demo2.getAvatar();
+    
+    
     
     /**
     This is the initialize method for the gui animation application
@@ -176,8 +183,6 @@ public class GUIAnimationApp extends Application {
 		mouseHitbox.setFill(Color.rgb(0,0,0,0));
         
         //root.getChildren().add(mini.getAvatarImage());
-		
-        Avatar mini = demo2.getAvatar();
         
         root.getChildren().add(mini.getAvatarImage());
         
