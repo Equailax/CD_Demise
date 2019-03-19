@@ -73,16 +73,10 @@ public class GUIAnimationApp extends Application {
         
         
         // Display Collectibles
-        Image record = new Image("Record.png");
+        
         for(Collectible o : demo2.getCollectiblesArray()){
-            if (o instanceof Collectible){
-                Rectangle recordSpace = new Rectangle(o.getLocation().getX(), o.getLocation().getY(), 60 , 60);
-                recordSpace.setFill(new ImagePattern(record));
-                
-                imageRectangles.add(recordSpace);
-                
-                root.getChildren().add(recordSpace);
-            }
+            o.setImage();
+            root.getChildren().add(o.getCollectibleImageRectangle());
         }
         
     }
