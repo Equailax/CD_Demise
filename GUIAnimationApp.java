@@ -284,7 +284,8 @@ public class GUIAnimationApp extends Application {
                         mini.moveAvatarImage(moveX, moveY);
 
                         mini.setLocation((int)mini.getXImageLayout() + 100, (int)mini.getYImageLayout() + 100);
-                        //demo2.setAvatar(updatedAvatar); 
+                        
+                        mini.setHealth(demo2.getAvatar().getHealth());
                         
                         demo2.setAvatar(mini);
                         

@@ -138,9 +138,9 @@ public class AnimationApp{
         
         //Add specific enemies
         
-        tempObstaclesArrayList.add(new Enemy("Enemy1", "dotify", 1, 500, 400));  //Sets the enemy health to 3
-        tempObstaclesArrayList.add(new Enemy("Enemy2", "beatsbydro", 1, 700, 200));  //Sets the enemy health to 3
-        tempObstaclesArrayList.add(new Enemy("Enemy3", "pearmusic", 1, 200, 500));  //Sets the enemy health to 3
+        tempObstaclesArrayList.add(new Enemy("Enemy1", "dotify", 1, 500, 400, "UPRIGHT"));  //Sets the enemy health to 3
+        tempObstaclesArrayList.add(new Enemy("Enemy2", "beatsbydro", 1, 700, 200, "DOWN"));  //Sets the enemy health to 3
+        tempObstaclesArrayList.add(new Enemy("Enemy3", "pearmusic", 1, 200, 500, "UP"));  //Sets the enemy health to 3
         
         /*
         //Add the required enemies to the temporary array list
@@ -390,7 +390,7 @@ public class AnimationApp{
             if (o1 instanceof Enemy){
                 
                 //Currently has the enemy move in a random direction
-                ((Enemy)o1).randomMove();
+                ((Enemy)o1).move();
                 
                 //Check if the enemy overlaps with any other enemy, obstacle, projectile
                 boolean occupiedByProjectile = false;
@@ -415,8 +415,17 @@ public class AnimationApp{
                     occupied = true;
                     this.minidisc.takeDamage(1);        
                     
-                } 
+                }
                 
+                if (occupiedByProjectile) {
+                    //If the spot is not occupied by an obstacle or an enemy, but it is occupied by a projectile that damages enemies, the enemy takes damage.
+                    ((Enemy)o1).takeDamage(1);
+                } else if (occupied) {
+                    // If moving obstacle overlaps with an avatar or obstacle, move it back
+                    o1.getLocation().setLocation((int)preMove.getX(), (int)preMove.getY());
+                }
+                
+                /*
                 if (occupied){
                     // If moving obstacle overlaps with an avatar or obstacle, move it back
                     o1.getLocation().setLocation((int)preMove.getX(), (int)preMove.getY());
@@ -424,6 +433,7 @@ public class AnimationApp{
                     //If the spot is not occupied by an obstacle or an enemy, but it is occupied by a projectile that damages enemies, the enemy takes damage.
                     ((Enemy)o1).takeDamage(1);
                 }
+                */
                 
             } else if (o1 instanceof Projectile) {
                 //If the instance of the obstacle is a projectile have it move in its specified direction, as long as its within bounds
