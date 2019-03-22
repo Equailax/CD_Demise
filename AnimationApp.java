@@ -386,8 +386,11 @@ public class AnimationApp{
             boolean occupied = false;
 			Rectangle preMove = new Rectangle(o1.getLocation());
 			
+            
             //If the obstacle is an instance of an enemy, move the enemy in a random direction for now
             if (o1 instanceof Enemy){
+                
+                Obstacle o1BeforeMovement = new Enemy((Enemy)o1);
                 
                 //Currently has the enemy move in a random direction
                 ((Enemy)o1).move();
@@ -396,14 +399,18 @@ public class AnimationApp{
                 boolean occupiedByProjectile = false;
                 
                 for(Obstacle o2: staticObstacleArray){
-                    if(o1.overlapsWithObstacle(o2)){
-                        if (o2 instanceof Enemy || o2 instanceof Obstacle){
-                            //If the instance of the obstacle is an enemy or an obstacle, then it cant move through
-                            occupied = true;
-                        }else if (o2 instanceof Projectile){
-                            //If the isntance is a projectile that damages enemies, then it can move through but it takes damage
-                            if (((Projectile)o2).getDeadlyToEnemy()){
-                                occupiedByProjectile = true;
+                    if (!(o1BeforeMovement.equals(o2))){
+                        if(o1.overlapsWithObstacle(o2)){
+                            if (o2 instanceof Enemy){
+                                //If the instance of the obstacle is an enemy or an obstacle, then it cant move through
+                                occupied = true;
+                            }else if (o2 instanceof Projectile){
+                                //If the isntance is a projectile that damages enemies, then it can move through but it takes damage
+                                if (((Projectile)o2).getDeadlyToEnemy()){
+                                    occupiedByProjectile = true;
+                                }
+                            } else if (o2 instanceof Obstacle) {
+                                occupied = true;
                             }
                         }
                     }
@@ -420,9 +427,22 @@ public class AnimationApp{
                 if (occupiedByProjectile) {
                     //If the spot is not occupied by an obstacle or an enemy, but it is occupied by a projectile that damages enemies, the enemy takes damage.
                     ((Enemy)o1).takeDamage(1);
+                    //System.out.println("ENEMY SHOULD BE DEAD OMG");
+                    
                 } else if (occupied) {
                     // If moving obstacle overlaps with an avatar or obstacle, move it back
                     o1.getLocation().setLocation((int)preMove.getX(), (int)preMove.getY());
+                    
+                    if (((Enemy)o1).getDirection().contains("UP")) {
+                        ((Enemy)o1).setDirection("DOWN");
+                    } else if (((Enemy)o1).getDirection().contains("DOWN")) {
+                        ((Enemy)o1).setDirection("up");
+                    }
+                    if (((Enemy)o1).getDirection().contains("LEFT")) {
+                        ((Enemy)o1).setDirection("RIGHT");
+                    } else if (((Enemy)o1).getDirection().contains("RIGHT")) {
+                        ((Enemy)o1).setDirection("LEFT");
+                    }
                 }
                 
                 /*
