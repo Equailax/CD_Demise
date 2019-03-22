@@ -434,14 +434,14 @@ public class AnimationApp{
                     o1.getLocation().setLocation((int)preMove.getX(), (int)preMove.getY());
                     
                     if (((Enemy)o1).getDirection().contains("UP")) {
-                        ((Enemy)o1).setDirection("DOWN");
+                        ((Enemy)o1).setDirection(((Enemy)o1).getDirection().replace("UP", "DOWN"));
                     } else if (((Enemy)o1).getDirection().contains("DOWN")) {
-                        ((Enemy)o1).setDirection("up");
+                        ((Enemy)o1).setDirection(((Enemy)o1).getDirection().replace("DOWN", "UP"));
                     }
                     if (((Enemy)o1).getDirection().contains("LEFT")) {
-                        ((Enemy)o1).setDirection("RIGHT");
+                        ((Enemy)o1).setDirection(((Enemy)o1).getDirection().replace("LEFT", "RIGHT"));
                     } else if (((Enemy)o1).getDirection().contains("RIGHT")) {
-                        ((Enemy)o1).setDirection("LEFT");
+                        ((Enemy)o1).setDirection(((Enemy)o1).getDirection().replace("RIGHT", "LEFT"));
                     }
                 }
                 
