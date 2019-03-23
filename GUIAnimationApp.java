@@ -128,10 +128,10 @@ public class GUIAnimationApp extends Application {
                 int moveX = 0;
                 int moveY = 0;
                 
-                Avatar avatarBeforeMovement = new Avatar(demo2.getAvatar());
+                
                 
                 //Avatar updatedAvatar = new Avatar(demo2.getAvatar());
-                
+                Avatar avatarBeforeMovement = new Avatar(demo2.getAvatar());
                 if (right) {
                     mini.setForward();
                     
@@ -158,6 +158,7 @@ public class GUIAnimationApp extends Application {
                         moveX -= 5;
                     }
                 }
+				avatarBeforeMovement = new Avatar(demo2.getAvatar());
                 if (up) {
                     //Check if moving right is valid by the ANIMATIONAPP LOGIC
                     demo2.processAvatarMove("up");
@@ -175,7 +176,7 @@ public class GUIAnimationApp extends Application {
                     
                     //if the avatar's movement changed, set the moveX to + 3, if not, nothing has changed
                     if (avatarBeforeMovement.equals(demo2.getAvatar())){
-                        moveX -= 0;
+                        moveY -= 0;
                     } else {
                         moveY += 5;
                     }
@@ -207,8 +208,8 @@ public class GUIAnimationApp extends Application {
                     root.getChildren().add(c.getCollectibleImageRectangle());
                 }
                 
-                if (((mini.getXImageLayout() + moveX) <= 758) && ((mini.getXImageLayout() + moveX) >= 0)) {
-                    if(((mini.getYImageLayout() + moveY) >= 0) && ((mini.getYImageLayout() + moveY) <= 805)) {
+                if (((mini.getXImageLayout() + moveX) <= 772) && ((mini.getXImageLayout() + moveX) >= 0)) {
+                    if(((mini.getYImageLayout() + moveY) >= 0) && ((mini.getYImageLayout() + moveY) <= 575)) {
                         
                     
                         

@@ -182,17 +182,17 @@ public class Avatar{
 		int yCoord = (int)(this.location.getY());
         
         if(direction.equals("up")){
-			if (this.location.getY() > 80){
+			if (this.location.getY() > 100){
                 //if the avatar is within the edge, then move up	
                 this.moveY(-3);
-			}else if(this.location.getY() == 80){
+			}else if(this.location.getY() == 100){
                 System.out.println("Cant go there, im at the edge");
             }
 		} else if(direction.equals("down")){
-			if (this.location.getY() < (574)){
+			if (this.location.getY() < 575){
                 //if the avatar is within the edge, then move down
                 this.moveY(3);
-			}else if(this.location.getY() == (574)){
+			}else if(this.location.getY() == 575){
                 System.out.println("Cant go there, im at the edge");
             }
 		} else if(direction.equals("left")){
@@ -206,14 +206,14 @@ public class Avatar{
                 System.out.println("Cant go there, im at the edge");
             }
 		}else if(direction.equals("right")){
-			if (this.location.getX() < (862)){
+			if (this.location.getX() < (852)){
 				//if the avatar is within the egde, then move right
                 //this.location.setLocation(xCoord + 1, yCoord);
                 this.moveX(3);
                 
                 //this.setForward();
                 
-			}else if(this.location.getX() == (862)){
+			}else if(this.location.getX() == (852)){
                 System.out.println("Cant go there, im at the edge");
             }
 		}
