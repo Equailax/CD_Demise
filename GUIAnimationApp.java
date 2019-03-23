@@ -462,9 +462,6 @@ public class GUIAnimationApp extends Application {
                 
 			}
 			
-			// Projectile Image
-			ProjectileImage projectile = new ProjectileImage((int)(avatarXCenter-11), (int)(avatarYCenter-18.5));
-			root.getChildren().add(projectile.getImageLocation());
 			mouseHitbox.toFront();
 		});
 		

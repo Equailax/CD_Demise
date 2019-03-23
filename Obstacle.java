@@ -279,7 +279,7 @@ public class Obstacle
         } else if (this.type.equals("NOTE")) {
             
             this.obstacleImage = new Image("MusicNote.png");
-            this.imageRectangle = new javafx.scene.shape.Rectangle(this.location.getX(), this.location.getY(), 22, 37);
+            this.imageRectangle = new javafx.scene.shape.Rectangle(this.location.getX()+14, this.location.getY()+17, 22, 37);
             this.imageRectangle.setFill(new ImagePattern(this.obstacleImage));
             
             this.location.setSize(22, 37);

@@ -29,7 +29,7 @@ public class ProjectileImage
 	public void setImage()
 	{
 		projectile = new Image("MusicNote.png");
-		this.location = new Rectangle(xcoord, ycoord, 15, 30);
+		this.location = new Rectangle(xcoord, ycoord, 22, 37);
 		this.location.setFill(new ImagePattern(projectile));
 	}
 
