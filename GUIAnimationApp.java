@@ -114,7 +114,6 @@ public class GUIAnimationApp extends Application {
         
         root.getChildren().add(mouseHitbox);
 		
-		mouseHitbox.toFront();
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
@@ -228,6 +227,7 @@ public class GUIAnimationApp extends Application {
                     
                     }
                 }
+				mouseHitbox.toFront();
             }};
             
         // Movement Key Events
@@ -390,7 +390,6 @@ public class GUIAnimationApp extends Application {
                 
 			}
 			
-			mouseHitbox.toFront();
 		});
 		
         moveTime.start();
