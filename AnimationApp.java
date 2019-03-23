@@ -138,9 +138,9 @@ public class AnimationApp{
         
         //Add specific enemies
         
-        tempObstaclesArrayList.add(new Enemy("Enemy1", "dotify", 1, 500, 400, "UPRIGHT"));  //Sets the enemy health to 3
-        tempObstaclesArrayList.add(new Enemy("Enemy2", "beatsbydro", 1, 700, 200, "DOWN"));  //Sets the enemy health to 3
-        tempObstaclesArrayList.add(new Enemy("Enemy3", "pearmusic", 1, 200, 500, "UP"));  //Sets the enemy health to 3
+        tempObstaclesArrayList.add(new Enemy("Enemy1", "dotify", 21, 500, 400, "UPRIGHT"));  //Sets the enemy health to 3
+        tempObstaclesArrayList.add(new Enemy("Enemy2", "beatsbydro", 21, 700, 200, "DOWN"));  //Sets the enemy health to 3
+        tempObstaclesArrayList.add(new Enemy("Enemy3", "pearmusic", 21, 200, 500, "UP"));  //Sets the enemy health to 3
         
         /*
         //Add the required enemies to the temporary array list
@@ -504,24 +504,35 @@ public class AnimationApp{
         /*
         Remove the projectiles that overlap with any obstacle
         */
+        /*
         int obstaclesToRemove = 0;
         
         for (Obstacle o1 : this.obstacleArray){
             for (Obstacle o2 : this.obstacleArray){
-                if (!o1.equals(o2)){
+                if (!(o1.equals(o2))){
                     //If the obstacle does not equal itself, check if it overlaps with obstacle 2
-                    if (o1.overlapsWithObstacle(o2)){
-                        obstaclesToRemove += 1;
+                    if (o1 instanceof Projectile){
+                        if (o1.overlapsWithObstacle(o2)){
+                            obstaclesToRemove += 1;
+                        }
                     }
                 }
             }
         }
         
+        
+        System.out.println(obstaclesToRemove);
+        */
+        
+        int lenghtOfObstacleArray = this.obstacleArray.size();
+        
+        ArrayList<Obstacle> staticObstacleArray = this.getObstacleArray();
+       
         //Once we have the number of obstacles to remove, remove that number from this.obstacleArray
-        for (int i = 0; i < obstaclesToRemove; i++){
-            for (Obstacle o1 : this.obstacleArray){
+        for (int i = 0; i < lenghtOfObstacleArray; i++){
+            for (Obstacle o1 : staticObstacleArray){
                 for (Obstacle o2 : this.obstacleArray){
-                    if (!o1.equals(o2)){
+                    if (!(o1.equals(o2))){
                         //If the obstacle does not equal itself, check if it overlaps with obstacle 2
                         if (o1.overlapsWithObstacle(o2)){
                             /*
@@ -534,19 +545,35 @@ public class AnimationApp{
                                 if (o2 instanceof Enemy){
                                     //if object 1 is a projectile, check if it damages enemies, if it does remove it, other wise don't do anything. 
                                     if (((Projectile)o1).getDeadlyToEnemy()){
-                                        this.obstacleArray.remove(o1);
+                                        
+                                        ((Enemy)o2).takeDamage(1);
+                                        
+                                        for (Obstacle o3 : this.obstacleArray) {
+                                            if (o1.equals(o3)) {
+                                                this.obstacleArray.remove(o3);
+                                                System.out.println("My note hit an Enemy!");
+                                                break;
+                                            }
+                                        }    
                                     }
                                     break;
-                                } else if (!(o2 instanceof Enemy || o2 instanceof Projectile)) {
+                                } else {
                                     //If the second obstacle is not an instance of enemy nor projectile, its a wall, so the projectile should be removed.
-                                    this.obstacleArray.remove(o1);
+                                    
+                                    for (Obstacle o3 : this.obstacleArray) {
+                                        if (o1.equals(o3)) {
+                                            this.obstacleArray.remove(o3);
+                                            System.out.println("My note hit an Obstacle!");
+                                            break;
+                                        }
+                                    }
                                     break;
                                 }
                             }
                         }
                     }
                 }
-                break;
+                //break;
             }
         }
         

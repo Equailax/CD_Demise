@@ -46,7 +46,7 @@ public class Enemy extends Obstacle
 		super.setLocation(location);
 	}
 
-	public Enemy(String name, String type,int aHealth ,int x, int y, String aDirection){
+	public Enemy(String name, String type, int aHealth ,int x, int y, String aDirection){
 		super.setName(name);
         super.setLocation(x, y);
         super.setType(type);
@@ -238,65 +238,6 @@ public class Enemy extends Obstacle
 		
 		super.setLocation(xCoord + xChange, yCoord + yChange);	
     }
-    
-	/**
-	Move the enemy in a defined direction
-	@param direction is the direction to move the enemy in (up, down, left, right, otherwise the object won't move)
-	*/
-    /*
-	public void move(String direction)
-	{
-		direction = direction.toLowerCase();
-		System.out.println(direction);
-		int xCoord = (int)(this.getLocation().getX());
-		int yCoord = (int)(this.getLocation().getY());
-		if(direction.equals("up")){
-			if (this.getLocation().getY() > 0){
-                //if the obstacle is within the edge, then move up
-				//super.setLocation(xCoord, yCoord - 1);	
-                this.moveY(-3);
-                
-            }else if(this.getLocation().getY() == 0 ){
-                //If the obstacle is at the edge, have the obstacle bounce away from it
-                //super.setLocation(xCoord, yCoord + 1);
-                this.moveY(3)
-            }
-		} else if(direction.equals("down")){
-			if (this.getLocation().getY() < mapHeight){
-                //if the obstcle is within the edge, then move down
-				//super.setLocation(xCoord, yCoord + 1);
-                this.moveY(3)
-                
-            }else if(this.getLocation().getY() == mapHeight){
-                //if the obstacle is at the edge, then move up
-                //super.setLocation(xCoord, yCoord - 1);
-                this.moveY(-3);
-            }
-		} else if(direction.equals("left")){
-			if (this.getLocation().getX() > 0){
-                //if the obstacle is within the edge, then move left
-				//super.setLocation(xCoord - 1, yCoord);
-                this.moveX(-3);
-                
-            }else if(this.getLocation().getX() == 0){
-                //if the obstacle is at the edge, then move right
-                //super.setLocation(xCoord + 1, yCoord);
-                this.moveX(3)
-            }
-		}else if(direction.equals("right")){
-			if (this.getLocation().getX() < mapWidth){
-				//if the obsatcle is within the egde, then move right
-                //super.setLocation(xCoord + 1, yCoord);
-                this.moveX(3);
-                
-            }else if(this.getLocation().getX() == mapWidth){
-                //if the obstacle is at the edge, then move left
-                //super.setLocation(xCoord - 1, yCoord);
-                this.move(-3);
-            }
-		}
-	}
-    */
 	
 	/**
 	Randomly decide if the object should stay in place or move in a random cardinal direction
