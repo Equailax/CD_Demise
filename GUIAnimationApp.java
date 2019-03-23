@@ -265,19 +265,7 @@ public class GUIAnimationApp extends Application {
                 if (((mini.getXImageLayout() + moveX) <= 758) && ((mini.getXImageLayout() + moveX) >= 0)) {
                     if(((mini.getYImageLayout() + moveY) >= 0) && ((mini.getYImageLayout() + moveY) <= 805)) {
                         
-                        //Process the obstacle movement remove anything if necessary
-                        demo2.processObstacleMove();
-                        demo2.removeObstacles();
-                        
-                        for (Obstacle o : obstacleGUIArray) {
-                            root.getChildren().remove(o.getEnemyImageRectangle());
-                        }
-                        
-                        obstacleGUIArray = demo2.getObstacleArray();
-                        
-                        for (Obstacle o : obstacleGUIArray) {
-                            root.getChildren().add(o.getEnemyImageRectangle());
-                        }
+                    
                         
                         
                         root.getChildren().remove(mini.getAvatarImage());
@@ -294,7 +282,23 @@ public class GUIAnimationApp extends Application {
                     
                     }
                     
+					//Process the obstacle movement remove anything if necessary
+					demo2.processObstacleMove();
+					demo2.removeObstacles();
+					
+					for (Obstacle o : obstacleGUIArray) {
+						root.getChildren().remove(o.getEnemyImageRectangle());
+					}
+					
+					obstacleGUIArray = demo2.getObstacleArray();
+					
+					for (Obstacle o : obstacleGUIArray) {
+						root.getChildren().add(o.getEnemyImageRectangle());
+					}
+					
                 }
+				
+				
                 
             }};
 
