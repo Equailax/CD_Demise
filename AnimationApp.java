@@ -460,14 +460,6 @@ public class AnimationApp{
                 //Projectile projecitleBeforeMovement = new Projectile((Projectile)o1);
                 //projecitleBeforeMovement.move();
                 ((Projectile)o1).move();
-                
-                /*if ((projecitleBeforeMovement.getLocation().getX() < this.mapWidth && projecitleBeforeMovement.getLocation().getX() > 0) && (
-                    projecitleBeforeMovement.getLocation().getY() < this.mapHeight && projecitleBeforeMovement.getLocation().getY() > 0))
-                    {
-                        //If the projetile before movement is within bounds, have the original projectile move 
-                        ((Projectile)o1).move();
-                    }
-                */
             }
         }
 		// Change this.ObstacleArray to the dynamic array
@@ -487,8 +479,8 @@ public class AnimationApp{
         for (Obstacle o1 : this.obstacleArray){
             if (o1 instanceof Projectile) {
                 //has the projectile reached the bounds of the map
-                if ((o1.getLocation().getX() == this.mapWidth || o1.getLocation().getX() == 0) || (
-                    o1.getLocation().getY() == this.mapHeight || o1.getLocation().getY() == 0)) {
+                if ((o1.getLocation().getX() >= 852 || o1.getLocation().getX() <= 100) || (
+                    o1.getLocation().getY() >= 574 || o1.getLocation().getY() <= 70)) {
                     
                     obstaclesThatHaveReachedBounds += 1;
                 }
@@ -499,8 +491,8 @@ public class AnimationApp{
             for (Obstacle o1 : this.obstacleArray){
                 if (o1 instanceof Projectile) {
                     //remove the obstacle once it has reached the edges of the map
-                    if ((o1.getLocation().getX() == this.mapWidth || o1.getLocation().getX() == 0) || (
-                    o1.getLocation().getY() == this.mapHeight || o1.getLocation().getY() == 0)) {
+                    if ((o1.getLocation().getX() >= 852 || o1.getLocation().getX() >= 100) || (
+                    o1.getLocation().getY() >= 574 || o1.getLocation().getY() <= 70)) {
                         
                         this.obstacleArray.remove(o1);
                         break;

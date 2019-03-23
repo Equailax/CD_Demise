@@ -116,10 +116,10 @@ public class Projectile extends Obstacle{
 		int yChange = 0;
 		
         if (this.direction.contains("UP")){
-			if (this.getLocation().getY() > 80){
+			if (this.getLocation().getY() > 60){
                 //if the proejectile is within the edge, then move up
 				yChange = -3; 
-			} else if (this.getLocation().getY() <= 80) {
+			} else if (this.getLocation().getY() <= 60) {
                 //Move the proejectile in a random direction once it has hit a boundary
                 yChange = 3;
 				this.direction = this.direction.replace("UP", "DOWN"); // Bounce
@@ -138,10 +138,10 @@ public class Projectile extends Obstacle{
                 
             }
 		} else if(this.direction.contains("DOWN")){
-			if (this.getLocation().getY() < 564){
+			if (this.getLocation().getY() < 584){
                 //if the projectile is within the edge, then move down
 				yChange = 3;
-            } else if (this.getLocation().getY() >= 564) {
+            } else if (this.getLocation().getY() >= 584) {
                 //Move the enemy in a random direction once it has hit a boundary
                 yChange = -3;
                 this.direction = this.direction.replace("DOWN", "UP"); // Bounce
@@ -160,10 +160,10 @@ public class Projectile extends Obstacle{
             }
 		} 
         if (this.direction.contains("LEFT")){
-			if (this.getLocation().getX() > 110){
+			if (this.getLocation().getX() > 90){
                 //if the preojectile is within the edge, then move left
 				xChange = -3;
-            } else if (this.getLocation().getX() <= 110) {
+            } else if (this.getLocation().getX() <= 90) {
                 //Move the proejectile in a random direction once it has hit a boundary
                 xChange = 3;
 				this.direction = this.direction.replace("LEFT", "RIGHT"); // Bounce
@@ -181,10 +181,10 @@ public class Projectile extends Obstacle{
                 
             }
 		}else if(this.direction.contains("RIGHT")){
-			if (this.getLocation().getX() < (852)){
+			if (this.getLocation().getX() < (872)){
 				//if the projectile is within the egde, then move right
 				xChange = 3;
-            } else if (this.getLocation().getX() >= (852)) {
+            } else if (this.getLocation().getX() >= (872)) {
                 //Move the projectile in a random direction once it has hit a boundary
                 xChange = -3;
 				this.direction = this.direction.replace("RIGHT", "LEFT"); // Bounce
