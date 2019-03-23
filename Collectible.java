@@ -9,8 +9,8 @@ public class Collectible
 	private int collection;
 	private int xcoord;
 	private int ycoord;
-	private final int height = 100;
-	private final int width = 100;
+	private final int height = 60;
+	private final int width = 60;
 	private Rectangle location = new Rectangle(xcoord, ycoord, width, height);
     private final int mapHeight = 1000;
     private final int mapWidth = 1000;
