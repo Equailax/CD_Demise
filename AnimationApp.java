@@ -501,29 +501,6 @@ public class AnimationApp{
             }
         }
         
-        /*
-        Remove the projectiles that overlap with any obstacle
-        */
-        /*
-        int obstaclesToRemove = 0;
-        
-        for (Obstacle o1 : this.obstacleArray){
-            for (Obstacle o2 : this.obstacleArray){
-                if (!(o1.equals(o2))){
-                    //If the obstacle does not equal itself, check if it overlaps with obstacle 2
-                    if (o1 instanceof Projectile){
-                        if (o1.overlapsWithObstacle(o2)){
-                            obstaclesToRemove += 1;
-                        }
-                    }
-                }
-            }
-        }
-        
-        
-        System.out.println(obstaclesToRemove);
-        */
-        
         int lenghtOfObstacleArray = this.obstacleArray.size();
         
         ArrayList<Obstacle> staticObstacleArray = this.getObstacleArray();
@@ -583,7 +560,7 @@ public class AnimationApp{
         int enemiesToRemove = 0;
         for (Obstacle enemy : this.obstacleArray){
             if (enemy instanceof Enemy){
-                if (((Enemy)enemy).getHealth() == 0){
+                if (((Enemy)enemy).getHealth() <= 0){
                     enemiesToRemove += 1;
                 }
             }
@@ -592,7 +569,7 @@ public class AnimationApp{
         for (int i = 0; i < enemiesToRemove; i++){
             for (Obstacle enemy : this.obstacleArray){
                 if (enemy instanceof Enemy){
-                    if (((Enemy)enemy).getHealth() == 0){
+                    if (((Enemy)enemy).getHealth() <= 0){
                         this.obstacleArray.remove(enemy);
                         break;
                     }
