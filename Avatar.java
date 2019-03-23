@@ -186,14 +186,14 @@ public class Avatar{
                 //if the avatar is within the edge, then move up	
                 this.moveY(-3);
 			}else if(this.location.getY() == 100){
-                //System.out.println("Cant go there, im at the edge");
+                System.out.println("Cant go there, im at the edge");
             }
 		} else if(direction.equals("down")){
 			if (this.location.getY() < 575){
                 //if the avatar is within the edge, then move down
                 this.moveY(3);
 			}else if(this.location.getY() == 575){
-                //System.out.println("Cant go there, im at the edge");
+                System.out.println("Cant go there, im at the edge");
             }
 		} else if(direction.equals("left")){
 			if (this.location.getX() > 100){
@@ -203,7 +203,7 @@ public class Avatar{
                 //this.setBackward();
                 
 			}else if(this.location.getX() == 100){
-                //System.out.println("Cant go there, im at the edge");
+                System.out.println("Cant go there, im at the edge");
             }
 		}else if(direction.equals("right")){
 			if (this.location.getX() < (852)){
@@ -214,7 +214,7 @@ public class Avatar{
                 //this.setForward();
                 
 			}else if(this.location.getX() == (852)){
-                //System.out.println("Cant go there, im at the edge");
+                System.out.println("Cant go there, im at the edge");
             }
 		}
     }
