@@ -184,6 +184,7 @@ public class GUIAnimationApp extends Application {
         //root.getChildren().add(mini.getAvatarImage());
         
         root.getChildren().add(mini.getAvatarImage());
+		mini.setForward();
         
         root.getChildren().add(mouseHitbox);
 		
