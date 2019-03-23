@@ -86,86 +86,12 @@ public class GUIAnimationApp extends Application {
         
         // Display Collectibles
         
-        for(Collectible o : demo2.getCollectiblesArray()){
-            o.setImage();
-            root.getChildren().add(o.getCollectibleImageRectangle());
+        for(Collectible c : this.collectibleGUIArray){
+            c.setImage();
+            root.getChildren().add(c.getCollectibleImageRectangle());
         }
         
     }
-    
-    /* //WORK IN PROGRESS
-    public void updateScreen() {
-        
-        //Remove all rectangles
-        
-        for (Rectangle r : imageRectangles) {
-            root.getChildren().remove(r);
-        }
-        
-        imageRectangles = new ArrayList<Rectangle>();
-        
-        // Display positions of life hearts for health
-        for(int i = 0; i <= demo2.getAvatar().getHealth(); i++){
-            LifeHeart tempHealth = new LifeHeart(25, 20+(30*i));
-            
-            imageRectangles.add(tempHealth.getLocation());
-            
-            lifeHearts.add(tempHealth);
-        }
-        
-        // Display of life hearts on GUI
-        for(int i = 0; i < demo2.getAvatar().getHealth(); i++){
-            root.getChildren().add(lifeHearts.get(i).getLocation());
-        }
-        
-        /*
-        // Display Obstacles
-        for (Obstacle o : demo2.getObstacleArray()){
-            int randomEnemy = new Random().nextInt(4);
-            if (o instanceof Enemy){
-                if (randomEnemy == 0){
-                    EnemyImage temp = new EnemyImage("DOTIFY", (int)(o.getLocation().getX()), (int)(o.getLocation().getY()));
-                    root.getChildren().add(temp.getLocation());
-                }
-                if (randomEnemy == 1) {
-                    EnemyImage temp = new EnemyImage("BEATSBYDRO", (int)(o.getLocation().getX()),(int)(o.getLocation().getY()));
-                    root.getChildren().add(temp.getLocation());
-                }
-                if (randomEnemy == 2) {
-                    EnemyImage temp = new EnemyImage("PEARMUSIC", (int)(o.getLocation().getX()),(int)(o.getLocation().getY()));
-                    root.getChildren().add(temp.getLocation());
-                }
-                if (randomEnemy == 3) {
-                    EnemyImage temp = new EnemyImage("MYPHONE", (int)(o.getLocation().getX()),(int)(o.getLocation().getY()));
-                    root.getChildren().add(temp.getLocation());
-                }
-            } else {
-                Image puddle = new Image("Puddle.png");
-                if (!(o instanceof Enemy || o instanceof Projectile)){
-                    Rectangle puddleSpace = new Rectangle(o.getLocation().getX(), o.getLocation().getY(), 60 , 60);
-                    puddleSpace.setFill(new ImagePattern(puddle));
-                    root.getChildren().add(puddleSpace);
-                }
-            }
-        }
-        
-        
-        // Display Collectibles
-        // Display Collectibles
-        Image record = new Image("Record.png");
-        for(Collectible o : demo2.getCollectiblesArray()){
-            if (o instanceof Collectible){
-                Rectangle recordSpace = new Rectangle(o.getLocation().getX(), o.getLocation().getY(), 60 , 60);
-                recordSpace.setFill(new ImagePattern(record));
-                
-                imageRectangles.add(recordSpace);
-                
-                root.getChildren().add(recordSpace);
-            }
-        }
-        
-    }
-    */
 
     public static void main(String[] args) {
         
@@ -218,8 +144,6 @@ public class GUIAnimationApp extends Application {
                     } else {
                         moveX += 5;
                     }
-                    
-                    //moveX += 3;
                 }
                 if (left) {
                     mini.setBackward();
@@ -233,8 +157,6 @@ public class GUIAnimationApp extends Application {
                     } else {
                         moveX -= 5;
                     }
-                    
-                   // moveX -= 3;
                 }
                 if (up) {
                     //Check if moving right is valid by the ANIMATIONAPP LOGIC
@@ -246,8 +168,6 @@ public class GUIAnimationApp extends Application {
                     } else {
                         moveY -= 5;
                     }
-                    
-                    //moveY -= 3;
                 }
                 if (down) {
                     //Check if moving right is valid by the ANIMATIONAPP LOGIC
@@ -259,7 +179,32 @@ public class GUIAnimationApp extends Application {
                     } else {
                         moveY += 5;
                     }
-                    //moveY += 3;
+                }
+                
+                //Process the obstacle movement remove anything if necessary
+                demo2.processObstacleMove();
+                demo2.removeObstacles();
+                
+                for (Obstacle o : obstacleGUIArray) {
+                    root.getChildren().remove(o.getEnemyImageRectangle());
+                }
+                
+                obstacleGUIArray = demo2.getObstacleArray();
+                
+                for (Obstacle o : obstacleGUIArray) {
+                    root.getChildren().add(o.getEnemyImageRectangle());
+                }
+                
+                //Update collectibles
+                for (Collectible c : collectibleGUIArray) {
+                    root.getChildren().remove(c.getCollectibleImageRectangle());
+                }
+                
+                collectibleGUIArray = demo2.getCollectiblesArray();
+                
+                for (Collectible c : collectibleGUIArray) {
+                    c.setImage();
+                    root.getChildren().add(c.getCollectibleImageRectangle());
                 }
                 
                 if (((mini.getXImageLayout() + moveX) <= 758) && ((mini.getXImageLayout() + moveX) >= 0)) {
@@ -281,32 +226,9 @@ public class GUIAnimationApp extends Application {
                         root.getChildren().add(mini.getAvatarImage());
                     
                     }
-                    
-					//Process the obstacle movement remove anything if necessary
-					demo2.processObstacleMove();
-					demo2.removeObstacles();
-					
-					for (Obstacle o : obstacleGUIArray) {
-						root.getChildren().remove(o.getEnemyImageRectangle());
-					}
-					
-					obstacleGUIArray = demo2.getObstacleArray();
-					
-					for (Obstacle o : obstacleGUIArray) {
-						root.getChildren().add(o.getEnemyImageRectangle());
-					}
-					
                 }
-				
-				
-                
             }};
-
-
-    
-
-        
-
+            
         // Movement Key Events
         scene.setOnKeyPressed(keyEvent -> {
                 // Starts moving right when key is pressed
