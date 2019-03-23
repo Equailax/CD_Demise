@@ -182,10 +182,10 @@ public class Avatar{
 		int yCoord = (int)(this.location.getY());
         
         if(direction.equals("up")){
-			if (this.location.getY() > 70){
+			if (this.location.getY() > 80){
                 //if the avatar is within the edge, then move up	
                 this.moveY(-3);
-			}else if(this.location.getY() == 70){
+			}else if(this.location.getY() == 80){
                 System.out.println("Cant go there, im at the edge");
             }
 		} else if(direction.equals("down")){
