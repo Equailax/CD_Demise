@@ -150,10 +150,10 @@ public class Enemy extends Obstacle
 		int yChange = 0;
 		
         if (this.direction.contains("UP")){
-			if (this.getLocation().getY() > 80){
+			if (this.getLocation().getY() > 100){
                 //if the enemy is within the edge, then move up
 				yChange = -3; 
-			} else if (this.getLocation().getY() <= 80) {
+			} else if (this.getLocation().getY() <= 100) {
                 //Move the enemy in a random direction once it has hit a boundary
                 yChange = 3;
 				this.direction = this.direction.replace("UP", "DOWN"); // Bounce
