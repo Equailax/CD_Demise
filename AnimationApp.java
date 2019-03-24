@@ -387,8 +387,12 @@ public class AnimationApp{
 			Rectangle preMove = new Rectangle(o1.getLocation());
 			
             
-            //If the obstacle is an instance of an enemy, move the enemy in a random direction for now
-            if (o1 instanceof Enemy){
+            if (o1 instanceof Projectile) {
+                //If the instance of the obstacle is a projectile have it move in its specified direction, as long as its within bounds
+                //Projectile projecitleBeforeMovement = new Projectile((Projectile)o1);
+                //projecitleBeforeMovement.move();
+                ((Projectile)o1).move();
+            } else if (o1 instanceof Enemy){
                 
                 Obstacle o1BeforeMovement = new Enemy((Enemy)o1);
                 
@@ -455,11 +459,6 @@ public class AnimationApp{
                 }
                 */
                 
-            } else if (o1 instanceof Projectile) {
-                //If the instance of the obstacle is a projectile have it move in its specified direction, as long as its within bounds
-                //Projectile projecitleBeforeMovement = new Projectile((Projectile)o1);
-                //projecitleBeforeMovement.move();
-                ((Projectile)o1).move();
             }
         }
 		// Change this.ObstacleArray to the dynamic array

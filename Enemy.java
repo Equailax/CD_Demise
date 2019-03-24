@@ -152,19 +152,19 @@ public class Enemy extends Obstacle
         if (this.direction.contains("UP")){
 			if (this.getLocation().getY() > 100){
                 //if the enemy is within the edge, then move up
-				yChange = -3; 
+				yChange = -5; 
 			} else if (this.getLocation().getY() <= 100) {
                 //Move the enemy in a random direction once it has hit a boundary
-                yChange = 3;
+                yChange = 5;
 				this.direction = this.direction.replace("UP", "DOWN"); // Bounce
                 
                 
                 //Change also the x position
                 if (this.direction.contains("LEFT")) {
-                    xChange = 3;
+                    xChange = 5;
                     this.direction = this.direction.replace("LEFT", "RIGHT"); //Bounce 
                 } else if (this.direction.contains("RIGHT")) {
-                    xChange = -3;
+                    xChange = -5;
                     this.direction = this.direction.replace("RIGHT", "LEFT");
                 }
                 
@@ -174,19 +174,19 @@ public class Enemy extends Obstacle
 		} else if(this.direction.contains("DOWN")){
 			if (this.getLocation().getY() < 564){
                 //if the enemy is within the edge, then move down
-				yChange = 3;
+				yChange = 5;
             } else if (this.getLocation().getY() >= 564) {
                 //Move the enemy in a random direction once it has hit a boundary
-                yChange = -3;
+                yChange = -5;
                 this.direction = this.direction.replace("DOWN", "UP"); // Bounce
                 
                 
                 //Change also the x position
                 if (this.direction.contains("LEFT")) {
-                    xChange = 3;
+                    xChange = 5;
                     this.direction = this.direction.replace("LEFT", "RIGHT"); //Bounce 
                 } else if (this.direction.contains("RIGHT")) {
-                    xChange = -3;
+                    xChange = -5;
                     this.direction = this.direction.replace("RIGHT", "LEFT");
                 }
                 
@@ -196,19 +196,19 @@ public class Enemy extends Obstacle
         if (this.direction.contains("LEFT")){
 			if (this.getLocation().getX() > 110){
                 //if the obstacle is within the edge, then move left
-				xChange = -3;
+				xChange = -5;
             } else if (this.getLocation().getX() <= 110) {
                 //Move the enemy in a random direction once it has hit a boundary
-                xChange = 3;
+                xChange = 5;
 				this.direction = this.direction.replace("LEFT", "RIGHT"); // Bounce
                 
                 
                 //Change also the y position
                 if (this.direction.contains("UP")) {
-                    yChange = 3;
+                    yChange = 5;
                     this.direction = this.direction.replace("UP", "DOWN"); //Bounce 
                 } else if (this.direction.contains("DOWN")) {
-                    yChange = -3;
+                    yChange = -5;
                     this.direction = this.direction.replace("DOWN", "UP");
                 }
                 
@@ -217,18 +217,18 @@ public class Enemy extends Obstacle
 		}else if(this.direction.contains("RIGHT")){
 			if (this.getLocation().getX() < (852)){
 				//if the obsatcle is within the egde, then move right
-				xChange = 3;
+				xChange = 5;
             } else if (this.getLocation().getX() >= (852)) {
                 //Move the enemy in a random direction once it has hit a boundary
-                xChange = -3;
+                xChange = -5;
 				this.direction = this.direction.replace("RIGHT", "LEFT"); // Bounce
                 
                 
                 if (this.direction.contains("UP")) {
-                    yChange = 3;
+                    yChange = 5;
                     this.direction = this.direction.replace("UP", "DOWN"); //Bounce 
                 } else if (this.direction.contains("DOWN")) {
-                    yChange = -3;
+                    yChange = -5;
                     this.direction = this.direction.replace("DOWN", "UP");
                 }
                 
