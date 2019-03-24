@@ -2,6 +2,10 @@ import java.awt.Rectangle;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 
+import ObstaclePackage.*;
+import AvatarPackage.*;
+import CollectiblePackage.*;
+
 public class Collectible
 {
     //Instance Variables 

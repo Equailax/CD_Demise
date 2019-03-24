@@ -18,6 +18,11 @@ import java.util.ArrayList;
 import java.lang.Math;
 import java.util.Random;
 
+import ObstaclePackage.*;
+import AvatarPackage.*;
+import CollectiblePackage.*;
+import AnimationAppPackage.*;
+
 /**
  * GUI to display the main map, with spawns and animations of the avatar, enemies, obstacles, and collectibles, and projectiles.
  * The avatar moves using keys on the keyboard for up, down, right and left movements, and a combination of these.
