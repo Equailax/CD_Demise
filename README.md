@@ -22,3 +22,16 @@ repository and switch to the branch "demo2" and download all the files by clicki
 containing the files extracted from the zip file earlier then compile all of the files inside. After compiling all of the files, type 
 "java GUIAnimaionApp" into your terminal to bring up the GUI window. In order to interact with the GUI and move the avatar you have use 
 arrow keys. Up arrow key to move up, left Arrow key to move left, down arrow key to move down and right arrow key to move right.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+DEMO 3:
+- To find demo 3 in our repository, go to the link https://github.com/Equailax/CD_Demise/tree/demo3 or go directly to our CD_Demise 
+repository and switch to the branch "demo3" and download all the files by clicking the button labelled "Clone or download" then clicking
+"Download ZIP" and extracting all the files into a folder.
+
+- To run demo 3, you have to compile all the files extracted from the master branch zip. Open your terminal and navigate to the folder 
+containing the files extracted from the zip file earlier then compile all of the files inside. After compiling all of the files, type 
+"java GUIAnimationApp" into your terminal to bring up the GUI window. In order to interact with the GUI and move the avatar, you have to 
+use arrow keys. Up arrow key to move up, left arrow key to move left, down arrow key to move down and right arrow key to move right. 
+Aiming is restricted to 8 directions around the avatar and is controlled by where your mouse cursor is located. To shoot, click with the 
+left mouse button and a projectile will be shot from the avatar to your mouse cursor.

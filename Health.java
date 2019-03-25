@@ -2,9 +2,6 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.lang.Math;
 
-import ObstaclePackage.*;
-import AvatarPackage.*;
-import CollectiblePackage.*;
 
 public class Health extends Collectible
 {

@@ -17,8 +17,8 @@ public class CollectibleTest{
     public void test_creation(){
         Collectible a = new MockCollectible("Collectible", 100, 100);
         assertEquals("Excpected name to be 'Collectible'", "Collectible", a.getName());
-        assertEquals("Excpected Xcoord to be 100", 100, a.getLocation().getX());
-        assertEquals("Excpected Ycoord to be 100", 100, a.getLocation().getY());
+        assertEquals("Excpected Xcoord to be 100", 100, (int)a.getLocation().getX());
+        assertEquals("Excpected Ycoord to be 100", 100, (int)a.getLocation().getY());
     }
 
     @Test 
@@ -26,8 +26,8 @@ public class CollectibleTest{
         Collectible toCopy = new MockCollectible("Collectible", 100, 100);
         Collectible collectible = new MockCollectible(toCopy);
         assertEquals("Excpected name to be 'Collectible'", toCopy.getName(), collectible.getName());
-        assertEquals("Excpected Xcoord to be 100", toCopy.getLocation().getX(), collectible.getLocation().getX());
-        assertEquals("Excpected Ycoord to be 100", toCopy.getLocation().getY(), collectible.getLocation().getY());
+        assertEquals("Excpected Xcoord to be 100", (int)toCopy.getLocation().getX(), (int)collectible.getLocation().getX());
+        assertEquals("Excpected Ycoord to be 100", (int)toCopy.getLocation().getY(), (int)collectible.getLocation().getY());
     }
 
     @Test 
@@ -36,8 +36,8 @@ public class CollectibleTest{
         collectible.setName("New Name");
         collectible.setLocation(100, 100);
         assertEquals("Excpected name to be 'New Name'", "New Name", collectible.getName());
-        assertEquals("Excpected Xcoord to be 100", 100, collectible.getLocation().getX());
-        assertEquals("Excpected Ycoord to be 100", 100, collectible.getLocation().getY());
+        assertEquals("Excpected Xcoord to be 100", 100, (int)collectible.getLocation().getX());
+        assertEquals("Excpected Ycoord to be 100", 100, (int)collectible.getLocation().getY());
     }
 
     @Test 
@@ -51,7 +51,7 @@ public class CollectibleTest{
     @Test 
     public void test_toString(){
         Collectible collectible = new MockCollectible("Collectible", 100, 100);
-        assertEquals("Expected right toString()", "Collectible 100 100", collectible.toString());
+        assertEquals("Expected right toString()", "Collectible 100.0 100.0", collectible.toString());
     }
 
     @Test 
