@@ -10,9 +10,14 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.animation.AnimationTimer;
+import javafx.animation.Timeline;
+import javafx.animation.KeyFrame;
+import javafx.util.Duration;
 import java.util.ArrayList;
 import java.lang.Math;
 import java.util.Random;
+
+
 
 /**
  * GUI to display the main map, with spawns and animations of the avatar, enemies, obstacles, and collectibles, and projectiles.
@@ -392,8 +397,32 @@ public class GUIAnimationApp extends Application {
 			
 		});
 		
-        moveTime.start();
+		Timeline enemyTimer = new Timeline(new KeyFrame(Duration.seconds(3), ActionEvent ->
+		{
+			ArrayList<Obstacle> newProjectile = new ArrayList<Obstacle>();
+			for (Obstacle o : this.obstacleGUIArray)
+			{
+				if (o instanceof Enemy)
+				{
+					((Enemy)o).shootProjectile("left");
+			
+					Projectile enemyProjectile = new Projectile(((Enemy)o).getProjectile());
+					newProjectile.add(enemyProjectile);
+					
+				}
+			}
+			this.obstacleGUIArray.addAll(newProjectile);
+			demo2.setObstacleArray(this.obstacleGUIArray);
+		}));
+		
+		
         
+		enemyTimer.setCycleCount(Timeline.INDEFINITE);
+		enemyTimer.play();
+		
+
+		moveTime.start();
+		
         demo2.printCurrentState();
     }
 };

@@ -112,6 +112,23 @@ public class Enemy extends Obstacle
     }
 	
 	/**
+    This method sets the proejectile note for the enemy
+    @param projecitleNote : this is the projectile that we wish to set the note to
+    */
+    public void setProjectile(Projectile projecitleNote){
+        this.note = new Projectile(projecitleNote);
+        this.note.setLocation(new Rectangle(this.getLocation()));
+    }
+	
+	/**
+	This method shoots the projectile note in a specified direction
+    @param directionToShoot : this is the direction that we want the enemy to shoot the projecitle
+    */
+	public void shootProjectile(String directionToShoot){
+        this.setProjectile(new Projectile(this.getProjectile().getName(), "note",this.getProjectile().getDeadlyToAvatar(), this.getProjectile().getDeadlyToEnemy(), directionToShoot));
+    }
+	
+	/**
 	If the enemy got hit, reduce the health by the damge taken
     @param damageTaken : this is the damage taken by the enemy
 	*/
@@ -298,13 +315,6 @@ public class Enemy extends Obstacle
     
     public String toString(){
         return this.getName() + " Location: " + this.getLocation().getX() + " " + this.getLocation().getY() + " Health: " + this.health + " Direction: " + this.direction;
-    }
-    
-    /**
-    This mehod shoots a projectile in the direction that the enemy is facing
-    */
-    public void shootProjectile(){
-        
     }
     
     
