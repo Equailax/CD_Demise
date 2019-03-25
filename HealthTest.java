@@ -3,37 +3,39 @@ import org.junit.Test;
 import java.io.*;
 import java.util.ArrayList;
 
+
+
 public class HealthTest{
 	
 	//test constructors 
 	
 	@Test 
-	public void Health_test(){
+	public void test_constructor(){
 	Health c = new Health("villan",10,100,100);
  assertEquals("Testing for the name, villan","villan",c.getName());
  assertEquals("Testing for the healthboost,10", 10,c.getHealthBoost());
-assertEquals("Testing for the Xcood,100",100,c.getLocation.getX());
-assertEquals("Testing for the Ycood,100",100,c.getLocation.getY());
+assertEquals("Testing for the Xcood,100",100,(int)c.getLocation().getX());
+assertEquals("Testing for the Ycood,100",100,(int)c.getLocation().getY());
 }
 //test for default constructor 
 
 @Test
-public void Health_default_test(){
-	Health c = new Health("");
-	assertEquals("testing for default constructor,name"," ",c.getName());
-	assertEquals("testing for default constructor,healthboost"," ",c.getHealthBoost());
-	assertEquals("testing for default constructor,xcood"," ",c.getLocation().getX());
-	assertEquals("testing for default constructor,ycood"," ",c.getLocation().getY());
+public void test_defaultConstructor(){
+	Health c = new Health();
+	assertEquals("testing for default constructor,name",null,c.getName());
+	assertEquals("testing for default constructor,healthboost",1,c.getHealthBoost());
+	assertEquals("testing for default constructor,xcood",0,(int)c.getLocation().getX());
+	assertEquals("testing for default constructor,ycood",0,(int)c.getLocation().getY());
 }
 // copy constructor 
 @Test 
-public void Health_test(){
+public void test_copyConstructor(){
 Health c = new Health("villan",10,100,100);
 Health c1 = new Health(c);
 assertEquals("Testing for the name, villan","villan",c1.getName());
 assertEquals("Testing for the healthboost,10", 10,c1.getHealthBoost());
-assertEquals("Testing for the Xcood,100",100,c1.getLocation.getX());
-assertEquals("Testing for the Ycood,100",100,c1.getLocation.getY());
+assertEquals("Testing for the Xcood,100",100,(int)c1.getLocation().getX());
+assertEquals("Testing for the Ycood,100",100,(int)c1.getLocation().getY());
 }
 // test getter ans setter
 @Test
@@ -55,8 +57,8 @@ public void test_overlapsWith(){
 	@Test
 	public void test_toString()
 	{
-		Enemy c = new Enemy("villan", 10,100,100);
-		assertEquals("villan, 10 healthBoost,100 xcood,100 ycood", c.toString());
+		Health c = new Health("villan", 10,100,100);
+		assertEquals("Testing toString method", "villan 100.0 100.0 Health Boost: 10", c.toString());
     
 	}
 	
