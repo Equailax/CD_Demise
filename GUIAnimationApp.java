@@ -9,6 +9,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
+import javafx.scene.text.Font;
 import javafx.animation.AnimationTimer;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
@@ -17,7 +21,14 @@ import java.util.ArrayList;
 import java.lang.Math;
 import java.util.Random;
 
+<<<<<<< HEAD
 
+=======
+import ObstaclePackage.*;
+import AvatarPackage.*;
+import CollectiblePackage.*;
+import AnimationAppPackage.*;
+>>>>>>> 10e812c86d14523e19c57625faf0a19e4f245e75
 
 /**
  * GUI to display the main map, with spawns and animations of the avatar, enemies, obstacles, and collectibles, and projectiles.
@@ -39,7 +50,7 @@ public class GUIAnimationApp extends Application {
     // Creation of the life hearts and the image of the avatar for the GUI
     //private AvatarImage mini = new AvatarImage();
     private ArrayList<LifeHeart> lifeHearts = new ArrayList<LifeHeart>();
-    
+    private ArrayList<Text> textList = new ArrayList<Text>();
     
     // Display Setup for the GUI
     private Image map = new Image("Map 1000pixels.jpg");
@@ -70,7 +81,7 @@ public class GUIAnimationApp extends Application {
         
         
         // Display positions of life hearts for health
-        for(int i = 0; i <= demo2.getAvatar().getHealth(); i++){
+        for(int i = 0; i <= demo2.getAvatar().getLives(); i++){
             LifeHeart tempHealth = new LifeHeart(25, 20+(30*i));
             
             //imageRectangles.add(tempHealth.getLocation());
@@ -78,8 +89,16 @@ public class GUIAnimationApp extends Application {
             lifeHearts.add(tempHealth);
         }
         
+        //Display the health as a number
+        Text health = new Text(5, 120, "HEALTH\n      " + demo2.getAvatar().getHealth());
+        
+        health.setFont(new Font("Times New Roman", 15));
+        health.setFill(Color.RED);
+        textList.add(health);
+        root.getChildren().add(health);
+        
         // Display of life hearts on GUI
-        for(int i = 0; i < demo2.getAvatar().getHealth(); i++){
+        for(int i = 0; i < demo2.getAvatar().getLives(); i++){
             root.getChildren().add(lifeHearts.get(i).getLocation());
         }
         
@@ -96,6 +115,13 @@ public class GUIAnimationApp extends Application {
             root.getChildren().add(c.getCollectibleImageRectangle());
         }
         
+        Text collection = new Text(0, 160, "Collectibles \nRemaining: " + demo2.getCollectiblesArray().size());
+        
+        collection.setFont(new Font("Times New Roman", 15));
+        collection.setFill(Color.YELLOW);
+        textList.add(collection);
+        root.getChildren().add(collection);
+
     }
 
     public static void main(String[] args) {
@@ -119,6 +145,7 @@ public class GUIAnimationApp extends Application {
         
         root.getChildren().add(mouseHitbox);
 		
+		mouseHitbox.toFront();
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
@@ -186,53 +213,111 @@ public class GUIAnimationApp extends Application {
                     }
                 }
                 
-                //Process the obstacle movement remove anything if necessary
-                demo2.processObstacleMove();
-                demo2.removeObstacles();
-                
-                for (Obstacle o : obstacleGUIArray) {
-                    root.getChildren().remove(o.getEnemyImageRectangle());
-                }
-                
-                obstacleGUIArray = demo2.getObstacleArray();
-                
-                for (Obstacle o : obstacleGUIArray) {
-                    root.getChildren().add(o.getEnemyImageRectangle());
-                }
-                
-                //Update collectibles
-                for (Collectible c : collectibleGUIArray) {
-                    root.getChildren().remove(c.getCollectibleImageRectangle());
-                }
-                
-                collectibleGUIArray = demo2.getCollectiblesArray();
-                
-                for (Collectible c : collectibleGUIArray) {
-                    c.setImage();
-                    root.getChildren().add(c.getCollectibleImageRectangle());
-                }
-                
-                if (((mini.getXImageLayout() + moveX) <= 772) && ((mini.getXImageLayout() + moveX) >= 0)) {
-                    if(((mini.getYImageLayout() + moveY) >= 0) && ((mini.getYImageLayout() + moveY) <= 575)) {
-                        
+                //Check if the player has run out of health
+                Avatar checkIfEndGameAvatar = new Avatar(demo2.getAvatar());
+                if (demo2.getCollectiblesArray().size() == 0) {
+                    //If all collectibles have reached 0, the game is over
+                    root.getChildren().clear();
+                    root.getChildren().add(new Label("YOU WIN!"));
+                } else if (!checkIfEndGameAvatar.checkIfEndGame(3)){
+                    //If the avatar still has lives (game hasnt ended), then update the main avatar accordingly
+                    demo2.setAvatar(checkIfEndGameAvatar);
                     
+                    //Clear collectible count and health count
+                    for (Text t : textList) {
+                        root.getChildren().remove(t);
                         
+                        int updatedHealth = demo2.getAvatar().getHealth();
+                        int updatedCollectibles = demo2.getCollectiblesArray().size();
                         
-                        root.getChildren().remove(mini.getAvatarImage());
-                        
-                        mini.moveAvatarImage(moveX, moveY);
-
-                        mini.setLocation((int)mini.getXImageLayout() + 100, (int)mini.getYImageLayout() + 100);
-                        
-                        mini.setHealth(demo2.getAvatar().getHealth());
-                        
-                        demo2.setAvatar(mini);
-                        
-                        root.getChildren().add(mini.getAvatarImage());
-                    
+                        if (t.getText().toUpperCase().contains("HEALTH")) {
+                            t.setText("HEALTH\n      " + updatedHealth);
+                            root.getChildren().add(t);
+                        } else if (t.getText().toUpperCase().contains("COLLECTIBLES")) {
+                            t.setText("Collectibles \nRemaining: " + updatedCollectibles);
+                            root.getChildren().add(t);
+                        }
                     }
+                    
+                    
+                    /*
+                    
+                    
+                    // Remove the life hearts
+                    for(LifeHeart l : lifeHearts){
+                        root.getChildren().remove(l.getLocation());
+                    }
+                    
+                    lifeHearts.clear();
+                    
+                    // Display positions of life hearts for health
+                    for(int i = 0; i < demo2.getAvatar().getHealth(); i++){
+                        LifeHeart tempHealth = new LifeHeart(25, 20+(30*i));
+                        lifeHearts.add(tempHealth);
+                    }
+                    
+                    // Display of life hearts on GUI
+                    for(LifeHeart l : lifeHearts){
+                        root.getChildren().add(l.getLocation());
+                    }
+                    */
+                    
+                    //Process the obstacle movement remove anything if necessary
+                    demo2.processObstacleMove();
+                    demo2.removeObstacles();
+                    
+                    for (Obstacle o : obstacleGUIArray) {
+                        root.getChildren().remove(o.getEnemyImageRectangle());
+                    }
+                    
+                    obstacleGUIArray = demo2.getObstacleArray();
+                    
+                    for (Obstacle o : obstacleGUIArray) {
+                        root.getChildren().add(o.getEnemyImageRectangle());
+                    }
+                    
+                    mouseHitbox.toFront();
+                    
+                    //Update collectibles
+                    for (Collectible c : collectibleGUIArray) {
+                        root.getChildren().remove(c.getCollectibleImageRectangle());
+                    }
+                    
+                    collectibleGUIArray = demo2.getCollectiblesArray();
+                    
+                    for (Collectible c : collectibleGUIArray) {
+                        c.setImage();
+                        root.getChildren().add(c.getCollectibleImageRectangle());
+                    }
+                    
+                    mouseHitbox.toFront();
+                    
+                    if (((mini.getXImageLayout() + moveX) <= 772) && ((mini.getXImageLayout() + moveX) >= 0)) {
+                        if(((mini.getYImageLayout() + moveY) >= 0) && ((mini.getYImageLayout() + moveY) <= 575)) {
+
+                            root.getChildren().remove(mini.getAvatarImage());
+                            
+                            mini.moveAvatarImage(moveX, moveY);
+
+                            mini.setLocation((int)mini.getXImageLayout() + 100, (int)mini.getYImageLayout() + 100);
+                            
+                            mini.setHealth(demo2.getAvatar().getHealth());
+                            mini.setLives(demo2.getAvatar().getLives());
+                            
+                            demo2.setAvatar(mini);
+                            
+                            root.getChildren().add(mini.getAvatarImage());
+                        
+                        }
+                    }
+                    mouseHitbox.toFront();
+                    
+                }else if (checkIfEndGameAvatar.checkIfEndGame(3)){
+                    //If the end game has been reached (avatar has lost all of their health and lives) then break from the loop and end the game
+                    root.getChildren().clear();
+                    root.getChildren().add(new Label("Game over man"));
                 }
-				mouseHitbox.toFront();
+
             }};
             
         // Movement Key Events
@@ -395,6 +480,7 @@ public class GUIAnimationApp extends Application {
                 
 			}
 			
+			mouseHitbox.toFront();
 		});
 		
 		Timeline enemyTimer = new Timeline(new KeyFrame(Duration.seconds(3), ActionEvent ->
@@ -424,6 +510,7 @@ public class GUIAnimationApp extends Application {
 		moveTime.start();
 		
         demo2.printCurrentState();
+
     }
 };
 

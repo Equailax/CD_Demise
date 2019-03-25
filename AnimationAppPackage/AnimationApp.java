@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.lang.Math;
 import java.awt.Rectangle;
 
@@ -543,12 +541,8 @@ public class AnimationApp{
                                     
                                     for (Obstacle o3 : this.obstacleArray) {
                                         if (o1.equals(o3)) {
-											if (((Projectile)o1).getDeadlyToEnemy()){
-												System.out.println("My note hit an Obstacle!");
-											} else {
-												System.out.println("An enemy's note hit an Obstacle!");
-											}
                                             this.obstacleArray.remove(o3);
+                                            System.out.println("My note hit an Obstacle!");
                                             break;
                                         }
                                     }
