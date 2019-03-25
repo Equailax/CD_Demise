@@ -22,3 +22,9 @@ repository and switch to the branch "demo2" and download all the files by clicki
 containing the files extracted from the zip file earlier then compile all of the files inside. After compiling all of the files, type 
 "java GUIAnimaionApp" into your terminal to bring up the GUI window. In order to interact with the GUI and move the avatar you have use 
 arrow keys. Up arrow key to move up, left Arrow key to move left, down arrow key to move down and right arrow key to move right.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+DEMO 3:
+- To find demo 3 in our repository, go to the master branch and download all the files by clicking the button labelled "Clone or download" then clicking "Download zip" and extracting all the files into a folder.
+
+-To run demo 3, you have to compile all the files extracted from the master branch zip. Open your terminal and navigate to the folder containing the files extracted from the zip file earlier then compile all of the files inside. After compiling all of the files, type "java GUIAnimationApp" into your terminal to bring up the GUI window. In order to interact with the GUI and move the avatar, you have to use arrow keys. Up arrow key to move up, left arrow key to move left, down arrow key to move down and right arrow key to move right. To shoot at the enemy use the left mouse click and to target the particular point place your mouse pointer/cursor on that particular point. First put your mouse cursor on that particular point and then click the left mouse button. 
