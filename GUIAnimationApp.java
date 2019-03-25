@@ -21,14 +21,11 @@ import java.util.ArrayList;
 import java.lang.Math;
 import java.util.Random;
 
-<<<<<<< HEAD
-
-=======
 import ObstaclePackage.*;
 import AvatarPackage.*;
 import CollectiblePackage.*;
 import AnimationAppPackage.*;
->>>>>>> 10e812c86d14523e19c57625faf0a19e4f245e75
+
 
 /**
  * GUI to display the main map, with spawns and animations of the avatar, enemies, obstacles, and collectibles, and projectiles.

@@ -57,13 +57,14 @@ public class ObstacleTest{
         Rectangle locRectangle = new Rectangle(100, 100, 100, 100);
         Obstacle a = new MockObstacle("Obstacle","Dotify", 100, 100);
         Avatar b = new Avatar("avatar", 4, 4, 1, locRectangle);
-        assertEquals("expected true", true, a.overlapsWith(b));}
+        assertEquals("expected true", true, a.overlapsWith(b));
+	}
     
     @Test 
     public void test_overlaps_obstacle(){
         Obstacle a = new MockObstacle("Obstacle","Dotify", 100, 100);
         Obstacle b = new MockObstacle("Obstacle","Dotify", 100, 100);
-        assertEquals("expected true", true, a.overlapsWithObstacle(b));}
+        assertEquals("expected true", true, a.overlapsWithObstacle(b));
     }
 
     
