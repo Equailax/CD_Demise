@@ -67,5 +67,5 @@ public class ObstacleTest{
         assertEquals("expected true", true, a.overlapsWithObstacle(b));
     }
 
-    
+}
 

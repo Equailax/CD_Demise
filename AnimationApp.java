@@ -32,7 +32,7 @@ public class AnimationApp{
     }
     
     /**
-    This constructor allows to initialize and set the intance variables to a prefered value
+    This constructor allows to initialize and set the instance variables to a prefered value
     @param 
     */
     public AnimationApp(Avatar inputAvatar, ArrayList<Collectible> inputCollectiblesArray, ArrayList<Obstacle> inputObstaclesArray){
@@ -179,6 +179,11 @@ public class AnimationApp{
         tempCollectiblesArrayList.add(new Collectible("Collectible1", 300, 300));
         tempCollectiblesArrayList.add(new Collectible("Collectible2", 800, 565));
         tempCollectiblesArrayList.add(new Collectible("Collectible3", 400, 200));
+        
+        
+        tempCollectiblesArrayList.add(new Health("Health1", 3, 345, 475));
+        tempCollectiblesArrayList.add(new Health("Health1", 3, 678, 265));
+        tempCollectiblesArrayList.add(new Health("Health1", 3, 545, 175));
         
         //Add the required number of collecitbles that one wished to add
         /*
@@ -336,30 +341,37 @@ public class AnimationApp{
             
         }else if (occupiedByEnemy == true){
             //if the spot is occupied by an enemy (regadless if there is a projectile there too), then dont move to the desired location and take damage
-            this.minidisc.takeDamage(1);
+            //this.minidisc.takeDamage(1);
             System.out.println("I cant move there!");
             
         }else if (occupiedByProjectile == true && occupiedByEnemy == false && occupiedByObstacle == false){
             // if the spot is occupied by a projecile (and is not occupied by an enemy nor an obstacle), take damage and move to the desired location
-            this.minidisc.takeDamage(1);
+            //this.minidisc.takeDamage(1);
             this.minidisc.move(userMovementInput);
             
         }else if(occupiedByCollectible == true){
             //If there is a collectible and no obstacles, move the real avatar and pick up the collecitble (remove it from the array)
+            this.minidisc.move(userMovementInput);
             for (int i = 0; i < copyOfCollectibleArrayList.size(); i++){
-                if (copyOfCollectibleArrayList.get(i).overlapsWith(copyOfAvatar)){
-                    //Collect collectible if its there
-                    this.collectiblesArray.get(i).addToCollection();
-                    
-                    //Move the original avatar accordingly (processAvatarMove())
-                    this.minidisc.move(userMovementInput);
-                    System.out.println("I picked up a collecitble");
-                    
-                    //Remove the collectible from the map
-                    removeCollectible(i);
-                    
-                    //break once removed
-                    break;
+                for (Collectible c : this.collectiblesArray) {
+                    if (c.overlapsWith(this.minidisc)) {
+                        if (c instanceof Health) {
+                            System.out.println("I picked up a health");
+                            
+                            this.minidisc.gainHealth(((Health)c).getHealthBoost());
+                            
+                            this.collectiblesArray.remove(c);
+                            break;
+                            
+                        } else if (c instanceof Collectible) {
+                            //Move the original avatar accordingly (processAvatarMove())
+                            
+                            System.out.println("I picked up a collecitble");
+                            
+                            this.collectiblesArray.remove(c);
+                            break;
+                        }
+                    }
                 }
             }
         }else if(occupiedByObstacle == false && occupiedByCollectible == false && occupiedByEnemy == false && occupiedByProjectile == false){
@@ -453,17 +465,6 @@ public class AnimationApp{
                         ((Enemy)o1).setDirection(((Enemy)o1).getDirection().replace("RIGHT", "LEFT"));
                     }
                 }
-                
-                /*
-                if (occupied){
-                    // If moving obstacle overlaps with an avatar or obstacle, move it back
-                    o1.getLocation().setLocation((int)preMove.getX(), (int)preMove.getY());
-                } else if (!occupied && occupiedByProjectile){
-                    //If the spot is not occupied by an obstacle or an enemy, but it is occupied by a projectile that damages enemies, the enemy takes damage.
-                    ((Enemy)o1).takeDamage(1);
-                }
-                */
-                
             }
         }
 		// Change this.ObstacleArray to the dynamic array
@@ -500,6 +501,34 @@ public class AnimationApp{
                         
                         this.obstacleArray.remove(o1);
                         break;
+                    }
+                }
+            }
+        }
+        
+        /*
+        Remove any projecitles htat overlpa with an avatar
+        */
+        //Overlapping projectiles
+        int numOfProjectilesToRemove = 0;
+        for (Obstacle o : this.obstacleArray) {
+            if (o.overlapsWith(this.minidisc)) {
+                if (o instanceof Projectile) {
+                    if (((Projectile)o).getDeadlyToAvatar()) {
+                        this.minidisc.takeDamage(1);
+                        numOfProjectilesToRemove++;
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < numOfProjectilesToRemove; i++) {
+            for (Obstacle o : this.obstacleArray) {
+                if (o.overlapsWith(this.minidisc)) {
+                    if (o instanceof Projectile) {
+                        if (((Projectile)o).getDeadlyToAvatar()) {
+                            this.obstacleArray.remove(o);
+                            break;
+                        }
                     }
                 }
             }

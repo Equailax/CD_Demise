@@ -62,24 +62,6 @@ public class Health extends Collectible
 	}
     
     //Methods
-    /**
-    This method is used to detect when the avatar has overlapped on the map with a health object.
-    This is used for the purposes of collecting/interacting with objects by the avatar/user.
-    If the avatar is overlapping with the health collectibles, then it will add the healthBoost of the health object
-    to the health of the avatar
-
-    @param avatar    the avatar being controlled by the user to interact with the program/game
-    */
-	public boolean overlapsWith(Avatar avatar)
-    {
-		if((avatar.getLocation().getX() == this.getLocation().getX()) && (avatar.getLocation().getY() == this.getLocation().getY())){
-			avatar.gainHealth(this.healthBoost);
-            return true;
-        }else {
-            return false;
-        }
-
-	}
     
     /**
     This is the toString method for the Health class

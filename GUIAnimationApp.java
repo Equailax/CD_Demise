@@ -78,13 +78,11 @@ public class GUIAnimationApp extends Application {
         
         
         // Display positions of life hearts for health
-        for(int i = 0; i <= demo2.getAvatar().getLives(); i++){
-            LifeHeart tempHealth = new LifeHeart(25, 20+(30*i));
-            
-            //imageRectangles.add(tempHealth.getLocation());
-            
-            lifeHearts.add(tempHealth);
-        }
+        Text life = new Text(5, 90, "LIVES: " + demo2.getAvatar().getLives());
+        life.setFont(new Font("Times New Roman", 15));
+        life.setFill(Color.YELLOW);
+        textList.add(life);
+        root.getChildren().add(life);
         
         //Display the health as a number
         Text health = new Text(5, 120, "HEALTH\n      " + demo2.getAvatar().getHealth());
@@ -93,11 +91,6 @@ public class GUIAnimationApp extends Application {
         health.setFill(Color.RED);
         textList.add(health);
         root.getChildren().add(health);
-        
-        // Display of life hearts on GUI
-        for(int i = 0; i < demo2.getAvatar().getLives(); i++){
-            root.getChildren().add(lifeHearts.get(i).getLocation());
-        }
         
         //Distplay the obstacles
         for (Obstacle o : this.obstacleGUIArray) {
@@ -225,39 +218,20 @@ public class GUIAnimationApp extends Application {
                         root.getChildren().remove(t);
                         
                         int updatedHealth = demo2.getAvatar().getHealth();
+                        int updatedLife = demo2.getAvatar().getLives();
                         int updatedCollectibles = demo2.getCollectiblesArray().size();
                         
                         if (t.getText().toUpperCase().contains("HEALTH")) {
                             t.setText("HEALTH\n      " + updatedHealth);
+                            root.getChildren().add(t);
+                        } else if (t.getText().toUpperCase().contains("LIVES")) {
+                            t.setText("LIVES: " + updatedLife);
                             root.getChildren().add(t);
                         } else if (t.getText().toUpperCase().contains("COLLECTIBLES")) {
                             t.setText("Collectibles \nRemaining: " + updatedCollectibles);
                             root.getChildren().add(t);
                         }
                     }
-                    
-                    
-                    /*
-                    
-                    
-                    // Remove the life hearts
-                    for(LifeHeart l : lifeHearts){
-                        root.getChildren().remove(l.getLocation());
-                    }
-                    
-                    lifeHearts.clear();
-                    
-                    // Display positions of life hearts for health
-                    for(int i = 0; i < demo2.getAvatar().getHealth(); i++){
-                        LifeHeart tempHealth = new LifeHeart(25, 20+(30*i));
-                        lifeHearts.add(tempHealth);
-                    }
-                    
-                    // Display of life hearts on GUI
-                    for(LifeHeart l : lifeHearts){
-                        root.getChildren().add(l.getLocation());
-                    }
-                    */
                     
                     //Process the obstacle movement remove anything if necessary
                     demo2.processObstacleMove();

@@ -158,10 +158,17 @@ public class Collectible
      */
 
      public void setImage(){
-         this.collectibleImage = new Image("Record.png");
-         this.imageRectangle = new javafx.scene.shape.Rectangle(this.location.getX(), this.location.getY(), 60, 60);
-         this.imageRectangle.setFill(new ImagePattern(this.collectibleImage));
-         this.location.setSize(60, 60);
+        if (this.name.toUpperCase().contains("COLLECTIBLE")) {
+            this.collectibleImage = new Image("Record.png");
+            this.imageRectangle = new javafx.scene.shape.Rectangle(this.location.getX(), this.location.getY(), 60, 60);
+            this.imageRectangle.setFill(new ImagePattern(this.collectibleImage));
+            this.location.setSize(60, 60);
+        } else if (this.name.toUpperCase().contains("HEALTH")) {
+            this.collectibleImage = new Image("LifeHeart.png");
+            this.imageRectangle = new javafx.scene.shape.Rectangle(this.location.getX(), this.location.getY(), 25, 20);
+            this.imageRectangle.setFill(new ImagePattern(this.collectibleImage));
+            this.location.setSize(25, 20);
+        }
      }
 
      /**
