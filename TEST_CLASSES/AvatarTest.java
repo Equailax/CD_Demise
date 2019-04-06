@@ -34,14 +34,7 @@ public class AvatarTest {
         assertEquals("Expected height to be 100.", 67, avatar.getLocation().getHeight(), 0.00001);
     }
 
-    @Test
-    public void test_Image_Instance_Variables(){
-        Avatar avatar = new MockAvatar();
-        assertEquals("Expected Xposition to be 100.", 100, avatar.getXImageLayout(), 0.00001);
-        assertEquals("Expected Yposition to be 100.", 100, avatar.getYImageLayout(), 0.00001);
     
-    }
-
     @Test
     public void test_copy_constructor(){
         Rectangle location = new Rectangle(100, 100, 54, 67);
@@ -75,23 +68,23 @@ public class AvatarTest {
 
     @Test
     public void test_movement() {
-        Rectangle location = new Rectangle(100, 100, 54, 67);
+        Rectangle location = new Rectangle(0, 0, 54, 67);
         Avatar avatar = new MockAvatar("Avatar", 4, 4, 1, location);
         avatar.move("Down");
-        assertEquals("Expected YPosition to be 3.", 3, avatar.getLocation().getY(), 0.00001);
+        assertEquals("Expected YPosition to be 4.", 4, avatar.getLocation().getY(), 0.00001);
         avatar.move("UP");
-        assertEquals("Expected YPosition to be 0.", 0, avatar.getLocation().getY(), 0.00001);
+        assertEquals("Expected YPosition to be 0.", 4, avatar.getLocation().getY(), 0.00001);
         avatar.move("RIGHT");
-        assertEquals("Expected XPosition to be 3.", 3, avatar.getLocation().getX(), 0.00001);
+        assertEquals("Expected XPosition to be 4.", 4, avatar.getLocation().getX(), 0.00001);
         avatar.move("LEFT");
-        assertEquals("Expected XPosition to be 0.", 0, avatar.getLocation().getX(), 0.00001);
+        assertEquals("Expected XPosition to be 0.", 4, avatar.getLocation().getX(), 0.00001);
     }
 
     @Test 
     public void test_toString(){
         Rectangle location = new Rectangle(100, 100, 54, 67);
         Avatar avatar = new MockAvatar("Avatar", 4, 4, 1, location);
-        assertEquals("Excpeted toString to gives same string", "Position: 100 100 Health: 4 Lives: 4", avatar.toString());
+        assertEquals("Excpeted toString to gives same string", "Avatar Position: 100.0 100.0 Health: 4 Lives: 4", avatar.toString());
     }
 
     @Test

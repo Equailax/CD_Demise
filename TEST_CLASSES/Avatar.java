@@ -296,13 +296,7 @@ public class Avatar{
         this.note.setLocation(new Rectangle(this.location));
         
         
-        //Image Variables
-        this.avatarImageForward = new Image("MiniDisc.png");
-        this.avatarImageBackward = new Image("MiniDisc Backward.png");
-        
-        this.imageRectangle = new javafx.scene.shape.Rectangle(100, 100, 54, 67);
-        this.imageRectangle.setFill(new ImagePattern(avatarImageForward));
-        
+               
     }
     public Avatar(Avatar inputAvatar){
         this.name = inputAvatar.name;

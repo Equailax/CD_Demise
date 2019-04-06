@@ -11,9 +11,9 @@ public class ObstacleTest{
     public void test_creation(){
         Obstacle a = new Obstacle("Obstacle","Dotify", 100, 100);
         assertEquals("Excpected name to be 'Obstacle'", "Obstacle", a.getName());
-        assertEquals("Excpected type to be 'Dotify'", "Dotify", a.getType());
-        assertEquals("Excpected Xcoord to be 100", 100, a.getLocation().getX());
-        assertEquals("Excpected Ycoord to be 100", 100, a.getLocation().getY());
+        assertEquals("Excpected type to be 'Dotify'", "DOTIFY", a.getType());
+        assertEquals("Excpected Xcoord to be 100", 100, a.getLocation().getX(), 0.00001);
+        assertEquals("Excpected Ycoord to be 100", 100, a.getLocation().getY(), 0.00001);
     }
 
     @Test
@@ -21,9 +21,9 @@ public class ObstacleTest{
         Obstacle toCopyObstacle = new Obstacle("Obstacle", "Dotify", 100, 100);
         Obstacle a = new Obstacle(toCopyObstacle);
         assertEquals("Excpected name to be 'Obstacle'", "Obstacle", a.getName());
-        assertEquals("Excpected type to be 'Dotify'", "Dotify", a.getType());
-        assertEquals("Excpected Xcoord to be 100", 100, a.getLocation().getX());
-        assertEquals("Excpected Ycoord to be 100", 100, a.getLocation().getY());
+        assertEquals("Excpected type to be 'Dotify'", "DOTIFY", a.getType());
+        assertEquals("Excpected Xcoord to be 100", 100, a.getLocation().getX(), 0.00001);
+        assertEquals("Excpected Ycoord to be 100", 100, a.getLocation().getY(), 0.00001);
     }
 
     @Test
@@ -33,9 +33,9 @@ public class ObstacleTest{
         a.setType("Dotify");
         a.setLocation(100, 100);
         assertEquals("Excpected name to be 'Obstacle'", "Obstacle", a.getName());
-        assertEquals("Excpected type to be 'Dotify'", "Dotify", a.getType());
-        assertEquals("Excpected Xcoord to be 100", 100, a.getLocation().getX());
-        assertEquals("Excpected Ycoord to be 100", 100, a.getLocation().getY());
+        assertEquals("Excpected type to be 'Dotify'", "DOTIFY", a.getType());
+        assertEquals("Excpected Xcoord to be 100", 100, a.getLocation().getX(), 0.00001);
+        assertEquals("Excpected Ycoord to be 100", 100, a.getLocation().getY(), 0.00001);
     }
 
     @Test 

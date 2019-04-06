@@ -22,7 +22,8 @@ assertEquals("Testing for the Ycood,100",100,(int)c.getLocation().getY());
 @Test
 public void test_defaultConstructor(){
 	Health c = new Health();
-	assertEquals("testing for default constructor,name",null,c.getName());
+	c.setName("Health");
+	assertEquals("testing for default constructor,name","Health",c.getName());
 	assertEquals("testing for default constructor,healthboost",1,c.getHealthBoost());
 	assertEquals("testing for default constructor,xcood",0,(int)c.getLocation().getX());
 	assertEquals("testing for default constructor,ycood",0,(int)c.getLocation().getY());
@@ -50,8 +51,8 @@ public void test_overlapsWith(){
 	Avatar a = new Avatar();
 	a.setLocation(100,100);
 	Health c = new Health();
-	boolean r = c.overlapsWith(a);
-		assertEquals("testing for over when is true",true,r);
+	c.setLocation(100, 100);
+		assertEquals("testing for over when is true",true, c.overlapsWith(a));
 }
 // tostring
 	@Test

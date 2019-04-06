@@ -5,10 +5,6 @@ import java.lang.Math;
 
 import javafx.scene.shape.ObservableFaceArray;
 
-import ObstaclePackage.*;
-import AvatarPackage.*;
-import CollectiblePackage.*;
-
 
 public class Enemy extends Obstacle
 {
@@ -319,14 +315,6 @@ public class Enemy extends Obstacle
     
     public String toString(){
         return this.getName() + " Location: " + this.getLocation().getX() + " " + this.getLocation().getY() + " Health: " + this.health + " Direction: " + this.direction;
-    }
-    
-    
-    /////IMAGE MOVEMENT METHODS\\\\\\
-    
-    public void moveEnemyImage(int moveX, int moveY) {
-        this.imageRectangle.setLayoutX(this.imageRectangle.getLayoutX() + moveX);
-        this.imageRectangle.setLayoutY(this.imageRectangle.getLayoutY() + moveY);
     }
     
     public static void main(String[] args){
