@@ -26,19 +26,19 @@ public static void main(String[] args)
 
 public void start(Stage primaryStage) throws Exception{
 	
-	Rectangle endGameScreen = new Rectangle(0,0,1100,1100);
-	endGameScreen.setFill(Color.BLACK);
-	root.getChildren().add(endGameScreen);
+	Rectangle gameOverScreen = new Rectangle(0,0,1100,1100);
+	gameOverScreen.setFill(Color.BLACK);
+	root.getChildren().add(gameOverScreen);
 	
 	//Game Title
-	Text endGameTitle = new Text("GAME OVER");
-	Font endTitleFont = new Font("Callibri", 120);
-	endGameTitle.setFill(Color.RED);
-	endGameTitle.setLayoutX(160);
-	endGameTitle.setLayoutY(450);
-	endGameTitle.setFont(endTitleFont.font("Berlin Sans FB", FontWeight.BOLD, 120));
-	endGameTitle.setTextAlignment(TextAlignment.CENTER);
-	root.getChildren().add(endGameTitle);
+	Text gameOverTitle = new Text("GAME OVER");
+	Font gameOverTitleFont = new Font("Callibri", 120);
+	gameOverTitle.setFill(Color.RED);
+	gameOverTitle.setLayoutX(160);
+	gameOverTitle.setLayoutY(450);
+	gameOverTitle.setFont(gameOverTitleFont.font("Berlin Sans FB", FontWeight.BOLD, 120));
+	gameOverTitle.setTextAlignment(TextAlignment.CENTER);
+	root.getChildren().add(gameOverTitle);
 
 
 	//Start game button
