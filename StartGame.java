@@ -27,36 +27,36 @@ public static void main(String[] args)
 public void start(Stage primaryStage) throws Exception{
 	
 	Rectangle endGameScreen = new Rectangle(0,0,1100,1100);
-	endGameScreen.setFill(Color.BLACK);
-	root.getChildren().add(endGameScreen);
+	startGameScreen.setFill(Color.BLACK);
+	root.getChildren().add(startGameScreen);
 	
 	//Game Title
-	Text endGameTitle = new Text("CD\nDEMISE");
+	Text starGameTitle = new Text("CD\nDEMISE");
 	Font endTitleFont = new Font("Callibri", 150);
-	endGameTitle.setFill(Color.WHITE);
-	endGameTitle.setLayoutX(180);
-	endGameTitle.setLayoutY(320);
-	endGameTitle.setFont(endTitleFont.font("Berlin Sans FB", FontWeight.BOLD, 180));
-	endGameTitle.setStroke(Color.DODGERBLUE);
-	endGameTitle.setTextAlignment(TextAlignment.CENTER);
-	endGameTitle.setStrokeWidth(6);
-	root.getChildren().add(endGameTitle);
+	startGameTitle.setFill(Color.WHITE);
+	startGameTitle.setLayoutX(180);
+	startGameTitle.setLayoutY(320);
+	startGameTitle.setFont(endTitleFont.font("Berlin Sans FB", FontWeight.BOLD, 180));
+	startGameTitle.setStroke(Color.DODGERBLUE);
+	startGameTitle.setTextAlignment(TextAlignment.CENTER);
+	startGameTitle.setStrokeWidth(6);
+	root.getChildren().add(startGameTitle);
 
 
 	//Start game button
-	Button startOver = new Button("START GAME");
+	Button startGame = new Button("START GAME");
 	Font buttonFont = new Font("Callibri", 25);
-	startOver.setPrefHeight(100);
-	startOver.setPrefWidth(310);
-	startOver.setLayoutY(750);
-	startOver.setLayoutX(345);
-	startOver.setStyle("-fx-background-color: #7AFB7D");
-	startOver.setFont(buttonFont.font("Berlin Sans FB", FontWeight.BOLD, 40));
-	startOver.setTextFill(Color.BLACK);
-	startOver.setOnMouseEntered(actionEvent -> startOver.setStyle("-fx-background-color: #4FFE79"));
-	startOver.setOnMouseExited(actionEvent -> startOver.setStyle("-fx-background-color: #7AFB7D"));
-	startOver.setOnAction(actionEvent -> Platform.exit()); //change this action to screen reset
-	root.getChildren().add(startOver);
+	startGame.setPrefHeight(100);
+	startGame.setPrefWidth(310);
+	startGame.setLayoutY(750);
+	startGame.setLayoutX(345);
+	startGame.setStyle("-fx-background-color: #7AFB7D");
+	startGame.setFont(buttonFont.font("Berlin Sans FB", FontWeight.BOLD, 40));
+	startGame.setTextFill(Color.BLACK);
+	startGame.setOnMouseEntered(actionEvent -> startOver.setStyle("-fx-background-color: #4FFE79"));
+	startGame.setOnMouseExited(actionEvent -> startOver.setStyle("-fx-background-color: #7AFB7D"));
+	startGame.setOnAction(actionEvent -> Platform.exit()); //change this action to screen reset
+	root.getChildren().add(startGame);
 	
 	
 	primaryStage.setScene(scene);
