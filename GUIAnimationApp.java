@@ -294,37 +294,37 @@ public class GUIAnimationApp extends Application {
         // Movement Key Events
         scene.setOnKeyPressed(keyEvent -> {
                 // Starts moving right when key is pressed
-                if (keyEvent.getCode().toString() == "RIGHT")
+                if (keyEvent.getCode().toString() == "D")
                     right = true;
         
                 // Starts moving left when key is pressed
-                if (keyEvent.getCode().toString() == "LEFT")
+                if (keyEvent.getCode().toString() == "A")
                     left = true;
         
                 // Starts moving up when key is pressed
-                if (keyEvent.getCode().toString() == "UP")
+                if (keyEvent.getCode().toString() == "W")
                     up = true;
         
                 // Starts moving down when key is pressed
-                if (keyEvent.getCode().toString() == "DOWN")
+                if (keyEvent.getCode().toString() == "S")
                     down = true;
         });
 
         scene.setOnKeyReleased(keyEvent -> {
                 // Stops moving right when key is released
-                if (keyEvent.getCode().toString() == "RIGHT")
+                if (keyEvent.getCode().toString() == "D")
                     right = false;
         
                 // Stops moving left when key is released
-                if (keyEvent.getCode().toString() == "LEFT")
+                if (keyEvent.getCode().toString() == "A")
                     left = false;
         
                 // Stops moving up when key is released
-                if (keyEvent.getCode().toString() == "UP")
+                if (keyEvent.getCode().toString() == "W")
                     up = false;
         
                 // Stops moving down when key is released
-                if (keyEvent.getCode().toString() == "DOWN")
+                if (keyEvent.getCode().toString() == "S")
                     down = false;
         });
 		
