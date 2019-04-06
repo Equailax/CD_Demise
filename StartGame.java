@@ -32,11 +32,11 @@ public void start(Stage primaryStage) throws Exception{
 	
 	//Game Title
 	Text starGameTitle = new Text("CD\nDEMISE");
-	Font endTitleFont = new Font("Callibri", 150);
+	Font startTitleFont = new Font("Callibri", 150);
 	startGameTitle.setFill(Color.WHITE);
 	startGameTitle.setLayoutX(180);
 	startGameTitle.setLayoutY(320);
-	startGameTitle.setFont(endTitleFont.font("Berlin Sans FB", FontWeight.BOLD, 180));
+	startGameTitle.setFont(starTitleFont.font("Berlin Sans FB", FontWeight.BOLD, 180));
 	startGameTitle.setStroke(Color.DODGERBLUE);
 	startGameTitle.setTextAlignment(TextAlignment.CENTER);
 	startGameTitle.setStrokeWidth(6);
