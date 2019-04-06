@@ -1,12 +1,6 @@
 import java.util.Scanner;
 import java.awt.Rectangle;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.paint.ImagePattern;
 
-import ObstaclePackage.*;
-import AvatarPackage.*;
-import CollectiblePackage.*;
 
 
     // i have not consider the privacy leaks in this file 
@@ -25,13 +19,7 @@ public class Avatar{
     
     private final int mapHeight = 1000;
     private final int mapWidth = 1000;
-    
-    
-    /////IMAGE INSTANCE VARIABLES\\\\\
-    
-    private Image avatarImageForward = new Image("MiniDisc.png");
-    private Image avatarImageBackward = new Image("MiniDisc Backward.png");
-    private javafx.scene.shape.Rectangle imageRectangle = new javafx.scene.shape.Rectangle(100, 100, 54, 67);
+
 
     // getter methods 
     /**
@@ -290,47 +278,7 @@ public class Avatar{
         }
     }
 
-    //////////////IMAGE METHODS\\\\\\\\\\\\\\\\
     
-    public void setForward()
-    {
-        this.imageRectangle.setFill(new ImagePattern(avatarImageForward));
-    }
-    
-    public void setBackward()
-    {
-        this.imageRectangle.setFill(new ImagePattern(avatarImageBackward));
-    }
-    
-    public javafx.scene.shape.Rectangle getAvatarImage()
-    {
-        return this.imageRectangle;
-    }
-    
-    public double getXImageLayout(int moveX)
-    {
-        //this.moveX = moveX;
-        return this.imageRectangle.getLayoutX() + moveX;
-    }
-    
-    public double getXImageLayout(){
-        return this.imageRectangle.getLayoutX();
-    }
-    
-    public double getYImageLayout(int moveY)
-    {
-        //this.moveY = moveY;
-        return this.imageRectangle.getLayoutY() + moveY;
-    }
-    
-    public double getYImageLayout(){
-        return this.imageRectangle.getLayoutY();
-    }
-    
-    public void moveAvatarImage(int moveX, int moveY) {
-        this.imageRectangle.setLayoutX(this.imageRectangle.getLayoutX() + moveX);
-        this.imageRectangle.setLayoutY(this.imageRectangle.getLayoutY() + moveY);
-    }
     
     
     // constructors 

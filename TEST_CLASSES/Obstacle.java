@@ -4,15 +4,6 @@ import java.awt.Point;
 import java.awt.Point;
 import java.lang.Math;
 
-import javafx.scene.shape.ObservableFaceArray;
-
-import javafx.scene.image.Image;
-import javafx.scene.paint.ImagePattern;
-
-import ObstaclePackage.*;
-import AvatarPackage.*;
-import CollectiblePackage.*;
-
 public class Obstacle
 {
 	private String name;
@@ -27,8 +18,7 @@ public class Obstacle
         
     ////IMAGE INSTANCE VARIABLES\\\\
     
-    private Image obstacleImage;
-	protected javafx.scene.shape.Rectangle imageRectangle = new javafx.scene.shape.Rectangle(xcoord, ycoord, height, width);
+    
     private String type = "NOTSET";
 	
 	
@@ -49,7 +39,7 @@ public class Obstacle
         */
         
         this.type = inputObstacle.type;
-        this.setImage();
+        
         
         
     }
@@ -73,7 +63,7 @@ public class Obstacle
         */
         this.type = aType.toUpperCase();
         
-        this.setImage();
+        
         
 	}
 	
@@ -165,147 +155,7 @@ public class Obstacle
         }
     }
     
-    //////IMAGE METHODS\\\\\\\
     
-    /**
-    This method returns the x position of the image layout
-    @return double
-    */
-    public double getXImageLayout(){
-        return this.imageRectangle.getLayoutX();
-    }
-    
-    /**
-    This method returns the y position of the image layout
-    */
-    public double getYImageLayout(){
-        return this.imageRectangle.getLayoutY();
-    }
-    
-    /**
-    This method sets the forward image of the obstacle
-    */
-    public void setImageForward() {
-		if(this.type.equals("DOTIFY")) {
-            
-			this.obstacleImage = new Image("Dotify.png");
-			this.imageRectangle.setFill(new ImagePattern(this.obstacleImage));
-            
-		} else if(this.type.equals("BEATSBYDRO")) {
-            
-			this.obstacleImage = new Image("BeatsbyDro.png");
-			this.imageRectangle.setFill(new ImagePattern(this.obstacleImage));
-            
-		} else if(this.type.equals("PEARMUSIC")) {
-            
-			this.obstacleImage = new Image("PearMusic.png");
-			this.imageRectangle.setFill(new ImagePattern(this.obstacleImage));
-            
-		} else if(this.type.equals("MYPHONE")) {
-            
-			this.obstacleImage = new Image("MyPhone.png");
-			this.imageRectangle.setFill(new ImagePattern(this.obstacleImage));
-            
-		} else if (this.type.equals("NOTE")) {
-            
-            this.obstacleImage = new Image("MusicNote.png");
-            this.imageRectangle.setFill(new ImagePattern(this.obstacleImage));
-            
-        } else if (this.type.equals("PUDDLE")) {
-            
-            this.obstacleImage = new Image("Puddle.png");
-            this.imageRectangle.setFill(new ImagePattern(this.obstacleImage));
-            
-        }
-	}
-    
-    /**
-    This method sets the backward image of the obstacle
-    */
-    public void setImageBackward() {
-        
-		if(this.type.equals("DOTIFY")) {
-            
-			this.obstacleImage = new Image("Dotify Backward.png");
-			this.imageRectangle.setFill(new ImagePattern(this.obstacleImage));
-            
-		} else if(this.type.equals("BEATSBYDRO")) {
-            
-			this.obstacleImage = new Image("BeatsbyDro Backward.png");
-			this.imageRectangle.setFill(new ImagePattern(this.obstacleImage));
-            
-		} else if(this.type.equals("PEARMUSIC")) {
-            
-			this.obstacleImage = new Image("PearMusic Backward.png");
-			this.imageRectangle.setFill(new ImagePattern(this.obstacleImage));
-            
-		} else if(this.type.equals("MYPHONE")) {
-            
-			this.obstacleImage = new Image("MyPhone Backward.png");
-			this.imageRectangle.setFill(new ImagePattern(this.obstacleImage));
-            
-		}
-	}
-    
-    public void setImage() {
-        if(this.type.equals("DOTIFY")) {
-            
-            this.obstacleImage = new Image("Dotify.png");
-            this.imageRectangle = new javafx.scene.shape.Rectangle(this.location.getX(), this.location.getY(), 54, 67);
-            this.imageRectangle.setFill(new ImagePattern(this.obstacleImage));
-            
-            this.location.setSize(54, 67);
-        
-        } else if(this.type.equals("BEATSBYDRO")) {
-            
-            this.obstacleImage = new Image("BeatsbyDro.png");
-            this.imageRectangle = new javafx.scene.shape.Rectangle(this.location.getX(), this.location.getY(), 37, 67);
-            this.imageRectangle.setFill(new ImagePattern(this.obstacleImage));
-            
-            this.location.setSize(37, 67);
-        
-        } else if(this.type.equals("PEARMUSIC")) {
-            
-            this.obstacleImage = new Image("PearMusic.png");
-            this.imageRectangle = new javafx.scene.shape.Rectangle(this.location.getX(), this.location.getY(), 40, 67);
-            this.imageRectangle.setFill(new ImagePattern(this.obstacleImage));
-            
-            this.location.setSize(40, 67);
-        
-        } else if(this.type.equals("MYPHONE")) {
-            
-            this.obstacleImage = new Image("MyPhone.png");
-            this.imageRectangle = new javafx.scene.shape.Rectangle(this.location.getX(), this.location.getY(), 40, 67);
-            this.imageRectangle.setFill(new ImagePattern(this.obstacleImage));
-            
-            this.location.setSize(40, 67);
-            
-        } else if (this.type.equals("NOTE")) {
-            
-            this.obstacleImage = new Image("MusicNote.png");
-            this.imageRectangle = new javafx.scene.shape.Rectangle(this.location.getX()+14, this.location.getY()+17, 22, 37);
-            this.imageRectangle.setFill(new ImagePattern(this.obstacleImage));
-            
-            this.location.setSize(22, 37);
-            
-        } else if (this.type.equals("PUDDLE")) {
-            
-            this.obstacleImage = new Image("Puddle.png");
-            this.imageRectangle = new javafx.scene.shape.Rectangle(this.location.getX(), this.location.getY(), 60 , 60);
-            this.imageRectangle.setFill(new ImagePattern(this.obstacleImage));
-            
-            this.location.setSize(60, 60);
-            
-        }
-    }
-    
-    /**
-    This returns the image location of the obstacle
-    @return javafx.scene.shape.Rectangle
-    */
-    public javafx.scene.shape.Rectangle getEnemyImageRectangle() {
-        return this.imageRectangle;
-    }
     
     /**
     This sets the type of the obstacle, which then subsequently changes the image as well
@@ -315,7 +165,7 @@ public class Obstacle
         if (aType != null) {
             this.type = aType.toUpperCase();
         }
-        this.setImage();
+        
     }
     
     /**
