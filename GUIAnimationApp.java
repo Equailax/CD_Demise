@@ -454,7 +454,7 @@ public class GUIAnimationApp extends Application {
 			mouseHitbox.toFront();
 		});
 		
-		Timeline enemyTimer = new Timeline(new KeyFrame(Duration.seconds(3), ActionEvent ->
+		Timeline enemyTimer = new Timeline(new KeyFrame(Duration.seconds(2.5), ActionEvent ->
 		{
 			ArrayList<Obstacle> newProjectile = new ArrayList<Obstacle>();
 			for (Obstacle o : this.obstacleGUIArray)
@@ -462,7 +462,6 @@ public class GUIAnimationApp extends Application {
 				if (o instanceof Enemy)
 				{
 					((Enemy)o).shootProjectile("left");
-			
 					Projectile enemyProjectile = new Projectile(((Enemy)o).getProjectile());
 					newProjectile.add(enemyProjectile);
 					
