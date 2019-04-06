@@ -122,6 +122,19 @@ public class Obstacle
             return false;
         }
 	}
+    
+    /**
+    This method checks wether or not the obstacle overlaps with a collectible
+    @param c : the collectible that we want to check that it overlaps
+    */
+    public boolean overlapsWith(Collectible c) {
+        if (c.getLocation().intersects(this.location)){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
 	
     //Setter methods
     /**

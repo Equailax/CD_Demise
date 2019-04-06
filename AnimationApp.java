@@ -119,11 +119,101 @@ public class AnimationApp{
         tempObstaclesArrayList.add(new Obstacle("Obstacle1", "puddle", 300, 110));
         tempObstaclesArrayList.add(new Obstacle("Obstacle2", "puddle", 700, 400));
         tempObstaclesArrayList.add(new Obstacle("Obstacle3", "puddle", 260, 565));
+<<<<<<< HEAD
+        /*
+        for (int i = 0; i < numberOfObstaclesToAdd; i++){
+            
+            //Generate a random number between 0 and 10 for the x coordinate
+            int randomXCoordinate = (int)(Math.random() * (652) + 200);
+            
+            //Generate a random number between 0 and 10 for the Y coordinate
+            int randomYCoordinate = (int)(Math.random() * (475) + 100);
+            
+            tempObstaclesArrayList.add(new Obstacle("Obstacle" + i, "puddle",randomXCoordinate, randomYCoordinate));  ///When constructing an obstacle, it should take a random positon as an argument
+        }
+        */
+        
+        //Add specific enemies
+        /*
+        tempObstaclesArrayList.add(new Enemy("Enemy1", "dotify", 21, 500, 400, "UPRIGHT"));  //Sets the enemy health to 3
+        tempObstaclesArrayList.add(new Enemy("Enemy2", "beatsbydro", 21, 700, 200, "DOWN"));  //Sets the enemy health to 3
+        tempObstaclesArrayList.add(new Enemy("Enemy3", "pearmusic", 21, 200, 500, "UP"));  //Sets the enemy health to 3
+        */
+        
+        //Add the required enemies to the temporary array list
+        for (int i = 0; i < numberOfEnemiesToAdd; i++){
+            
+            //Generate a random number between 0 and 10 for the x coordinate
+            int randomXCoordinate = (int)(Math.random() * (452) + 200);
+            
+            //Generate a random number between 0 and 10 for the Y coordinate
+            int randomYCoordinate = (int)(Math.random() * (275) + 200);
+            
+            //Generate a random dierction 
+            int randomDirection = (int)((Math.random() * 4) + 1);
+            String newDirection = "";
+            if (randomDirection == 1) {
+                newDirection = "LEFT";
+            } else if (randomDirection == 2) {
+                newDirection = "RIGHT";
+            } else if (randomDirection == 3) {
+                newDirection = "DOWN";
+            } else if (randomDirection == 4) {
+                newDirection = "UP";
+            }
+            
+            int anotherOneRandomDirection = (int)((Math.random() * (4)) + 1);
+            
+            //anotherOneRandomDirection = 4;
+            
+            if (anotherOneRandomDirection == 1) {
+                newDirection = newDirection + "LEFT";
+            } else if (anotherOneRandomDirection == 2) {
+                newDirection = newDirection + "DOWN";
+            } else if (anotherOneRandomDirection == 3) {
+                newDirection = newDirection + "UP";
+            } else if (anotherOneRandomDirection == 4) {
+                newDirection = newDirection + "RIGHT";
+            }
+            
+            //Randomize the enemy skin
+            int randomSkin = (int)((Math.random() * 4) + 1);
+            String skin = "";
+            if (randomSkin == 1) {
+                skin = "MYPHONE";
+            } else if (randomSkin == 2) {
+                skin = "PEARMUSIC";
+            } else if (randomSkin == 3) {
+                skin = "BEATSBYDRO";
+            } else if (randomSkin == 4) {
+                skin = "DOTIFY";
+            }
+            
+            tempObstaclesArrayList.add(new Enemy("Enemy" + i, skin, 1, randomXCoordinate, randomYCoordinate, newDirection));  //Sets the enemy health to 3
+        }
+        
+        for (Obstacle o1 : tempObstaclesArrayList) {
+            //Check obstacle
+            for (Obstacle o2 : tempObstaclesArrayList) {
+                if (!o1.equals(o2)) {
+                    if (o1.overlapsWithObstacle(o2)) {
+                        Rectangle newLocation = new Rectangle(o1.getLocation());
+                        newLocation.setLocation((int)(newLocation.getX()) + 100, (int)(newLocation.getY()  + 100));
+                        o1.setLocation(newLocation);
+                        
+                    }
+                }
+            }
+        }
+        
+        
+=======
         
         // Add specific enemies. Enemy health is set to 3
         tempObstaclesArrayList.add(new Enemy("Enemy1", "dotify", 21, 500, 400, "UPRIGHT"));
         tempObstaclesArrayList.add(new Enemy("Enemy2", "beatsbydro", 21, 700, 200, "DOWN"));
         tempObstaclesArrayList.add(new Enemy("Enemy3", "pearmusic", 21, 200, 500, "UP"));
+>>>>>>> 7e802a922be09a6a388874db1685e0d632647257
         this.obstacleArray = tempObstaclesArrayList;
     }
     
@@ -166,7 +256,7 @@ public class AnimationApp{
     
     /**
     This method returns the collectible array list.
-    @return temp : this is a copy of the this.collecitblesArray
+    @return temp : this is a copy of the this.collectiblesArray
     */
     public ArrayList<Collectible> getCollectiblesArray(){
         ArrayList<Collectible> temp = new ArrayList<Collectible>();
@@ -521,7 +611,28 @@ public class AnimationApp{
     public void initialize(){
         this.minidisc = new Avatar("Minidisc",3, 3, 1, new Rectangle(100, 100, 54, 67));
         addCollectible(3);
+<<<<<<< HEAD
+        
+        //Initalize Obstacles
         addObstacle(3, 3);
+
+        //Check if anything overlpas with any other one
+        
+        
+        
+        //Check if collectibles overlap with obstacles
+        for (Collectible c : this.collectiblesArray) {
+            for (Obstacle o1 : this.obstacleArray) {
+                if (o1.overlapsWith(c)) {
+                    Rectangle newLocation = new Rectangle(c.getLocation());
+                    newLocation.setLocation((int)(newLocation.getX()) + 100, (int)(newLocation.getY() + 100));
+                    c.setLocation(newLocation);
+                }
+            }
+        }
+=======
+        addObstacle(3, 3);
+>>>>>>> 7e802a922be09a6a388874db1685e0d632647257
     }
     
     /**This method initializes the game while the game runs.  This means keeping the positons of the 'original' objects that
