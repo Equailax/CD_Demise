@@ -9,29 +9,43 @@ import ObstaclePackage.*;
 import AvatarPackage.*;
 import CollectiblePackage.*;
 
+<<<<<<< HEAD
 public class AnimationApp{
     //This is the animation app, where we will run our game.
     
     //Instance variables
+=======
+//This is the animation app, where we will run our game.
+public class AnimationApp {
+
+    // Instance variables
+>>>>>>> 7c0e76857367b8988fc48fcb400a309ba6b48010
     private Avatar minidisc = new Avatar();
     private ArrayList<Collectible> collectiblesArray = new ArrayList<Collectible>();
     private ArrayList<Obstacle> obstacleArray = new ArrayList<Obstacle>();
-    
-    //Map dimensions
+
+    // Map dimensions
     private final int mapHeight = 1000;
     private final int mapWidth = 1000;
+<<<<<<< HEAD
     
     //Constructors
+=======
+
+    // Constructors
+>>>>>>> 7c0e76857367b8988fc48fcb400a309ba6b48010
     /**
-    The default constructor for the AnimationApp class has the instance variables set to their default values
-    */
-    public AnimationApp(){
+     * The default constructor for the AnimationApp class has the instance variables
+     * set to their default values
+     */
+    public AnimationApp() {
         this.minidisc = new Avatar();
         this.collectiblesArray = new ArrayList<Collectible>();
         this.obstacleArray = new ArrayList<Obstacle>();
     }
-    
+
     /**
+<<<<<<< HEAD
     This constructor allows to initialize and set the instance variables to a prefered value
     @param 
     */
@@ -39,8 +53,20 @@ public class AnimationApp{
         
         //Copy the input avatar and set the newAvatar equal to the instance variable
         if (inputAvatar != null){
+=======
+     * This constructor allows to initialize and set the instance variables to a
+     * prefered value
+     * 
+     * @param inputAvatar            is the avatar to copy
+     * @param inputCollectiblesArray is the collectibles array to copy
+     * @param inputObstaclesArray    is the obstacles array to copy
+     */
+    public AnimationApp(Avatar inputAvatar, ArrayList<Collectible> inputCollectiblesArray,
+            ArrayList<Obstacle> inputObstaclesArray) {
+        if (inputAvatar != null) {
+>>>>>>> 7c0e76857367b8988fc48fcb400a309ba6b48010
             this.minidisc = new Avatar(inputAvatar);
-        }else {
+        } else {
             this.minidisc = null;
         }
         
@@ -50,29 +76,43 @@ public class AnimationApp{
         //Copy the inputObstaclesArray and set it equal to the instance variable
         setObstacleArray(inputObstaclesArray);
     }
+<<<<<<< HEAD
     
     //Setter Method
+=======
+
+    // Setter Method
+>>>>>>> 7c0e76857367b8988fc48fcb400a309ba6b48010
     /**
-    This method sets the avatar to some new avatar
-    @param inputAvatar : this is the avatar we wish to set this.avatar to
-    */
-    public void setAvatar(Avatar inputAvatar){
+     * This method sets the avatar to some new avatar
+     * 
+     * @param inputAvatar : this is the avatar we wish to set this.avatar to
+     */
+    public void setAvatar(Avatar inputAvatar) {
         this.minidisc = new Avatar(inputAvatar);
     }
-    
-    /** 
-    This method sets this.collectiblesArray to a new array 
-    @param inputCollectiblesArray : the collectiblesArray that we wish to set this.collectiblesArray to
-    */
-    public void setCollectiblesArray(ArrayList<Collectible> inputCollectiblesArray){
-        if (inputCollectiblesArray != null){
+
+    /**
+     * This method sets this.collectiblesArray to a new array
+     * 
+     * @param inputCollectiblesArray : the collectiblesArray that we wish to set
+     *                               this.collectiblesArray to
+     */
+    public void setCollectiblesArray(ArrayList<Collectible> inputCollectiblesArray) {
+        if (inputCollectiblesArray != null) {
             ArrayList<Collectible> tempCollectiblesArrayList = new ArrayList<Collectible>();
+<<<<<<< HEAD
             
             //copy the elements of the inputCollectiblesArray to a temporary array list
             for (Collectible c : inputCollectiblesArray){
                 if (c != null){
+=======
+            // Copy the elements of the inputCollectiblesArray to a temporary array list
+            for (Collectible c : inputCollectiblesArray) {
+                if (c != null) {
+>>>>>>> 7c0e76857367b8988fc48fcb400a309ba6b48010
                     tempCollectiblesArrayList.add(new Collectible(c));
-                }else {
+                } else {
                     tempCollectiblesArrayList.add(new Collectible());
                 }
             }
@@ -83,12 +123,15 @@ public class AnimationApp{
     }
 
     /**
-    This method set this.obstacleArray to a new array
-    @param inputObstaclesArray : the obstacleArray that we wish to set this.obstacleArray to
-    */
-    public void setObstacleArray(ArrayList<Obstacle> inputObstaclesArray){
-        if (inputObstaclesArray != null){
+     * This method set this.obstacleArray to a new array
+     * 
+     * @param inputObstaclesArray : the obstacleArray that we wish to set
+     *                            this.obstacleArray to
+     */
+    public void setObstacleArray(ArrayList<Obstacle> inputObstaclesArray) {
+        if (inputObstaclesArray != null) {
             ArrayList<Obstacle> tempObstaclesArrayList = new ArrayList<Obstacle>();
+<<<<<<< HEAD
             
             //Copy the elements of the inputObstaclesArray to the temporary array list
             for (Obstacle o : inputObstaclesArray){
@@ -102,6 +145,19 @@ public class AnimationApp{
                     }
                     //tempObstaclesArrayList.add(new Obstacle(o));
                 }else {
+=======
+            // Copy the elements of the inputObstaclesArray to the temporary array list
+            for (Obstacle o : inputObstaclesArray) {
+                if (o != null) {
+                    if (o instanceof Enemy) {
+                        tempObstaclesArrayList.add(new Enemy((Enemy) o));
+                    } else if (o instanceof Projectile) {
+                        tempObstaclesArrayList.add(new Projectile((Projectile) o));
+                    } else if (o instanceof Obstacle) {
+                        tempObstaclesArrayList.add(new Obstacle(o));
+                    }
+                } else {
+>>>>>>> 7c0e76857367b8988fc48fcb400a309ba6b48010
                     tempObstaclesArrayList.add(new Obstacle());
                 }
             }
@@ -110,7 +166,7 @@ public class AnimationApp{
             this.obstacleArray = tempObstaclesArrayList;
         }
     }
-    
+
     /**
     This method will add a specified number of obstacles to the end of the obstacleArray
     @param numberOfObstaclesToAdd : this is the number of (new) obstacles we wish to add
@@ -128,6 +184,7 @@ public class AnimationApp{
         tempObstaclesArrayList.add(new Obstacle("Obstacle1", "puddle", 300, 110));
         tempObstaclesArrayList.add(new Obstacle("Obstacle2", "puddle", 700, 400));
         tempObstaclesArrayList.add(new Obstacle("Obstacle3", "puddle", 260, 565));
+<<<<<<< HEAD
         /*
         for (int i = 0; i < numberOfObstaclesToAdd; i++){
             
@@ -215,18 +272,34 @@ public class AnimationApp{
         }
         
         
+=======
+        
+        // Add specific enemies. Enemy health is set to 3
+        tempObstaclesArrayList.add(new Enemy("Enemy1", "dotify", 21, 500, 400, "UPRIGHT"));
+        tempObstaclesArrayList.add(new Enemy("Enemy2", "beatsbydro", 21, 700, 200, "DOWN"));
+        tempObstaclesArrayList.add(new Enemy("Enemy3", "pearmusic", 21, 200, 500, "UP"));
+>>>>>>> 7c0e76857367b8988fc48fcb400a309ba6b48010
         this.obstacleArray = tempObstaclesArrayList;
     }
-    
+
     /**
-    This method will adda specified number of collectibles to the collectibles array list
-    @param numberOfCollectiblesToAdd : this is the number of collectibles we wish to add to the array list
-    */
-    public void addCollectible(int numberOfCollectiblesToAdd){
+     * This method will adda specified number of collectibles to the collectibles
+     * array list
+     * 
+     * @param numberOfCollectiblesToAdd : this is the number of collectibles we wish
+     *                                  to add to the array list
+     */
+    public void addCollectible(int numberOfCollectiblesToAdd) {
         ArrayList<Collectible> tempCollectiblesArrayList = new ArrayList<Collectible>();
+<<<<<<< HEAD
         
         //Copy the collectibles array list (this.collectiblesArray) elements to the temporary array list if it is not empty
         if (this.collectiblesArray != null){ 
+=======
+        // Copy the collectibles array list (this.collectiblesArray) elements to the
+        // temporary array list if it is not empty
+        if (this.collectiblesArray != null) {
+>>>>>>> 7c0e76857367b8988fc48fcb400a309ba6b48010
             tempCollectiblesArrayList = getCollectiblesArray();
         }
         
@@ -254,43 +327,54 @@ public class AnimationApp{
         */
         this.collectiblesArray = tempCollectiblesArrayList;
     }
-    
+
     /**
-    This method removes a collectible from the map once it has been picked up!
-    @param indexToRemoveCollectible : this is the index of the collecitble that we wish to remove
-    */
-    public void removeCollectible(int indexToRemoveCollectible){
+     * This method removes a collectible from the map once it has been picked up!
+     * 
+     * @param indexToRemoveCollectible : this is the index of the collecitble that
+     *                                 we wish to remove
+     */
+    public void removeCollectible(int indexToRemoveCollectible) {
         this.collectiblesArray.remove(indexToRemoveCollectible);
         //can add some animation for removing things
     }
+<<<<<<< HEAD
     
     //Getter methods
+=======
+
+    // Getter methods
+>>>>>>> 7c0e76857367b8988fc48fcb400a309ba6b48010
     /**
-    This method will return a copy of the avatar
-    @return Avatar : this is a new avatar with the same values as this.minidisc
-    */
-    public Avatar getAvatar(){
+     * This method will return a copy of the avatar
+     * 
+     * @return Avatar : this is a new avatar with the same values as this.minidisc
+     */
+    public Avatar getAvatar() {
         return new Avatar(this.minidisc);
     }
-    
+
     /**
-    This method returns the collectible array list.
-    @return temp : this is a copy of the this.collectiblesArray
-    */
-    public ArrayList<Collectible> getCollectiblesArray(){
+     * This method returns the collectible array list.
+     * 
+     * @return temp : this is a copy of the this.collectiblesArray
+     */
+    public ArrayList<Collectible> getCollectiblesArray() {
         ArrayList<Collectible> temp = new ArrayList<Collectible>();
-        for (Collectible c : this.collectiblesArray){
+        for (Collectible c : this.collectiblesArray) {
             temp.add(new Collectible(c));
         }
         return temp;
     }
-    
+
     /**
-    This method returns the obstacle array list
-    @return temp : this is a copy of the this.obstacleArray
-    */
-    public ArrayList<Obstacle> getObstacleArray(){
+     * This method returns the obstacle array list
+     * 
+     * @return temp : this is a copy of the this.obstacleArray
+     */
+    public ArrayList<Obstacle> getObstacleArray() {
         ArrayList<Obstacle> temp = new ArrayList<Obstacle>();
+<<<<<<< HEAD
         
         for (Obstacle o : this.obstacleArray){
             if (o instanceof Enemy){
@@ -298,13 +382,22 @@ public class AnimationApp{
             }else if (o instanceof Projectile){
                 temp.add(new Projectile((Projectile)o));
             }else if (o instanceof Obstacle){
+=======
+        for (Obstacle o : this.obstacleArray) {
+            if (o instanceof Enemy) {
+                temp.add(new Enemy((Enemy) o));
+            } else if (o instanceof Projectile) {
+                temp.add(new Projectile((Projectile) o));
+            } else if (o instanceof Obstacle) {
+>>>>>>> 7c0e76857367b8988fc48fcb400a309ba6b48010
                 temp.add(new Obstacle(o));
             }
         }
         return temp;
     }
-    
+
     /**
+<<<<<<< HEAD
     This will print the current state of the game.  This means avatar position/health, collectibes and obstacles
     */
     public void printCurrentState(){
@@ -312,28 +405,48 @@ public class AnimationApp{
         System.out.println(this.minidisc.toString());
         
         //Print out the state of the obstacles
+=======
+     * This will print the current state of the game. This means avatar
+     * position/health, collectibes and obstacles
+     */
+    public void printCurrentState() {
+        // Print the curent state of the avatar
+        System.out.println(this.minidisc.toString());
+
+        // Print out the state of the obstacles
+>>>>>>> 7c0e76857367b8988fc48fcb400a309ba6b48010
         for (Obstacle o : this.obstacleArray) {
             if (o instanceof Enemy) {
-                System.out.println(((Enemy)o).toString());
+                System.out.println(((Enemy) o).toString());
             } else if (o instanceof Projectile) {
-                System.out.println(((Projectile)o).toString());
+                System.out.println(((Projectile) o).toString());
             } else {
                 System.out.println(o.toString());
             }
         }
+<<<<<<< HEAD
         
         //Print out the state of the collectibles
         for (Collectible c : this.collectiblesArray){
             if (c instanceof Health){
                 System.out.println(((Health)c).toString());
             }else {
+=======
+
+        // Print out the state of the collectibles
+        for (Collectible c : this.collectiblesArray) {
+            if (c instanceof Health) {
+                System.out.println(((Health) c).toString());
+            } else {
+>>>>>>> 7c0e76857367b8988fc48fcb400a309ba6b48010
                 System.out.println(c.toString());
             }
         }
         
     }
-    
+
     /**
+<<<<<<< HEAD
     This method processess if the avatar can move.  This means it would check if there are any obstacles and collectibles in the area to the place
     that the avatar move to.  It would then act accordingly if there are some present
     */
@@ -342,19 +455,30 @@ public class AnimationApp{
         Avatar copyOfAvatar = new Avatar(this.minidisc);
         
         //Move the copy avatar accordingly 
+=======
+     * This method processess if the avatar can move. This means it would check if
+     * there are any obstacles and collectibles in the area to the place that the
+     * avatar move to. It would then act accordingly if there are some present
+     */
+    public void processAvatarMove(String userMovementInput) {
+        // Create a copy avatar
+        Avatar copyOfAvatar = new Avatar(this.minidisc);
+        // Move the copy avatar accordingly
+>>>>>>> 7c0e76857367b8988fc48fcb400a309ba6b48010
         copyOfAvatar.move(userMovementInput);
-        
+
         ArrayList<Collectible> copyOfCollectibleArrayList = new ArrayList<Collectible>();
         copyOfCollectibleArrayList = getCollectiblesArray();
         
         
         ArrayList<Obstacle> copyOfObstacleArray = new ArrayList<Obstacle>();
         copyOfObstacleArray = getObstacleArray();
-        
+
         boolean occupiedByObstacle = false;
         boolean occupiedByEnemy = false;
         boolean occupiedByProjectile = false;
         boolean occupiedByCollectible = false;
+<<<<<<< HEAD
         
         //Check if the avatar overlaps with any obsatacles
         /*
@@ -375,19 +499,54 @@ public class AnimationApp{
                 }else if (o instanceof Projectile){
                     //If the obstacle is an instance of a projectile, then we can move through it and so the spot is occupied by a projectile
                     if (((Projectile)o).getDeadlyToAvatar()) {
+=======
+
+        /*
+         * This block of code check if the instance of the obstacle in the obstacle
+         * array is a projectile, enemy, or obstacle If the instance is a projectile
+         * then, the avatar would take damage, move in the desired direction, and the
+         * projectile would be removed from the obstacle array If the instance is an
+         * enemy, then the avatar would take damage and would not move in the desired
+         * direction If the instance is an obstacle, then the avatar would just not move
+         * to the desired space, taking no damage
+         */
+        for (Obstacle o : copyOfObstacleArray) {
+            if (o.overlapsWith(copyOfAvatar)) {
+                if (!(o instanceof Enemy || o instanceof Projectile)) {
+                    // If the object is NOT an instance of either an enemy nor a porjetile,then it
+                    // is an obstacle and we cant move through it
+                    occupiedByObstacle = true;
+                    break;
+                } else if (o instanceof Enemy) {
+                    // If the obstalce is an instance of an enemy, then we cant move to the desired
+                    // position so the spot is occupied by an enemy
+                    occupiedByEnemy = true;
+                } else if (o instanceof Projectile) {
+                    // If the obstacle is an instance of a projectile, then we can move through it
+                    // and so the spot is occupied by a projectile
+                    if (((Projectile) o).getDeadlyToAvatar()) {
+>>>>>>> 7c0e76857367b8988fc48fcb400a309ba6b48010
                         occupiedByProjectile = true;
                     }
                 }
             }
         }
+<<<<<<< HEAD
         
         //Check if the avatar overlaps with any collecitbles
         for(Collectible c: copyOfCollectibleArrayList){
             if(c.overlapsWith(copyOfAvatar)){
+=======
+
+        // Check if the avatar overlaps with any collecitbles
+        for (Collectible c : copyOfCollectibleArrayList) {
+            if (c.overlapsWith(copyOfAvatar)) {
+>>>>>>> 7c0e76857367b8988fc48fcb400a309ba6b48010
                 occupiedByCollectible = true;
                 break;
             }
         }
+<<<<<<< HEAD
         
         if(occupiedByObstacle == true){
             //just have the obstacle not move
@@ -405,18 +564,39 @@ public class AnimationApp{
             
         }else if(occupiedByCollectible == true){
             //If there is a collectible and no obstacles, move the real avatar and pick up the collecitble (remove it from the array)
+=======
+
+        // If occupied by an obstacle on't move
+        if (occupiedByObstacle == true) {
+            System.out.println("I cant move there!");
+            // If occupied by an enemy then don't move
+        } else if (occupiedByEnemy == true) {
+            System.out.println("I cant move there!");
+            // If the spot is occupied by a projecile only, take damage and move
+        } else if (occupiedByProjectile == true && occupiedByEnemy == false && occupiedByObstacle == false) {
             this.minidisc.move(userMovementInput);
-            for (int i = 0; i < copyOfCollectibleArrayList.size(); i++){
+            // If there is a collectible only, move and pick up the collecitble
+        } else if (occupiedByCollectible == true) {
+>>>>>>> 7c0e76857367b8988fc48fcb400a309ba6b48010
+            this.minidisc.move(userMovementInput);
+            for (int i = 0; i < copyOfCollectibleArrayList.size(); i++) {
                 for (Collectible c : this.collectiblesArray) {
                     if (c.overlapsWith(this.minidisc)) {
+<<<<<<< HEAD
                         if (c instanceof Health) {
                             System.out.println("I picked up a health");
                             
                             this.minidisc.gainHealth(((Health)c).getHealthBoost());
                             
+=======
+                        // Gain health if the collectible was a health boost
+                        if (c instanceof Health) {
+                            System.out.println("I picked up a health");
+                            this.minidisc.gainHealth(((Health) c).getHealthBoost());
+>>>>>>> 7c0e76857367b8988fc48fcb400a309ba6b48010
                             this.collectiblesArray.remove(c);
                             break;
-                            
+
                         } else if (c instanceof Collectible) {
                             //Move the original avatar accordingly (processAvatarMove())
                             
@@ -428,25 +608,41 @@ public class AnimationApp{
                     }
                 }
             }
+<<<<<<< HEAD
         }else if(occupiedByObstacle == false && occupiedByCollectible == false && occupiedByEnemy == false && occupiedByProjectile == false){
             //if it doesnt overlap with any obstacles or colectibles, thne just move without doing nothing
+=======
+            // If there is no overlap, move
+        } else if (occupiedByObstacle == false && occupiedByCollectible == false && occupiedByEnemy == false
+                && occupiedByProjectile == false) {
+>>>>>>> 7c0e76857367b8988fc48fcb400a309ba6b48010
             this.minidisc.move(userMovementInput);
             //System.out.println("Theres nothing here");
         }
     }
-	
+
     /**
+<<<<<<< HEAD
     This method processes the obstacle movement.  It checks if the obstacle overlaps with any other obstacle and doesnt move if it does.
     It also checks if it overlaps with an avatar and damages the avatar accordingly.
     */
 	public void processObstacleMove()
 	{   
         //Create new avatar
+=======
+     * This method processes the obstacle movement. It checks if the obstacle
+     * overlaps with any other obstacle and doesnt move if it does. It also checks
+     * if it overlaps with an avatar and damages the avatar accordingly.
+     */
+    public void processObstacleMove() {
+        // Create a new avatar
+>>>>>>> 7c0e76857367b8988fc48fcb400a309ba6b48010
         Avatar inputAvatar = new Avatar(this.minidisc);
-        
-		// Create two obstacle array states
-		ArrayList<Obstacle> dynamicObstacleArray = new ArrayList<Obstacle>();
+
+        // Create two obstacle array states
+        ArrayList<Obstacle> dynamicObstacleArray = new ArrayList<Obstacle>();
         dynamicObstacleArray = getObstacleArray();
+<<<<<<< HEAD
         
 		ArrayList<Obstacle> staticObstacleArray = new ArrayList<Obstacle>();
         staticObstacleArray = getObstacleArray();
@@ -484,12 +680,47 @@ public class AnimationApp{
                                 if (((Projectile)o2).getDeadlyToEnemy()){
                                     occupiedByProjectile = true;
                                 }
+=======
+        ArrayList<Obstacle> staticObstacleArray = new ArrayList<Obstacle>();
+        staticObstacleArray = getObstacleArray();
+
+        // Go through the dynamic array and move an obstacle then check for overlaps
+        for (Obstacle o1 : dynamicObstacleArray) {
+            boolean occupied = false;
+            Rectangle preMove = new Rectangle(o1.getLocation());
+            // If the obstacle is a projectile, have it move in its specified direction, as
+            // long as it's within bounds
+            if (o1 instanceof Projectile) {
+                ((Projectile) o1).move();
+                // If the obstacle is a enemy, have it move in its specified direction, as long
+                // as it's within bounds
+            } else if (o1 instanceof Enemy) {
+                Obstacle o1BeforeMovement = new Enemy((Enemy) o1);
+                ((Enemy) o1).move();
+
+                // Check if the enemy overlaps with any other enemy, obstacle, projectile
+                boolean occupiedByProjectile = false;
+                for (Obstacle o2 : staticObstacleArray) {
+                    if (!(o1BeforeMovement.equals(o2))) {
+                        if (o1.overlapsWithObstacle(o2)) {
+                            // If the obstacle is an enemy or an obstacle, then it can't move
+                            if (o2 instanceof Enemy) {
+                                occupied = true;
+                                // If the obstacle is a projectile that damages enemies, then it can move
+                                // through but it takes damage
+                            } else if (o2 instanceof Projectile) {
+                                if (((Projectile) o2).getDeadlyToEnemy()) {
+                                    occupiedByProjectile = true;
+                                }
+                                // If it is any other obstacle, then the first obstacle can't move
+>>>>>>> 7c0e76857367b8988fc48fcb400a309ba6b48010
                             } else if (o2 instanceof Obstacle) {
                                 occupied = true;
                             }
                         }
                     }
                 }
+<<<<<<< HEAD
                 
                 // Check if the moving enemy overlaps with the avatar
                 if (o1.overlapsWith(inputAvatar)){
@@ -512,15 +743,37 @@ public class AnimationApp{
                         ((Enemy)o1).setDirection(((Enemy)o1).getDirection().replace("UP", "DOWN"));
                     } else if (((Enemy)o1).getDirection().contains("DOWN")) {
                         ((Enemy)o1).setDirection(((Enemy)o1).getDirection().replace("DOWN", "UP"));
+=======
+
+                // Check if the moving enemy overlaps with the avatar, if the enemy overlaps
+                // with an avatar, have the avatar take damage
+                if (o1.overlapsWith(inputAvatar)) {
+                    occupied = true;
+                    this.minidisc.takeDamage(1);
+                }
+
+                // If the spot is occupied by a projectile that damages enemies, the enemy takes
+                // damage
+                if (occupiedByProjectile) {
+                    ((Enemy) o1).takeDamage(1);
+                    // If moving obstacle overlaps with an avatar or obstacle, move it back
+                } else if (occupied) {
+                    o1.getLocation().setLocation((int) preMove.getX(), (int) preMove.getY());
+                    if (((Enemy) o1).getDirection().contains("UP")) {
+                        ((Enemy) o1).setDirection(((Enemy) o1).getDirection().replace("UP", "DOWN"));
+                    } else if (((Enemy) o1).getDirection().contains("DOWN")) {
+                        ((Enemy) o1).setDirection(((Enemy) o1).getDirection().replace("DOWN", "UP"));
+>>>>>>> 7c0e76857367b8988fc48fcb400a309ba6b48010
                     }
-                    if (((Enemy)o1).getDirection().contains("LEFT")) {
-                        ((Enemy)o1).setDirection(((Enemy)o1).getDirection().replace("LEFT", "RIGHT"));
-                    } else if (((Enemy)o1).getDirection().contains("RIGHT")) {
-                        ((Enemy)o1).setDirection(((Enemy)o1).getDirection().replace("RIGHT", "LEFT"));
+                    if (((Enemy) o1).getDirection().contains("LEFT")) {
+                        ((Enemy) o1).setDirection(((Enemy) o1).getDirection().replace("LEFT", "RIGHT"));
+                    } else if (((Enemy) o1).getDirection().contains("RIGHT")) {
+                        ((Enemy) o1).setDirection(((Enemy) o1).getDirection().replace("RIGHT", "LEFT"));
                     }
                 }
             }
         }
+<<<<<<< HEAD
 		// Change this.ObstacleArray to the dynamic array
 		setObstacleArray(dynamicObstacleArray);
 
@@ -534,17 +787,34 @@ public class AnimationApp{
         /*
         Remove the projecitles that have reached bound limits
         */
+=======
+        // Change this.ObstacleArray to the dynamic array
+        setObstacleArray(dynamicObstacleArray);
+    }
+
+    /**
+     * This method removes any obstacle that need to be removed
+     */
+    public void removeObstacles() {
+        // Check any projecitles that have reached bound limits
+>>>>>>> 7c0e76857367b8988fc48fcb400a309ba6b48010
         int obstaclesThatHaveReachedBounds = 0;
-        for (Obstacle o1 : this.obstacleArray){
+        for (Obstacle o1 : this.obstacleArray) {
             if (o1 instanceof Projectile) {
+<<<<<<< HEAD
                 //has the projectile reached the bounds of the map
                 if ((o1.getLocation().getX() >= 870 || o1.getLocation().getX() <= 90) || (
                     o1.getLocation().getY() >= 630 || o1.getLocation().getY() <= 70)) {
                     
+=======
+                if ((o1.getLocation().getX() >= 870 || o1.getLocation().getX() <= 90)
+                        || (o1.getLocation().getY() >= 630 || o1.getLocation().getY() <= 70)) {
+>>>>>>> 7c0e76857367b8988fc48fcb400a309ba6b48010
                     obstaclesThatHaveReachedBounds += 1;
                 }
             }
         }
+<<<<<<< HEAD
         
         for (int i = 0; i < obstaclesThatHaveReachedBounds; i++){
             for (Obstacle o1 : this.obstacleArray){
@@ -553,22 +823,36 @@ public class AnimationApp{
                     if ((o1.getLocation().getX() >= 870 || o1.getLocation().getX() <= 90) || (
                     o1.getLocation().getY() >= 630 || o1.getLocation().getY() <= 70)) {
                         
+=======
+
+        // Remove any projectiles that have reached the bounds
+        for (int i = 0; i < obstaclesThatHaveReachedBounds; i++) {
+            for (Obstacle o1 : this.obstacleArray) {
+                if (o1 instanceof Projectile) {
+                    if ((o1.getLocation().getX() >= 870 || o1.getLocation().getX() <= 90)
+                            || (o1.getLocation().getY() >= 630 || o1.getLocation().getY() <= 70)) {
+>>>>>>> 7c0e76857367b8988fc48fcb400a309ba6b48010
                         this.obstacleArray.remove(o1);
                         break;
                     }
                 }
             }
         }
+<<<<<<< HEAD
         
         /*
         Remove any projecitles htat overlpa with an avatar
         */
         //Overlapping projectiles
+=======
+
+        // Overlapping projectiles
+>>>>>>> 7c0e76857367b8988fc48fcb400a309ba6b48010
         int numOfProjectilesToRemove = 0;
         for (Obstacle o : this.obstacleArray) {
             if (o.overlapsWith(this.minidisc)) {
                 if (o instanceof Projectile) {
-                    if (((Projectile)o).getDeadlyToAvatar()) {
+                    if (((Projectile) o).getDeadlyToAvatar()) {
                         this.minidisc.takeDamage(1);
                         numOfProjectilesToRemove++;
                     }
@@ -579,7 +863,7 @@ public class AnimationApp{
             for (Obstacle o : this.obstacleArray) {
                 if (o.overlapsWith(this.minidisc)) {
                     if (o instanceof Projectile) {
-                        if (((Projectile)o).getDeadlyToAvatar()) {
+                        if (((Projectile) o).getDeadlyToAvatar()) {
                             this.obstacleArray.remove(o);
                             break;
                         }
@@ -587,10 +871,11 @@ public class AnimationApp{
                 }
             }
         }
-        
+
         int lenghtOfObstacleArray = this.obstacleArray.size();
         
         ArrayList<Obstacle> staticObstacleArray = this.getObstacleArray();
+<<<<<<< HEAD
        
         //Once we have the number of obstacles to remove, remove that number from this.obstacleArray
         for (int i = 0; i < lenghtOfObstacleArray; i++){
@@ -612,25 +897,53 @@ public class AnimationApp{
                                         
                                         ((Enemy)o2).takeDamage(1);
                                         
+=======
+
+        // Once we have the number of obstacles to remove, remove that number from
+        // this.obstacleArray
+        for (int i = 0; i < lenghtOfObstacleArray; i++) {
+            for (Obstacle o1 : staticObstacleArray) {
+                for (Obstacle o2 : this.obstacleArray) {
+                    if (!(o1.equals(o2))) {
+                        // If the obstacle does not equal itself, check if it overlaps with obstacle 2
+                        if (o1.overlapsWithObstacle(o2)) {
+                            /*
+                             * Now, if the obstacle is an instance of a projectile remove it If the
+                             * projectile overlaps with an enemy (if it damages it) If the projecitle
+                             * overlaps with the avatar (if it damages it) If the projectile overlaps with
+                             * an obstacle, remove only the projectile
+                             */
+                            if (o1 instanceof Projectile) {
+                                if (o2 instanceof Enemy) {
+                                    // If object 1 is a projectile, check if it damages enemies, if it does remove
+                                    // it, other wise don't do anything
+                                    if (((Projectile) o1).getDeadlyToEnemy()) {
+                                        ((Enemy) o2).takeDamage(1);
+>>>>>>> 7c0e76857367b8988fc48fcb400a309ba6b48010
                                         for (Obstacle o3 : this.obstacleArray) {
                                             if (o1.equals(o3)) {
                                                 this.obstacleArray.remove(o3);
                                                 System.out.println("My note hit an Enemy!");
                                                 break;
                                             }
-                                        }    
+                                        }
                                     }
                                     break;
                                 } else {
+<<<<<<< HEAD
                                     //If the second obstacle is not an instance of enemy nor projectile, its a wall, so the projectile should be removed.
                                     
+=======
+                                    // If the second obstacle is not an instance of enemy nor projectile, its a
+                                    // wall, so the projectile should be removed
+>>>>>>> 7c0e76857367b8988fc48fcb400a309ba6b48010
                                     for (Obstacle o3 : this.obstacleArray) {
                                         if (o1.equals(o3)) {
-											if (((Projectile)o1).getDeadlyToEnemy()){
-												System.out.println("My note hit an Obstacle!");
-											} else {
-												System.out.println("An enemy's note hit an Obstacle!");
-											}
+                                            if (((Projectile) o1).getDeadlyToEnemy()) {
+                                                System.out.println("My note hit an Obstacle!");
+                                            } else {
+                                                System.out.println("An enemy's note hit an Obstacle!");
+                                            }
                                             this.obstacleArray.remove(o3);
                                             break;
                                         }
@@ -644,23 +957,28 @@ public class AnimationApp{
                 //break;
             }
         }
+<<<<<<< HEAD
         
         /*
         Remove any enemies that have run out of health
         */
+=======
+
+        // Remove any enemies that have run out of health
+>>>>>>> 7c0e76857367b8988fc48fcb400a309ba6b48010
         int enemiesToRemove = 0;
-        for (Obstacle enemy : this.obstacleArray){
-            if (enemy instanceof Enemy){
-                if (((Enemy)enemy).getHealth() <= 0){
+        for (Obstacle enemy : this.obstacleArray) {
+            if (enemy instanceof Enemy) {
+                if (((Enemy) enemy).getHealth() <= 0) {
                     enemiesToRemove += 1;
                 }
             }
         }
-        
-        for (int i = 0; i < enemiesToRemove; i++){
-            for (Obstacle enemy : this.obstacleArray){
-                if (enemy instanceof Enemy){
-                    if (((Enemy)enemy).getHealth() <= 0){
+
+        for (int i = 0; i < enemiesToRemove; i++) {
+            for (Obstacle enemy : this.obstacleArray) {
+                if (enemy instanceof Enemy) {
+                    if (((Enemy) enemy).getHealth() <= 0) {
                         this.obstacleArray.remove(enemy);
                         break;
                     }
@@ -669,7 +987,7 @@ public class AnimationApp{
         }
  
     }
-    
+
     /**
     This method initializes the game.  What that means is it creates the obstacles and collecitbles for the stage
     and places the avatar at the starting position. 
@@ -681,6 +999,7 @@ public class AnimationApp{
         
         //Initialize Collectibles -- Add 3 collectibles -- make sure the positions of collectibles are correct
         addCollectible(3);
+<<<<<<< HEAD
         
         //Initalize Obstacles
         addObstacle(3, 3);
@@ -709,14 +1028,36 @@ public class AnimationApp{
     public void initialize(int collecitblesToAdd, int obstacleToAdd){
         
         //Add any collectibles if necessary
+=======
+        addObstacle(3, 3);
+    }
+
+    /**
+     * This method initializes the game while the game runs. This means keeping the
+     * positons of the 'original' objects that where created but also adding
+     * obstacles and collecitbles accordingly
+     * 
+     * @param collecitblesToAdd : this is the number of new collecitbles that the
+     *                          game should add after completing a certain task
+     * @param obstaclesToAdd    : this is the number of new obsatacles that the game
+     *                          shoudl add.
+     */
+    public void initialize(int collecitblesToAdd, int obstacleToAdd) {
+        // Add any collectibles if necessary
+>>>>>>> 7c0e76857367b8988fc48fcb400a309ba6b48010
         addCollectible(collecitblesToAdd);
         
         //Add any obstacles if necessary
         //addObstacle(obstacleToAdd);
     }
+<<<<<<< HEAD
     
     
     //Main Run 
+=======
+
+    // Main Run
+>>>>>>> 7c0e76857367b8988fc48fcb400a309ba6b48010
     public static void main(String[] args){
         int movements = 0;
         
@@ -837,5 +1178,4 @@ public class AnimationApp{
         
         System.out.println("End of Demo1");
         
-    }
-}
+    }}
