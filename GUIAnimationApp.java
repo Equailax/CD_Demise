@@ -88,7 +88,7 @@ public class GUIAnimationApp extends Application {
     /**
     This is the initialize method for the gui animation application
     */
-    public void initialize(){
+    public void initialize(Pane root){
         this.demo2.initialize();
         
         obstacleGUIArray = demo2.getObstacleArray();
@@ -133,10 +133,10 @@ public class GUIAnimationApp extends Application {
     public static void main(String[] args) { 
         launch(args); 
     }
-
+    
     public void start(Stage primaryStage) throws Exception {
         // Initialize the Animation App with 3 collectibles, 3 obstacles, and 3 enemies
-        initialize();
+        initialize(root);
           
         // Rectangle / hitbox
 		Rectangle mouseHitbox = new Rectangle(0, 0, 1250, 1250); // IMPORTANT: Make the rectangle fill the whole window
@@ -212,25 +212,17 @@ public class GUIAnimationApp extends Application {
                 if (quit) {
                     Platform.exit();
                 }
+                if (restart) {
+                    demo2 = new AnimationApp();
+                    root.getChildren().clear();
+                    
+                    initialize(root);
+                    mouseHitbox.toFront();
+                }
                 
                 // Check if the player has run out of health
                 Avatar checkIfEndGameAvatar = new Avatar(demo2.getAvatar());
                 if (demo2.getCollectiblesArray().size() == 0) {
-                    
-                    scene.setOnKeyPressed(keyEvent -> {
-                        if (keyEvent.getCode().toString() == "Q")
-                            quit = true;
-                        if (keyEvent.getCode().toString() == "R")
-                            restart = true;
-                    });
-                    
-                    scene.setOnKeyReleased(keyEvent -> {
-                        if (keyEvent.getCode().toString() == "Q")
-                            quit = true;
-                        if (keyEvent.getCode().toString() == "R")
-                            restart = true;
-                    });
-                    
                     Rectangle endGameScreen = new Rectangle(0,0,1100,1100);
                     endGameScreen.setFill(Color.BLACK);
                     root.getChildren().add(endGameScreen);
@@ -411,6 +403,10 @@ public class GUIAnimationApp extends Application {
                     up = true;
                 if (keyEvent.getCode().toString() == "S")
                     down = true;
+                if (keyEvent.getCode().toString() == "Q")
+                    quit = true;
+                if (keyEvent.getCode().toString() == "R")
+                    restart = true;
         });
 
 		// Stop moving when the key is no longer pressed
@@ -423,6 +419,10 @@ public class GUIAnimationApp extends Application {
                     up = false;
                 if (keyEvent.getCode().toString() == "S")
                     down = false;
+                if (keyEvent.getCode().toString() == "Q")
+                    quit = false;
+                if (keyEvent.getCode().toString() == "R")
+                    restart = false;
         });
 		
 		// When clicking left mouse button
