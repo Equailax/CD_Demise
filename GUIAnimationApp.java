@@ -71,7 +71,7 @@ public class GUIAnimationApp extends Application {
     // Display Setup for the GUI
     private Image map = new Image("Map 1000pixels.jpg");
     private Pane root = new Pane();
-    private final Scene scene = new Scene(root, 1000, 1000, new ImagePattern(map));
+    private Scene scene = new Scene(root, 1000, 1000, new ImagePattern(map));
     
     // Instance variables
     // This creades an animation app instance
@@ -127,6 +127,8 @@ public class GUIAnimationApp extends Application {
         collection.setFill(Color.YELLOW);
         textList.add(collection);
         root.getChildren().add(collection);
+        
+        scene.setFill(new ImagePattern(map));
     }
 	
 	// Launches GUI application
@@ -217,12 +219,22 @@ public class GUIAnimationApp extends Application {
                     root.getChildren().clear();
                     
                     initialize(root);
+                    root.getChildren().add(mouseHitbox);
+                    
                     mouseHitbox.toFront();
+                    
+                    //scene = new Scene(root, 1000, 1000, new ImagePattern(map));
+                    primaryStage.setScene(scene);
+                    primaryStage.show();
                 }
                 
                 // Check if the player has run out of health
                 Avatar checkIfEndGameAvatar = new Avatar(demo2.getAvatar());
                 if (demo2.getCollectiblesArray().size() == 0) {
+                    
+                    demo2 = new AnimationApp();
+                    root.getChildren().clear();
+                    
                     Rectangle endGameScreen = new Rectangle(0,0,1100,1100);
                     endGameScreen.setFill(Color.BLACK);
                     root.getChildren().add(endGameScreen);
