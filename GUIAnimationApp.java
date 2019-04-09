@@ -69,9 +69,11 @@ public class GUIAnimationApp extends Application {
     private ArrayList<Text> textList = new ArrayList<Text>();
     
     // Display Setup for the GUI
-    private Image map = new Image("Map 1000pixels.jpg");
+    private final Image map = new Image("Map 1000pixels.jpg");
+    private final ImagePattern mapPattern = new ImagePattern(map);
     private Pane root = new Pane();
-    private Scene scene = new Scene(root, 1000, 1000, new ImagePattern(map));
+
+    private Scene scene = new Scene(root, 1000, 1000, mapPattern);
     
     // Instance variables
     // This creades an animation app instance
@@ -128,7 +130,7 @@ public class GUIAnimationApp extends Application {
         textList.add(collection);
         root.getChildren().add(collection);
         
-        scene.setFill(new ImagePattern(map));
+        scene.setFill(mapPattern);
     }
 	
 	// Launches GUI application
@@ -147,10 +149,14 @@ public class GUIAnimationApp extends Application {
         root.getChildren().add(mini.getAvatarImage());
 		mini.setForward();
 		mouseHitbox.toFront();
-        primaryStage.setScene(scene);
+        
+        scene.setFill(new ImagePattern(map));
+        
+		primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
-		
+        
+       // scene.setFill(new ImagePattern(map));
         
         
         // Animation of movements
@@ -215,39 +221,46 @@ public class GUIAnimationApp extends Application {
                     Platform.exit();
                 }
                 if (restart) {
-                    demo2 = new AnimationApp();
-                    root.getChildren().clear();
+                    root.getChildren().removeAll(root.getChildren());
                     
+                    demo2 = new AnimationApp();
+
                     initialize(root);
                     root.getChildren().add(mouseHitbox);
-                    
+                    root.getChildren().add(mini.getAvatarImage());
+                    mini.setForward();
                     mouseHitbox.toFront();
+                    //primaryStage.setScene(scene);
                     
                     //scene = new Scene(root, 1000, 1000, new ImagePattern(map));
-                    primaryStage.setScene(scene);
-                    primaryStage.show();
+                    //scene.setFill(new ImagePattern(new Image("Map 1000pixels.jpg")));
+
+                    //primaryStage.setScene(scene);
+                    //primaryStage.show();
                 }
                 
                 // Check if the player has run out of health
                 Avatar checkIfEndGameAvatar = new Avatar(demo2.getAvatar());
-                if (demo2.getCollectiblesArray().size() == 0) {
+                if ((demo2.getCollectiblesArray().size() == 0)) {
                     
                     demo2 = new AnimationApp();
-                    root.getChildren().clear();
+                    root.getChildren().removeAll(root.getChildren());
                     
+                    //Set up the end game screen a new stage
                     Rectangle endGameScreen = new Rectangle(0,0,1100,1100);
                     endGameScreen.setFill(Color.BLACK);
                     root.getChildren().add(endGameScreen);
                     
                     //End of Game Title
-                    Label endGameTitle = new Label("VICTORY!");
+                    Text endGameTitle = new Text("VICTORY!");
                     Font endTitleFont = new Font("Callibri", 80);
-                    endGameTitle.setTextFill(Color.WHITE);
+                    //endGameTitle.setTextFill(Color.WHITE);
+                    endGameTitle.setFill(Color.WHITE);
                     endGameTitle.setLayoutX(320);
                     endGameTitle.setLayoutY(0);
                     endGameTitle.setFont(endTitleFont.font("Berlin Sans FB", FontWeight.BOLD, 80));
-                    endGameTitle.setPrefWidth(400);
-                    endGameTitle.setPrefHeight(80);
+                    //endGameTitle.setPrefWidth(400);
+                    //endGameTitle.setPrefHeight(80);
                     root.getChildren().add(endGameTitle);
                     
                     //Collector Picture
@@ -269,11 +282,14 @@ public class GUIAnimationApp extends Application {
                     recordImage.setPreserveRatio(true);
                     root.getChildren().add(recordImage);
                     
+                    
+                    
                     //End of game statement
-                    Label endStatement = new Label("Congratulations! You have succeessfully in prevented Dotify, PearMusic, BeatsbyDro,\nand MyPhone from finding and stealing the Collector's precious records. The Collector can\nnow relax knowing that you have retrieved the lost music records from his collection.");
+                    Text endStatement = new Text("Congratulations! You have succeessfully in prevented Dotify, PearMusic, BeatsbyDro,\nand MyPhone from finding and stealing the Collector's precious records. The Collector can\nnow relax knowing that you have retrieved the lost music records from his collection.");
                     Font statementFont = new Font("Callibri", 22);
                     endStatement.setTextAlignment(TextAlignment.CENTER);
-                    endStatement.setTextFill(Color.WHITE);
+                    //endStatement.setTextFill(Color.WHITE);
+                    endStatement.setFill(Color.WHITE);
                     endStatement.setFont(statementFont);
                     endStatement.setLayoutX(63);
                     endStatement.setLayoutY(525);
@@ -287,45 +303,18 @@ public class GUIAnimationApp extends Application {
                     endBoard.setStrokeWidth(6);
                     root.getChildren().add(endBoard);
                     
-                    Label endBoardTitle = new Label("END OF GAME REPORT");
+                    Text endBoardTitle = new Text("END OF GAME REPORT");
                     Font boardTitleFont = new Font("Callibri", 30);
                     endBoardTitle.setLayoutX(340);
                     endBoardTitle.setLayoutY(570);
                     endBoardTitle.setFont(boardTitleFont.font("Berlin Sans FB", FontWeight.BOLD, 30));
-                    endBoardTitle.setPrefHeight(200);
-                    endBoardTitle.setPrefWidth(400);
+                    //endBoardTitle.setPrefHeight(200);
+                    //endBoardTitle.setPrefWidth(400);
                     endBoardTitle.setUnderline(true);
                     root.getChildren().add(endBoardTitle);
                     
-                    //Start over button
-                    Button startOver = new Button("START OVER PRESS R");
-                    Font buttonFont = new Font("Callibri", 25);
-                    startOver.setPrefHeight(90);
-                    startOver.setPrefWidth(260);
-                    startOver.setLayoutY(900);
-                    startOver.setLayoutX(190);
-                    startOver.setStyle("-fx-background-color: #FFDD7D");
-                    startOver.setFont(buttonFont.font("Berlin Sans FB", FontWeight.BOLD, 35));
-                    startOver.setTextFill(Color.BLACK);
-                    startOver.setOnMouseEntered(actionEvent -> startOver.setStyle("-fx-background-color: #FFB34E"));
-                    startOver.setOnMouseExited(actionEvent -> startOver.setStyle("-fx-background-color: #FFDD7D"));
-                    startOver.setOnAction(actionEvent -> Platform.exit()); //change this action to screen reset
-                    root.getChildren().add(startOver);
                     
-                    //Exit button
-                    Button exitButton = new Button("EXIT GAME PRESS Q");
-                    exitButton.setPrefHeight(90);
-                    exitButton.setPrefWidth(260);
-                    exitButton.setLayoutY(900);
-                    exitButton.setLayoutX(550);
-                    exitButton.setStyle("-fx-background-color: #FFDD7D");
-                    exitButton.setFont(buttonFont.font("Berlin Sans FB", FontWeight.BOLD, 35));
-                    exitButton.setTextFill(Color.BLACK);
-                    exitButton.setOnMouseEntered(actionEvent -> exitButton.setStyle("-fx-background-color: #FFB34E"));
-                    exitButton.setOnMouseExited(actionEvent -> exitButton.setStyle("-fx-background-color: #FFDD7D"));
-                    exitButton.setOnAction(actionEvent -> Platform.exit()); //exits program when button is clicked
-                    root.getChildren().add(exitButton);
-                    
+                    //scene.setFill(new ImagePattern(map));
                     /*
                     primaryStage.setScene(scene);
                     primaryStage.setResizable(false);
@@ -400,7 +389,8 @@ public class GUIAnimationApp extends Application {
                     
                 }else if (checkIfEndGameAvatar.checkIfEndGame(3)){
                     // If the end game has been reached (avatar has lost all of their health and lives) then break from the loop and end the game
-                    root.getChildren().clear();
+                    //root.getChildren().clear();
+                    root.getChildren().removeAll(root.getChildren());
                     root.getChildren().add(new Label("Game over man"));
                 }
             }};
@@ -538,7 +528,69 @@ public class GUIAnimationApp extends Application {
 		enemyTimer.setCycleCount(Timeline.INDEFINITE);
 		enemyTimer.play();
 		moveTime.start();
-		
+        /*
+        // Move when a key is pressed
+        endGameScene.setOnKeyPressed(keyEvent -> {
+                if (keyEvent.getCode().toString() == "Q") {
+                    quit = true;
+                }
+                if (keyEvent.getCode().toString() == "R") {
+                    restart = true;
+                }
+                left = false;
+                right = false;
+                up = false;
+                down = false;
+        });
+        
+
+		// Stop moving when the key is no longer pressed
+        endGameScene.setOnKeyReleased(keyEvent -> {
+                if (keyEvent.getCode().toString() == "Q") {
+                    quit = false;
+                }
+                if (keyEvent.getCode().toString() == "R") {
+                    restart = false;
+                }
+                left = false;
+                right = false;
+                up = false;
+                down = false;
+        });
+        */
+        
+        /*
+        //Start over button
+        Button startOver = new Button("START OVER PRESS R");
+        Font buttonFont = new Font("Callibri", 25);
+        startOver.setPrefHeight(90);
+        startOver.setPrefWidth(260);
+        startOver.setLayoutY(900);
+        startOver.setLayoutX(190);
+        startOver.setStyle("-fx-background-color: #FFDD7D");
+        startOver.setFont(buttonFont.font("Berlin Sans FB", FontWeight.BOLD, 35));
+        startOver.setTextFill(Color.BLACK);
+        startOver.setOnMouseEntered(actionEvent -> startOver.setStyle("-fx-background-color: #FFB34E"));
+        startOver.setOnMouseExited(actionEvent -> startOver.setStyle("-fx-background-color: #FFDD7D"));
+        startOver.setOnAction(actionEvent -> Platform.exit()); //change this action to screen reset
+        root.getChildren().add(startOver);
+        
+        //Exit button
+        Button exitButton = new Button("EXIT GAME PRESS Q");
+        exitButton.setPrefHeight(90);
+        exitButton.setPrefWidth(260);
+        exitButton.setLayoutY(900);
+        exitButton.setLayoutX(550);
+        exitButton.setStyle("-fx-background-color: #FFDD7D");
+        exitButton.setFont(buttonFont.font("Berlin Sans FB", FontWeight.BOLD, 35));
+        exitButton.setTextFill(Color.BLACK);
+        exitButton.setOnMouseEntered(actionEvent -> exitButton.setStyle("-fx-background-color: #FFB34E"));
+        exitButton.setOnMouseExited(actionEvent -> exitButton.setStyle("-fx-background-color: #FFDD7D"));
+        exitButton.setOnAction(actionEvent -> Platform.exit()); //exits program when button is clicked
+        root.getChildren().add(exitButton);
+        */
+        
+        
 		// Print game state
         demo2.printCurrentState();
     }
