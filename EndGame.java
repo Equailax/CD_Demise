@@ -63,13 +63,13 @@ public void start(Stage primaryStage) throws Exception{
 	root.getChildren().add(recordImage);
 	
 	//End of game statement
-	Label endStatement = new Label("Congratulations! You have succeessfully in prevented Dotify, PearMusic, BeatsbyDro,\nand MyPhone from finding and stealing the Collector's precious records. The Collector can\nnow relax knowing that you have retrieved the lost music records from his collection.");
+	Label endStatement = new Label("Congratulations! You have succeessfully prevented Dotify, PearMusic, BeatsbyDro,\nand MyPhone from finding and stealing the Collector's precious records. The Collector can\nnow relax knowing that you have retrieved the lost music records from his collection.");
 	Font statementFont = new Font("Callibri", 22);
 	endStatement.setTextAlignment(TextAlignment.CENTER);
 	endStatement.setTextFill(Color.WHITE);
 	endStatement.setFont(statementFont);
 	endStatement.setLayoutX(63);
-	endStatement.setLayoutY(525);
+	endStatement.setLayoutY(700);
 	root.getChildren().add(endStatement);
 	
 	//Stats Board

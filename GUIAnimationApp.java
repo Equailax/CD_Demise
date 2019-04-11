@@ -20,6 +20,8 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 import java.lang.Math;
 import java.util.Random;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -262,7 +264,7 @@ public class GUIAnimationApp extends Application {
                     //endGameTitle.setTextFill(Color.WHITE);
                     endGameTitle.setFill(Color.WHITE);
                     endGameTitle.setLayoutX(320);
-                    endGameTitle.setLayoutY(0);
+                    endGameTitle.setLayoutY(80);
                     endGameTitle.setFont(endTitleFont.font("Berlin Sans FB", FontWeight.BOLD, 80));
                     //endGameTitle.setPrefWidth(400);
                     //endGameTitle.setPrefHeight(80);
@@ -290,16 +292,16 @@ public class GUIAnimationApp extends Application {
                     
                     
                     //End of game statement
-                    Text endStatement = new Text("Congratulations! You have succeessfully in prevented Dotify, PearMusic, BeatsbyDro,\nand MyPhone from finding and stealing the Collector's precious records. The Collector can\nnow relax knowing that you have retrieved the lost music records from his collection.");
+                    Text endStatement = new Text("Congratulations! You have succeessfully prevented Dotify, PearMusic, BeatsbyDro,\nand MyPhone from finding and stealing the Collector's precious records. The Collector can\nnow relax knowing that you have retrieved the lost music records from his collection.");
                     Font statementFont = new Font("Callibri", 22);
                     endStatement.setTextAlignment(TextAlignment.CENTER);
                     //endStatement.setTextFill(Color.WHITE);
                     endStatement.setFill(Color.WHITE);
                     endStatement.setFont(statementFont);
                     endStatement.setLayoutX(63);
-                    endStatement.setLayoutY(525);
+                    endStatement.setLayoutY(600);
                     root.getChildren().add(endStatement);
-                    
+                    /*
                     //Stats Board
                     Rectangle endBoard = new Rectangle(250,650,500,230);
                     LinearGradient boardColor = new LinearGradient(0, 0, 0, 1, true, CycleMethod.NO_CYCLE,  new Stop(0.2, Color.LIGHTGREEN), new Stop(0.8, Color.MEDIUMSEAGREEN));
@@ -307,7 +309,61 @@ public class GUIAnimationApp extends Application {
                     endBoard.setStroke(Color.WHITESMOKE);
                     endBoard.setStrokeWidth(6);
                     root.getChildren().add(endBoard);
+                    */
+
+                    //Exit button
+                    Button exitButton = new Button("EXIT GAME");
+                    Font buttonFont = new Font("Callibri", 25);
+                    exitButton.setPrefHeight(90);
+                    exitButton.setPrefWidth(260);
+                    exitButton.setLayoutY(700);
+                    exitButton.setLayoutX(150);
+                    exitButton.setStyle("-fx-background-color: #FFDD7D");
+                    exitButton.setFont(buttonFont.font("Berlin Sans FB", FontWeight.BOLD, 35));
+                    exitButton.setTextFill(Color.BLACK);
+                    exitButton.setOnMouseEntered(actionEvent -> exitButton.setStyle("-fx-background-color: #FFB34E"));
+                    exitButton.setOnMouseExited(actionEvent -> exitButton.setStyle("-fx-background-color: #FFDD7D"));
+                    exitButton.setOnAction(actionEvent -> Platform.exit()); // exits program when button is clicked
+                    root.getChildren().add(exitButton);
+
+                    //Restart Button
+                    Button startOver = new Button("START OVER");
+                    Font buttonFont2 = new Font("Callibri", 25);
+                    startOver.setPrefHeight(90);
+                    startOver.setPrefWidth(260);
+                    startOver.setLayoutY(700);
+                    startOver.setLayoutX(500);
+                    startOver.setStyle("-fx-background-color: #FFDD7D");
+                    startOver.setFont(buttonFont2.font("Berlin Sans FB", FontWeight.BOLD, 35));
+                    startOver.setTextFill(Color.BLACK);
+                    startOver.setOnMouseEntered(actionEvent -> startOver.setStyle("-fx-background-color: #FFB34E"));
+                    startOver.setOnMouseExited(actionEvent -> startOver.setStyle("-fx-background-color: #FFDD7D"));
+                    startOver.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent e) {
+                            root.getChildren().removeAll(root.getChildren());
+                            initialize(root);
+                            primaryStage.setScene(scene);
+                            /*
+                             * This sets up the start game screen
+                             */
+                            // Rectangle / hitbox
+                            Rectangle mouseHitbox = new Rectangle(0, 0, 1250, 1250); // IMPORTANT: Make the rectangle
+                                                                                     // fill the whole window
+                            mouseHitbox.setFill(Color.rgb(0, 0, 0, 0));
+                            root.getChildren().add(mouseHitbox);
+                            root.getChildren().add(mini.getAvatarImage());
+                            mini.setForward();
+                            mouseHitbox.toFront();
+                            primaryStage.setResizable(false);
+
+                        }
+
+                    });
+                    root.getChildren().add(startOver);
                     
+                
+                    /*
                     Text endBoardTitle = new Text("END OF GAME REPORT");
                     Font boardTitleFont = new Font("Callibri", 30);
                     endBoardTitle.setLayoutX(340);
@@ -317,6 +373,7 @@ public class GUIAnimationApp extends Application {
                     //endBoardTitle.setPrefWidth(400);
                     endBoardTitle.setUnderline(true);
                     root.getChildren().add(endBoardTitle);
+                    */
                     
                     
                     //scene.setFill(new ImagePattern(map));
@@ -395,8 +452,97 @@ public class GUIAnimationApp extends Application {
                 }else if (checkIfEndGameAvatar.checkIfEndGame(3)){
                     // If the end game has been reached (avatar has lost all of their health and lives) then break from the loop and end the game
                     //root.getChildren().clear();
+                    demo2 = new AnimationApp();
                     root.getChildren().removeAll(root.getChildren());
-                    root.getChildren().add(new Label("Game over man"));
+
+                    // Set up the end game screen a new stage
+                    Rectangle endGameScreen = new Rectangle(0, 0, 1100, 1100);
+                    endGameScreen.setFill(Color.BLACK);
+                    root.getChildren().add(endGameScreen);
+
+                    // End of Game Title
+                    Text endGameTitle = new Text("You Failed!");
+                    Font endTitleFont = new Font("Callibri", 80);
+                    // endGameTitle.setTextFill(Color.WHITE);
+                    endGameTitle.setFill(Color.WHITE);
+                    endGameTitle.setLayoutX(320);
+                    endGameTitle.setLayoutY(580);
+                    endGameTitle.setFont(endTitleFont.font("Berlin Sans FB", FontWeight.BOLD, 80));
+                    // endGameTitle.setPrefWidth(400);
+                    // endGameTitle.setPrefHeight(80);
+                    root.getChildren().add(endGameTitle);
+
+                    // End of game statement
+                    Text endStatement = new Text("Better Luck Next Time");
+                    Font statementFont = new Font("Callibri", 22);
+                    endStatement.setTextAlignment(TextAlignment.CENTER);
+                    // endStatement.setTextFill(Color.WHITE);
+                    endStatement.setFill(Color.WHITE);
+                    endStatement.setFont(statementFont);
+                    endStatement.setLayoutX(63);
+                    endStatement.setLayoutY(600);
+                    root.getChildren().add(endStatement);
+                    /*
+                     * //Stats Board Rectangle endBoard = new Rectangle(250,650,500,230);
+                     * LinearGradient boardColor = new LinearGradient(0, 0, 0, 1, true,
+                     * CycleMethod.NO_CYCLE, new Stop(0.2, Color.LIGHTGREEN), new Stop(0.8,
+                     * Color.MEDIUMSEAGREEN)); endBoard.setFill(boardColor);
+                     * endBoard.setStroke(Color.WHITESMOKE); endBoard.setStrokeWidth(6);
+                     * root.getChildren().add(endBoard);
+                     */
+
+                    // Exit button
+                    Button exitButton = new Button("EXIT GAME");
+                    Font buttonFont = new Font("Callibri", 25);
+                    exitButton.setPrefHeight(90);
+                    exitButton.setPrefWidth(260);
+                    exitButton.setLayoutY(700);
+                    exitButton.setLayoutX(150);
+                    exitButton.setStyle("-fx-background-color: #FFDD7D");
+                    exitButton.setFont(buttonFont.font("Berlin Sans FB", FontWeight.BOLD, 35));
+                    exitButton.setTextFill(Color.BLACK);
+                    exitButton.setOnMouseEntered(actionEvent -> exitButton.setStyle("-fx-background-color: #FFB34E"));
+                    exitButton.setOnMouseExited(actionEvent -> exitButton.setStyle("-fx-background-color: #FFDD7D"));
+                    exitButton.setOnAction(actionEvent -> Platform.exit()); // exits program when button is clicked
+                    root.getChildren().add(exitButton);
+
+                    // Restart Button
+                    Button startOver = new Button("START OVER");
+                    Font buttonFont2 = new Font("Callibri", 25);
+                    startOver.setPrefHeight(90);
+                    startOver.setPrefWidth(260);
+                    startOver.setLayoutY(700);
+                    startOver.setLayoutX(500);
+                    startOver.setStyle("-fx-background-color: #FFDD7D");
+                    startOver.setFont(buttonFont2.font("Berlin Sans FB", FontWeight.BOLD, 35));
+                    startOver.setTextFill(Color.BLACK);
+                    startOver.setOnMouseEntered(actionEvent -> startOver.setStyle("-fx-background-color: #FFB34E"));
+                    startOver.setOnMouseExited(actionEvent -> startOver.setStyle("-fx-background-color: #FFDD7D"));
+                    startOver.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent e) {
+                            root.getChildren().removeAll(root.getChildren());
+                            initialize(root);
+                            scene.setFill(mapPattern);
+                            /*
+                             * This sets up the start game screen
+                             */
+                            // Rectangle / hitbox
+                            Rectangle mouseHitbox = new Rectangle(0, 0, 1250, 1250); // IMPORTANT: Make the rectangle
+                                                                                     // fill the whole window
+                            mouseHitbox.setFill(Color.rgb(0, 0, 0, 0));
+                            root.getChildren().add(mouseHitbox);
+                            root.getChildren().add(mini.getAvatarImage());
+                            mini.setForward();
+                            mouseHitbox.toFront();
+                            primaryStage.setScene(scene);
+                            primaryStage.setResizable(false);
+
+                        }
+
+                    });
+                    root.getChildren().add(startOver);
+
                 }
                 mouseHitbox.toFront();
             }};
@@ -548,6 +694,19 @@ public class GUIAnimationApp extends Application {
         startGameTitle.setTextAlignment(TextAlignment.CENTER);
         startGameTitle.setStrokeWidth(6);
         startRoot.getChildren().add(startGameTitle);
+
+        //Game Start Button
+        //What to press to start gameText
+        Text startGameButton = new Text("PRESS 'T' TO START GAME");
+        Font startTitleButton = new Font("Callibri", 100);
+        startGameButton.setFill(Color.ORANGE);
+        startGameButton.setLayoutX(180);
+        startGameButton.setLayoutY(700);
+        startGameButton.setFont(startTitleFont.font("Berlin Sans FB", FontWeight.BOLD, 50));
+        startGameButton.setStroke(Color.DODGERBLUE);
+        startGameButton.setTextAlignment(TextAlignment.CENTER);
+        startGameButton.setStrokeWidth(6);
+        startRoot.getChildren().add(startGameButton);
 
         
         //Start game button

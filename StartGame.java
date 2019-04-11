@@ -42,6 +42,20 @@ public void start(Stage primaryStage) throws Exception{
 	startGameTitle.setStrokeWidth(6);
 	root.getChildren().add(startGameTitle);
 
+	
+
+	//  What to press to start gameText 
+	Text startGameButton = new Text("PRESS 'T' TO START GAME");
+	Font startTitleButton = new Font("Callibri", 100);
+	startGameButton.setFill(Color.WHITE);
+	startGameButton.setLayoutX(0);
+	startGameButton.setLayoutY(100);
+	startGameButton.setFont(startTitleFont.font("Berlin Sans FB", FontWeight.BOLD, 180));
+	startGameButton.setStroke(Color.DODGERBLUE);
+	startGameButton.setTextAlignment(TextAlignment.CENTER);
+	startGameButton.setStrokeWidth(6);
+	root.getChildren().add(startGameButton);
+
 
 	//Start game button
 	Button startGame = new Button("START GAME");
