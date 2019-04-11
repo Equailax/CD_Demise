@@ -26,17 +26,17 @@ public static void main(String[] args)
 
 public void start(Stage primaryStage) throws Exception{
 	
-	Rectangle endGameScreen = new Rectangle(0,0,1100,1100);
+	Rectangle startGameScreen = new Rectangle(0,0,1100,1100);
 	startGameScreen.setFill(Color.BLACK);
 	root.getChildren().add(startGameScreen);
 	
 	//Game Title
-	Text starGameTitle = new Text("CD\nDEMISE");
+	Text startGameTitle = new Text("CD\nDEMISE");
 	Font startTitleFont = new Font("Callibri", 150);
 	startGameTitle.setFill(Color.WHITE);
 	startGameTitle.setLayoutX(180);
 	startGameTitle.setLayoutY(320);
-	startGameTitle.setFont(starTitleFont.font("Berlin Sans FB", FontWeight.BOLD, 180));
+	startGameTitle.setFont(startTitleFont.font("Berlin Sans FB", FontWeight.BOLD, 180));
 	startGameTitle.setStroke(Color.DODGERBLUE);
 	startGameTitle.setTextAlignment(TextAlignment.CENTER);
 	startGameTitle.setStrokeWidth(6);
@@ -53,8 +53,8 @@ public void start(Stage primaryStage) throws Exception{
 	startGame.setStyle("-fx-background-color: #7AFB7D");
 	startGame.setFont(buttonFont.font("Berlin Sans FB", FontWeight.BOLD, 40));
 	startGame.setTextFill(Color.BLACK);
-	startGame.setOnMouseEntered(actionEvent -> startOver.setStyle("-fx-background-color: #4FFE79"));
-	startGame.setOnMouseExited(actionEvent -> startOver.setStyle("-fx-background-color: #7AFB7D"));
+	startGame.setOnMouseEntered(actionEvent -> startGame.setStyle("-fx-background-color: #4FFE79"));
+	startGame.setOnMouseExited(actionEvent -> startGame.setStyle("-fx-background-color: #7AFB7D"));
 	startGame.setOnAction(actionEvent -> Platform.exit()); //change this action to screen reset
 	root.getChildren().add(startGame);
 	

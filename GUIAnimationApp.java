@@ -528,6 +528,17 @@ public class GUIAnimationApp extends Application {
 		enemyTimer.setCycleCount(Timeline.INDEFINITE);
 		enemyTimer.play();
 		moveTime.start();
+        
+        /*
+        //Create a start screen timer
+        AnimationTimer startScreenTime = new AnimationTimer(){
+            @Override
+            public void handle(long now) {
+                
+            }
+        };
+        */
+        
         /*
         // Move when a key is pressed
         endGameScene.setOnKeyPressed(keyEvent -> {
