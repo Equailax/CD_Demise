@@ -77,6 +77,7 @@ public void start(Stage primaryStage) throws Exception{
     primaryStage.setResizable(false);
     primaryStage.show();
 	
+	
 }
 
 }

@@ -312,6 +312,7 @@ public class GUIAnimationApp extends Application {
                     */
 
                     //Exit button
+                    /*
                     Button exitButton = new Button("EXIT GAME");
                     Font buttonFont = new Font("Callibri", 25);
                     exitButton.setPrefHeight(90);
@@ -325,7 +326,8 @@ public class GUIAnimationApp extends Application {
                     exitButton.setOnMouseExited(actionEvent -> exitButton.setStyle("-fx-background-color: #FFDD7D"));
                     exitButton.setOnAction(actionEvent -> Platform.exit()); // exits program when button is clicked
                     root.getChildren().add(exitButton);
-
+                    */
+                    /*
                     //Restart Button
                     Button startOver = new Button("START OVER");
                     Font buttonFont2 = new Font("Callibri", 25);
@@ -348,6 +350,7 @@ public class GUIAnimationApp extends Application {
                              * This sets up the start game screen
                              */
                             // Rectangle / hitbox
+                            /*
                             Rectangle mouseHitbox = new Rectangle(0, 0, 1250, 1250); // IMPORTANT: Make the rectangle
                                                                                      // fill the whole window
                             mouseHitbox.setFill(Color.rgb(0, 0, 0, 0));
@@ -361,6 +364,8 @@ public class GUIAnimationApp extends Application {
 
                     });
                     root.getChildren().add(startOver);
+                    */
+                    
                     
                 
                     /*
@@ -492,6 +497,7 @@ public class GUIAnimationApp extends Application {
                      */
 
                     // Exit button
+                    /*
                     Button exitButton = new Button("EXIT GAME");
                     Font buttonFont = new Font("Callibri", 25);
                     exitButton.setPrefHeight(90);
@@ -505,7 +511,8 @@ public class GUIAnimationApp extends Application {
                     exitButton.setOnMouseExited(actionEvent -> exitButton.setStyle("-fx-background-color: #FFDD7D"));
                     exitButton.setOnAction(actionEvent -> Platform.exit()); // exits program when button is clicked
                     root.getChildren().add(exitButton);
-
+                    */
+                    /*
                     // Restart Button
                     Button startOver = new Button("START OVER");
                     Font buttonFont2 = new Font("Callibri", 25);
@@ -528,6 +535,7 @@ public class GUIAnimationApp extends Application {
                              * This sets up the start game screen
                              */
                             // Rectangle / hitbox
+                            /*
                             Rectangle mouseHitbox = new Rectangle(0, 0, 1250, 1250); // IMPORTANT: Make the rectangle
                                                                                      // fill the whole window
                             mouseHitbox.setFill(Color.rgb(0, 0, 0, 0));
@@ -542,6 +550,7 @@ public class GUIAnimationApp extends Application {
 
                     });
                     root.getChildren().add(startOver);
+                    */
 
                 }
                 mouseHitbox.toFront();
@@ -675,38 +684,55 @@ public class GUIAnimationApp extends Application {
 			this.obstacleGUIArray.addAll(newProjectile);
 			demo2.setObstacleArray(this.obstacleGUIArray);
 		}));
-
-		
         
-        
+        //Game Title
         Rectangle startGameScreen = new Rectangle(0,0,1100,1100);
         startGameScreen.setFill(Color.BLACK);
         startRoot.getChildren().add(startGameScreen);
         
         //Game Title
         Text startGameTitle = new Text("CD\nDEMISE");
-        Font startTitleFont = new Font("Callibri", 150);
+        Font startTitleFont = new Font("Callibri", 100);
         startGameTitle.setFill(Color.WHITE);
-        startGameTitle.setLayoutX(180);
-        startGameTitle.setLayoutY(320);
-        startGameTitle.setFont(startTitleFont.font("Berlin Sans FB", FontWeight.BOLD, 180));
+        startGameTitle.setLayoutX(320);
+        startGameTitle.setLayoutY(150);
+        startGameTitle.setFont(startTitleFont.font("Berlin Sans FB", FontWeight.BOLD, 100));
         startGameTitle.setStroke(Color.DODGERBLUE);
         startGameTitle.setTextAlignment(TextAlignment.CENTER);
-        startGameTitle.setStrokeWidth(6);
+        startGameTitle.setStrokeWidth(3);
         startRoot.getChildren().add(startGameTitle);
 
-        //Game Start Button
-        //What to press to start gameText
-        Text startGameButton = new Text("PRESS 'T' TO START GAME");
-        Font startTitleButton = new Font("Callibri", 100);
-        startGameButton.setFill(Color.ORANGE);
-        startGameButton.setLayoutX(180);
-        startGameButton.setLayoutY(700);
-        startGameButton.setFont(startTitleFont.font("Berlin Sans FB", FontWeight.BOLD, 50));
-        startGameButton.setStroke(Color.DODGERBLUE);
+        
+
+        //  What to press to start gameText 
+        Text startGameButton = new Text(" PRESS 'T' TO \nSTART GAME");
+        Font startTitleButton = new Font("Callibri", 70);
+        startGameButton.setFill(Color.WHITE);
+        startGameButton.setLayoutX(270);
+        startGameButton.setLayoutY(400);
+        startGameButton.setFont(startTitleFont.font("Berlin Sans FB", FontWeight.BOLD, 70));
+        startGameButton.setStroke(Color.RED);
         startGameButton.setTextAlignment(TextAlignment.CENTER);
-        startGameButton.setStrokeWidth(6);
+        startGameButton.setStrokeWidth(3);
         startRoot.getChildren().add(startGameButton);
+
+
+        //Start game button
+        /*
+        Button startGame = new Button("START GAME");
+        Font buttonFont = new Font("Callibri", 25);
+        startGame.setPrefHeight(100);
+        startGame.setPrefWidth(310);
+        startGame.setLayoutY(750);
+        startGame.setLayoutX(345);
+        startGame.setStyle("-fx-background-color: #7AFB7D");
+        startGame.setFont(buttonFont.font("Berlin Sans FB", FontWeight.BOLD, 40));
+        startGame.setTextFill(Color.BLACK);
+        startGame.setOnMouseEntered(actionEvent -> startGame.setStyle("-fx-background-color: #4FFE79"));
+        startGame.setOnMouseExited(actionEvent -> startGame.setStyle("-fx-background-color: #7AFB7D"));
+        startGame.setOnAction(actionEvent -> Platform.exit()); //change this action to screen reset
+        root.getChildren().add(startGame);
+        */
 
         
         //Start game button
@@ -769,69 +795,6 @@ public class GUIAnimationApp extends Application {
             }
         };
         */
-        
-        /*
-        // Move when a key is pressed
-        endGameScene.setOnKeyPressed(keyEvent -> {
-                if (keyEvent.getCode().toString() == "Q") {
-                    quit = true;
-                }
-                if (keyEvent.getCode().toString() == "R") {
-                    restart = true;
-                }
-                left = false;
-                right = false;
-                up = false;
-                down = false;
-        });
-        
-
-		// Stop moving when the key is no longer pressed
-        endGameScene.setOnKeyReleased(keyEvent -> {
-                if (keyEvent.getCode().toString() == "Q") {
-                    quit = false;
-                }
-                if (keyEvent.getCode().toString() == "R") {
-                    restart = false;
-                }
-                left = false;
-                right = false;
-                up = false;
-                down = false;
-        });
-        */
-        
-        /*
-        //Start over button
-        Button startOver = new Button("START OVER PRESS R");
-        Font buttonFont = new Font("Callibri", 25);
-        startOver.setPrefHeight(90);
-        startOver.setPrefWidth(260);
-        startOver.setLayoutY(900);
-        startOver.setLayoutX(190);
-        startOver.setStyle("-fx-background-color: #FFDD7D");
-        startOver.setFont(buttonFont.font("Berlin Sans FB", FontWeight.BOLD, 35));
-        startOver.setTextFill(Color.BLACK);
-        startOver.setOnMouseEntered(actionEvent -> startOver.setStyle("-fx-background-color: #FFB34E"));
-        startOver.setOnMouseExited(actionEvent -> startOver.setStyle("-fx-background-color: #FFDD7D"));
-        startOver.setOnAction(actionEvent -> Platform.exit()); //change this action to screen reset
-        root.getChildren().add(startOver);
-        
-        //Exit button
-        Button exitButton = new Button("EXIT GAME PRESS Q");
-        exitButton.setPrefHeight(90);
-        exitButton.setPrefWidth(260);
-        exitButton.setLayoutY(900);
-        exitButton.setLayoutX(550);
-        exitButton.setStyle("-fx-background-color: #FFDD7D");
-        exitButton.setFont(buttonFont.font("Berlin Sans FB", FontWeight.BOLD, 35));
-        exitButton.setTextFill(Color.BLACK);
-        exitButton.setOnMouseEntered(actionEvent -> exitButton.setStyle("-fx-background-color: #FFB34E"));
-        exitButton.setOnMouseExited(actionEvent -> exitButton.setStyle("-fx-background-color: #FFDD7D"));
-        exitButton.setOnAction(actionEvent -> Platform.exit()); //exits program when button is clicked
-        root.getChildren().add(exitButton);
-        */
-        
         
 		// Print game state
         demo2.printCurrentState();
