@@ -237,13 +237,6 @@ public class GUIAnimationApp extends Application {
                     root.getChildren().add(mini.getAvatarImage());
                     mini.setForward();
                     mouseHitbox.toFront();
-                    //primaryStage.setScene(scene);
-                    
-                    //scene = new Scene(root, 1000, 1000, new ImagePattern(map));
-                    //scene.setFill(new ImagePattern(new Image("Map 1000pixels.jpg")));
-
-                    //primaryStage.setScene(scene);
-                    //primaryStage.show();
                 }
                 
                 // Check if the player has run out of health
@@ -253,8 +246,7 @@ public class GUIAnimationApp extends Application {
                     demo2 = new AnimationApp();
                     root.getChildren().removeAll(root.getChildren());
                     
-                    //Set up the end game screen a new stage
-                    Rectangle endGameScreen = new Rectangle(0,0,1100,1100);
+                    Rectangle endGameScreen = new Rectangle(0,0,1000,1000);
                     endGameScreen.setFill(Color.BLACK);
                     root.getChildren().add(endGameScreen);
                     
@@ -266,16 +258,16 @@ public class GUIAnimationApp extends Application {
                     endGameTitle.setLayoutX(320);
                     endGameTitle.setLayoutY(80);
                     endGameTitle.setFont(endTitleFont.font("Berlin Sans FB", FontWeight.BOLD, 80));
-                    //endGameTitle.setPrefWidth(400);
-                    //endGameTitle.setPrefHeight(80);
+                    endGameTitle.setStroke(Color.BLUE);
+                    endGameTitle.setStrokeWidth(2);
                     root.getChildren().add(endGameTitle);
                     
                     //Collector Picture
                     Image collector = new Image("collector.jpg");
                     ImageView collectorImage = new ImageView(collector);
-                    collectorImage.setLayoutX(100);
+                    collectorImage.setLayoutX(300);
                     collectorImage.setLayoutY(100);
-                    collectorImage.setFitWidth(800);
+                    collectorImage.setFitWidth(400);
                     collectorImage.setPreserveRatio(true);
                     collectorImage.setSmooth(true);
                     root.getChildren().add(collectorImage);
@@ -283,13 +275,11 @@ public class GUIAnimationApp extends Application {
                     //Record Image
                     Image record = new Image("Record.png");
                     ImageView recordImage = new ImageView(record);
-                    recordImage.setLayoutX(590);
-                    recordImage.setLayoutY(95);
-                    recordImage.setFitWidth(120);
+                    recordImage.setLayoutX(545);
+                    recordImage.setLayoutY(100);
+                    recordImage.setFitWidth(60);
                     recordImage.setPreserveRatio(true);
                     root.getChildren().add(recordImage);
-                    
-                    
                     
                     //End of game statement
                     Text endStatement = new Text("Congratulations! You have succeessfully prevented Dotify, PearMusic, BeatsbyDro,\nand MyPhone from finding and stealing the Collector's precious records. The Collector can\nnow relax knowing that you have retrieved the lost music records from his collection.");
@@ -299,8 +289,30 @@ public class GUIAnimationApp extends Application {
                     endStatement.setFill(Color.WHITE);
                     endStatement.setFont(statementFont);
                     endStatement.setLayoutX(63);
-                    endStatement.setLayoutY(600);
+                    endStatement.setLayoutY(350);
                     root.getChildren().add(endStatement);
+                    
+                    //Instruction to Restart
+                    Text endGameRestart = new Text("TO RESTART, PRESS 'R'");
+                    Font endRestartFont = new Font("Callibri", 22);
+                    endGameRestart.setFill(Color.WHITE);
+                    endGameRestart.setLayoutX(140);
+                    endGameRestart.setLayoutY(500);
+                    endGameRestart.setFont(endRestartFont.font("Berlin Sans FB", FontWeight.BOLD, 22));
+                    endGameRestart.setStroke(Color.BLUE);
+                    endGameRestart.setStrokeWidth(1);
+                    root.getChildren().add(endGameRestart);
+                    
+                    //Instruction to Restart
+                    Text endGameQuit = new Text("TO QUIT, PRESS 'Q'");
+                    Font endQuitFont = new Font("Callibri", 22);
+                    endGameQuit.setFill(Color.WHITE);
+                    endGameQuit.setLayoutX(640);
+                    endGameQuit.setLayoutY(500);
+                    endGameQuit.setFont(endQuitFont.font("Berlin Sans FB", FontWeight.BOLD, 22));
+                    endGameQuit.setStroke(Color.BLUE);
+                    endGameQuit.setStrokeWidth(1);
+                    root.getChildren().add(endGameQuit);
                     /*
                     //Stats Board
                     Rectangle endBoard = new Rectangle(250,650,500,230);
@@ -457,11 +469,11 @@ public class GUIAnimationApp extends Application {
                 }else if (checkIfEndGameAvatar.checkIfEndGame(3)){
                     // If the end game has been reached (avatar has lost all of their health and lives) then break from the loop and end the game
                     //root.getChildren().clear();
-                    demo2 = new AnimationApp();
+                    //demo2 = new AnimationApp();
                     root.getChildren().removeAll(root.getChildren());
 
                     // Set up the end game screen a new stage
-                    Rectangle endGameScreen = new Rectangle(0, 0, 1100, 1100);
+                    Rectangle endGameScreen = new Rectangle(0, 0, 1000, 1000);
                     endGameScreen.setFill(Color.BLACK);
                     root.getChildren().add(endGameScreen);
 
@@ -469,12 +481,12 @@ public class GUIAnimationApp extends Application {
                     Text endGameTitle = new Text("You Failed!");
                     Font endTitleFont = new Font("Callibri", 80);
                     // endGameTitle.setTextFill(Color.WHITE);
-                    endGameTitle.setFill(Color.WHITE);
-                    endGameTitle.setLayoutX(320);
-                    endGameTitle.setLayoutY(580);
+                    endGameTitle.setFill(Color.BLACK);
+                    endGameTitle.setLayoutX(300);
+                    endGameTitle.setLayoutY(300);
                     endGameTitle.setFont(endTitleFont.font("Berlin Sans FB", FontWeight.BOLD, 80));
-                    // endGameTitle.setPrefWidth(400);
-                    // endGameTitle.setPrefHeight(80);
+                    endGameTitle.setStroke(Color.RED);
+                    endGameTitle.setStrokeWidth(3);
                     root.getChildren().add(endGameTitle);
 
                     // End of game statement
@@ -482,11 +494,36 @@ public class GUIAnimationApp extends Application {
                     Font statementFont = new Font("Callibri", 22);
                     endStatement.setTextAlignment(TextAlignment.CENTER);
                     // endStatement.setTextFill(Color.WHITE);
-                    endStatement.setFill(Color.WHITE);
-                    endStatement.setFont(statementFont);
-                    endStatement.setLayoutX(63);
-                    endStatement.setLayoutY(600);
+                    endStatement.setFill(Color.BLACK);
+                    endStatement.setFont(statementFont.font("Berlin Sans FB", FontWeight.BOLD, 40));
+                    endStatement.setStroke(Color.RED);
+                    endStatement.setStrokeWidth(2);
+                    endStatement.setLayoutX(300);
+                    endStatement.setLayoutY(400);
                     root.getChildren().add(endStatement);
+                    
+                    //Instruction to Restart
+                    Text gameOverRestart = new Text("TO RESTART, PRESS 'R'");
+                    Font gameOverRestartFont = new Font("Callibri", 22);
+                    gameOverRestart.setFill(Color.BLACK);
+                    gameOverRestart.setLayoutX(140);
+                    gameOverRestart.setLayoutY(500);
+                    gameOverRestart.setFont(gameOverRestartFont.font("Berlin Sans FB", FontWeight.BOLD, 22));
+                    gameOverRestart.setStroke(Color.RED);
+                    gameOverRestart.setStrokeWidth(1);
+                    root.getChildren().add(gameOverRestart);
+                    
+                    //Instruction to Restart
+                    Text gameOverQuit = new Text("TO QUIT, PRESS 'Q'");
+                    Font gameOverQuitFont = new Font("Callibri", 22);
+                    gameOverQuit.setFill(Color.BLACK);
+                    gameOverQuit.setLayoutX(640);
+                    gameOverQuit.setLayoutY(500);
+                    gameOverQuit.setFont(gameOverQuitFont.font("Berlin Sans FB", FontWeight.BOLD, 22));
+                    gameOverQuit.setStroke(Color.RED);
+                    gameOverQuit.setStrokeWidth(1);
+                    root.getChildren().add(gameOverQuit);
+                    
                     /*
                      * //Stats Board Rectangle endBoard = new Rectangle(250,650,500,230);
                      * LinearGradient boardColor = new LinearGradient(0, 0, 0, 1, true,

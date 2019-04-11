@@ -142,10 +142,10 @@ public class Projectile extends Obstacle{
                 
             }
 		} else if(this.direction.contains("DOWN")){
-			if (this.getLocation().getY() < 630){
+			if (this.getLocation().getY() < 575){
                 //if the projectile is within the edge, then move down
 				yChange = 10;
-            } else if (this.getLocation().getY() >= 630) {
+            } else if (this.getLocation().getY() >= 575) {
                 //Move the enemy in a random direction once it has hit a boundary
                 yChange = -10;
                 this.direction = this.direction.replace("DOWN", "UP"); // Bounce

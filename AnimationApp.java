@@ -539,7 +539,7 @@ public class AnimationApp{
             if (o1 instanceof Projectile) {
                 //has the projectile reached the bounds of the map
                 if ((o1.getLocation().getX() >= 870 || o1.getLocation().getX() <= 90) || (
-                    o1.getLocation().getY() >= 630 || o1.getLocation().getY() <= 70)) {
+                    o1.getLocation().getY() >= 575 || o1.getLocation().getY() <= 70)) {
                     
                     obstaclesThatHaveReachedBounds += 1;
                 }
@@ -551,7 +551,7 @@ public class AnimationApp{
                 if (o1 instanceof Projectile) {
                     //remove the obstacle once it has reached the edges of the map
                     if ((o1.getLocation().getX() >= 870 || o1.getLocation().getX() <= 90) || (
-                    o1.getLocation().getY() >= 630 || o1.getLocation().getY() <= 70)) {
+                    o1.getLocation().getY() >= 575 || o1.getLocation().getY() <= 70)) {
                         
                         this.obstacleArray.remove(o1);
                         break;
