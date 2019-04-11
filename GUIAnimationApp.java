@@ -72,8 +72,10 @@ public class GUIAnimationApp extends Application {
     private final Image map = new Image("Map 1000pixels.jpg");
     private final ImagePattern mapPattern = new ImagePattern(map);
     private Pane root = new Pane();
+    private Pane startRoot = new Pane();
 
     private Scene scene = new Scene(root, 1000, 1000, mapPattern);
+    private Scene startScene = new Scene(startRoot, 1000, 1000, mapPattern);
     
     // Instance variables
     // This creades an animation app instance
@@ -141,7 +143,10 @@ public class GUIAnimationApp extends Application {
     public void start(Stage primaryStage) throws Exception {
         // Initialize the Animation App with 3 collectibles, 3 obstacles, and 3 enemies
         initialize(root);
-          
+        
+        /*
+        This sets up the start game screen
+        */
         // Rectangle / hitbox
 		Rectangle mouseHitbox = new Rectangle(0, 0, 1250, 1250); // IMPORTANT: Make the rectangle fill the whole window
 		mouseHitbox.setFill(Color.rgb(0,0,0,0));
@@ -152,11 +157,11 @@ public class GUIAnimationApp extends Application {
         
         scene.setFill(new ImagePattern(map));
         
-		primaryStage.setScene(scene);
         primaryStage.setResizable(false);
-        primaryStage.show();
         
-       // scene.setFill(new ImagePattern(map));
+		//primaryStage.setScene(scene);
+        //primaryStage.setResizable(false);
+        //primaryStage.show();
         
         
         // Animation of movements
@@ -393,6 +398,7 @@ public class GUIAnimationApp extends Application {
                     root.getChildren().removeAll(root.getChildren());
                     root.getChildren().add(new Label("Game over man"));
                 }
+                mouseHitbox.toFront();
             }};
             
         // Move when a key is pressed
@@ -524,10 +530,76 @@ public class GUIAnimationApp extends Application {
 			demo2.setObstacleArray(this.obstacleGUIArray);
 		}));
 
-		// Start timers
-		enemyTimer.setCycleCount(Timeline.INDEFINITE);
-		enemyTimer.play();
-		moveTime.start();
+		
+        
+        
+        Rectangle startGameScreen = new Rectangle(0,0,1100,1100);
+        startGameScreen.setFill(Color.BLACK);
+        startRoot.getChildren().add(startGameScreen);
+        
+        //Game Title
+        Text startGameTitle = new Text("CD\nDEMISE");
+        Font startTitleFont = new Font("Callibri", 150);
+        startGameTitle.setFill(Color.WHITE);
+        startGameTitle.setLayoutX(180);
+        startGameTitle.setLayoutY(320);
+        startGameTitle.setFont(startTitleFont.font("Berlin Sans FB", FontWeight.BOLD, 180));
+        startGameTitle.setStroke(Color.DODGERBLUE);
+        startGameTitle.setTextAlignment(TextAlignment.CENTER);
+        startGameTitle.setStrokeWidth(6);
+        startRoot.getChildren().add(startGameTitle);
+
+        
+        //Start game button
+        /*
+        Button startGame = new Button("START GAME");
+        Font buttonFont = new Font("Callibri", 25);
+        startGame.setPrefHeight(100);
+        startGame.setPrefWidth(310);
+        startGame.setLayoutY(750);
+        startGame.setLayoutX(345);
+        startGame.setStyle("-fx-background-color: #7AFB7D");
+        startGame.setFont(buttonFont.font("Berlin Sans FB", FontWeight.BOLD, 40));
+        startGame.setTextFill(Color.BLACK);
+        startGame.setOnMouseEntered(actionEvent -> startGame.setStyle("-fx-background-color: #4FFE79"));
+        startGame.setOnMouseExited(actionEvent -> startGame.setStyle("-fx-background-color: #7AFB7D"));
+        startGame.setOnAction(actionEvent -> {
+            
+            startRoot.getChildren().remove(startGameScreen);
+            startRoot.getChildren().remove(startGame);
+            startRoot.getChildren().remove(startGameTitle);
+            mouseHitbox.toFront();
+        
+            scene.setFill(new ImagePattern(map));
+
+            // Start timers
+            enemyTimer.setCycleCount(Timeline.INDEFINITE);
+            enemyTimer.play();
+            moveTime.start();
+            
+                        
+            primaryStage.setScene(scene);
+        
+        }); //change this action to screen reset
+        startRoot.getChildren().add(startGame);
+    */
+        startScene.setOnKeyPressed(keyEvent -> {
+                if (keyEvent.getCode().toString() == "T") {
+                    startRoot.getChildren().clear();
+                    
+                    scene.setFill(new ImagePattern(map));
+                    // Start timers
+                    enemyTimer.setCycleCount(Timeline.INDEFINITE);
+                    enemyTimer.play();
+                    moveTime.start();    
+                    primaryStage.setScene(scene);
+                    
+                    mouseHitbox.toFront();
+                }
+        });
+        primaryStage.setScene(startScene);
+        primaryStage.show();
+        mouseHitbox.toFront();
         
         /*
         //Create a start screen timer
