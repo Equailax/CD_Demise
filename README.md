@@ -38,7 +38,6 @@ left mouse button and a projectile will be shot from the avatar to your mouse cu
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 FINAL DEMO:
-
--The final demo will be in the master branch of our repository. The files will downloaded by pressing the button labelled "Clone or download" then clicking "Download ZIP" and extracting all of the files into a folder.
+- The final demo will be in the master branch of our repository. The files will downloaded by pressing the button labelled "Clone or download" then clicking "Download ZIP" and extracting all of the files into a folder.
 
 - To run the final demo, you will only have to compile the file labelled "GUIAnimationApp.java". Open your terminal and navigate to the folder containing the files extracted from the zip file earlier then compile the file named "GUIAnimationApp.java". After compiling the required files, type "java GUIAnimationApp" into your terminal to bring up the GUI window. The GUI window will have a start menu which provides instructions for the user on how to start the game. In order to interact with the GUI and move the avatar, you have to use the 'W', 'A', 'S', and 'D' keys. Use the 'W' key to move up, the 'A' key to move left, the 'S' key to move down, and the 'D' key to move right.Aiming is restricted to 8 directions around the avatar and is controlled by where your mouse cursor is located. To shoot, click with the left mouse button and a projectile will be shot from the avatar to your mouse cursor. Once the game is won or lost, the GUI window will show a game over screen or end game screen depending on the outcome which will provide instructions on how to restart or exit the game.
