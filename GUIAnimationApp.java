@@ -313,95 +313,7 @@ public class GUIAnimationApp extends Application {
                     endGameQuit.setStroke(Color.BLUE);
                     endGameQuit.setStrokeWidth(1);
                     root.getChildren().add(endGameQuit);
-                    /*
-                    //Stats Board
-                    Rectangle endBoard = new Rectangle(250,650,500,230);
-                    LinearGradient boardColor = new LinearGradient(0, 0, 0, 1, true, CycleMethod.NO_CYCLE,  new Stop(0.2, Color.LIGHTGREEN), new Stop(0.8, Color.MEDIUMSEAGREEN));
-                    endBoard.setFill(boardColor);
-                    endBoard.setStroke(Color.WHITESMOKE);
-                    endBoard.setStrokeWidth(6);
-                    root.getChildren().add(endBoard);
-                    */
 
-                    //Exit button
-                    /*
-                    Button exitButton = new Button("EXIT GAME");
-                    Font buttonFont = new Font("Callibri", 25);
-                    exitButton.setPrefHeight(90);
-                    exitButton.setPrefWidth(260);
-                    exitButton.setLayoutY(700);
-                    exitButton.setLayoutX(150);
-                    exitButton.setStyle("-fx-background-color: #FFDD7D");
-                    exitButton.setFont(buttonFont.font("Berlin Sans FB", FontWeight.BOLD, 35));
-                    exitButton.setTextFill(Color.BLACK);
-                    exitButton.setOnMouseEntered(actionEvent -> exitButton.setStyle("-fx-background-color: #FFB34E"));
-                    exitButton.setOnMouseExited(actionEvent -> exitButton.setStyle("-fx-background-color: #FFDD7D"));
-                    exitButton.setOnAction(actionEvent -> Platform.exit()); // exits program when button is clicked
-                    root.getChildren().add(exitButton);
-                    */
-                    /*
-                    //Restart Button
-                    Button startOver = new Button("START OVER");
-                    Font buttonFont2 = new Font("Callibri", 25);
-                    startOver.setPrefHeight(90);
-                    startOver.setPrefWidth(260);
-                    startOver.setLayoutY(700);
-                    startOver.setLayoutX(500);
-                    startOver.setStyle("-fx-background-color: #FFDD7D");
-                    startOver.setFont(buttonFont2.font("Berlin Sans FB", FontWeight.BOLD, 35));
-                    startOver.setTextFill(Color.BLACK);
-                    startOver.setOnMouseEntered(actionEvent -> startOver.setStyle("-fx-background-color: #FFB34E"));
-                    startOver.setOnMouseExited(actionEvent -> startOver.setStyle("-fx-background-color: #FFDD7D"));
-                    startOver.setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent e) {
-                            root.getChildren().removeAll(root.getChildren());
-                            initialize(root);
-                            primaryStage.setScene(scene);
-                            /*
-                             * This sets up the start game screen
-                             */
-                            // Rectangle / hitbox
-                            /*
-                            Rectangle mouseHitbox = new Rectangle(0, 0, 1250, 1250); // IMPORTANT: Make the rectangle
-                                                                                     // fill the whole window
-                            mouseHitbox.setFill(Color.rgb(0, 0, 0, 0));
-                            root.getChildren().add(mouseHitbox);
-                            root.getChildren().add(mini.getAvatarImage());
-                            mini.setForward();
-                            mouseHitbox.toFront();
-                            primaryStage.setResizable(false);
-
-                        }
-
-                    });
-                    root.getChildren().add(startOver);
-                    */
-                    
-                    
-                
-                    /*
-                    Text endBoardTitle = new Text("END OF GAME REPORT");
-                    Font boardTitleFont = new Font("Callibri", 30);
-                    endBoardTitle.setLayoutX(340);
-                    endBoardTitle.setLayoutY(570);
-                    endBoardTitle.setFont(boardTitleFont.font("Berlin Sans FB", FontWeight.BOLD, 30));
-                    //endBoardTitle.setPrefHeight(200);
-                    //endBoardTitle.setPrefWidth(400);
-                    endBoardTitle.setUnderline(true);
-                    root.getChildren().add(endBoardTitle);
-                    */
-                    
-                    
-                    //scene.setFill(new ImagePattern(map));
-                    /*
-                    primaryStage.setScene(scene);
-                    primaryStage.setResizable(false);
-                    primaryStage.show();
-                    */
-                    // If all collectibles have reached 0, the game is over
-                    //
-                    //root.getChildren().add(new Label("YOU WIN!"));
                 } else if (!checkIfEndGameAvatar.checkIfEndGame(3)){
                     // If the avatar still has lives (game hasn't ended), then update the main avatar accordingly
                     demo2.setAvatar(checkIfEndGameAvatar);
@@ -524,70 +436,7 @@ public class GUIAnimationApp extends Application {
                     gameOverQuit.setStrokeWidth(1);
                     root.getChildren().add(gameOverQuit);
                     
-                    /*
-                     * //Stats Board Rectangle endBoard = new Rectangle(250,650,500,230);
-                     * LinearGradient boardColor = new LinearGradient(0, 0, 0, 1, true,
-                     * CycleMethod.NO_CYCLE, new Stop(0.2, Color.LIGHTGREEN), new Stop(0.8,
-                     * Color.MEDIUMSEAGREEN)); endBoard.setFill(boardColor);
-                     * endBoard.setStroke(Color.WHITESMOKE); endBoard.setStrokeWidth(6);
-                     * root.getChildren().add(endBoard);
-                     */
-
-                    // Exit button
-                    /*
-                    Button exitButton = new Button("EXIT GAME");
-                    Font buttonFont = new Font("Callibri", 25);
-                    exitButton.setPrefHeight(90);
-                    exitButton.setPrefWidth(260);
-                    exitButton.setLayoutY(700);
-                    exitButton.setLayoutX(150);
-                    exitButton.setStyle("-fx-background-color: #FFDD7D");
-                    exitButton.setFont(buttonFont.font("Berlin Sans FB", FontWeight.BOLD, 35));
-                    exitButton.setTextFill(Color.BLACK);
-                    exitButton.setOnMouseEntered(actionEvent -> exitButton.setStyle("-fx-background-color: #FFB34E"));
-                    exitButton.setOnMouseExited(actionEvent -> exitButton.setStyle("-fx-background-color: #FFDD7D"));
-                    exitButton.setOnAction(actionEvent -> Platform.exit()); // exits program when button is clicked
-                    root.getChildren().add(exitButton);
-                    */
-                    /*
-                    // Restart Button
-                    Button startOver = new Button("START OVER");
-                    Font buttonFont2 = new Font("Callibri", 25);
-                    startOver.setPrefHeight(90);
-                    startOver.setPrefWidth(260);
-                    startOver.setLayoutY(700);
-                    startOver.setLayoutX(500);
-                    startOver.setStyle("-fx-background-color: #FFDD7D");
-                    startOver.setFont(buttonFont2.font("Berlin Sans FB", FontWeight.BOLD, 35));
-                    startOver.setTextFill(Color.BLACK);
-                    startOver.setOnMouseEntered(actionEvent -> startOver.setStyle("-fx-background-color: #FFB34E"));
-                    startOver.setOnMouseExited(actionEvent -> startOver.setStyle("-fx-background-color: #FFDD7D"));
-                    startOver.setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent e) {
-                            root.getChildren().removeAll(root.getChildren());
-                            initialize(root);
-                            scene.setFill(mapPattern);
-                            /*
-                             * This sets up the start game screen
-                             */
-                            // Rectangle / hitbox
-                            /*
-                            Rectangle mouseHitbox = new Rectangle(0, 0, 1250, 1250); // IMPORTANT: Make the rectangle
-                                                                                     // fill the whole window
-                            mouseHitbox.setFill(Color.rgb(0, 0, 0, 0));
-                            root.getChildren().add(mouseHitbox);
-                            root.getChildren().add(mini.getAvatarImage());
-                            mini.setForward();
-                            mouseHitbox.toFront();
-                            primaryStage.setScene(scene);
-                            primaryStage.setResizable(false);
-
-                        }
-
-                    });
-                    root.getChildren().add(startOver);
-                    */
+                    
 
                 }
                 mouseHitbox.toFront();
@@ -753,58 +602,6 @@ public class GUIAnimationApp extends Application {
         startGameButton.setStrokeWidth(3);
         startRoot.getChildren().add(startGameButton);
 
-
-        //Start game button
-        /*
-        Button startGame = new Button("START GAME");
-        Font buttonFont = new Font("Callibri", 25);
-        startGame.setPrefHeight(100);
-        startGame.setPrefWidth(310);
-        startGame.setLayoutY(750);
-        startGame.setLayoutX(345);
-        startGame.setStyle("-fx-background-color: #7AFB7D");
-        startGame.setFont(buttonFont.font("Berlin Sans FB", FontWeight.BOLD, 40));
-        startGame.setTextFill(Color.BLACK);
-        startGame.setOnMouseEntered(actionEvent -> startGame.setStyle("-fx-background-color: #4FFE79"));
-        startGame.setOnMouseExited(actionEvent -> startGame.setStyle("-fx-background-color: #7AFB7D"));
-        startGame.setOnAction(actionEvent -> Platform.exit()); //change this action to screen reset
-        root.getChildren().add(startGame);
-        */
-
-        
-        //Start game button
-        /*
-        Button startGame = new Button("START GAME");
-        Font buttonFont = new Font("Callibri", 25);
-        startGame.setPrefHeight(100);
-        startGame.setPrefWidth(310);
-        startGame.setLayoutY(750);
-        startGame.setLayoutX(345);
-        startGame.setStyle("-fx-background-color: #7AFB7D");
-        startGame.setFont(buttonFont.font("Berlin Sans FB", FontWeight.BOLD, 40));
-        startGame.setTextFill(Color.BLACK);
-        startGame.setOnMouseEntered(actionEvent -> startGame.setStyle("-fx-background-color: #4FFE79"));
-        startGame.setOnMouseExited(actionEvent -> startGame.setStyle("-fx-background-color: #7AFB7D"));
-        startGame.setOnAction(actionEvent -> {
-            
-            startRoot.getChildren().remove(startGameScreen);
-            startRoot.getChildren().remove(startGame);
-            startRoot.getChildren().remove(startGameTitle);
-            mouseHitbox.toFront();
-        
-            scene.setFill(new ImagePattern(map));
-
-            // Start timers
-            enemyTimer.setCycleCount(Timeline.INDEFINITE);
-            enemyTimer.play();
-            moveTime.start();
-            
-                        
-            primaryStage.setScene(scene);
-        
-        }); //change this action to screen reset
-        startRoot.getChildren().add(startGame);
-    */
         startScene.setOnKeyPressed(keyEvent -> {
                 if (keyEvent.getCode().toString() == "T") {
                     startRoot.getChildren().clear();
@@ -823,15 +620,6 @@ public class GUIAnimationApp extends Application {
         primaryStage.show();
         mouseHitbox.toFront();
         
-        /*
-        //Create a start screen timer
-        AnimationTimer startScreenTime = new AnimationTimer(){
-            @Override
-            public void handle(long now) {
-                
-            }
-        };
-        */
         
 		// Print game state
         demo2.printCurrentState();
